@@ -29,11 +29,12 @@ import SliderBackground from "pages/Innvie/Home/components/Background";
 
 // Images
 // import bg1 from "assets/images/bg2.jpg";
-import bg2 from "assets/images/bg.jpg";
-import bg3 from "assets/images/dg1.jpg";
-import { Card } from "@mui/material";
 import Container from "@mui/material/Container";
+import { Card } from "@mui/material";
 import DateInput from "../components/Date/DateInput";
+import bg1 from "../../../../assets/images/photos/IMG_0613.JPG";
+import bg2 from "../../../../assets/images/photos/IMG_0331.JPG";
+import bg3 from "../../../../assets/images/photos/IMG_0369.JPG";
 
 function Header() {
   // install SwiperJS modules
@@ -51,7 +52,7 @@ function Header() {
         style={{ height: "75vh" }}
       >
         <SwiperSlide>
-          <SliderBackground image={bg2} />
+          <SliderBackground image={bg1} />
         </SwiperSlide>
         <SwiperSlide>
           <SliderBackground image={bg3} />

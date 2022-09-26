@@ -105,7 +105,13 @@ function SimpleBookingCard({ image, title, description, categories, action }) {
             >
               {action.label}
             </MKButton>
-            <MKButton variant="gradient" color="error" sx={{ height: "100%" }}>
+            <MKButton
+              component={Link}
+              to="/innvie/reserve"
+              variant="gradient"
+              color="error"
+              sx={{ height: "100%" }}
+            >
               Reservar
             </MKButton>
           </div>

@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+// import Card from "@mui/material/Card";
 import MKAlert from "components/MKAlert";
 // @mui material components
 import Icon from "@mui/material/Icon";
@@ -39,14 +39,15 @@ import Places from "pages/LandingPages/Rental/sections/Places";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/bg-rental.jpeg";
 import CenteredFooter from "examples/Footers/CenteredFooter";
+import bgImage from "../../../assets/images/photos/IMG_0535.JPG";
 import routes from "../../../innvie.routes";
 
 import Offers from "../../Innvie/Home/components/Offers/offers";
 import Places2 from "../../Innvie/Home/sections/Amenities";
 
 function Rental() {
+  const showAlert = false;
   return (
     <>
       <DefaultNavbar
@@ -96,7 +97,7 @@ function Rental() {
           </Grid>
         </Container>
       </MKBox>
-      <Card
+      {/* <Card
         sx={{
           p: 2,
           mx: { xs: 2, lg: 3 },
@@ -107,20 +108,34 @@ function Rental() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
           overflow: "hidden",
         }}
-      >
-        {/* <Search /> */}
+      > */}
+      {/* <Search /> */}
+      <Container>
         <div
-          style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: 20 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: 20,
+            backgroundColor: "white",
+            padding: "10px",
+            width: "500px",
+            borderRadius: "10px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
         >
           <DateInput />
         </div>
 
-        <Container sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <MKAlert color="error" dismissible sx={{ width: "540px" }}>
-            <Icon fontSize="small">warning</Icon>&nbsp; Favor de seleccionar una fecha para validar
-            la disponibilidad
-          </MKAlert>
-        </Container>
+        {showAlert && (
+          <Container sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <MKAlert color="error" dismissible sx={{ width: "540px" }}>
+              <Icon fontSize="small">warning</Icon>&nbsp; Favor de seleccionar una fecha para
+              validar la disponibilidad
+            </MKAlert>
+          </Container>
+        )}
         <Places />
         {/* <Testimonials />
         <Faq />
@@ -161,7 +176,8 @@ function Rental() {
           ]}
         />
         <Places2 />
-      </Card>
+      </Container>
+      {/* </Card> */}
       <MKBox pt={6} px={1} mt={6} sx={{ backgroundColor: "#bc2f2c" }}>
         <CenteredFooter content={footerRoutes} />
       </MKBox>

@@ -51,7 +51,7 @@ function Reserve() {
               ]}
               action={{
                 type: "internal",
-                route: "/",
+                route: "/innvie/confirmation",
                 color: "error",
                 label: "Pagar",
               }}
