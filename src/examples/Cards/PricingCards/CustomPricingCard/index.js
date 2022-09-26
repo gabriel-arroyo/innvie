@@ -95,6 +95,13 @@ function CustomPricingCard({ color, badge, price, specifications, action, shadow
             {badge.label}
           </MKTypography>
         </MKBox>
+        <MKBox width="100%" display="flex" justifyContent="center" mt={3}>
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-azul.png?alt=media&token=609c519b-5244-4f6e-b05a-4a6781442f84"
+            alt="confirmation"
+            width="35%"
+          />
+        </MKBox>
         <MKBox pt={3} pb={2} px={2} textAlign="center">
           <MKBox my={1}>
             <MKTypography variant="h1" color={color === "white" ? "dark" : "white"}>

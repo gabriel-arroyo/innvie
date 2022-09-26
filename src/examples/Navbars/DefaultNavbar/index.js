@@ -476,15 +476,17 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
-            <MKBox
-              component="img"
-              src={logoUrl}
-              alt="logo"
-              width="200px"
-              position="absolute"
-              zIndex={1}
-              sx={{ top: "70px" }}
-            />
+            {logoUrl && (
+              <MKBox
+                component="img"
+                src={logoUrl}
+                alt="logo"
+                width="200px"
+                position="absolute"
+                zIndex={1}
+                sx={{ top: "70px" }}
+              />
+            )}
           </MKBox>
           <MKBox
             color="inherit"
@@ -558,8 +560,7 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
 // Setting default values for the props of DefaultNavbar
 DefaultNavbar.defaultProps = {
   brand: "Innvie",
-  logoUrl:
-    "https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-blanco.png?alt=media&token=e4c69723-59be-4dfc-b1b7-b1d5c3f2513f",
+  logoUrl: "",
   transparent: false,
   light: false,
   action: false,

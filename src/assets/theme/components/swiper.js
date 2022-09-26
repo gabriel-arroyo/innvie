@@ -9,7 +9,7 @@ const { white } = colors;
 export default {
   ".swiper-button-prev, .swiper-button-next": {
     position: "absolute",
-    top: "50%",
+    top: "65%",
     padding: `0 ${pxToRem(64)}`,
     color: white.main,
     opacity: 0.5,

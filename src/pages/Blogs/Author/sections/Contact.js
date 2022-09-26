@@ -206,7 +206,11 @@ function Contact() {
                       textAlign="right"
                       ml="auto"
                     >
-                      <MKButton variant="gradient" color="error">
+                      <MKButton
+                        variant="gradient"
+                        color="error"
+                        sx={{ width: "120px", padding: "0px !important" }}
+                      >
                         Send Message
                       </MKButton>
                     </Grid>

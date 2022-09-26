@@ -13,7 +13,7 @@ function DateInput() {
     <Grid
       container
       spacing={3}
-      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      sx={{ display: "flex", alignItems: "center", justifyContent: "center", maxWidth: "500px" }}
     >
       <Grid
         item
@@ -55,13 +55,22 @@ function DateInput() {
         </MKTypography>
         <MKInput type="number" value="2" sx={{ width: "60px" }} />
       </Grid>
-      <Grid item xs={12} lg={4} sx={{ display: "flex", justifyContent: "center" }}>
+      <Grid
+        item
+        xs={12}
+        lg={4}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignSelf: "self-end",
+        }}
+      >
         <MKButton
           component={Link}
           to="/pages/landing-pages/rental"
           variant="gradient"
-          color="primary"
-          sx={{ width: "700px" }}
+          color="error"
+          sx={{ width: "500px", padding: "14px" }}
         >
           Ver Opciones
         </MKButton>

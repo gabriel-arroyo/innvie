@@ -17,7 +17,7 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // @mui material components
 import Icon from "@mui/material/Icon";
@@ -55,7 +55,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
 
   return (
     <MKBox
-      display={{ xs: "block", md: "flex" }}
+      display={{ xs: "block", md: "flex", cursor: "pointer" }}
       variant={variant}
       bgColor="secondary"
       borderRadius="xl"
@@ -93,7 +93,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
             {action.label} <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
           </MKTypography>
         ) : null}
-        {action && action.type === "internal" ? (
+        {/* {action && action.type === "internal" ? (
           <MKTypography
             component={Link}
             to={action.route}
@@ -104,7 +104,7 @@ function FilledInfoCard({ variant, color, icon, title, description, action }) {
           >
             {action.label} <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
           </MKTypography>
-        ) : null}
+        ) : null} */}
       </MKBox>
     </MKBox>
   );

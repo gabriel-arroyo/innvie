@@ -27,7 +27,6 @@ import MKTypography from "components/MKTypography";
 import DateInput from "pages/Innvie/Home/components/Date/DateInput";
 // Otis Kit PRO examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
 
 // Rental page sections
 // import Search from "pages/LandingPages/Rental/sections/Search";
@@ -41,6 +40,7 @@ import footerRoutes from "footer.routes";
 
 // Images
 import bgImage from "assets/images/bg-rental.jpeg";
+import CenteredFooter from "examples/Footers/CenteredFooter";
 import routes from "../../../innvie.routes";
 
 import Offers from "../../Innvie/Home/components/Offers/offers";
@@ -109,9 +109,12 @@ function Rental() {
         }}
       >
         {/* <Search /> */}
-        <Container sx={{ mt: "20px", mb: "40px" }}>
+        <div
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", margin: 20 }}
+        >
           <DateInput />
-        </Container>
+        </div>
+
         <Container sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <MKAlert color="error" dismissible sx={{ width: "540px" }}>
             <Icon fontSize="small">warning</Icon>&nbsp; Favor de seleccionar una fecha para validar
@@ -159,8 +162,8 @@ function Rental() {
         />
         <Places2 />
       </Card>
-      <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
+      <MKBox pt={6} px={1} mt={6} sx={{ backgroundColor: "#bc2f2c" }}>
+        <CenteredFooter content={footerRoutes} />
       </MKBox>
     </>
   );

@@ -24,12 +24,12 @@ const routes = [
     route: "/innvie/reservation",
     component: <Reservation />,
   },
-  {
-    name: "Blog",
-    icon: <Icon>book</Icon>,
-    route: "/authentication/sign-in/basic",
-    component: <Reservation />,
-  },
+  // {
+  //   name: "Blog",
+  //   icon: <Icon>book</Icon>,
+  //   route: "/authentication/sign-in/basic",
+  //   component: <Reservation />,
+  // },
   {
     name: "Login",
     icon: <Icon>person</Icon>,

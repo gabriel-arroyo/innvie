@@ -16,6 +16,7 @@ Coded by www.creative-tim.com
 // @mui material components
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
+import "./MKInputRoot.css";
 
 export default styled(TextField)(({ theme, ownerState }) => {
   const { palette, functions } = theme;
@@ -65,6 +66,7 @@ export default styled(TextField)(({ theme, ownerState }) => {
   return {
     backgroundColor: disabled ? `${grey[200]} !important` : transparent.main,
     pointerEvents: disabled ? "none" : "auto",
+    borderColor: "#923 !important",
     ...(error && errorStyles()),
     ...(success && successStyles()),
   };

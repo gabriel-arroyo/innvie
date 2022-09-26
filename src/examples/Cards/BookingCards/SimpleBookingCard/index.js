@@ -100,12 +100,12 @@ function SimpleBookingCard({ image, title, description, categories, action }) {
               component={Link}
               to={action.route}
               variant="outlined"
-              size="small"
+              size="large"
               color={action.color ? action.color : "dark"}
             >
               {action.label}
             </MKButton>
-            <MKButton variant="gradient" color="primary" sx={{ height: "100%" }}>
+            <MKButton variant="gradient" color="error" sx={{ height: "100%" }}>
               Reservar
             </MKButton>
           </div>

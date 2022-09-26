@@ -52,7 +52,7 @@ function Reserve() {
               action={{
                 type: "internal",
                 route: "/",
-                color: "primary",
+                color: "error",
                 label: "Pagar",
               }}
             />
