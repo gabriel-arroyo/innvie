@@ -46,7 +46,7 @@ import routes from "../../../innvie.routes";
 import Offers from "../../../components/Offers/offers";
 import Places2 from "../../../components/Amenities/Amenities";
 
-function Rental() {
+function FindRooms() {
   const showAlert = false;
   return (
     <>
@@ -185,4 +185,4 @@ function Rental() {
   );
 }
 
-export default Rental;
+export default FindRooms;

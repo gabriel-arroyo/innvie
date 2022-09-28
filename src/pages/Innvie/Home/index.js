@@ -27,7 +27,7 @@ import CenteredFooter from "examples/Footers/CenteredFooter";
 import Contact from "pages/Blogs/Author/sections/Contact";
 import Places from "./sections/Places";
 import Header from "./sections/Header";
-import Offers from "./components/Offers/offers";
+import Offers from "../../../components/Offers/offers";
 import Map from "./components/Map/map";
 
 function Reservation() {

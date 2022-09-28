@@ -28,22 +28,22 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 // Otis Kit PRO page layout routes
 import footerRoutes from "footer.routes";
-import DefaultFooter from "examples/Footers/DefaultFooter";
-import routes from "../../../../innvie.routes";
+import CenteredFooter from "examples/Footers/CenteredFooter";
+import routes from "routes";
 
 function CoverLayout({ coverHeight, image, children }) {
   return (
-    <MKBox height="calc(100vh - 1rem)">
-      <MKBox width="100%" position="absolute" top="0.25rem">
+    <>
+      <MKBox bgColor="white" shadow="sm" py={0.25}>
         <DefaultNavbar
           routes={routes}
-          logoUrl="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-blanco2.png?alt=media&token=cabde339-12a3-4b84-8879-1e945fdc7696"
+          logoUrl="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-blanco.png?alt=media&token=e4c69723-59be-4dfc-b1b7-b1d5c3f2513f"
           transparent
-          light
+          relative
+          sticky
         />
       </MKBox>
       <MKBox
-        width="calc(100% - 2rem)"
         minHeight={coverHeight}
         borderRadius="xl"
         mx={2}
@@ -62,18 +62,18 @@ function CoverLayout({ coverHeight, image, children }) {
           backgroundRepeat: "no-repeat",
         }}
       />
-      <MKBox mt={{ xs: -20, lg: -18 }} px={1} width="calc(100% - 3rem)" ml={-18}>
-        <Grid container spacing={1} justifyContent="center">
+      <MKBox mt={{ xs: -20, lg: -18 }} px={1} width="100vw" ml={-18}>
+        <Grid container spacing={1} justifyContent="center" alignItems="center" width="100vw">
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3} pb={9}>
             {children}
           </Grid>
         </Grid>
       </MKBox>
 
-      <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
+      <MKBox pt={6} px={1} mt={6} sx={{ backgroundColor: "#bc2f2c" }}>
+        <CenteredFooter content={footerRoutes} />
       </MKBox>
-    </MKBox>
+    </>
   );
 }
 

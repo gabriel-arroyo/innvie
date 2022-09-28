@@ -1,44 +1,18 @@
-/**
-=========================================================
-* Otis Kit PRO - v2.0.1
-=========================================================
+import React, { useState } from "react";
+import CoverLayout from "pages/Authentication/components/CoverLayout";
 
-* Product Page: https://material-ui.com/store/items/otis-kit-pro-material-kit-react/
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState } from "react";
-
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @mui material components
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
-
-// Otis Kit PRO components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
+import { Link } from "react-router-dom";
+import bgImage from "../../../assets/images/photos/IMG_0613.JPG";
 
-// Authentication layout components
-import CoverLayout from "pages/Authentication/components/CoverLayout";
-
-// Images
-import bgImage from "../../../../assets/images/photos/IMG_0613.JPG";
-
-function SignInCover() {
+function Login() {
   const [rememberMe, setRememberMe] = useState(true);
-
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
-
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -101,16 +75,16 @@ function SignInCover() {
             </MKBox>
             <MKBox mt={3} mb={1} textAlign="center">
               <MKTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
+                ¿No tienes una cuenta? &nbsp;
                 <MKTypography
                   component={Link}
-                  to="/authentication/sign-up/cover"
+                  to="/register"
                   variant="button"
                   color="info"
                   fontWeight="medium"
                   textGradient
                 >
-                  Sign up
+                  Regístrate
                 </MKTypography>
               </MKTypography>
             </MKBox>
@@ -121,4 +95,4 @@ function SignInCover() {
   );
 }
 
-export default SignInCover;
+export default Login;
