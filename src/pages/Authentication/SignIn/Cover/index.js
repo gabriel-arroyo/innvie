@@ -32,7 +32,7 @@ import MKButton from "components/MKButton";
 import CoverLayout from "pages/Authentication/components/CoverLayout";
 
 // Images
-import bgImage from "../../../../assets/images/photos/IMG_0613.JPG";
+import bgImage from "assets/images/bg-sign-in-cover.jpeg";
 
 function SignInCover() {
   const [rememberMe, setRememberMe] = useState(true);

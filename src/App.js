@@ -27,8 +27,7 @@ import theme from "assets/theme";
 import Home from "pages/Innvie/Home";
 
 // Otis Kit PRO routes
-import FindRooms from "pages/Innvie/FindRooms";
-import routes from "./innvie.routes";
+import routes from "routes";
 import img from "./assets/images/shapes/bg-tile1.svg";
 
 export default function App() {
@@ -64,9 +63,8 @@ export default function App() {
       >
         <Routes>
           {getRoutes(routes)}
-          <Route path="/home" element={<Home />} />
-          <Route path="/findRooms" element={<FindRooms />} />
-          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path="/innvie/home" element={<Home />} />
+          <Route path="*" element={<Navigate to="/innvie/home" />} />
         </Routes>
       </div>
     </ThemeProvider>

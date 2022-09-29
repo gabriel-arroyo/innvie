@@ -484,7 +484,7 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
                 width="200px"
                 position="absolute"
                 zIndex={1}
-                sx={{ top: "110px" }}
+                sx={{ top: "70px" }}
               />
             )}
           </MKBox>

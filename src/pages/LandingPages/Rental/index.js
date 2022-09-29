@@ -43,8 +43,8 @@ import CenteredFooter from "examples/Footers/CenteredFooter";
 import bgImage from "../../../assets/images/photos/IMG_0535.JPG";
 import routes from "../../../innvie.routes";
 
-import Offers from "../../../components/Offers/offers";
-import Places2 from "../../../components/Amenities/Amenities";
+import Offers from "../../Innvie/Home/components/Offers/offers";
+import Places2 from "../../Innvie/Home/sections/Amenities";
 
 function Rental() {
   const showAlert = false;
