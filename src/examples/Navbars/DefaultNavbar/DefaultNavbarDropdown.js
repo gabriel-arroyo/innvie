@@ -76,7 +76,7 @@ function DefaultNavbarDropdown({
           variant="button"
           fontWeight="regular"
           textTransform="capitalize"
-          color={light ? "white" : "black"}
+          color={light ? "white" : "dark"}
           sx={{ fontWeight: "bold", ml: 1, mr: 0.25 }}
         >
           {name}

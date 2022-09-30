@@ -1,14 +1,15 @@
 # Innvie
 
-- home
-  - options
-    - reserve
-      - confirmación
+- home✔
+  - options✔
+    - reserve✔
+      - confirmación✔
 - login
 - register
 - blog
-- mis reservaciones
+- myreservations✔
 - checkin/checkout
 
 * admin
   - rooms availability / calendar
+  - ofertas

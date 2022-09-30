@@ -23,8 +23,7 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import FaqCollapse from "pages/Support/HelpCenter/components/FaqCollapse";
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+// import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 // Rental page sections
 // import Search from "pages/LandingPages/Rental/sections/Search";
@@ -32,24 +31,15 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 // import Faq from "pages/LandingPages/Rental/sections/Faq";
 // import Contact from "pages/LandingPages/Rental/sections/Contact";
 
-// Routes
-import footerRoutes from "footer.routes";
-
 // Images
 import bgImage from "assets/images/bg-rental.jpeg";
-import routes from "../../../innvie.routes";
+// import routes from "../../../innvie.routes";
 import Reservation from "./components/reservation";
 
-function Rental() {
+function MyReservations() {
   const [collapse, setCollapse] = useState(false);
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        logoUrl="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-blanco.png?alt=media&token=e4c69723-59be-4dfc-b1b7-b1d5c3f2513f"
-        transparent
-        light
-      />
       <MKBox
         minHeight="50vh"
         width="100%"
@@ -86,7 +76,7 @@ function Rental() {
               Mis Reservaciones
             </MKTypography>
             <MKTypography variant="body1" color="white" mt={1}>
-              Datos de mis visisitas pasadas y pendientes
+              Datos de mis visitas pasadas y pendientes
             </MKTypography>
           </Grid>
         </Container>
@@ -178,11 +168,8 @@ function Rental() {
           </Grid>
         </Container>
       </Card>
-      <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
-      </MKBox>
     </>
   );
 }
 
-export default Rental;
+export default MyReservations;

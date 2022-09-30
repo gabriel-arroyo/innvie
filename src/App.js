@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useEffect } from "react";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
@@ -27,7 +27,14 @@ import theme from "assets/theme";
 import Home from "pages/Innvie/Home";
 
 // Otis Kit PRO routes
-import routes from "routes";
+import routes from "innvie.routes";
+import Reserve from "pages/Innvie/Reserve";
+import Options from "pages/Innvie/Options";
+import Confirmation from "pages/Innvie/Confirmation";
+// import Layout from "pages/Innvie/Layouts/BasicLayout";
+// import Login from "pages/Innvie/Authentication/Login";
+// import Register from "pages/Innvie/Authentication/Register";
+import Layout from "pages/Innvie/Layouts/BasicLayout";
 import img from "./assets/images/shapes/bg-tile1.svg";
 
 export default function App() {
@@ -46,7 +53,7 @@ export default function App() {
       }
 
       if (route.route) {
-        return <Route exact path={route.route} element={route.component} key={route.key} />;
+        return <Route exact path={route.route} element={route.component} key={route.route} />;
       }
 
       return null;
@@ -62,9 +69,18 @@ export default function App() {
         }}
       >
         <Routes>
-          {getRoutes(routes)}
-          <Route path="/innvie/home" element={<Home />} />
-          <Route path="*" element={<Navigate to="/innvie/home" />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/options/:date" element={<Options />} />
+            <Route path="/reserve" element={<Reserve />} />
+            <Route path="/confirmation" element={<Confirmation />} />
+            {getRoutes(routes)}
+            {/* <Route path="*" element={<Navigate to="/home" />} /> */}
+          </Route>
+          {/* <Route path="/authentication" element={<Layout />}>
+            <Route index element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route> */}
         </Routes>
       </div>
     </ThemeProvider>

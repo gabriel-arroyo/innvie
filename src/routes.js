@@ -97,42 +97,42 @@ import SocialButtons from "layouts/sections/elements/social-buttons";
 import Tables from "layouts/sections/elements/tables";
 import Toggles from "layouts/sections/elements/toggles";
 import Typography from "layouts/sections/elements/typography";
-import Home from "pages/Innvie/Home";
-import Reservation from "pages/Innvie/Reservation";
-import Selected from "pages/Innvie/Selected";
-import Reserve from "pages/Innvie/Reserve";
-import Confirmation from "pages/Innvie/Confirmation";
+// import Home from "pages/Innvie/Home";
+// import Reservation from "pages/Innvie/Reservation";
+// import Selected from "pages/Innvie/Selected";
+// import Reserve from "pages/Innvie/Reserve";
+// import Confirmation from "pages/Innvie/Confirmation";
 
 const routes = [
   {
     name: "Innvie",
     icon: <Icon>menu</Icon>,
     collapse: [
-      {
-        name: "Home",
-        route: "/innvie/home",
-        component: <Home />,
-      },
-      {
-        name: "Reservation",
-        route: "/innvie/reservation",
-        component: <Reservation />,
-      },
-      {
-        name: "Selected",
-        route: "/innvie/selected",
-        component: <Selected />,
-      },
-      {
-        name: "Reserve",
-        route: "/innvie/reserve",
-        component: <Reserve />,
-      },
-      {
-        name: "Confirmation",
-        route: "/innvie/confirmation",
-        component: <Confirmation />,
-      },
+      // {
+      //   name: "Home",
+      //   route: "/home",
+      //   component: <Home />,
+      // },
+      // {
+      //   name: "Reservation",
+      //   route: "/innvie/reservation",
+      //   component: <Reservation />,
+      // },
+      // {
+      //   name: "Selected",
+      //   route: "/innvie/selected",
+      //   component: <Selected />,
+      // },
+      // {
+      //   name: "Reserve",
+      //   route: "/innvie/reserve",
+      //   component: <Reserve />,
+      // },
+      // {
+      //   name: "Confirmation",
+      //   route: "/innvie/confirmation",
+      //   component: <Confirmation />,
+      // },
     ],
   },
   {

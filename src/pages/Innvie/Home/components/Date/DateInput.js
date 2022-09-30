@@ -1,6 +1,7 @@
 import React from "react";
 // react-router-dom components
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Grid from "@mui/material/Grid";
 import MKInput from "components/MKInput";
@@ -8,7 +9,10 @@ import MKButton from "components/MKButton";
 import MKDatePicker from "components/MKDatePicker";
 import MKTypography from "components/MKTypography";
 
-function DateInput() {
+function DateInput({ startDate, endDate }) {
+  const onChangeDate = (e) => {
+    console.log(e); // value picked from date picker
+  };
   return (
     <Grid
       container
@@ -31,11 +35,12 @@ function DateInput() {
         </MKTypography>
         <MKDatePicker
           type="date"
-          options={{ mode: "range" }}
+          options={{ mode: "range", defaultDate: [startDate, endDate] }}
           variant="standard"
           placeholder="Please select date"
           fullWidth
           sx={{ width: "20vw", p: "20px" }}
+          onChange={onChangeDate}
         />
         {/* <MKInput type="date" label="Date" value="2018-11-23" sx={{ width: "20vw" }} /> */}
       </Grid>
@@ -67,7 +72,7 @@ function DateInput() {
       >
         <MKButton
           component={Link}
-          to="/pages/landing-pages/rental"
+          to="/options"
           variant="gradient"
           color="error"
           sx={{ width: "500px", padding: "14px" }}
@@ -80,3 +85,24 @@ function DateInput() {
 }
 
 export default DateInput;
+
+const getCurrentDate = () => {
+  const date = new Date();
+  const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  return currentDate;
+};
+const getTomorrowDate = () => {
+  const date = new Date();
+  date.setDate(date.getDate() + 1);
+  const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  return currentDate;
+};
+DateInput.propTypes = {
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
+};
+
+DateInput.defaultProps = {
+  startDate: getCurrentDate(),
+  endDate: getTomorrowDate(),
+};
