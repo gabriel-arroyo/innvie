@@ -2,6 +2,7 @@ import React from "react";
 // react-router-dom components
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import Grid from "@mui/material/Grid";
 import MKInput from "components/MKInput";
@@ -13,6 +14,7 @@ import { useAtom } from "jotai";
 import { reservedEndDate, reservedStartDate, reservedDays } from "states/reservedDate";
 
 function DateInput({ startDate, endDate }) {
+  const matches = useMediaQuery("(min-width:1000px)");
   const [stateStartDate, setStartDate] = useAtom(reservedStartDate);
   const [stateEndDate, setEndDate] = useAtom(reservedEndDate);
   const [stateDays, setDays] = useAtom(reservedDays);
@@ -26,7 +28,12 @@ function DateInput({ startDate, endDate }) {
     <Grid
       container
       spacing={3}
-      sx={{ display: "flex", alignItems: "center", justifyContent: "center", maxWidth: "500px" }}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        maxWidth: matches ? "500px" : "300px",
+      }}
     >
       <Grid
         item

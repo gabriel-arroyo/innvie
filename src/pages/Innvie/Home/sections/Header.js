@@ -66,7 +66,7 @@ function Header() {
       <div
         style={{
           position: "absolute",
-          top: matches ? "13vh" : "550px",
+          top: matches ? "13vh" : "87vh",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 1,
