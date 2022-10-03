@@ -59,10 +59,10 @@ function Contact() {
                   />
                   <MKBox py={6} pr={6} pl={{ xs: 6, sm: 12 }} pt={{ xs: 28 }} my="auto">
                     <MKTypography variant="h3" color="white" mb={1}>
-                      Contact Information
+                      Información de Contacto
                     </MKTypography>
                     <MKTypography variant="body2" color="white" opacity={0.8} mb={3}>
-                      Fill up the form and our Team will get back to you within 24 hours.
+                      Llena el formulario y nuestro equipo se comunicará contigo.
                     </MKTypography>
                     <MKBox display="flex" p={1}>
                       <MKTypography variant="button" color="white">
@@ -141,8 +141,8 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
-                          label="My name is"
-                          placeholder="Full Name"
+                          label="Mi nombre es"
+                          placeholder="Nombre completo"
                           InputLabelProps={{ shrink: true }}
                           fullWidth
                         />
@@ -150,8 +150,8 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
-                          label="My phone number is"
-                          placeholder="Phone"
+                          label="Mi teléfono es"
+                          placeholder="Teléfono"
                           InputLabelProps={{ shrink: true }}
                           fullWidth
                         />
@@ -159,8 +159,8 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
-                          label="My email is"
-                          placeholder="Email"
+                          label="My correo es"
+                          placeholder="Correo electrónico"
                           InputLabelProps={{ shrink: true }}
                           fullWidth
                         />
@@ -168,8 +168,8 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
-                          label="Your message"
-                          placeholder="I want to say that..."
+                          label="Tu mensaje"
+                          placeholder="Quiero decir ..."
                           InputLabelProps={{ shrink: true }}
                           fullWidth
                           multiline

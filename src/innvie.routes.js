@@ -12,7 +12,7 @@ const routes = [
     component: <Checkin />,
   },
   {
-    name: "My Reservation",
+    name: "Mis Reservaciones",
     icon: <Icon>menu</Icon>,
     route: "/myreservations",
     component: <MyReservations />,
@@ -40,16 +40,16 @@ const routes = [
   //   ],
   // },
   {
-    name: "Login",
+    name: "Ingresar",
     icon: <Icon>person</Icon>,
     collapse: [
       {
-        name: "Login",
+        name: "Ingresar",
         route: "/authentication",
         component: <Login />,
       },
       {
-        name: "Register",
+        name: "Registrarse",
         route: "/authentication/register",
         component: <Register />,
       },

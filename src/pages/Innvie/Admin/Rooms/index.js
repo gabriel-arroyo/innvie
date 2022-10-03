@@ -255,7 +255,13 @@ function Rooms() {
       },
       {
         ID: <RoomId name="201" />,
-        Tipo: <RoomType category="Habitación" subCategory="Studio" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
         Estado: (
           <MKBadge
             variant="contained"
