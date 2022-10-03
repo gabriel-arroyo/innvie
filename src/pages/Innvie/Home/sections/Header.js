@@ -36,7 +36,6 @@ import DateInput from "../components/Date/DateInput";
 import bg1 from "../../../../assets/images/photos/innvie1.png";
 import bg2 from "../../../../assets/images/photos/innvie2.png";
 import bg3 from "../../../../assets/images/photos/innvie3.png";
-import bg4 from "../../../../assets/images/photos/innvie4.png";
 
 function Header() {
   // install SwiperJS modules
@@ -52,7 +51,7 @@ function Header() {
         slidesPerView={1}
         navigation
         loop
-        style={{ height: "75vh" }}
+        style={{ height: "75vh", marginBottom: matches ? "0px" : "300px" }}
       >
         <SwiperSlide>
           <SliderBackground image={bg1} />
@@ -63,14 +62,11 @@ function Header() {
         <SwiperSlide>
           <SliderBackground image={bg3} />
         </SwiperSlide>
-        <SwiperSlide>
-          <SliderBackground image={bg4} />
-        </SwiperSlide>
       </Swiper>
       <div
         style={{
           position: "absolute",
-          top: matches ? "13vh" : "40vh",
+          top: matches ? "13vh" : "550px",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 1,

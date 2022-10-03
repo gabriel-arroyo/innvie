@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import footerRoutes from "footer.routes";
 import CenteredFooter from "examples/Footers/CenteredFooter";
-import image from "assets/images/bg-sign-in-cover.jpeg";
+import image from "../../../../assets/images/photos/innvie4.png";
 import routes from "../../../../innvie.routes";
 
 function CoverLayout() {

@@ -37,7 +37,7 @@ import DateInput from "pages/Innvie/Home/components/Date/DateInput";
 // import Contact from "pages/LandingPages/Rental/sections/Contact";
 
 // Images
-import bgImage from "../../../assets/images/photos/IMG_0535.JPG";
+import bgImage from "../../../assets/images/photos/innvie1.png";
 
 import Offers from "../Home/components/Offers/offers";
 import Places from "./sections/Places";

@@ -58,26 +58,31 @@ function Checkin() {
       </MKBox>
       <MKBox pt={4} pb={3} px={3}>
         <MKBox component="form" role="form">
-          <MKBox mb={2}>
-            <MKInput
-              type="email"
-              label="Email"
-              variant="standard"
-              fullWidth
-              placeholder="john@example.com"
-              InputLabelProps={{ shrink: true }}
-            />
-          </MKBox>
-          <MKBox mb={2}>
-            <MKInput
-              type="password"
-              label="Password"
-              variant="standard"
-              fullWidth
-              placeholder="************"
-              InputLabelProps={{ shrink: true }}
-            />
-          </MKBox>
+          {!checked && (
+            <>
+              {" "}
+              <MKBox mb={2}>
+                <MKInput
+                  type="email"
+                  label="Email"
+                  variant="standard"
+                  fullWidth
+                  placeholder="john@example.com"
+                  InputLabelProps={{ shrink: true }}
+                />
+              </MKBox>
+              <MKBox mb={2}>
+                <MKInput
+                  type="password"
+                  label="Password"
+                  variant="standard"
+                  fullWidth
+                  placeholder="************"
+                  InputLabelProps={{ shrink: true }}
+                />
+              </MKBox>
+            </>
+          )}
           <MKBox mt={4} mb={1}>
             <MKButton variant="gradient" color="error" onClick={handleCheckin} fullWidth>
               {!checked ? "Checkin" : "Checkout"}
