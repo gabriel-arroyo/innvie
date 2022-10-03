@@ -45,7 +45,7 @@ function RaisedBlogCard({ image, title, description, action }) {
   };
 
   return (
-    <Card sx={{ flexGrow: 1, backgroundColor: "#2c8ea2" }}>
+    <Card sx={{ flexGrow: 1, backgroundColor: "#2c8ea2", height: "100%" }}>
       <MKBox position="relative" borderRadius="lg" mx={2} mt={-3}>
         <MKBox
           component="img"

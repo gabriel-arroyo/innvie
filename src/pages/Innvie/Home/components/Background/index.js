@@ -27,8 +27,8 @@ function Background({ image }) {
       sx={{
         backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
           `${linearGradient(
-            rgba(gradients.dark.main, 0.8),
-            rgba(gradients.dark.state, 0.8)
+            rgba(gradients.dark.main, 0),
+            rgba(gradients.dark.state, 0)
           )}, url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

@@ -16,7 +16,6 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 
-import BaseLayout from "layouts/sections/components/BaseLayout";
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
@@ -25,16 +24,11 @@ import MKInput from "components/MKInput";
 // Otis Kit PRO examples
 import CustomPricingCard from "examples/Cards/PricingCards/CustomPricingCard";
 import { Checkbox } from "@mui/material";
+import BlancLayout from "../Layouts/BlancLayout";
 
 function Reserve() {
   return (
-    <BaseLayout
-      title="Reservación"
-      breadcrumb={[
-        { label: "Modelos", route: "/pages/landing-pages/rental" },
-        { label: "Reservar" },
-      ]}
-    >
+    <BlancLayout title="Reservación">
       <MKBox position="relative" zIndex={10} px={{ xs: 1, sm: 0 }}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>
@@ -58,7 +52,7 @@ function Reserve() {
             />
           </Grid>
           <Grid item xs={12} lg={4}>
-            <MKBox p={3}>
+            <MKBox p={3} bgColor="white" shadow="sm" borderRadius={10}>
               <MKBox component="form" role="form">
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
@@ -122,7 +116,7 @@ function Reserve() {
           </Grid>
         </Grid>
       </MKBox>
-    </BaseLayout>
+    </BlancLayout>
   );
 }
 

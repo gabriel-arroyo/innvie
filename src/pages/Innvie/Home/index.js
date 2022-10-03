@@ -13,11 +13,11 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import Contact from "pages/Blogs/Author/sections/Contact";
-import Places from "./sections/Places";
+import Contact from "./sections/Contact";
 import Header from "./sections/Header";
 import Offers from "./components/Offers/offers";
 import Map from "./components/Map/map";
+import PlacesSwipe from "./sections/PlacesSwipe";
 
 function Reservation() {
   return (
@@ -51,7 +51,7 @@ function Reservation() {
         ]}
       />
       <Map />
-      <Places />
+      <PlacesSwipe />
       <Contact />
     </>
   );

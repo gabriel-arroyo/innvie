@@ -16,8 +16,7 @@ Coded by www.creative-tim.com
 
 // SwiperJS
 import SwiperCore, { Autoplay, Navigation } from "swiper";
-import useMediaQuery from "@mui/material/useMediaQuery";
-
+import MKTypography from "components/MKTypography";
 // SwiperJS react components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -26,24 +25,33 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 // Pricing page components
-import SliderBackground from "pages/Innvie/Home/components/Background";
 
 // Images
 // import bg1 from "assets/images/bg2.jpg";
 import Container from "@mui/material/Container";
-import { Card } from "@mui/material";
-import DateInput from "../components/Date/DateInput";
-import bg1 from "../../../../assets/images/photos/IMG_0613.JPG";
-import bg2 from "../../../../assets/images/photos/IMG_0331.JPG";
-import bg3 from "../../../../assets/images/photos/IMG_0369.JPG";
+import MKBox from "components/MKBox";
+import Grid from "@mui/material/Grid";
+import PlacesCards from "./PlacesCards";
 
-function Header() {
+function PlacesSwipe() {
   // install SwiperJS modules
   SwiperCore.use([Autoplay, Navigation]);
-  const matches = useMediaQuery("(min-width:1000px)");
 
   return (
-    <>
+    <div style={{ marginBottom: "20px" }}>
+      <Grid
+        container
+        item
+        xs={12}
+        lg={12}
+        flexDirection="column"
+        alignItems="center"
+        sx={{ textAlign: "center", my: 0, mx: "auto" }}
+      >
+        <MKTypography variant="h2" fontWeight="bold" pb={2} color="white">
+          Lugares cercanos
+        </MKTypography>
+      </Grid>
       <Swiper
         autoplay={{ delay: 5000 }}
         speed={800}
@@ -51,44 +59,41 @@ function Header() {
         slidesPerView={1}
         navigation
         loop
-        style={{ height: "75vh" }}
+        style={{ height: "100%" }}
       >
         <SwiperSlide>
-          <SliderBackground image={bg1} />
+          <MKBox component="section" py={7}>
+            <Container>
+              <PlacesCards />
+            </Container>
+          </MKBox>
         </SwiperSlide>
         <SwiperSlide>
-          <SliderBackground image={bg3} />
+          <MKBox component="section" py={7}>
+            <Container>
+              <PlacesCards />
+            </Container>
+          </MKBox>
         </SwiperSlide>
         <SwiperSlide>
-          <SliderBackground image={bg2} />
+          <MKBox component="section" py={7}>
+            <Container>
+              <PlacesCards />
+            </Container>
+          </MKBox>
         </SwiperSlide>
       </Swiper>
       <div
         style={{
           position: "absolute",
-          top: matches ? "13vh" : "40vh",
+          top: "13vh",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 1,
         }}
-      >
-        <Container>
-          <Card
-            sx={{
-              ml: "18vw",
-              mr: "18vw",
-              p: "10px",
-              display: "flex",
-              backgroundColor: "rgba(255,255,255,0.9)",
-            }}
-          >
-            <DateInput className="dateHome" />
-            <p>{matches}</p>
-          </Card>
-        </Container>
-      </div>
-    </>
+      />
+    </div>
   );
 }
 
-export default Header;
+export default PlacesSwipe;

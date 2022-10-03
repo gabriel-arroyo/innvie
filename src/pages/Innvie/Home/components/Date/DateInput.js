@@ -51,7 +51,6 @@ function DateInput({ startDate, endDate }) {
           sx={{ width: "20vw", p: "20px" }}
           onChange={onChangeDate}
         />
-        {/* <MKInput type="date" label="Date" value="2018-11-23" sx={{ width: "20vw" }} /> */}
       </Grid>
       <Grid
         item
@@ -71,7 +70,7 @@ function DateInput({ startDate, endDate }) {
       </Grid>
       <Grid
         item
-        xs={12}
+        xs={5}
         lg={4}
         sx={{
           display: "flex",

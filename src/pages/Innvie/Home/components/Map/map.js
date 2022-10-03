@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import MKTypography from "components/MKTypography";
 import MKBox from "components/MKBox";
 import Container from "@mui/material/Container";
+import "./map.css";
 
 function Map() {
   return (
@@ -14,8 +15,11 @@ function Map() {
           justifyContent="center"
           alignItems="center"
           backgroundColor="#fff"
+          borderRadius="lg"
+          className="map"
         >
           <iframe
+            className="map"
             width="100%"
             height="400"
             id="gmap_canvas"

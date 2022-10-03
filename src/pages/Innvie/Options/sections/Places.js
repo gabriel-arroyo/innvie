@@ -36,7 +36,7 @@ import product6 from "../../../../assets/images/photos/IMG_6.JPG";
 function Places() {
   const actionProps = {
     type: "internal",
-    route: "/pages/landing-pages/rental",
+    route: "/reserve",
     color: "info",
     label: "$123.00",
   };

@@ -30,7 +30,7 @@ import DateInput from "pages/Innvie/Home/components/Date/DateInput";
 
 // Rental page sections
 // import Search from "pages/LandingPages/Rental/sections/Search";
-import Places from "pages/LandingPages/Rental/sections/Places";
+// import Places from "pages/LandingPages/Rental/sections/Places";
 // import Testimonials from "pages/LandingPages/Rental/sections/Testimonials";
 // import Faq from "pages/LandingPages/Rental/sections/Faq";
 // import Contact from "pages/LandingPages/Rental/sections/Contact";
@@ -39,7 +39,8 @@ import Places from "pages/LandingPages/Rental/sections/Places";
 import bgImage from "../../../assets/images/photos/IMG_0535.JPG";
 
 import Offers from "../Home/components/Offers/offers";
-import Places2 from "../Home/sections/Amenities";
+import Places from "./sections/Places";
+// import Amenities from "../Home/sections/Amenities";
 
 function Options() {
   const showAlert = false;
@@ -135,7 +136,6 @@ function Options() {
           <br />
           <br />
           <br />
-          <br />
         </Container>
         <Offers
           cards={[
@@ -165,7 +165,7 @@ function Options() {
             },
           ]}
         />
-        <Places2 />
+        {/* <Amenities /> */}
       </Container>
       {/* </Card> */}
     </>

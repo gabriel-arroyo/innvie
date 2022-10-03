@@ -107,7 +107,7 @@ function SimpleBookingCard({ image, title, description, categories, action }) {
             </MKButton>
             <MKButton
               component={Link}
-              to="/innvie/reserve"
+              to="/reserve"
               variant="gradient"
               color="error"
               sx={{ height: "100%" }}
