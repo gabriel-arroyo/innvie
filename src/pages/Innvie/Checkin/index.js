@@ -74,7 +74,7 @@ function Checkin() {
               <MKBox mb={2}>
                 <MKInput
                   type="password"
-                  label="Password"
+                  label="Contraseña"
                   variant="standard"
                   fullWidth
                   placeholder="************"
@@ -101,7 +101,7 @@ function Checkin() {
             )}
             {!checked && (
               <MKTypography variant="button" color="text">
-                Don&apos;t have an account?{" "}
+                ¿No tienes una cuenta?{" "}
                 <MKTypography
                   component={Link}
                   to="/authentication/sign-up/cover"
@@ -110,7 +110,7 @@ function Checkin() {
                   fontWeight="medium"
                   textGradient
                 >
-                  Sign up
+                  Regístrate
                 </MKTypography>
               </MKTypography>
             )}

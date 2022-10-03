@@ -13,14 +13,11 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
-
 // react-router-dom components
 import { Link } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
@@ -29,10 +26,6 @@ import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 
 function Login() {
-  const [rememberMe, setRememberMe] = useState(true);
-
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
-
   return (
     <Card>
       <MKBox
@@ -47,10 +40,10 @@ function Login() {
         textAlign="center"
       >
         <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-          Sign in
+          Ingresar
         </MKTypography>
         <MKTypography display="block" variant="button" color="white" my={1}>
-          Enter your email and password to Sign In
+          Ingresa con tu correo y contraseña.
         </MKTypography>
       </MKBox>
       <MKBox pt={4} pb={3} px={3}>
@@ -68,14 +61,14 @@ function Login() {
           <MKBox mb={2}>
             <MKInput
               type="password"
-              label="Password"
+              label="Contraseña"
               variant="standard"
               fullWidth
               placeholder="************"
               InputLabelProps={{ shrink: true }}
             />
           </MKBox>
-          <MKBox display="flex" alignItems="center" ml={-1}>
+          {/* <MKBox display="flex" alignItems="center" ml={-1}>
             <Switch checked={rememberMe} onChange={handleSetRememberMe} />
             <MKTypography
               variant="button"
@@ -86,15 +79,15 @@ function Login() {
             >
               &nbsp;&nbsp;Remember me
             </MKTypography>
-          </MKBox>
+          </MKBox> */}
           <MKBox mt={4} mb={1}>
             <MKButton variant="gradient" color="error" fullWidth>
-              sign in
+              ingresar
             </MKButton>
           </MKBox>
           <MKBox mt={3} mb={1} textAlign="center">
             <MKTypography variant="button" color="text">
-              Don&apos;t have an account?{" "}
+              ¿No tienes una cuenta?{" "}
               <MKTypography
                 component={Link}
                 to="/authentication/sign-up/cover"
@@ -103,7 +96,7 @@ function Login() {
                 fontWeight="medium"
                 textGradient
               >
-                Sign up
+                Regístrate
               </MKTypography>
             </MKTypography>
           </MKBox>

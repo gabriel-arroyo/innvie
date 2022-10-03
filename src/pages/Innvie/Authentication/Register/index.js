@@ -100,7 +100,7 @@ function Register() {
           </MKBox>
           <MKBox mt={3} mb={1} textAlign="center">
             <MKTypography variant="button" color="text">
-              ¿Ya tienes una cuenta?
+              ¿Ya tienes una cuenta?{" "}
               <MKTypography
                 component={Link}
                 to="/authentication/sign-in/cover"
