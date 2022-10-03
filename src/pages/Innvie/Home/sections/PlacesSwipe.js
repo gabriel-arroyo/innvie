@@ -32,6 +32,7 @@ import Container from "@mui/material/Container";
 import MKBox from "components/MKBox";
 import Grid from "@mui/material/Grid";
 import PlacesCards from "./PlacesCards";
+import PlacesCards2 from "./PlacesCards2";
 
 function PlacesSwipe() {
   // install SwiperJS modules
@@ -71,14 +72,7 @@ function PlacesSwipe() {
         <SwiperSlide>
           <MKBox component="section" py={7}>
             <Container>
-              <PlacesCards />
-            </Container>
-          </MKBox>
-        </SwiperSlide>
-        <SwiperSlide>
-          <MKBox component="section" py={7}>
-            <Container>
-              <PlacesCards />
+              <PlacesCards2 />
             </Container>
           </MKBox>
         </SwiperSlide>

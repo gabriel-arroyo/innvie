@@ -16,11 +16,11 @@ Coded by www.creative-tim.com
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+// import Icon from "@mui/material/Icon";
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
-import MKPagination from "components/MKPagination";
+// import MKPagination from "components/MKPagination";
 
 // Otis Kit PRO components
 import SimpleBookingCard from "examples/Cards/BookingCards/SimpleBookingCard";
@@ -145,7 +145,7 @@ function Places() {
             </MKBox>
           </Grid> */}
         </Grid>
-        <MKBox mt={5}>
+        {/* <MKBox mt={5}>
           <MKPagination>
             <MKPagination item>
               <Icon>keyboard_arrow_left</Icon>
@@ -161,7 +161,7 @@ function Places() {
               <Icon>keyboard_arrow_right</Icon>
             </MKPagination>
           </MKPagination>
-        </MKBox>
+        </MKBox> */}
       </Container>
     </MKBox>
   );

@@ -2,8 +2,8 @@ import React from "react";
 import MKBox from "components/MKBox";
 import { Outlet } from "react-router-dom";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import footerRoutes from "footer.routes";
 import CenteredFooter from "examples/Footers/CenteredFooter";
+import footerRoutes from "../../../../footer.routes";
 import routes from "../../../../innvie.routes";
 
 function Layout() {

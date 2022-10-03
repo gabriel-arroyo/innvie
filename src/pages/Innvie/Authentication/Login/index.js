@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-
+import React, { useState } from "react";
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -26,6 +26,10 @@ import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 
 function Login() {
+  const [logged, setLogged] = useState(false);
+  const handleLogin = () => {
+    setLogged(!logged);
+  };
   return (
     <Card>
       <MKBox
@@ -48,42 +52,42 @@ function Login() {
       </MKBox>
       <MKBox pt={4} pb={3} px={3}>
         <MKBox component="form" role="form">
-          <MKBox mb={2}>
-            <MKInput
-              type="email"
-              label="Email"
-              variant="standard"
-              fullWidth
-              placeholder="john@example.com"
-              InputLabelProps={{ shrink: true }}
-            />
-          </MKBox>
-          <MKBox mb={2}>
-            <MKInput
-              type="password"
-              label="Contraseña"
-              variant="standard"
-              fullWidth
-              placeholder="************"
-              InputLabelProps={{ shrink: true }}
-            />
-          </MKBox>
-          {/* <MKBox display="flex" alignItems="center" ml={-1}>
-            <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-            <MKTypography
-              variant="button"
-              fontWeight="regular"
-              color="text"
-              onClick={handleSetRememberMe}
-              sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-            >
-              &nbsp;&nbsp;Remember me
-            </MKTypography>
-          </MKBox> */}
+          {logged && <MKTypography type="h2">¡Bienvenido!</MKTypography>}
+          {!logged && (
+            <>
+              <MKBox mb={2}>
+                <MKInput
+                  type="email"
+                  label="Email"
+                  variant="standard"
+                  fullWidth
+                  placeholder="john@example.com"
+                  InputLabelProps={{ shrink: true }}
+                />
+              </MKBox>
+              <MKBox mb={2}>
+                <MKInput
+                  type="password"
+                  label="Contraseña"
+                  variant="standard"
+                  fullWidth
+                  placeholder="************"
+                  InputLabelProps={{ shrink: true }}
+                />
+              </MKBox>
+            </>
+          )}
           <MKBox mt={4} mb={1}>
-            <MKButton variant="gradient" color="error" fullWidth>
-              ingresar
-            </MKButton>
+            {!logged && (
+              <MKButton variant="gradient" color="error" onClick={handleLogin} fullWidth>
+                ingresar
+              </MKButton>
+            )}
+            {logged && (
+              <MKButton component={Link} to="/" variant="gradient" color="error" fullWidth>
+                regresar
+              </MKButton>
+            )}
           </MKBox>
           <MKBox mt={3} mb={1} textAlign="center">
             <MKTypography variant="button" color="text">

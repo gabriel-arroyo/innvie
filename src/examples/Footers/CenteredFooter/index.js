@@ -34,25 +34,25 @@ import MKTypography from "components/MKTypography";
 
 function CenteredFooter({ company, links, socials }) {
   const { href, name } = company;
-
+  console.log(links);
   const year = new Date().getFullYear();
 
-  const renderLinks = links.map((link, key) => {
-    const elementKey = `${link.name}-${key}`;
+  // const renderLinks = links.map((link, key) => {
+  //   const elementKey = `${link.name}-${key}`;
 
-    return (
-      <MKTypography
-        key={elementKey}
-        component={Link}
-        href={link.href}
-        variant="body2"
-        color="white"
-        fontWeight="regular"
-      >
-        {link.name}
-      </MKTypography>
-    );
-  });
+  //   return (
+  //     <MKTypography
+  //       key={elementKey}
+  //       component={Link}
+  //       href={link.href}
+  //       variant="body2"
+  //       color="white"
+  //       fontWeight="regular"
+  //     >
+  //       {link.name}
+  //     </MKTypography>
+  //   );
+  // });
 
   const renderSocials = socials.map((social, key) => {
     const elementKey = `${social.link}-${key}`;
@@ -74,7 +74,7 @@ function CenteredFooter({ company, links, socials }) {
   return (
     <MKBox component="footer" py={6}>
       <Grid container justifyContent="center">
-        <Grid item xs={10} lg={8}>
+        {/* <Grid item xs={10} lg={8}>
           <Stack
             direction="row"
             flexWrap="wrap"
@@ -84,7 +84,7 @@ function CenteredFooter({ company, links, socials }) {
           >
             {renderLinks}
           </Stack>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} lg={8}>
           <Stack display="flex" direction="row" justifyContent="center" spacing={3} mt={1} mb={3}>
             {renderSocials}

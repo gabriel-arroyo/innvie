@@ -476,7 +476,7 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
-            {logoUrl && (
+            {logoUrl && !mobileNavbar && (
               <MKBox
                 component="img"
                 src={logoUrl}

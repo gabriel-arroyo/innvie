@@ -1,7 +1,6 @@
 // @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 // Otis Kit PRO components
@@ -27,90 +26,87 @@ export default {
       icon: <TwitterIcon />,
       link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
     },
-    {
-      icon: <GitHubIcon />,
-      link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-    },
+
     {
       icon: <YouTubeIcon />,
       link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
     },
   ],
-  menus: [
-    {
-      name: "company",
-      items: [
-        {
-          name: "about us",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        {
-          name: "freebies",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        {
-          name: "premium tools",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        {
-          name: "blog",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-      ],
-    },
-    {
-      name: "resources",
-      items: [
-        {
-          name: "illustrations",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        {
-          name: "bits & snippets",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        {
-          name: "affiliate program",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-      ],
-    },
-    {
-      name: "help & support",
-      items: [
-        {
-          name: "contact us",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        {
-          name: "knowledge center",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        { name: "custom development", href: "https://services.creative-tim.com/" },
-        {
-          name: "sponsorships",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-      ],
-    },
-    {
-      name: "legal",
-      items: [
-        {
-          name: "terms & conditions",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        {
-          name: "privacy policy",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-        {
-          name: "licenses (EULA)",
-          href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-        },
-      ],
-    },
-  ],
+  // menus: [
+  //   {
+  //     name: "company",
+  //     items: [
+  //       {
+  //         name: "about us",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       {
+  //         name: "freebies",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       {
+  //         name: "premium tools",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       {
+  //         name: "blog",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "resources",
+  //     items: [
+  //       {
+  //         name: "illustrations",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       {
+  //         name: "bits & snippets",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       {
+  //         name: "affiliate program",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "help & support",
+  //     items: [
+  //       {
+  //         name: "contact us",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       {
+  //         name: "knowledge center",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       { name: "custom development", href: "https://services.creative-tim.com/" },
+  //       {
+  //         name: "sponsorships",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     name: "legal",
+  //     items: [
+  //       {
+  //         name: "terms & conditions",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       {
+  //         name: "privacy policy",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //       {
+  //         name: "licenses (EULA)",
+  //         href: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+  //       },
+  //     ],
+  //   },
+  // ],
   copyright: (
     <MKTypography variant="button" fontWeight="regular">
       All rights reserved. Copyright &copy; {date} Otis Kit by{" "}
