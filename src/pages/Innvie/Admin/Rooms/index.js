@@ -283,6 +283,396 @@ function Rooms() {
           </MKTypography>
         ),
       },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
+      {
+        ID: <RoomId name="201" />,
+        Tipo: <RoomType category="Habitación" />,
+        Categoría: (
+          <MKTypography variant="caption" fontWeight="medium" color="text">
+            Studio
+          </MKTypography>
+        ),
+        Camas: "2",
+        Estado: (
+          <MKBadge
+            variant="contained"
+            badgeContent="Mantenimiento"
+            color="info"
+            size="xs"
+            container
+          />
+        ),
+        action: (
+          <MKTypography
+            component="a"
+            href="#"
+            variant="caption"
+            color="secondary"
+            fontWeight="medium"
+          >
+            Edit
+          </MKTypography>
+        ),
+      },
     ],
   };
 
