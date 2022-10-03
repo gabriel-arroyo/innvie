@@ -1,25 +1,16 @@
 import Icon from "@mui/material/Icon";
 import Login from "pages/Innvie/Authentication/Login";
 import Register from "pages/Innvie/Authentication/Register";
+import Checkin from "pages/Innvie/Checkin";
 import MyReservations from "pages/Innvie/MyReservations";
 
 const routes = [
-  // {
-  //   name: "Checkin/Checkout",
-  //   icon: <Icon>menu</Icon>,
-  //   collapse: [
-  //     {
-  //       name: "Checkin",
-  //       route: "/authentication/sign-in/basic",
-  //       component: <MyReservations />,
-  //     },
-  //     {
-  //       name: "Checkout",
-  //       route: "/authentication/sign-in/basic",
-  //       component: <MyReservations />,
-  //     },
-  //   ],
-  // },
+  {
+    name: "Checkin/Checkout",
+    icon: <Icon>menu</Icon>,
+    route: "/authentication/checkin",
+    component: <Checkin />,
+  },
   {
     name: "My Reservation",
     icon: <Icon>menu</Icon>,
@@ -54,12 +45,12 @@ const routes = [
     collapse: [
       {
         name: "Login",
-        route: "/login",
+        route: "/authentication",
         component: <Login />,
       },
       {
         name: "Register",
-        route: "/register",
+        route: "/authentication/register",
         component: <Register />,
       },
     ],

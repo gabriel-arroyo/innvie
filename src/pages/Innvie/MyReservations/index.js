@@ -33,7 +33,6 @@ import FaqCollapse from "pages/Support/HelpCenter/components/FaqCollapse";
 
 // Images
 import bgImage from "assets/images/bg-rental.jpeg";
-// import routes from "../../../innvie.routes";
 import Reservation from "./components/reservation";
 
 function MyReservations() {

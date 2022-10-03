@@ -1,3 +1,8 @@
 fieldset {
   border-color: #0D283C !important;
+  text-align: center;
+}
+
+.MuiOutlinedInput-input {
+  text-align: center;
 }

@@ -484,7 +484,7 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
                 width="200px"
                 position="absolute"
                 zIndex={1}
-                sx={{ top: "70px" }}
+                sx={{ top: "80px" }}
               />
             )}
           </MKBox>
@@ -539,7 +539,9 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
             sx={{ cursor: "pointer" }}
             onClick={openMobileNavbar}
           >
-            <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
+            <Icon color="primary" fontSize="default">
+              {mobileNavbar ? "close" : "menu"}
+            </Icon>
           </MKBox>
         </MKBox>
         <MKBox

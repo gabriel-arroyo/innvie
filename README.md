@@ -4,8 +4,8 @@
   - options✔
     - reserve✔
       - confirmación✔
-- login
-- register
+- login✔
+- register✔
 - blog
 - myreservations✔
 - checkin/checkout

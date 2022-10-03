@@ -13,6 +13,7 @@ function Offers({ cards }) {
         mt: "2rem",
         mb: 10,
         zIndex: 1,
+        height: "100%",
       }}
     >
       <Grid container spacing={2}>

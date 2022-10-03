@@ -13,26 +13,29 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
-
 // react-router-dom components
 import { Link } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
+import { useEffect, useState } from "react";
 
-function Login() {
-  const [rememberMe, setRememberMe] = useState(true);
-
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
-
+function Checkin() {
+  const [checked, setChecked] = useState(false);
+  const [password, setPassword] = useState("");
+  const handleCheckin = () => setChecked(!checked);
+  useEffect(() => {
+    if (checked) {
+      const val = Math.floor(1000 + Math.random() * 9000);
+      setPassword(val);
+    }
+  }, [checked]);
   return (
     <Card>
       <MKBox
@@ -47,10 +50,10 @@ function Login() {
         textAlign="center"
       >
         <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-          Sign in
+          Checkin
         </MKTypography>
         <MKTypography display="block" variant="button" color="white" my={1}>
-          Enter your email and password to Sign In
+          Ingrese su correo y contraseña para hacer checkin
         </MKTypography>
       </MKBox>
       <MKBox pt={4} pb={3} px={3}>
@@ -75,37 +78,37 @@ function Login() {
               InputLabelProps={{ shrink: true }}
             />
           </MKBox>
-          <MKBox display="flex" alignItems="center" ml={-1}>
-            <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-            <MKTypography
-              variant="button"
-              fontWeight="regular"
-              color="text"
-              onClick={handleSetRememberMe}
-              sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-            >
-              &nbsp;&nbsp;Remember me
-            </MKTypography>
-          </MKBox>
           <MKBox mt={4} mb={1}>
-            <MKButton variant="gradient" color="error" fullWidth>
-              sign in
+            <MKButton variant="gradient" color="error" onClick={handleCheckin} fullWidth>
+              {!checked ? "Checkin" : "Checkout"}
             </MKButton>
           </MKBox>
           <MKBox mt={3} mb={1} textAlign="center">
-            <MKTypography variant="button" color="text">
-              Don&apos;t have an account?{" "}
-              <MKTypography
-                component={Link}
-                to="/authentication/sign-up/cover"
-                variant="button"
-                color="info"
-                fontWeight="medium"
-                textGradient
-              >
-                Sign up
+            {checked && (
+              <>
+                <MKTypography variant="h1" fontWeight="medium" color="primary" mt={1}>
+                  {password}
+                </MKTypography>
+                <MKTypography variant="body1" fontWeight="medium" color="primary" mt={1}>
+                  Ingrese esta contraseña en la cerradura de su cuarto para ingresar.
+                </MKTypography>
+              </>
+            )}
+            {!checked && (
+              <MKTypography variant="button" color="text">
+                Don&apos;t have an account?{" "}
+                <MKTypography
+                  component={Link}
+                  to="/authentication/sign-up/cover"
+                  variant="button"
+                  color="info"
+                  fontWeight="medium"
+                  textGradient
+                >
+                  Sign up
+                </MKTypography>
               </MKTypography>
-            </MKTypography>
+            )}
           </MKBox>
         </MKBox>
       </MKBox>
@@ -113,4 +116,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Checkin;

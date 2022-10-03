@@ -29,9 +29,8 @@ function Reservation() {
             variant: "gradient",
             color: "primary",
             icon: "shuffle_on",
-            title: "Oferta 1",
-            description:
-              "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
+            title: "6x5",
+            description: "Hospédate con nosotros 6 noches y paga solamente 5.",
           },
           {
             variant: "gradient",

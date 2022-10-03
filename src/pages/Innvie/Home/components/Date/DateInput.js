@@ -8,10 +8,19 @@ import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import MKDatePicker from "components/MKDatePicker";
 import MKTypography from "components/MKTypography";
+import { getTomorrowDate, getCurrentDate, getDaysDifference } from "tools/getDate";
+import { useAtom } from "jotai";
+import { reservedEndDate, reservedStartDate, reservedDays } from "states/reservedDate";
 
 function DateInput({ startDate, endDate }) {
+  const [stateStartDate, setStartDate] = useAtom(reservedStartDate);
+  const [stateEndDate, setEndDate] = useAtom(reservedEndDate);
+  const [stateDays, setDays] = useAtom(reservedDays);
   const onChangeDate = (e) => {
-    console.log(e); // value picked from date picker
+    const [start, end] = e;
+    setStartDate(getCurrentDate(start));
+    setEndDate(getCurrentDate(end));
+    setDays(getDaysDifference(start, end));
   };
   return (
     <Grid
@@ -58,7 +67,7 @@ function DateInput({ startDate, endDate }) {
         <MKTypography variant="h6" color="primary">
           Días
         </MKTypography>
-        <MKInput type="number" value="2" sx={{ width: "60px" }} />
+        <MKInput type="text" value={stateDays} sx={{ width: "50px", pointerEvents: "none" }} />
       </Grid>
       <Grid
         item
@@ -72,7 +81,7 @@ function DateInput({ startDate, endDate }) {
       >
         <MKButton
           component={Link}
-          to="/options"
+          to={`/options/${stateStartDate}/${stateEndDate}`}
           variant="gradient"
           color="error"
           sx={{ width: "500px", padding: "14px" }}
@@ -86,17 +95,6 @@ function DateInput({ startDate, endDate }) {
 
 export default DateInput;
 
-const getCurrentDate = () => {
-  const date = new Date();
-  const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  return currentDate;
-};
-const getTomorrowDate = () => {
-  const date = new Date();
-  date.setDate(date.getDate() + 1);
-  const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  return currentDate;
-};
 DateInput.propTypes = {
   startDate: PropTypes.string,
   endDate: PropTypes.string,

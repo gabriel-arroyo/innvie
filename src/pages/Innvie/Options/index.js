@@ -27,7 +27,6 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import DateInput from "pages/Innvie/Home/components/Date/DateInput";
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 // Rental page sections
 // import Search from "pages/LandingPages/Rental/sections/Search";
@@ -36,28 +35,17 @@ import Places from "pages/LandingPages/Rental/sections/Places";
 // import Faq from "pages/LandingPages/Rental/sections/Faq";
 // import Contact from "pages/LandingPages/Rental/sections/Contact";
 
-// Routes
-import footerRoutes from "footer.routes";
-
 // Images
-import CenteredFooter from "examples/Footers/CenteredFooter";
 import bgImage from "../../../assets/images/photos/IMG_0535.JPG";
-import routes from "../../../innvie.routes";
 
 import Offers from "../Home/components/Offers/offers";
 import Places2 from "../Home/sections/Amenities";
 
 function Options() {
   const showAlert = false;
-  const { date } = useParams();
+  const { startDate, endDate } = useParams();
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        logoUrl="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-blanco.png?alt=media&token=e4c69723-59be-4dfc-b1b7-b1d5c3f2513f"
-        transparent
-        light
-      />
       <MKBox
         minHeight="50vh"
         width="100%"
@@ -127,7 +115,7 @@ function Options() {
             marginRight: "auto",
           }}
         >
-          <DateInput date={date} />
+          <DateInput startDate={startDate} endDate={endDate} />
         </div>
 
         {showAlert && (
@@ -180,9 +168,6 @@ function Options() {
         <Places2 />
       </Container>
       {/* </Card> */}
-      <MKBox pt={6} px={1} mt={6} sx={{ backgroundColor: "#bc2f2c" }}>
-        <CenteredFooter content={footerRoutes} />
-      </MKBox>
     </>
   );
 }
