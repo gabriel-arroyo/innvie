@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useParams } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -45,6 +46,7 @@ import Places from "./sections/Places";
 function Options() {
   const showAlert = false;
   const { startDate, endDate } = useParams();
+  const matches = useMediaQuery("(min-width:1000px)");
   return (
     <>
       <MKBox
@@ -69,7 +71,7 @@ function Options() {
             xs={12}
             lg={6}
             justifyContent="center"
-            sx={{ mx: "auto", textAlign: "center" }}
+            sx={{ mx: "auto", textAlign: "center", marginTop: matches ? "0px" : "150px" }}
           >
             <MKTypography
               variant="h2"
@@ -110,7 +112,7 @@ function Options() {
             margin: 20,
             backgroundColor: "white",
             padding: "10px",
-            width: "500px",
+            width: matches ? "500px" : "300px",
             borderRadius: "10px",
             marginLeft: "auto",
             marginRight: "auto",

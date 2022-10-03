@@ -33,9 +33,10 @@ import SliderBackground from "pages/Innvie/Home/components/Background";
 import Container from "@mui/material/Container";
 import { Card } from "@mui/material";
 import DateInput from "../components/Date/DateInput";
-import bg1 from "../../../../assets/images/photos/IMG_0613.JPG";
-import bg2 from "../../../../assets/images/photos/IMG_0331.JPG";
-import bg3 from "../../../../assets/images/photos/IMG_0369.JPG";
+import bg1 from "../../../../assets/images/photos/innvie1.png";
+import bg2 from "../../../../assets/images/photos/innvie2.png";
+import bg3 from "../../../../assets/images/photos/innvie3.png";
+import bg4 from "../../../../assets/images/photos/innvie4.png";
 
 function Header() {
   // install SwiperJS modules
@@ -57,10 +58,13 @@ function Header() {
           <SliderBackground image={bg1} />
         </SwiperSlide>
         <SwiperSlide>
+          <SliderBackground image={bg2} />
+        </SwiperSlide>
+        <SwiperSlide>
           <SliderBackground image={bg3} />
         </SwiperSlide>
         <SwiperSlide>
-          <SliderBackground image={bg2} />
+          <SliderBackground image={bg4} />
         </SwiperSlide>
       </Swiper>
       <div
