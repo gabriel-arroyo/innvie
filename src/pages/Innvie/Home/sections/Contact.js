@@ -159,7 +159,7 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
-                          label="My correo es"
+                          label="Mi correo es"
                           placeholder="Correo electrónico"
                           InputLabelProps={{ shrink: true }}
                           fullWidth
