@@ -19,6 +19,7 @@ import SwiperCore, { Autoplay, Navigation } from "swiper";
 import MKTypography from "components/MKTypography";
 // SwiperJS react components
 import { Swiper, SwiperSlide } from "swiper/react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 // SwiperJS styles
 import "swiper/css";
@@ -32,9 +33,10 @@ import Container from "@mui/material/Container";
 import MKBox from "components/MKBox";
 import Grid from "@mui/material/Grid";
 import PlacesCards from "./PlacesCards";
-import PlacesCards2 from "./PlacesCards2";
+// import PlacesCards2 from "./PlacesCards2";
 
 function PlacesSwipe() {
+  const matches = useMediaQuery("(min-width:1000px)");
   // install SwiperJS modules
   SwiperCore.use([Autoplay, Navigation]);
 
@@ -65,14 +67,14 @@ function PlacesSwipe() {
         <SwiperSlide>
           <MKBox component="section" py={7}>
             <Container>
-              <PlacesCards />
+              <PlacesCards number={matches ? 3 : 1} />
             </Container>
           </MKBox>
         </SwiperSlide>
         <SwiperSlide>
           <MKBox component="section" py={7}>
             <Container>
-              <PlacesCards2 />
+              <PlacesCards number={matches ? 3 : 1} />
             </Container>
           </MKBox>
         </SwiperSlide>

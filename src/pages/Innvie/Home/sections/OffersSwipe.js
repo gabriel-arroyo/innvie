@@ -22,20 +22,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // SwiperJS styles
 import "swiper/css";
 import "swiper/css/navigation";
+import PropTypes from "prop-types";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Pricing page components
 
+import { v4 as uuidv4 } from "uuid";
 // Images
 // import bg1 from "assets/images/bg2.jpg";
 import Container from "@mui/material/Container";
 import MKBox from "components/MKBox";
 import Grid from "@mui/material/Grid";
+import React from "react";
 import Offers from "../components/Offers/offers";
 
-function OffersSwipe() {
+function OffersSwipe({ cards }) {
+  const matches = useMediaQuery("(min-width:1000px)");
+  console.log(matches);
   // install SwiperJS modules
   SwiperCore.use([Autoplay, Navigation]);
-
   return (
     <div style={{ marginBottom: "20px" }}>
       <Grid
@@ -56,72 +61,25 @@ function OffersSwipe() {
         loop
         style={{ height: "100%" }}
       >
-        <SwiperSlide>
-          <MKBox component="section" py={7}>
-            <Container>
-              <Offers
-                cards={[
-                  {
-                    variant: "gradient",
-                    color: "primary",
-                    icon: "shuffle_on",
-                    title: "6x5",
-                    description: "Hospédate con nosotros 6 noches y paga solamente 5.",
-                  },
-                  {
-                    variant: "gradient",
-                    color: "primary",
-                    icon: "beenhere",
-                    title: "Oferta 2",
-                    description:
-                      "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
-                  },
-                  {
-                    variant: "gradient",
-                    color: "primary",
-                    icon: "ballot",
-                    title: "Oferta 3",
-                    description:
-                      "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
-                  },
-                ]}
-              />
-            </Container>
-          </MKBox>
-        </SwiperSlide>
-        <SwiperSlide>
-          <MKBox component="section" py={7}>
-            <Container>
-              <Offers
-                cards={[
-                  {
-                    variant: "gradient",
-                    color: "primary",
-                    icon: "shuffle_on",
-                    title: "6x5",
-                    description: "Hospédate con nosotros 6 noches y paga solamente 5.",
-                  },
-                  {
-                    variant: "gradient",
-                    color: "primary",
-                    icon: "beenhere",
-                    title: "Oferta 2",
-                    description:
-                      "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
-                  },
-                  {
-                    variant: "gradient",
-                    color: "primary",
-                    icon: "ballot",
-                    title: "Oferta 3",
-                    description:
-                      "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
-                  },
-                ]}
-              />
-            </Container>
-          </MKBox>
-        </SwiperSlide>
+        {matches && (
+          <SwiperSlide key={uuidv4()}>
+            <MKBox component="section" py={7}>
+              <Container>
+                <Offers cards={cards} />
+              </Container>
+            </MKBox>
+          </SwiperSlide>
+        )}
+        {!matches &&
+          cards.map((page) => (
+            <SwiperSlide key={uuidv4()}>
+              <MKBox component="section" py={7}>
+                <Container>
+                  <Offers cards={[page]} />
+                </Container>
+              </MKBox>
+            </SwiperSlide>
+          ))}
       </Swiper>
       <div
         style={{
@@ -137,3 +95,7 @@ function OffersSwipe() {
 }
 
 export default OffersSwipe;
+
+OffersSwipe.propTypes = {
+  cards: PropTypes.instanceOf(Array).isRequired,
+};

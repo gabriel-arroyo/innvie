@@ -18,7 +18,7 @@ function Offers({ cards }) {
     >
       <Grid container spacing={2}>
         {cards.map(({ variant, color, icon, title: cardTitle, description: cardDescription }) => (
-          <Grid key={icon} item xs={11} sm={6} lg={4}>
+          <Grid key={icon} item xs={11} sm={11} lg={4}>
             <FilledInfoCard
               variant={variant}
               color={color}
