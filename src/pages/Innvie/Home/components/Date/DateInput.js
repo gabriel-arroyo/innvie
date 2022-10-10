@@ -37,7 +37,8 @@ function DateInput({ startDate, endDate }) {
     >
       <Grid
         item
-        xs={12}
+        sm={10}
+        xs={10}
         lg={5}
         sx={{
           display: "flex",

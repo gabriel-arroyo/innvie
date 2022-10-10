@@ -28,7 +28,7 @@ import "swiper/css/navigation";
 // Pricing page components
 import SliderBackground from "pages/Innvie/Home/components/Background";
 
-// Images
+// Images;
 // import bg1 from "assets/images/bg2.jpg";
 import Container from "@mui/material/Container";
 import { Card } from "@mui/material";
@@ -75,8 +75,6 @@ function Header() {
         <Container>
           <Card
             sx={{
-              ml: "18vw",
-              mr: "18vw",
               p: "10px",
               display: "flex",
               backgroundColor: "rgba(255,255,255,0.9)",

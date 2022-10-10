@@ -43,6 +43,8 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Otis Kit PRO base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
+import "./Navbar.css";
+
 function DefaultNavbar({ routes, transparent, light, action, sticky, relative, center, logoUrl }) {
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
@@ -485,6 +487,7 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
                 position="absolute"
                 zIndex={1}
                 sx={{ top: "80px" }}
+                className="logo"
               />
             )}
           </MKBox>
