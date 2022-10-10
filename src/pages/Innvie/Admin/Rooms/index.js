@@ -65,6 +65,7 @@ function Rooms() {
       { name: "Camas", align: "center" },
       { name: "Estado", align: "center" },
       { name: "Entrada", align: "center" },
+      { name: "Comentarios", align: "center" },
       { name: "action", align: "center" },
     ],
 
@@ -87,10 +88,11 @@ function Rooms() {
             23/04/18
           </MKTypography>
         ),
+        Comentarios: "habitación dañada",
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -119,8 +121,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -147,8 +149,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -175,8 +177,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -209,8 +211,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -243,8 +245,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -273,8 +275,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -303,8 +305,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -333,8 +335,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -363,8 +365,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -393,8 +395,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -423,8 +425,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -453,8 +455,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -483,8 +485,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -513,8 +515,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -543,8 +545,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -573,8 +575,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -603,8 +605,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -633,8 +635,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"
@@ -663,8 +665,8 @@ function Rooms() {
         ),
         action: (
           <MKTypography
-            component="a"
-            href="#"
+            component={Link}
+            to="/admin/newroom"
             variant="caption"
             color="secondary"
             fontWeight="medium"

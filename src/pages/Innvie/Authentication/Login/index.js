@@ -30,6 +30,20 @@ function Login() {
   const handleLogin = () => {
     setLogged(!logged);
   };
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState(null);
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+  const handleChange = (event) => {
+    if (!isValidEmail(event.target.value)) {
+      setError("Email inválido");
+    } else {
+      setError(null);
+    }
+
+    setMessage(event.target.value);
+  };
   return (
     <Card>
       <MKBox
@@ -60,11 +74,25 @@ function Login() {
                   type="email"
                   label="Email"
                   variant="standard"
+                  value={message}
+                  onChange={handleChange}
                   fullWidth
                   placeholder="john@example.com"
                   InputLabelProps={{ shrink: true }}
                 />
               </MKBox>
+              {error && (
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "0.8rem",
+                    marginTop: "-5px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  {error}
+                </p>
+              )}
               <MKBox mb={2}>
                 <MKInput
                   type="password"
@@ -94,7 +122,7 @@ function Login() {
               ¿No tienes una cuenta?{" "}
               <MKTypography
                 component={Link}
-                to="/authentication/sign-up/cover"
+                to="/authentication/register"
                 variant="button"
                 color="info"
                 fontWeight="medium"

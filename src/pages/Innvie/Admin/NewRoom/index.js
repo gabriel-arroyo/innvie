@@ -12,6 +12,7 @@ import MKButton from "components/MKButton";
 import { Grid } from "@mui/material";
 import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
+import image from "../../../../assets/images/photos/IMG_3.JPG";
 
 function NewRoom() {
   return (
@@ -62,6 +63,9 @@ function NewRoom() {
                   <MKBox mb={2}>
                     <MKInput type="text" label="Camas" fullWidth />
                   </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput type="text" label="Comentarios" fullWidth />
+                  </MKBox>
                 </Grid>
                 <Grid item xs={6}>
                   <MKBox mb={2}>
@@ -71,7 +75,7 @@ function NewRoom() {
                   </MKBox>
                   <MKBox
                     component="img"
-                    src="https://picsum.photos/200/300"
+                    src={image}
                     alt="..."
                     borderRadius="lg"
                     shadow="md"

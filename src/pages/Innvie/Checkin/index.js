@@ -29,11 +29,25 @@ import { useEffect, useState } from "react";
 function Checkin() {
   const [checked, setChecked] = useState(false);
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState(null);
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+  const handleChange = (event) => {
+    if (!isValidEmail(event.target.value)) {
+      setError("Email inválido");
+    } else {
+      setError(null);
+    }
+
+    setMessage(event.target.value);
+  };
   const handleCheckin = () => setChecked(!checked);
   useEffect(() => {
     if (checked) {
-      const val = Math.floor(1000 + Math.random() * 9000);
-      setPassword(val);
+      // const val = Math.floor(1000 + Math.random() * 9000);
+      setPassword("Se ha enviado el código de ingreso a su correo");
     }
   }, [checked]);
   return (
@@ -66,11 +80,25 @@ function Checkin() {
                   type="email"
                   label="Email"
                   variant="standard"
+                  value={message}
+                  onChange={handleChange}
                   fullWidth
                   placeholder="john@example.com"
                   InputLabelProps={{ shrink: true }}
                 />
               </MKBox>
+              {error && (
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "0.8rem",
+                    marginTop: "-5px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  {error}
+                </p>
+              )}
               <MKBox mb={2}>
                 <MKInput
                   type="password"

@@ -83,8 +83,8 @@ function Register() {
               &nbsp;&nbsp;Acepto los&nbsp;
             </MKTypography>
             <MKTypography
-              component="a"
-              href="#"
+              component={Link}
+              to="/admin/terms"
               variant="button"
               fontWeight="bold"
               color="info"
@@ -103,13 +103,13 @@ function Register() {
               ¿Ya tienes una cuenta?{" "}
               <MKTypography
                 component={Link}
-                to="/authentication/sign-in/cover"
+                to="/authentication"
                 variant="button"
                 color="info"
                 fontWeight="medium"
                 textGradient
               >
-                Registrarse
+                Ingresa
               </MKTypography>
             </MKTypography>
           </MKBox>
