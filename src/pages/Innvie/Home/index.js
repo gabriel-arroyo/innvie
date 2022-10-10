@@ -15,15 +15,17 @@ Coded by www.creative-tim.com
 
 import Contact from "./sections/Contact";
 import Header from "./sections/Header";
-import Offers from "./components/Offers/offers";
 import Map from "./components/Map/map";
 import PlacesSwipe from "./sections/PlacesSwipe";
+import Description from "./sections/Description";
+import OffersSwipe from "./sections/OffersSwipe";
 
 function Reservation() {
   return (
     <>
       <Header />
-      <Offers
+      <Description />
+      <OffersSwipe
         cards={[
           {
             variant: "gradient",
