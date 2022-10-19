@@ -46,6 +46,7 @@ import NewRoom from "pages/Innvie/Admin/NewRoom";
 import NavbarLayout from "pages/Innvie/Layouts/NavbarLayout";
 import Checkin from "pages/Innvie/Checkin";
 import Terms from "pages/Innvie/TermsAndConditions";
+import ApiTest from "pages/Tests/apitest";
 import img from "./assets/images/shapes/bg-tile1.svg";
 // Images
 
@@ -84,6 +85,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
+
               <Route path="/options/:startDate/:endDate" element={<Options />} />
               <Route path="/reserve" element={<Reserve />} />
               <Route path="/confirmation" element={<Confirmation />} />
@@ -100,6 +102,7 @@ export default function App() {
               <Route path="/authentication/register" element={<Register />} />
               <Route path="/authentication/checkin" element={<Checkin />} />
             </Route>
+            <Route path="/test/api" element={<ApiTest />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Provider>
