@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // @mui material components
@@ -12,8 +12,43 @@ import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 
 import { Grid } from "@mui/material";
+import useUser from "api/useUser";
+import { v4 as uuidv4 } from "uuid";
 
 function Register() {
+  const [error, setError] = useState(null);
+  const { addUser, insertError } = useUser();
+  const [checked, setChecked] = React.useState(false);
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(checked);
+    if (event.target.password.value !== event.target.password_confirmation.value) {
+      setError("Las contraseñas no coinciden");
+      return;
+    }
+    const newUser = {
+      first_name: event.target.first_name.value,
+      last_name: event.target.last_name.value,
+      phone: event.target.phone.value,
+      address: event.target.address.value,
+      city: event.target.city.value,
+      country: event.target.country.value,
+      zipcode: event.target.zipcode.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+      id: uuidv4(),
+    };
+    Promise.resolve(addUser(newUser)).then((res) => {
+      if (res) {
+        event.target.reset();
+        setChecked(false);
+      }
+    });
+  };
   return (
     <Card sx={{ width: "700px" }}>
       <MKBox
@@ -35,45 +70,74 @@ function Register() {
         </MKTypography>
       </MKBox>
       <MKBox p={3}>
-        <MKBox component="form" role="form">
+        <MKBox component="form" role="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <MKBox mb={2}>
-                <MKInput type="text" label="Nombre" fullWidth />
+                <MKInput type="text" name="first_name" label="Nombre" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" label="Apellido" fullWidth />
+                <MKInput type="text" name="last_name" label="Apellido" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" label="Teléfono" fullWidth />
+                <MKInput type="text" name="phone" label="Teléfono" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" label="Dirección" fullWidth />
+                <MKInput type="text" name="address" label="Dirección" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" label="Ciudad" fullWidth />
+                <MKInput type="text" name="city" label="Ciudad" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" label="País" fullWidth />
+                <MKInput type="text" name="country" label="País" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" label="Código Postal" fullWidth />
+                <MKInput type="text" name="zipcode" label="Código Postal" fullWidth />
               </MKBox>
             </Grid>
             <Grid item xs={6}>
               <MKBox mb={2}>
-                <MKInput type="email" label="Email" fullWidth />
+                <MKInput type="email" name="email" label="Email" fullWidth />
+              </MKBox>
+              {insertError && (
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "0.8rem",
+                    marginTop: "-5px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  El usuario ya existe
+                </p>
+              )}
+              <MKBox mb={2}>
+                <MKInput type="password" name="password" label="Contraseña" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="password" label="Contraseña" fullWidth />
+                <MKInput
+                  type="password"
+                  name="password_confirmation"
+                  label="Repite Contraseña"
+                  fullWidth
+                />
               </MKBox>
-              <MKBox mb={2}>
-                <MKInput type="password" label="Repite Contraseña" fullWidth />
-              </MKBox>
+              {error && (
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "0.8rem",
+                    marginTop: "-5px",
+                    marginBottom: "5px",
+                  }}
+                >
+                  {error}
+                </p>
+              )}
             </Grid>
           </Grid>
           <MKBox display="flex" alignItems="center" ml={-1}>
-            <Checkbox />
+            <Checkbox checked={checked} onChange={handleChange} />
             <MKTypography
               variant="button"
               fontWeight="regular"
@@ -94,7 +158,7 @@ function Register() {
             </MKTypography>
           </MKBox>
           <MKBox mt={3} mb={1}>
-            <MKButton variant="gradient" color="error" fullWidth>
+            <MKButton type="submit" variant="gradient" color="error" fullWidth disabled={!checked}>
               Registrarse
             </MKButton>
           </MKBox>

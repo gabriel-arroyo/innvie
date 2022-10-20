@@ -3,7 +3,7 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
 function ApiTest() {
-  const [, , addUser, , ,] = useUser();
+  const { addUser } = useUser();
   const newUser = {
     name: "test2",
     email: "test1@gmail.com",

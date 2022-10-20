@@ -16,10 +16,22 @@ import db from "../firebase";
 
 function useUser() {
   const [loading, setLoading] = useState(false);
+  const [insertError, setInsertError] = useState(false);
   const [data, setData] = useState([]);
   const collectionRef = collection(db, "users");
 
   async function addUser(newUser) {
+    const q = query(collectionRef, where("email", "==", newUser.email));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      // eslint-disable-next-line
+      console.log("user already exists");
+      setInsertError(true);
+      return false;
+    }
+
+    setInsertError(false);
+
     const newUserWithTimestamp = { ...newUser, lastUpdate: serverTimestamp() };
     try {
       const docRef = doc(collectionRef, newUser.id);
@@ -27,7 +39,9 @@ function useUser() {
     } catch (error) {
       // eslint-disable-next-line
       console.log(error);
+      return false;
     }
+    return true;
   }
 
   async function deleteUser(id) {
@@ -78,7 +92,7 @@ function useUser() {
     });
     return () => unsub();
   }, []);
-  return [loading, data, addUser, deleteUser, updateUser, deleteAllUsers];
+  return { loading, data, addUser, deleteUser, updateUser, deleteAllUsers, insertError };
 }
 
 export default useUser;
