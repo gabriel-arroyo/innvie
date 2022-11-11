@@ -44,6 +44,8 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 import breakpoints from "assets/theme/base/breakpoints";
 
 import "./Navbar.css";
+import { useAtom } from "jotai";
+import loggedUser from "states/loggedUser";
 
 function DefaultNavbar({ routes, transparent, light, action, sticky, relative, center, logoUrl }) {
   const [dropdown, setDropdown] = useState("");
@@ -82,6 +84,8 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
+
+  const [user] = useAtom(loggedUser);
 
   const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
@@ -498,6 +502,17 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
             mr={center ? "auto" : 0}
           >
             {renderNavbarItems}
+          </MKBox>
+          <MKBox>
+            <MKTypography
+              variant="button"
+              fontWeight="regular"
+              textTransform="capitalize"
+              color={light ? "white" : "dark"}
+              sx={{ fontWeight: "bold", ml: 1, mr: 0.25 }}
+            >
+              {user?.first_name}
+            </MKTypography>
           </MKBox>
           <MKBox ml={{ xs: "auto", lg: 0 }}>
             {action &&

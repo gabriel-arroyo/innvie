@@ -12,10 +12,11 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // react-router-dom components
 import { Link } from "react-router-dom";
-
+import { useAtom } from "jotai";
+import loggedUser from "states/loggedUser";
 // @mui material components
 import Card from "@mui/material/Card";
 
@@ -24,14 +25,60 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
+import useUser from "api/useUser";
 
 function Login() {
   const [logged, setLogged] = useState(false);
-  const handleLogin = () => {
-    setLogged(!logged);
-  };
+  const { login, logout, getCurrentUser } = useUser();
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
+
+  const [user, setUser] = useAtom(loggedUser);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     setLogged(true);
+  //     setUser(user);
+  //   } else {
+  //     const item = JSON.parse(localStorage.getItem("user"));
+  //     if (item) {
+  //       setUser(item);
+  //       setLogged(true);
+  //     }
+  //   }
+  // }, [user]);
+
+  useEffect(() => {
+    if (getCurrentUser()) {
+      setLogged(true);
+      setUser(getCurrentUser());
+    }
+  }, []);
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    // eslint-disable-next-line
+    console.log("login");
+    const success = await login(event.target.email.value, event.target.password.value);
+    if (success) {
+      // eslint-disable-next-line
+      console.log("user logged");
+      setLogged(true);
+      setError(null);
+    } else {
+      // eslint-disable-next-line
+      console.log("login failed");
+      setLogged(false);
+      setError("Usuario o contraseña incorrectos");
+    }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setLogged(false);
+    setError(false);
+  };
+
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
@@ -64,14 +111,30 @@ function Login() {
           Ingresa con tu correo y contraseña.
         </MKTypography>
       </MKBox>
-      <MKBox pt={4} pb={3} px={3}>
-        <MKBox component="form" role="form">
-          {logged && <MKTypography type="h2">¡Bienvenido!</MKTypography>}
+      <MKBox pt={4} pb={3} px={3} component="form" role="form" onSubmit={handleLogin}>
+        <MKBox>
+          {logged && (
+            <>
+              <MKTypography type="h2" sx={{ m: 5, textAlign: "center" }}>
+                ¡Bienvenido! {user?.first_name}
+              </MKTypography>
+              <MKButton
+                variant="contained"
+                color="error"
+                size="large"
+                onClick={handleLogout}
+                fullWidth
+              >
+                Cerrar sesión
+              </MKButton>
+            </>
+          )}
           {!logged && (
             <>
               <MKBox mb={2}>
                 <MKInput
                   type="email"
+                  name="email"
                   label="Email"
                   variant="standard"
                   value={message}
@@ -96,6 +159,7 @@ function Login() {
               <MKBox mb={2}>
                 <MKInput
                   type="password"
+                  name="password"
                   label="Contraseña"
                   variant="standard"
                   fullWidth
@@ -107,7 +171,7 @@ function Login() {
           )}
           <MKBox mt={4} mb={1}>
             {!logged && (
-              <MKButton variant="gradient" color="error" onClick={handleLogin} fullWidth>
+              <MKButton type="submit" variant="gradient" color="error" fullWidth>
                 ingresar
               </MKButton>
             )}

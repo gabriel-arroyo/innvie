@@ -25,7 +25,6 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(checked);
     if (event.target.password.value !== event.target.password_confirmation.value) {
       setError("Las contraseñas no coinciden");
       return;

@@ -12,13 +12,16 @@ import {
   where,
 } from "firebase/firestore";
 
+import { useAtom } from "jotai";
+import loggedUser from "states/loggedUser";
 import db from "../firebase";
 
-function useUser() {
+function useUser(email) {
   const [loading, setLoading] = useState(false);
   const [insertError, setInsertError] = useState(false);
   const [data, setData] = useState([]);
   const collectionRef = collection(db, "users");
+  const [currentUser, setCurrentUser] = useAtom(loggedUser);
 
   async function addUser(newUser) {
     const q = query(collectionRef, where("email", "==", newUser.email));
@@ -58,8 +61,8 @@ function useUser() {
     try {
       const q = query(collectionRef);
       const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((user) => {
-        const docRef = doc(collectionRef, user.id);
+      querySnapshot.forEach((userData) => {
+        const docRef = doc(collectionRef, userData.id);
         deleteDoc(docRef);
       });
     } catch (error) {
@@ -79,8 +82,47 @@ function useUser() {
     }
   }
 
+  async function login(myemail, password) {
+    const q = query(
+      collectionRef,
+      where("email", "==", myemail),
+      where("password", "==", password)
+    );
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      // eslint-disable-next-line
+      console.log("wrong email or password");
+      return false;
+    }
+    localStorage.setItem("user", JSON.stringify(querySnapshot.docs[0].data()));
+    setCurrentUser(querySnapshot.docs[0].data());
+    return true;
+  }
+
+  async function logout() {
+    localStorage.removeItem("user");
+    setData(null);
+    setCurrentUser(null);
+  }
+
+  function getCurrentUser() {
+    if (currentUser) {
+      return currentUser;
+    }
+
+    const item = JSON.parse(localStorage.getItem("user"));
+    if (item) {
+      setCurrentUser(item);
+      return item;
+    }
+    return null;
+  }
+
   useEffect(() => {
-    const q = query(collectionRef, where("name", "==", "test2"));
+    let q = query(collectionRef);
+    if (email) {
+      q = query(collectionRef, where("email", "==", email));
+    }
     setLoading(true);
     const unsub = onSnapshot(q, (querySnapshot) => {
       const items = [];
@@ -88,11 +130,32 @@ function useUser() {
         items.push({ ...user.data(), id: user.id });
       });
       setData(items);
+      if (email) {
+        setCurrentUser(items);
+      }
+      if (!email) {
+        const item = JSON.parse(localStorage.getItem("user"));
+        if (item) {
+          setCurrentUser(item);
+          setData(item);
+        }
+      }
       setLoading(false);
     });
     return () => unsub();
   }, []);
-  return { loading, data, addUser, deleteUser, updateUser, deleteAllUsers, insertError };
+  return {
+    loading,
+    data,
+    addUser,
+    deleteUser,
+    updateUser,
+    deleteAllUsers,
+    insertError,
+    login,
+    logout,
+    getCurrentUser,
+  };
 }
 
 export default useUser;
