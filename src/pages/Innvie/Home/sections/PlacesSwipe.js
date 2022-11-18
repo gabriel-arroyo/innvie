@@ -71,13 +71,24 @@ function PlacesSwipe() {
             </Container>
           </MKBox>
         </SwiperSlide>
-        <SwiperSlide>
-          <MKBox component="section" py={7}>
-            <Container>
-              <PlacesCards number={matches ? 3 : 1} />
-            </Container>
-          </MKBox>
-        </SwiperSlide>
+        {!matches && (
+          <>
+            <SwiperSlide>
+              <MKBox component="section" py={7}>
+                <Container>
+                  <PlacesCards number={matches ? 3 : 1} />
+                </Container>
+              </MKBox>
+            </SwiperSlide>
+            <SwiperSlide>
+              <MKBox component="section" py={7}>
+                <Container>
+                  <PlacesCards number={matches ? 3 : 1} />
+                </Container>
+              </MKBox>
+            </SwiperSlide>
+          </>
+        )}
       </Swiper>
       <div
         style={{

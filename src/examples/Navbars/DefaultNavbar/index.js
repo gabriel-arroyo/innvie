@@ -503,6 +503,16 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
           >
             {renderNavbarItems}
           </MKBox>
+          {user?.admin && (
+            <DefaultNavbarDropdown
+              key="admin"
+              name="admin"
+              icon={<Icon>settings</Icon>}
+              route="/admin"
+              collapse={false}
+              light={light}
+            />
+          )}
           <MKBox>
             <MKTypography
               variant="button"

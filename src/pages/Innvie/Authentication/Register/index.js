@@ -71,7 +71,7 @@ function Register() {
       <MKBox p={3}>
         <MKBox component="form" role="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6} xl={6}>
               <MKBox mb={2}>
                 <MKInput type="text" name="first_name" label="Nombre" fullWidth />
               </MKBox>
@@ -94,7 +94,7 @@ function Register() {
                 <MKInput type="text" name="zipcode" label="Código Postal" fullWidth />
               </MKBox>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6} xl={6}>
               <MKBox mb={2}>
                 <MKInput type="email" name="email" label="Email" fullWidth />
               </MKBox>
