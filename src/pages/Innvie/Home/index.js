@@ -30,25 +30,18 @@ function InnvieHome() {
           {
             variant: "gradient",
             color: "primary",
-            icon: "shuffle_on",
-            title: "6x5",
-            description: "Hospédate con nosotros 6 noches y paga solamente 5.",
+            icon: "local_offer",
+            title: "7x6",
+            description: `Paga 6 noches y la séptima es gratis. 
+              Válido solamente al pagar 6 noches por adelantado.`,
           },
           {
             variant: "gradient",
             color: "primary",
-            icon: "beenhere",
+            icon: "local_offer",
             title: "Oferta 2",
             description:
-              "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
-          },
-          {
-            variant: "gradient",
-            color: "primary",
-            icon: "ballot",
-            title: "Oferta 3",
-            description:
-              "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
+              "Paga 2 semanas y obtén 3 noches gratis. Válido solamente al pagar 2 semanas por adelantado.",
           },
         ]}
       />
