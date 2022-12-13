@@ -8,11 +8,12 @@
 
 Coded by www.creative-tim.com
 
- =========================================================
+=========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import React, { useEffect, useRef, useState } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -27,6 +28,47 @@ import { Checkbox } from "@mui/material";
 import BlancLayout from "../Layouts/BlancLayout";
 
 function Reserve() {
+  const [party, setParty] = useState(0);
+  const [adults, setAdults] = useState(0);
+  const [kids, setKids] = useState(0);
+  const count = useRef(0);
+  useEffect(() => {
+    count.current += 1;
+  });
+  const handlePartyChange = (e) => {
+    const intParty = parseInt(e.target.value, 10);
+    if (intParty < 0) return;
+    const intKids = parseInt(kids, 10);
+    const intAdults = parseInt(adults, 10);
+    const up = intParty > intKids + intAdults;
+    if (up || !(intAdults === 1 && intKids > 0)) {
+      const newAdults = intParty - intKids;
+      setAdults(newAdults);
+    } else {
+      const newKids = intParty - intAdults;
+      setKids(newKids);
+    }
+    setParty(intParty > 0 ? intParty : 0);
+  };
+  const handleAdultsChange = (e) => {
+    const intAdults = parseInt(e.target.value, 10);
+    const intParty = parseInt(party, 10);
+    const newKids = intParty - intAdults;
+    if (newKids < 0) return;
+    if (intAdults < 0) return;
+    setKids(newKids);
+    setAdults(intAdults);
+  };
+  const handleKidsChange = (e) => {
+    const intKids = parseInt(e.target.value, 10);
+    const intParty = parseInt(party, 10);
+    const newAdults = intParty - intKids;
+    if (newAdults < 0) return;
+    if (intKids < 0) return;
+    setKids(intKids);
+    setAdults(newAdults);
+  };
+
   return (
     <BlancLayout title="Reservación">
       <MKBox position="relative" zIndex={10} px={{ xs: 1, sm: 0 }}>
@@ -82,6 +124,38 @@ function Reserve() {
                     <MKBox mb={2}>
                       <MKInput type="email" label="Email" fullWidth />
                     </MKBox>
+                    <MKBox mb={2}>
+                      <MKInput type="text" name="licence" label="Licence Number" fullWidth />
+                    </MKBox>
+                    <Grid item>
+                      <MKBox mb={2}>
+                        <MKInput
+                          type="number"
+                          name="party"
+                          label="Número de ocupantes"
+                          value={party}
+                          onChange={handlePartyChange}
+                        />
+                      </MKBox>
+                      <MKBox mb={2}>
+                        <MKInput
+                          type="number"
+                          name="adults"
+                          label="Adultos"
+                          value={adults}
+                          onChange={handleAdultsChange}
+                        />
+                      </MKBox>
+                      <MKBox mb={2}>
+                        <MKInput
+                          type="number"
+                          name="children"
+                          label="Niños"
+                          value={kids}
+                          onChange={handleKidsChange}
+                        />
+                      </MKBox>
+                    </Grid>
                     <MKBox mb={2}>
                       <MKInput type="password" label="Contraseña" fullWidth />
                     </MKBox>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // @mui material components
@@ -14,6 +14,9 @@ import MKButton from "components/MKButton";
 import { Grid } from "@mui/material";
 import useUser from "api/useUser";
 import { v4 as uuidv4 } from "uuid";
+import { useAtom } from "jotai";
+import loggedUser from "states/loggedUser";
+import TermsModal from "pages/Innvie/TermsAndConditions/modal";
 
 function Register() {
   const [error, setError] = useState(null);
@@ -22,6 +25,16 @@ function Register() {
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
+  const [, setLogged] = useState(false);
+  const { getCurrentUser } = useUser();
+  const [, setUser] = useAtom(loggedUser);
+
+  useEffect(() => {
+    if (getCurrentUser()) {
+      setLogged(true);
+      setUser(getCurrentUser());
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,6 +53,7 @@ function Register() {
       email: event.target.email.value,
       password: event.target.password.value,
       id: uuidv4(),
+      licence: event.target.licence.value,
     };
     Promise.resolve(addUser(newUser)).then((res) => {
       if (res) {
@@ -98,6 +112,9 @@ function Register() {
               <MKBox mb={2}>
                 <MKInput type="email" name="email" label="Email" fullWidth />
               </MKBox>
+              <MKBox mb={2}>
+                <MKInput type="text" name="licence" label="Licence Number" fullWidth />
+              </MKBox>
               {insertError && (
                 <p
                   style={{
@@ -145,16 +162,7 @@ function Register() {
             >
               &nbsp;&nbsp;Acepto los&nbsp;
             </MKTypography>
-            <MKTypography
-              component={Link}
-              to="/admin/terms"
-              variant="button"
-              fontWeight="bold"
-              color="info"
-              textGradient
-            >
-              Términos y condiciones
-            </MKTypography>
+            <TermsModal />
           </MKBox>
           <MKBox mt={3} mb={1}>
             <MKButton type="submit" variant="gradient" color="error" fullWidth disabled={!checked}>

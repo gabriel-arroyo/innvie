@@ -20,7 +20,7 @@ import PlacesSwipe from "./sections/PlacesSwipe";
 import Description from "./sections/Description";
 import OffersSwipe from "./sections/OffersSwipe";
 
-function Reservation() {
+function InnvieHome() {
   return (
     <>
       <Header />
@@ -59,4 +59,4 @@ function Reservation() {
   );
 }
 
-export default Reservation;
+export default InnvieHome;

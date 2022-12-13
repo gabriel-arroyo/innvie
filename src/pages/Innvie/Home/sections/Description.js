@@ -44,12 +44,11 @@ function Description() {
                   <MKTypography variant="h3">Bienvenido</MKTypography>
                 </MKBox>
                 <MKTypography variant="body1" fontWeight="light" color="text">
-                  Consequat et est gravida magna a sapien aptent quisque dis vitae habitasse at id
-                  gravida nisl iaculis vestibulum eget a.Consectetur elementum ullamcorper felis
-                  ullamcorper a quam tincidunt a hendrerit et lacus sagittis a pharetra eu accumsan
-                  nibh.Ultricies est natoque malesuada litora elit hendrerit nibh dictum eget mi non
-                  mi consectetur laoreet condimentum varius.Adipiscing a condimentum est torquent.{" "}
+                  En INNVIE nos interesa tu descanso y tranquilidad. Si viajas solo, acompañado o en
+                  grupo, tenemos espacios para que así sea.
                   <br />
+                  INNVIE te ofrece un ambiente espacioso y tranquilo fuera de la ciudad, pero muy
+                  cerca y totalmente conectado, para que disfrutes la cercanía con la ciudad. <br />
                 </MKTypography>
               </Grid>
             </Grid>

@@ -34,10 +34,16 @@ function BlancLayout({ title, children }) {
       <MKBox bgColor="white" shadow="sm" py={0.25} />
       <Container sx={{ mt: 6 }}>
         <Grid container item xs={12} flexDirection="column" justifyContent="center" mx="auto">
-          <MKBox width={{ xs: "100%", md: "50%", lg: "25%" }} mb={10}>
+          <MKBox width={{ xs: "100%", md: "50%", lg: "100%" }} mb={10}>
             <br />
           </MKBox>
-          <MKTypography variant="h3" mb={1} color="white">
+          <MKTypography
+            variant="h3"
+            mb={1}
+            color="white"
+            justifyContent="center"
+            textAlign="center"
+          >
             {title}
           </MKTypography>
           {children}

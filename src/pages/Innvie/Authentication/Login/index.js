@@ -35,19 +35,6 @@ function Login() {
 
   const [user, setUser] = useAtom(loggedUser);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     setLogged(true);
-  //     setUser(user);
-  //   } else {
-  //     const item = JSON.parse(localStorage.getItem("user"));
-  //     if (item) {
-  //       setUser(item);
-  //       setLogged(true);
-  //     }
-  //   }
-  // }, [user]);
-
   useEffect(() => {
     if (getCurrentUser()) {
       setLogged(true);

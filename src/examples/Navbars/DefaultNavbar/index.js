@@ -46,6 +46,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 import "./Navbar.css";
 import { useAtom } from "jotai";
 import loggedUser from "states/loggedUser";
+import useUser from "api/useUser";
 
 function DefaultNavbar({ routes, transparent, light, action, sticky, relative, center, logoUrl }) {
   const [dropdown, setDropdown] = useState("");
@@ -60,7 +61,13 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
 
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
 
+  const { getCurrentUser } = useUser();
+  const [user, setUser] = useAtom(loggedUser);
+
   useEffect(() => {
+    if (getCurrentUser()) {
+      setUser(getCurrentUser());
+    }
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
@@ -84,8 +91,6 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
-
-  const [user] = useAtom(loggedUser);
 
   const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
