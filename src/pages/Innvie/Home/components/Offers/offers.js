@@ -17,22 +17,34 @@ function Offers({ cards }) {
       }}
     >
       <Grid container spacing={2}>
-        {cards.map(({ variant, color, icon, title: cardTitle, description: cardDescription }) => (
-          <Grid key={icon} item xs={11} sm={11} lg={4}>
-            <FilledInfoCard
-              variant={variant}
-              color={color}
-              icon={icon}
-              title={cardTitle}
-              description={cardDescription}
-              action={{
-                type: "internal",
-                route: "/pages/company/about-us",
-                label: "Conoce más",
-              }}
-            />
-          </Grid>
-        ))}
+        {cards.map(
+          ({
+            variant,
+            color,
+            icon,
+            title: cardTitle,
+            description: cardDescription,
+            description2,
+            description3,
+          }) => (
+            <Grid key={icon} item xs={11} sm={11} lg={4}>
+              <FilledInfoCard
+                variant={variant}
+                color={color}
+                icon={icon}
+                title={cardTitle}
+                description={cardDescription}
+                description2={description2}
+                description3={description3}
+                action={{
+                  type: "internal",
+                  route: "/pages/company/about-us",
+                  label: "Conoce más",
+                }}
+              />
+            </Grid>
+          )
+        )}
       </Grid>
     </Container>
   );
