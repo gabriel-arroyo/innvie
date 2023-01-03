@@ -54,7 +54,7 @@ RoomType.propTypes = {
   subCategory: PropTypes.string.isRequired,
 };
 
-function Rooms() {
+function History() {
   const { columns, rows } = {
     columns: [
       { name: "Entrada", align: "center" },
@@ -259,4 +259,4 @@ function Rooms() {
   );
 }
 
-export default Rooms;
+export default History;

@@ -48,6 +48,7 @@ import NavbarLayout from "pages/Innvie/Layouts/NavbarLayout";
 import Checkin from "pages/Innvie/Checkin";
 import Terms from "pages/Innvie/TermsAndConditions";
 import ApiTest from "pages/Tests/apitest";
+import Admin from "pages/Innvie/Admin";
 import img from "./assets/images/shapes/bg-tile1.svg";
 // Images
 
@@ -94,7 +95,8 @@ export default function App() {
               <Route path="/myreservations" element={<MyReservations />} />
             </Route>
             <Route path="/admin" element={<NavbarLayout />}>
-              <Route index element={<Rooms />} />
+              <Route index element={<Admin />} />
+              <Route path="/admin/rooms" element={<Rooms />} />
               <Route path="/admin/newroom" element={<NewRoom />} />
               <Route path="/admin/history" element={<History />} />
               <Route path="/admin/terms" element={<Terms />} />

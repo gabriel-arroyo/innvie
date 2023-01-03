@@ -13,8 +13,8 @@ import MKTypography from "components/MKTypography";
 
 // Material Kit 2 PRO React examples
 import Table from "examples/Tables/Table";
-import MKButton from "components/MKButton";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 // Images
 
@@ -55,7 +55,7 @@ RoomType.propTypes = {
   subCategory: PropTypes.string.isRequired,
 };
 
-function Rooms() {
+function Rooms({ setValue }) {
   const { columns, rows } = {
     columns: [
       { name: "ID", align: "left" },
@@ -103,11 +103,12 @@ function Rooms() {
         ),
         history: (
           <MKTypography
-            component={Link}
+            component={Button}
             to="/admin/history"
             variant="caption"
             color="secondary"
             fontWeight="medium"
+            onClick={() => setValue(2)}
           >
             History
           </MKTypography>
@@ -900,14 +901,7 @@ function Rooms() {
   };
 
   return (
-    <MKBox component="section" pt={20}>
-      <MKBox pb={2}>
-        <Container sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <MKButton color="error" component={Link} to="/admin/newroom">
-            Nueva habitación
-          </MKButton>
-        </Container>
-      </MKBox>
+    <MKBox component="section" pt={0}>
       <Container>
         <Grid container item xs={12} lg={10} mx="auto">
           <Table columns={columns} rows={rows} />
@@ -916,5 +910,11 @@ function Rooms() {
     </MKBox>
   );
 }
+Rooms.defaultProps = {
+  setValue: () => {},
+};
 
+Rooms.propTypes = {
+  setValue: PropTypes.func,
+};
 export default Rooms;

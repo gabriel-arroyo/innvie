@@ -1,22 +1,28 @@
-import useUser from "api/useUser";
+import useRoom from "api/useRoom";
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 function ApiTest() {
-  const { loading, data, addUser, login, logout } = useUser("ing.gabriel.arroyo1@gmail.com");
-  const newUser = {
-    name: "test2",
-    email: "test1@gmail.com",
-    age: 23,
-    id: uuidv4(),
-  };
+  const { loading, data, addRoom, getRoomByNumber } = useRoom();
 
-  const handleLogin = async () => {
-    const success = await login("ing.gabriel.arroyo@gmail.com", "123");
-    if (success) {
-      // eslint-disable-next-line
-      console.log("user added");
-    }
+  async function HandleGet() {
+    const room = await getRoomByNumber("104");
+    console.log(Boolean(room));
+  }
+
+  const newRoom = {
+    beds: { queen: 1, full: 0 },
+    accessories: [
+      "microwave",
+      "desk",
+      "tv",
+      "dish",
+      "wifi",
+      "you can ask for a mini fridge",
+      "full bath",
+    ],
+    price: 70,
+    number: "1021",
   };
 
   return (
@@ -25,24 +31,18 @@ function ApiTest() {
         <div>Loading...</div>
       ) : (
         <div>
-          {data.map((user) => (
-            <div key={user.id}>
-              <div>{user.first_name}</div>
-              <div>{user.email}</div>
+          {data.map((room) => (
+            <div key={room.id}>
+              <div>{JSON.stringify(room)}</div>
             </div>
           ))}
         </div>
       )}
-      {/* login button */}
-      <button type="button" onClick={handleLogin}>
-        Login
-      </button>
-      {/* logout button */}
-      <button type="button" onClick={() => logout()}>
-        Logout
-      </button>
-      <button type="button" onClick={() => addUser(newUser)}>
+      <button type="button" onClick={() => addRoom(newRoom)}>
         add
+      </button>
+      <button type="button" onClick={() => HandleGet()}>
+        update
       </button>
     </div>
   );
