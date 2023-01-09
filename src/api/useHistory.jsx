@@ -7,95 +7,71 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  Timestamp,
   updateDoc,
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import db from "../firebase";
-import useHistory from "./useHistory";
 
-function useRoom(roomId) {
-  const { addAction } = useHistory();
+function useHistory(roomId) {
   const [loading, setLoading] = useState(false);
   const [roomError, setError] = useState(false);
-  const [rooms, setRooms] = useState([]);
-  const [roomsByType, setRoomsByType] = useState([]);
-  const collectionRef = collection(db, "rooms");
+  const [history, setHistory] = useState([]);
+  const collectionRef = collection(db, "history");
 
-  async function getRoomsByType(roomType) {
-    if (!roomType) return null;
-    const q = query(collectionRef, where("type", "==", roomType));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-      // eslint-disable-next-line
-      console.log("no matching documents");
-      setRoomsByType([]);
-      return null;
+  function createActionName(action, room) {
+    const statusName = room.status ?? "available";
+    let status = "";
+    if (room.status) {
+      status += ` to ${statusName}`;
     }
-    const roomsData = [];
-    querySnapshot.forEach((room) => {
-      roomsData.push({ ...room.data(), ...roomType });
-    });
-    setRoomsByType(roomsData);
-    return roomsData;
+    const commentsOptions = {
+      checkIn: `Check in`,
+      checkOut: `Check out`,
+      clean: `Clean room`,
+      dirty: `Dirty room`,
+      maintenance: `Maintenance room`,
+      newRoom: `New room created`,
+      newType: `New type created`,
+      deleteRoom: `Room deleted`,
+      deleteType: `Type deleted`,
+      updateRoom: `Room updated${status}`,
+      updateType: `Type updated`,
+    };
+    return commentsOptions[action];
   }
 
-  async function getRoomsByTypesArray(array) {
+  async function addAction(action, room) {
     setError(false);
-    setLoading(true);
-    const roomsData = [];
-    array.forEach((type) => {
-      roomsData.push(getRoomsByType(type));
-    });
-    setRoomsByType(roomsData);
-    setLoading(false);
-    return roomsData;
-  }
-
-  async function addRoom(newRoom) {
-    const q = query(collectionRef, where("number", "==", newRoom.number));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      // eslint-disable-next-line
-      console.log("room already exists");
-      setError("Room already exists");
-      return false;
-    }
-
-    setError(false);
-
-    const newRoomWithTimestamp = { ...newRoom, lastUpdate: serverTimestamp(), status: "available" };
+    const actionId = action.includes("Type") ? room.type : room.number;
+    const acitonWithTimestamp = {
+      action: createActionName(action, room),
+      lastUpdate: serverTimestamp(),
+      actionId,
+      number: room.number ?? "",
+      type: room.type ?? "",
+      category: room.category ?? "",
+    };
     try {
       const docRef = doc(collectionRef);
-      await setDoc(docRef, newRoomWithTimestamp);
-      await getRoomsByType(newRoom.type);
+      await setDoc(docRef, acitonWithTimestamp);
     } catch (e) {
       // eslint-disable-next-line
       console.log("error:", e);
       setError(e);
       return false;
     }
-    addAction("newRoom", newRoom);
     return true;
   }
 
-  async function deleteRoom(id) {
+  async function deletePast() {
     setError(false);
+    const monthsAgo = new Date();
+    monthsAgo.setMonth(monthsAgo.getMonth() - 3);
+    const date = Timestamp.fromDate(monthsAgo);
     try {
-      const docRef = doc(collectionRef, id);
-      await deleteDoc(docRef);
-    } catch (e) {
-      // eslint-disable-next-line
-      console.log("error:", e);
-      setError(e);
-    }
-    addAction("deleteRoom", { number: id });
-  }
-
-  async function deleteAllRooms() {
-    setError(false);
-    try {
-      const q = query(collectionRef);
+      const q = query(collectionRef, where("lastUpdate", "<", date));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((roomData) => {
         const docRef = doc(collectionRef, roomData.id);
@@ -106,7 +82,6 @@ function useRoom(roomId) {
       console.log("error:", e);
       setError(e);
     }
-    addAction("deleteRoom", { number: "all" });
   }
 
   async function getRoomByNumber(roomNumber) {
@@ -147,7 +122,6 @@ function useRoom(roomId) {
       console.log("error:", e);
       setError(e);
     }
-    addAction("updateRoom", updatedRoom);
     setLoading(false);
   }
 
@@ -165,7 +139,6 @@ function useRoom(roomId) {
       console.log("error:", e);
       setError(e);
     }
-    addAction("deleteRoom", { number: roomNumber });
   }
 
   async function deleteRoomByType(roomType) {
@@ -182,42 +155,37 @@ function useRoom(roomId) {
       console.log("error:", e);
       setError(e);
     }
-    addAction("deleteRoom", { type: roomType });
   }
 
   useEffect(() => {
     setError(false);
     let q = query(collectionRef);
-    if (roomId) {
-      q = query(collectionRef, where("id", "==", roomId));
+    if (roomId && roomId !== "all") {
+      q = query(collectionRef, where("number", "==", roomId));
     }
     setLoading(true);
     const unsub = onSnapshot(q, (querySnapshot) => {
       const items = [];
       querySnapshot.forEach((room) => {
         items.push({ ...room.data(), id: room.id });
+        console.log(room.id, " => ", room.data());
       });
-      const sorted = items.sort((a, b) => a.number.localeCompare(b.number));
-      setRooms(sorted);
+      setHistory(items);
       setLoading(false);
     });
     return () => unsub();
   }, []);
   return {
     loading,
-    rooms,
-    roomsByType,
-    addRoom,
-    deleteRoom,
+    history,
+    addAction,
+    deletePast,
     deleteRoomByNumber,
-    getRoomsByTypesArray,
     deleteRoomByType,
     updateRoom,
     getRoomByNumber,
-    getRoomsByType,
-    deleteAllRooms,
     roomError,
   };
 }
 
-export default useRoom;
+export default useHistory;

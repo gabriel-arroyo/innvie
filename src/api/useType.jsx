@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import {
   collection,
   deleteDoc,
@@ -12,24 +10,26 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import db, { storage } from "../firebase";
 
 function useType(room) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [data, setData] = useState([]);
+  const [types, setTypes] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [cacheRoom, setCacheRoom] = useState(room);
   const collectionRef = collection(db, "types");
   const defaultRoom = {
-    name: "",
+    type: "",
     accessories: ["microwave", "desk", "tv", "dish", "wifi", "minifridge", "fullbath"],
     beds: { full: 0, queen: 0 },
     photos: [],
     price: 0,
-    type: "Habitación",
+    category: "Habitación",
   };
 
   function setDefault() {
@@ -37,8 +37,27 @@ function useType(room) {
     setPhotos([]);
   }
 
+  async function getType(typeName) {
+    setLoading(true);
+    let type = {};
+    try {
+      const q = query(collectionRef, where("type", "==", typeName));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((d) => {
+        type = { ...d.data(), id: d.id };
+        setCacheRoom(type);
+      });
+      setLoading(false);
+      setError(false);
+    } catch (e) {
+      setError(e);
+      return {};
+    }
+    return type;
+  }
+
   async function addType(newType) {
-    const q = query(collectionRef, where("name", "==", newType.name));
+    const q = query(collectionRef, where("type", "==", newType.type));
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
       // eslint-disable-next-line
@@ -53,6 +72,7 @@ function useType(room) {
     try {
       const docRef = doc(collectionRef);
       await setDoc(docRef, newTypeWithTimestamp);
+      await getType(newType.type);
     } catch (e) {
       // eslint-disable-next-line
       console.log(e);
@@ -88,6 +108,22 @@ function useType(room) {
     }
   }
 
+  // delete type by name
+  async function deleteTypeByName(name) {
+    setError(false);
+    try {
+      const q = query(collectionRef, where("type", "==", name));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((d) => {
+        deleteType(d.id);
+      });
+    } catch (e) {
+      // eslint-disable-next-line
+      console.log(e);
+      setError(e);
+    }
+  }
+
   async function deleteAllTypes() {
     setError(false);
     try {
@@ -110,7 +146,7 @@ function useType(room) {
     setError(false);
     const updatedTypeWithTimestamp = { ...updatedType, lastUpdate: serverTimestamp() };
     try {
-      const docRef = doc(collectionRef, updatedType.name);
+      const docRef = doc(collectionRef, updatedType.type);
       updateDoc(docRef, updatedTypeWithTimestamp);
     } catch (e) {
       // eslint-disable-next-line
@@ -121,7 +157,7 @@ function useType(room) {
 
   async function getPhotos(name) {
     setPhotos([]);
-    const q = query(collectionRef, where("name", "==", name));
+    const q = query(collectionRef, where("type", "==", name));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((d) => {
       // doc.data() is never undefined for query doc snapshots
@@ -138,23 +174,7 @@ function useType(room) {
       querySnapshot.forEach((d) => {
         items.push({ ...d.data(), id: d.id });
       });
-      setData(items);
-      setLoading(false);
-      setError(false);
-    } catch (e) {
-      setError(e);
-    }
-  }
-
-  async function getType(typeName) {
-    setLoading(true);
-    try {
-      const q = query(collectionRef, where("name", "==", typeName));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((d) => {
-        setCacheRoom({ ...d.data(), id: d.id });
-        console.log(d.data());
-      });
+      setTypes(items);
       setLoading(false);
       setError(false);
     } catch (e) {
@@ -163,14 +183,14 @@ function useType(room) {
   }
 
   useEffect(() => {
-    const q = query(collectionRef, where("name", "==", room.name));
+    const q = query(collectionRef);
     setLoading(true);
     const unsub = onSnapshot(q, (querySnapshot) => {
       const items = [];
       querySnapshot.forEach((d) => {
         items.push({ ...d.data(), id: d.id });
       });
-      setData(items);
+      setTypes(items);
       setLoading(false);
       setError(false);
       if (items.length > 0) {
@@ -181,7 +201,7 @@ function useType(room) {
   }, []);
   return {
     loading,
-    data,
+    types,
     photos,
     setPhotos,
     cacheRoom,
@@ -193,6 +213,7 @@ function useType(room) {
     addPhoto,
     getPhotos,
     deleteType,
+    deleteTypeByName,
     updateType,
     deleteAllTypes,
     error,
@@ -201,22 +222,22 @@ function useType(room) {
 }
 useType.defaultProps = {
   room: {
-    name: "",
+    type: "",
     accessories: ["microwave", "desk", "tv", "dish", "wifi", "minifridge", "fullbath"],
     beds: { full: 0, queen: 0 },
     photos: [],
     price: 0,
-    type: "Habitación",
+    category: "Habitación",
   },
 };
 useType.propTypes = {
   room: PropTypes.shape({
-    name: PropTypes.string,
+    type: PropTypes.string,
     accessories: PropTypes.arrayOf(PropTypes.string),
     beds: PropTypes.shape({ full: PropTypes.number, queen: PropTypes.number }),
     photos: PropTypes.arrayOf(PropTypes.string),
     price: PropTypes.number,
-    type: PropTypes.string,
+    category: PropTypes.string,
   }),
 };
 export default useType;

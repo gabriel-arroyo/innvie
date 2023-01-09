@@ -41,7 +41,7 @@ function DefaultNavbarMobile({ routes, open }) {
     ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
       <DefaultNavbarDropdown
         key={name}
-        name={name}
+        name={name ?? ""}
         icon={icon}
         collapseStatus={name === collapse}
         onClick={() => handleSetCollapse(name)}

@@ -15,8 +15,8 @@ Coded by www.creative-tim.com
 */
 
 // SwiperJS
-import SwiperCore, { Autoplay, Navigation } from "swiper";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import SwiperCore, { Autoplay, Navigation } from "swiper";
 
 // SwiperJS react components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -30,12 +30,12 @@ import SliderBackground from "pages/Innvie/Home/components/Background";
 
 // Images;
 // import bg1 from "assets/images/bg2.jpg";
-import Container from "@mui/material/Container";
 import { Card } from "@mui/material";
-import DateInput from "../components/Date/DateInput";
+import Container from "@mui/material/Container";
 import bg1 from "../../../../assets/images/photos/innvie1.png";
 import bg2 from "../../../../assets/images/photos/innvie2.png";
 import bg3 from "../../../../assets/images/photos/innvie3.png";
+import DateInput from "../components/Date/DateInput";
 
 function Header() {
   // install SwiperJS modules
@@ -81,7 +81,6 @@ function Header() {
             }}
           >
             <DateInput className="dateHome" />
-            <p>{matches}</p>
           </Card>
         </Container>
       </div>

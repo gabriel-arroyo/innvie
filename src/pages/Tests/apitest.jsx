@@ -1,9 +1,8 @@
 import useRoom from "api/useRoom";
-import React from "react";
 // import { v4 as uuidv4 } from "uuid";
 
 function ApiTest() {
-  const { loading, data, addRoom, getRoomByNumber } = useRoom();
+  const { loading, rooms, addRoom, getRoomByNumber } = useRoom();
 
   async function HandleGet() {
     const room = await getRoomByNumber("104");
@@ -30,13 +29,22 @@ function ApiTest() {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div>
-          {data.map((room) => (
-            <div key={room.id}>
-              <div>{JSON.stringify(room)}</div>
-            </div>
-          ))}
-        </div>
+        <>
+          <div>
+            {rooms.map((room) => (
+              <div key={room.id}>
+                <div>{JSON.stringify(room)}</div>
+              </div>
+            ))}
+          </div>
+          <div>
+            {rooms.map((room) => (
+              <div key={room.id}>
+                <div>{room.number}</div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
       <button type="button" onClick={() => addRoom(newRoom)}>
         add

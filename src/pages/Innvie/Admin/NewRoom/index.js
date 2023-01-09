@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import {
   Alert,
   Card,
@@ -11,22 +12,50 @@ import {
   OutlinedInput,
   Switch,
 } from "@mui/material";
+import useRoom from "api/useRoom";
 import useType from "api/useType";
 import SelectPicker from "components/Innvie/SelectPicker";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKInput from "components/MKInput";
 import MKTypography from "components/MKTypography";
-import React, { useState } from "react";
+import RoomList from "components/RoomList";
+import SectionTitle from "components/SectionTitle";
 import PropTypes from "prop-types";
-import ColumnHeader from "components/Innvie/ColumnHeader";
+import { useState } from "react";
 import ImageSwipe from "./imageswipe";
 
+function NewEditSwitch({ editSwitch, handleChangeNew }) {
+  return (
+    <MKBox pt={4} pb={0} px={5}>
+      <Grid container spacing={2}>
+        <FormGroup>
+          <FormControlLabel
+            control={<Switch checked={editSwitch} onChange={handleChangeNew} />}
+            label="Nuevo"
+          />
+          <FormControlLabel
+            control={<Switch checked={!editSwitch} onChange={handleChangeNew} />}
+            label="Editar"
+          />
+        </FormGroup>
+      </Grid>
+    </MKBox>
+  );
+}
+
+NewEditSwitch.propTypes = {
+  editSwitch: PropTypes.bool.isRequired,
+  handleChangeNew: PropTypes.func.isRequired,
+};
+
 function NewRoomType({ room }) {
+  const { roomsByType, deleteRoomByNumber, addRoom, roomError, getRoomsByType, deleteRoomByType } =
+    useRoom();
   const {
     error,
     setError,
-    data,
+    types,
     addType,
     addPhoto,
     getPhotos,
@@ -37,12 +66,14 @@ function NewRoomType({ room }) {
     getAll,
     getType,
     setDefault,
+    deleteTypeByName,
   } = useType(room);
   const options = ["Habitación", "Departamento"];
   const [editSwitch, setEditSwitch] = useState(true);
+  const [roomNumber, setRoomNumber] = useState("");
+  const [roomComment, setRoomComment] = useState("");
 
-  const handleChangeNew = (e) => {
-    e.preventDefault();
+  const resetAll = () => {
     if (editSwitch) {
       getAll();
     }
@@ -51,16 +82,22 @@ function NewRoomType({ room }) {
     setPhotos([]);
   };
 
+  const handleChangeNew = (e) => {
+    e.preventDefault();
+    resetAll();
+  };
+
   const handleChangeName = async (e) => {
     if (editSwitch) {
-      setCacheRoom({ ...cacheRoom, name: e.target.value });
+      setCacheRoom({ ...cacheRoom, type: e.target.value });
     }
     if (!editSwitch) {
-      setCacheRoom({ ...cacheRoom, name: e.target.innerText });
+      setCacheRoom({ ...cacheRoom, type: e.target.innerText });
     }
     if (!editSwitch && e.target.innerText) {
       getType(e.target.innerText);
       getPhotos(e.target.innerText);
+      getRoomsByType(e.target.innerText);
     }
   };
 
@@ -70,6 +107,18 @@ function NewRoomType({ room }) {
     if (url) {
       setPhotos([...photos, url]);
     }
+  };
+
+  const handleDeleteType = async (e) => {
+    e.preventDefault();
+    await deleteTypeByName(cacheRoom.type);
+    await deleteRoomByType(cacheRoom.type);
+    resetAll();
+  };
+
+  const handleDeleteRoom = async (rn) => {
+    await deleteRoomByNumber(rn.toString());
+    await getRoomsByType(cacheRoom.type);
   };
 
   const setAccesory = async (e, accesory) => {
@@ -87,12 +136,12 @@ function NewRoomType({ room }) {
 
   async function hadleSubmit(e) {
     e.preventDefault();
-    if (!cacheRoom?.name) {
+    if (!cacheRoom?.type) {
       setError("Ingrese un nombre");
       return;
     }
-    if (!cacheRoom?.type) {
-      setError("Ingrese un tipo de habitación");
+    if (!cacheRoom?.category) {
+      setError("Ingrese una categoría");
       return;
     }
 
@@ -103,41 +152,28 @@ function NewRoomType({ room }) {
       }
     });
     setDefault();
-    setEditSwitch(false);
+    setEditSwitch(true);
     setPhotos([]);
+  }
+
+  async function handleAddRoom(e) {
+    e.preventDefault();
+    addRoom({
+      number: roomNumber,
+      comment: roomComment,
+      type: cacheRoom.type,
+      typeId: cacheRoom.id,
+    }).then((success) => {
+      if (success) {
+        e.target.reset();
+      }
+    });
   }
 
   return (
     <Card sx={{ width: "700px", margin: "auto", marginTop: "30px" }}>
-      <MKBox
-        variant="gradient"
-        bgColor="primary"
-        borderRadius="lg"
-        coloredShadow="primary"
-        mx={2}
-        mt={-3}
-        p={3}
-        mb={1}
-        textAlign="center"
-      >
-        <MKTypography display="block" variant="button" color="white" my={1}>
-          Crea o edita un tipo de habitación
-        </MKTypography>
-      </MKBox>
-      <MKBox pt={4} pb={0} px={5}>
-        <Grid container spacing={2}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Switch checked={editSwitch} onChange={handleChangeNew} />}
-              label="Nuevo"
-            />
-            <FormControlLabel
-              control={<Switch checked={!editSwitch} onChange={handleChangeNew} />}
-              label="Editar"
-            />
-          </FormGroup>
-        </Grid>
-      </MKBox>
+      <SectionTitle title="Crea o edita un tipo de habitación" />
+      <NewEditSwitch editSwitch={editSwitch} handleChangeNew={handleChangeNew} />
       {/* eslint-disable-next-line react/jsx-no-bind */}
       <MKBox pt={4} pb={3} px={3} component="form" role="form" onSubmit={hadleSubmit}>
         <Grid container spacing={2}>
@@ -145,11 +181,11 @@ function NewRoomType({ room }) {
             {!editSwitch && (
               <MKBox mb={2}>
                 <SelectPicker
-                  options={data ? data.map((o) => o.name) : []}
-                  name="name"
+                  options={types ? types.map((o) => o.type) : []}
+                  name="type"
                   label="Nombre"
                   onChange={handleChangeName}
-                  value={cacheRoom.name}
+                  value={cacheRoom.type}
                 />
               </MKBox>
             )}
@@ -157,7 +193,7 @@ function NewRoomType({ room }) {
               <MKBox mb={2}>
                 <MKInput
                   type="text"
-                  name="name"
+                  name="type"
                   label="Nombre"
                   fullWidth
                   onChange={handleChangeName}
@@ -167,13 +203,12 @@ function NewRoomType({ room }) {
             <MKBox mb={2}>
               <SelectPicker
                 options={options}
-                defaultValue={cacheRoom.type}
-                name="type"
-                label="Tipo"
+                name="category"
+                label="Categoría"
                 onChange={(e) => {
-                  setCacheRoom({ ...cacheRoom, type: e.target.innerText });
+                  setCacheRoom({ ...cacheRoom, category: e.target.innerText });
                 }}
-                value={cacheRoom.type}
+                value={cacheRoom.category}
               />
             </MKBox>
             <MKBox mb={2}>
@@ -308,8 +343,6 @@ function NewRoomType({ room }) {
             </MKBox>
             {photos && <ImageSwipe images={photos} />}
           </Grid>
-          <ColumnHeader title="Number" />
-          <ColumnHeader title="Status" />
         </Grid>
         <MKBox mt={3} mb={1}>
           {error && (
@@ -322,33 +355,101 @@ function NewRoomType({ room }) {
             variant="gradient"
             color="primary"
             fullWidth
-            disabled={!cacheRoom?.name}
+            disabled={!cacheRoom?.type}
           >
             Guardar
           </MKButton>
+          <MKButton
+            sx={{ mt: 2 }}
+            variant="gradient"
+            color="error"
+            fullWidth
+            disabled={!cacheRoom?.type}
+            onClick={handleDeleteType}
+          >
+            Eliminar
+          </MKButton>
         </MKBox>
       </MKBox>
+      {!editSwitch && (
+        <MKBox pt={1} pb={5} px={3} component="form" role="form" onSubmit={handleAddRoom}>
+          <MKTypography
+            display="flex"
+            width="100%"
+            variant="h5"
+            mb={2}
+            sx={{ justifyContent: "center" }}
+          >
+            Agregar o quitar Habitaciones
+          </MKTypography>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6} xl={6} s>
+              <MKBox mt={2} mb={2} mr={4} ml={4}>
+                <MKInput
+                  type="number"
+                  name="number"
+                  label="Número de habitacion"
+                  defaultValue={0}
+                  fullWidth
+                  value={roomNumber ?? 0}
+                  onChange={(e) => {
+                    setRoomNumber(e.target.value);
+                  }}
+                />
+              </MKBox>
+              <MKBox mt={2} mb={2} mr={4} ml={4}>
+                <MKInput
+                  type="text"
+                  name="comment"
+                  label="Comentario"
+                  fullWidth
+                  onChange={(e) => {
+                    setRoomComment(e.target.value);
+                  }}
+                />
+              </MKBox>
+              {roomError && (
+                <Alert severity="error" color="error">
+                  {roomError}
+                </Alert>
+              )}
+              <MKButton
+                type="submit"
+                variant="gradient"
+                color="primary"
+                fullWidth
+                disabled={!cacheRoom?.type}
+              >
+                Agregar
+              </MKButton>
+            </Grid>
+            <Grid item xs={12} md={6} xl={6}>
+              <RoomList deleteRoom={handleDeleteRoom} rooms={roomsByType} />
+            </Grid>
+          </Grid>
+        </MKBox>
+      )}
     </Card>
   );
 }
 NewRoomType.defaultProps = {
   room: {
-    name: "",
+    type: "",
     accessories: ["microwave", "desk", "tv", "dish", "wifi", "minifridge", "fullbath"],
     beds: { full: 0, queen: 0 },
     photos: [],
     price: 0,
-    type: "Habitación",
+    category: "Habitación",
   },
 };
 NewRoomType.propTypes = {
   room: PropTypes.shape({
-    name: PropTypes.string,
+    type: PropTypes.string,
     accessories: PropTypes.arrayOf(PropTypes.string),
     beds: PropTypes.shape({ full: PropTypes.number, queen: PropTypes.number }),
     photos: PropTypes.arrayOf(PropTypes.string),
     price: PropTypes.number,
-    type: PropTypes.string,
+    category: PropTypes.string,
   }),
 };
 

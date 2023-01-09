@@ -1,12 +1,12 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Rooms from "./Rooms";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import PropTypes from "prop-types";
+import * as React from "react";
 import History from "./History";
 import NewRoomType from "./NewRoom";
+import Rooms from "./Rooms";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,25 +43,26 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-  const [value, setValue] = React.useState(0);
+  const [tab, setTab] = React.useState(0);
+  const [historyFilter, setHistoryFilter] = React.useState("all");
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setTab(newValue);
   };
 
   return (
     <Box sx={{ width: "90%", paddingTop: "230px", margin: "auto" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Habitaciones" {...a11yProps(0)} />
           <Tab label="Tipos de habitación" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Historial" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        <Rooms setValue={setValue} />
+      <TabPanel value={tab} index={0}>
+        <Rooms setTab={setTab} setHistoryFilter={setHistoryFilter} />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={tab} index={1}>
         <NewRoomType
           room={{
             name: "Single3",
@@ -75,8 +76,8 @@ export default function BasicTabs() {
           }}
         />
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        <History />
+      <TabPanel value={tab} index={2}>
+        <History historyFilter={historyFilter} setHistoryFilter={setHistoryFilter} />
       </TabPanel>
     </Box>
   );

@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -24,17 +24,17 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Container from "@mui/material/Container";
-import Icon from "@mui/material/Icon";
-import Popper from "@mui/material/Popper";
-import Grow from "@mui/material/Grow";
-import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Grow from "@mui/material/Grow";
+import Icon from "@mui/material/Icon";
 import MuiLink from "@mui/material/Link";
+import Popper from "@mui/material/Popper";
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
+import MKTypography from "components/MKTypography";
 
 // Otis Kit PRO examples
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
@@ -43,11 +43,11 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Otis Kit PRO base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
-import "./Navbar.css";
-import { useAtom } from "jotai";
-import loggedUser from "states/loggedUser";
 import useUser from "api/useUser";
+import { useAtom } from "jotai";
 import Login from "pages/Innvie/Authentication/Login";
+import loggedUser from "states/loggedUser";
+import "./Navbar.css";
 
 function DefaultNavbar({ routes, transparent, light, action, sticky, relative, center, logoUrl }) {
   const [dropdown, setDropdown] = useState("");
@@ -96,7 +96,7 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
   const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
       key={name}
-      name={name}
+      name={name ?? ""}
       icon={icon}
       href={href}
       route={route}
@@ -113,10 +113,18 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
     />
   ));
 
+  const getName = (name) => {
+    if (!name) return "";
+    if (name === "Ingresar" && user && user.name) {
+      return user.first_name;
+    }
+    return name;
+  };
+
   const renderLoggedNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
       key={name}
-      name={name === "Ingresar" ? user?.first_name : name}
+      name={getName(name)}
       icon={icon}
       href={href}
       route={route}
@@ -783,19 +791,17 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
     </Container>
   );
 }
-
-// Setting default values for the props of DefaultNavbar
+// DefaultNavbar default props
 DefaultNavbar.defaultProps = {
-  brand: "Innvie",
-  logoUrl: "",
+  action: null,
   transparent: false,
   light: false,
-  action: false,
   sticky: false,
   relative: false,
   center: false,
+  logoUrl: null,
+  brand: null,
 };
-
 // Typechecking props for the DefaultNavbar
 DefaultNavbar.propTypes = {
   brand: PropTypes.string,

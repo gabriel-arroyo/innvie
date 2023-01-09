@@ -11,9 +11,9 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
 // Material Kit 2 PRO React examples
+import useHistory from "api/useHistory";
 import Table from "examples/Tables/Table";
-import MKButton from "components/MKButton";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 // Images
 
@@ -54,209 +54,58 @@ RoomType.propTypes = {
   subCategory: PropTypes.string.isRequired,
 };
 
-function History() {
-  const { columns, rows } = {
-    columns: [
-      { name: "Entrada", align: "center" },
-      { name: "Salida", align: "center" },
-      { name: "Comentarios", align: "center" },
-    ],
+function History({ historyFilter, setHistoryFilter }) {
+  useEffect(() => {
+    console.log("historyFilter", historyFilter);
+    setHistoryFilter("all");
+  });
 
-    rows: [
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/25
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/26
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/23
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/24
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/21
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/22
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/19
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/20
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/17
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/18
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/15
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/16
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/13
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/14
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/11
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/12
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/09
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/10
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/07
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/08
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/05
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/06
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/03
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/04
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-      {
-        Entrada: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/1
-          </MKTypography>
-        ),
-        Salida: (
-          <MKTypography variant="caption" color="secondary" fontWeight="medium">
-            23/04/2
-          </MKTypography>
-        ),
-        Comentarios: "habitación dañada",
-      },
-    ],
-  };
+  const { loading, history } = useHistory();
+  const [rows, setRows] = useState(history);
+
+  useEffect(() => {
+    const allRows = [];
+    history.forEach((element) => {
+      const row = {
+        date: element.lastUpdate.toDate().toLocaleDateString(),
+        action: element.action,
+        id: element.actionId,
+      };
+      allRows.push(row);
+    });
+    setRows(allRows);
+    console.log("allrows", allRows);
+  }, [history, loading]);
+
+  const columns = [
+    { name: "date", align: "center" },
+    { name: "action", align: "center" },
+    { name: "id", align: "center" },
+  ];
 
   return (
-    <MKBox component="section" pt={20}>
-      <MKBox pb={2}>
-        <Container sx={{ display: "flex", justifyContent: "space-between", mt: 10 }}>
-          <MKTypography color="white" variant="h3" fontWeight="medium">
-            Historial
-          </MKTypography>
-          <MKTypography color="white" variant="h5" fontWeight="medium">
-            Habitación 101
-          </MKTypography>
-          <MKButton color="error" component={Link} to="/admin">
-            Habitaciones
-          </MKButton>
-        </Container>
-      </MKBox>
+    <MKBox component="section">
+      {historyFilter !== "all" ? (
+        <MKBox pb={2}>
+          <Container sx={{ display: "flex", justifyContent: "center" }}>
+            <MKTypography color="white" variant="h5" fontWeight="medium">
+              {historyFilter}
+            </MKTypography>
+          </Container>
+        </MKBox>
+      ) : null}
       <Container>
-        <Grid container item xs={12} lg={10} mx="auto">
+        <Grid container item xs={12} lg={5} md={8} mx="auto">
           <Table columns={columns} rows={rows} />
         </Grid>
       </Container>
     </MKBox>
   );
 }
+
+History.propTypes = {
+  historyFilter: PropTypes.string.isRequired,
+  setHistoryFilter: PropTypes.func.isRequired,
+};
 
 export default History;

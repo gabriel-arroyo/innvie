@@ -19,8 +19,8 @@ import Grid from "@mui/material/Grid";
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
+import MKInput from "components/MKInput";
 import MKTypography from "components/MKTypography";
 
 // Images
@@ -76,7 +76,7 @@ function Contact() {
                         ml={2}
                         fontWeight="regular"
                       >
-                        (+40) 772 100 200
+                        734 642 7451
                       </MKTypography>
                     </MKBox>
                     <MKBox display="flex" color="white" p={1}>
@@ -91,7 +91,7 @@ function Contact() {
                         ml={2}
                         fontWeight="regular"
                       >
-                        hello@creative-tim.com
+                        innviestay@gmail.com
                       </MKTypography>
                     </MKBox>
                     <MKBox display="flex" color="white" p={1}>
@@ -106,10 +106,10 @@ function Contact() {
                         ml={2}
                         fontWeight="regular"
                       >
-                        Dyonisie Wolf Bucharest, RO 010458
+                        18732 Dix Toledo HWY, Brownstown MI 48193
                       </MKTypography>
                     </MKBox>
-                    <MKBox mt={3}>
+                    {/* <MKBox mt={3}>
                       <MKButton variant="text" color="white" size="large" iconOnly>
                         <i className="fab fa-facebook" style={{ fontSize: "1.25rem" }} />
                       </MKButton>
@@ -122,7 +122,7 @@ function Contact() {
                       <MKButton variant="text" color="white" size="large" iconOnly>
                         <i className="fab fa-instagram" style={{ fontSize: "1.25rem" }} />
                       </MKButton>
-                    </MKBox>
+                    </MKBox> */}
                   </MKBox>
                 </MKBox>
               </Grid>
