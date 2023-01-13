@@ -64,7 +64,6 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
 
   const { getCurrentUser } = useUser();
   const [user, setUser] = useAtom(loggedUser);
-
   useEffect(() => {
     if (getCurrentUser()) {
       setUser(getCurrentUser());
@@ -113,18 +112,11 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
     />
   ));
 
-  const getName = (name) => {
-    if (!name) return "";
-    if (name === "Ingresar" && user && user.name) {
-      return user.first_name;
-    }
-    return name;
-  };
-
+  const useUserName = (name = "") => (name === "Ingresar" ? user?.first_name ?? "No user" : name);
   const renderLoggedNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
       key={name}
-      name={getName(name)}
+      name={useUserName(name)}
       icon={icon}
       href={href}
       route={route}
