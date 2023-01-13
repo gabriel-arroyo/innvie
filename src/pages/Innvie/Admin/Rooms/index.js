@@ -12,6 +12,7 @@ import MKTypography from "components/MKTypography";
 // Material Kit 2 PRO React examples
 import useRoom from "api/useRoom";
 import useType from "api/useType";
+import { useEffect, useState } from "react";
 import CreateTable from "./CreateTable";
 
 // Images
@@ -70,8 +71,18 @@ RoomState.propTypes = {
 };
 
 function Rooms({ setTab, setHistoryFilter }) {
-  const { rooms, loading, updateRoom } = useRoom();
+  const { getRooms, loading, updateRoom } = useRoom();
   const { types, loading: loadingtypes } = useType();
+  const [rooms, setRooms] = useState();
+
+  // update rooms when loading changes
+  useEffect(() => {
+    if (!loading) {
+      getRooms().then((res) => {
+        setRooms(res);
+      });
+    }
+  }, [loading]);
 
   return (
     <MKBox component="section" pt={0}>

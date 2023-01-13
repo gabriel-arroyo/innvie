@@ -3,23 +3,23 @@ import {
   deleteDoc,
   doc,
   getDocs,
-  onSnapshot,
   query,
   serverTimestamp,
   setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import db from "../firebase";
 import useHistory from "./useHistory";
 
-function useRoom(roomId) {
+function useRoom() {
   const { addAction } = useHistory();
   const [loading, setLoading] = useState(false);
   const [roomError, setError] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [roomsByType, setRoomsByType] = useState([]);
+  const [roomsAvailable, setRoomsAvailable] = useState([]);
   const collectionRef = collection(db, "rooms");
 
   async function getRoomsByType(roomType) {
@@ -28,7 +28,7 @@ function useRoom(roomId) {
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("no matching documents");
+      console.error("no matching documents");
       setRoomsByType([]);
       return null;
     }
@@ -44,10 +44,45 @@ function useRoom(roomId) {
     setError(false);
     setLoading(true);
     const roomsData = [];
-    array.forEach((type) => {
-      roomsData.push(getRoomsByType(type));
+    const q = query(collectionRef, where("type", "in", array));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      // eslint-disable-next-line
+      console.error("no matching documents");
+      setRoomsByType([]);
+      setLoading(false);
+      return null;
+    }
+    querySnapshot.forEach((room) => {
+      roomsData.push({ ...room.data(), id: room.id });
     });
     setRoomsByType(roomsData);
+    setLoading(false);
+    return roomsData;
+  }
+
+  async function getRoomsNotInArray(type, array) {
+    setError(false);
+    setLoading(true);
+    const roomsData = [];
+    let q = query(collectionRef);
+    if (array.length > 0) {
+      q = query(collectionRef, where("number", "not-in", array));
+    }
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      // eslint-disable-next-line
+      console.error("no matching documents");
+      setRoomsAvailable([]);
+      setLoading(false);
+      return null;
+    }
+    querySnapshot.forEach((room) => {
+      if (room.data().type === type) {
+        roomsData.push({ ...room.data(), id: room.id });
+      }
+    });
+    setRoomsAvailable(roomsData);
     setLoading(false);
     return roomsData;
   }
@@ -57,7 +92,7 @@ function useRoom(roomId) {
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("room already exists");
+      console.error("room already exists");
       setError("Room already exists");
       return false;
     }
@@ -71,7 +106,7 @@ function useRoom(roomId) {
       await getRoomsByType(newRoom.type);
     } catch (e) {
       // eslint-disable-next-line
-      console.log("error:", e);
+      console.error(e);
       setError(e);
       return false;
     }
@@ -86,7 +121,7 @@ function useRoom(roomId) {
       await deleteDoc(docRef);
     } catch (e) {
       // eslint-disable-next-line
-      console.log("error:", e);
+      console.error(e);
       setError(e);
     }
     addAction("deleteRoom", { number: id });
@@ -103,7 +138,7 @@ function useRoom(roomId) {
       });
     } catch (e) {
       // eslint-disable-next-line
-      console.log("error:", e);
+      console.error(e);
       setError(e);
     }
     addAction("deleteRoom", { number: "all" });
@@ -115,7 +150,7 @@ function useRoom(roomId) {
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("no matching documents");
+      console.error("no matching documents");
       return null;
     }
     let roomData = null;
@@ -144,7 +179,7 @@ function useRoom(roomId) {
       updateDoc(docRef, updatedRoomWithTimestamp);
     } catch (e) {
       // eslint-disable-next-line
-      console.log("error:", e);
+      console.error("error:", e);
       setError(e);
     }
     addAction("updateRoom", updatedRoom);
@@ -162,7 +197,7 @@ function useRoom(roomId) {
       });
     } catch (e) {
       // eslint-disable-next-line
-      console.log("error:", e);
+      console.error("error:", e);
       setError(e);
     }
     addAction("deleteRoom", { number: roomNumber });
@@ -179,38 +214,42 @@ function useRoom(roomId) {
       });
     } catch (e) {
       // eslint-disable-next-line
-      console.log("error:", e);
+      console.error("error:", e);
       setError(e);
     }
     addAction("deleteRoom", { type: roomType });
   }
 
-  useEffect(() => {
+  async function getRooms() {
     setError(false);
-    let q = query(collectionRef);
-    if (roomId) {
-      q = query(collectionRef, where("id", "==", roomId));
-    }
-    setLoading(true);
-    const unsub = onSnapshot(q, (querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((room) => {
-        items.push({ ...room.data(), id: room.id });
-      });
-      const sorted = items.sort((a, b) => a.number.localeCompare(b.number));
-      setRooms(sorted);
+    const q = query(collectionRef);
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      // eslint-disable-next-line
+      console.error("no matching documents");
+      setRooms([]);
       setLoading(false);
+      return null;
+    }
+    const roomsData = [];
+    querySnapshot.forEach((room) => {
+      roomsData.push({ ...room.data(), id: room.id });
     });
-    return () => unsub();
-  }, []);
+    setRooms(roomsData);
+    return roomsData;
+  }
+
   return {
     loading,
     rooms,
     roomsByType,
+    roomsAvailable,
     addRoom,
     deleteRoom,
+    getRooms,
     deleteRoomByNumber,
     getRoomsByTypesArray,
+    getRoomsNotInArray,
     deleteRoomByType,
     updateRoom,
     getRoomByNumber,

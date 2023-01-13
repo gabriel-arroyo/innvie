@@ -13,12 +13,12 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import Contact from "./sections/Contact";
-import Header from "./sections/Header";
 import Map from "./components/Map/map";
-import PlacesSwipe from "./sections/PlacesSwipe";
+import Contact from "./sections/Contact";
 import Description from "./sections/Description";
+import Header from "./sections/Header";
 import OffersSwipe from "./sections/OffersSwipe";
+import PlacesSwipe from "./sections/PlacesSwipe";
 
 function InnvieHome() {
   return (
@@ -40,7 +40,7 @@ function InnvieHome() {
             variant: "gradient",
             color: "primary",
             icon: "local_offer",
-            title: "Oferta 2",
+            title: "3 Noches gratis",
             description: "Paga 2 semanas y obtén 3 noches gratis.",
             description2: "Válido solamente al pagar 2 semanas por adelantado.",
             description3: "Ahorra 195 USD",

@@ -54,28 +54,25 @@ RoomType.propTypes = {
   subCategory: PropTypes.string.isRequired,
 };
 
-function History({ historyFilter, setHistoryFilter }) {
-  useEffect(() => {
-    console.log("historyFilter", historyFilter);
-    setHistoryFilter("all");
-  });
-
-  const { loading, history } = useHistory();
-  const [rows, setRows] = useState(history);
+function History({ historyFilter }) {
+  const { loading, getCompleteHistory } = useHistory();
+  const [rows, setRows] = useState();
 
   useEffect(() => {
     const allRows = [];
-    history.forEach((element) => {
-      const row = {
-        date: element.lastUpdate.toDate().toLocaleDateString(),
-        action: element.action,
-        id: element.actionId,
-      };
-      allRows.push(row);
+    getCompleteHistory().then((h) => {
+      h.forEach((element) => {
+        const row = {
+          date: element.lastUpdate.toDate().toLocaleDateString(),
+          action: element.action,
+          id: element.actionId,
+        };
+        allRows.push(row);
+      });
+      setRows(allRows);
+      console.log("allrows", allRows);
     });
-    setRows(allRows);
-    console.log("allrows", allRows);
-  }, [history, loading]);
+  }, [loading]);
 
   const columns = [
     { name: "date", align: "center" },
@@ -105,7 +102,6 @@ function History({ historyFilter, setHistoryFilter }) {
 
 History.propTypes = {
   historyFilter: PropTypes.string.isRequired,
-  setHistoryFilter: PropTypes.func.isRequired,
 };
 
 export default History;

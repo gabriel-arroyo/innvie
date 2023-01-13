@@ -3,7 +3,6 @@ import {
   deleteDoc,
   doc,
   getDocs,
-  onSnapshot,
   query,
   serverTimestamp,
   setDoc,
@@ -11,10 +10,10 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import db from "../firebase";
 
-function useHistory(roomId) {
+function useHistory() {
   const [loading, setLoading] = useState(false);
   const [roomError, setError] = useState(false);
   const [history, setHistory] = useState([]);
@@ -55,6 +54,7 @@ function useHistory(roomId) {
     };
     try {
       const docRef = doc(collectionRef);
+      console.log("useHistory", docRef, collectionRef, acitonWithTimestamp);
       await setDoc(docRef, acitonWithTimestamp);
     } catch (e) {
       // eslint-disable-next-line
@@ -157,28 +157,29 @@ function useHistory(roomId) {
     }
   }
 
-  useEffect(() => {
+  async function getCompleteHistory() {
+    const historyData = [];
     setError(false);
-    let q = query(collectionRef);
-    if (roomId && roomId !== "all") {
-      q = query(collectionRef, where("number", "==", roomId));
-    }
-    setLoading(true);
-    const unsub = onSnapshot(q, (querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((room) => {
-        items.push({ ...room.data(), id: room.id });
-        console.log(room.id, " => ", room.data());
+    try {
+      const q = query(collectionRef, where("actionId", "!=", ""));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((roomData) => {
+        historyData.push({ ...roomData.data(), id: roomData.id });
       });
-      setHistory(items);
-      setLoading(false);
-    });
-    return () => unsub();
-  }, []);
+      setHistory(historyData);
+    } catch (e) {
+      // eslint-disable-next-line
+      console.log("error:", e);
+      setError(e);
+    }
+    return historyData;
+  }
+
   return {
     loading,
     history,
     addAction,
+    getCompleteHistory,
     deletePast,
     deleteRoomByNumber,
     deleteRoomByType,

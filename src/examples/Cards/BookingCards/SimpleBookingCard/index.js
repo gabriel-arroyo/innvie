@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -23,14 +23,21 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import MuiLink from "@mui/material/Link";
 
 // Otis Kit PRO components
+import useCalendar from "api/useCalendar";
 import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
+import MKTypography from "components/MKTypography";
 
-function SimpleBookingCard({ image, title, description, categories, action }) {
+function SimpleBookingCard({ image, title, description, categories, action, startDate, endDate }) {
+  const { available, getAvailableRoom } = useCalendar();
+
+  useEffect(() => {
+    getAvailableRoom(title, startDate, endDate).then((room) => {
+      console.log("room", room);
+    });
+  }, []);
   return (
     <Card sx={{ height: "100%" }}>
       <MKBox position="relative" borderRadius="lg" mx={2} mt={-3} height="100%">
@@ -85,32 +92,29 @@ function SimpleBookingCard({ image, title, description, categories, action }) {
         </MKBox>
         {action.type === "external" ? (
           <MKButton
-            component={MuiLink}
+            component={Link}
             href={action.route}
             target="_blank"
             rel="noreferrer"
             variant="outlined"
             size="small"
+            disabled={action.disabled}
             color={action.color ? action.color : "dark"}
           >
-            {action.label}qwer
+            {action.label}
           </MKButton>
         ) : (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <MKTypography fontWeight="bold" sx={{ color: "#0D283C" }}>
+              {action.label}
+            </MKTypography>
+
             <MKButton
               component={Link}
               to={action.route}
-              variant="outlined"
-              size="large"
-              color={action.color ? action.color : "dark"}
-            >
-              {action.label}
-            </MKButton>
-            <MKButton
-              component={Link}
-              to="/reserve"
               variant="gradient"
               color="error"
+              disabled={!available}
               sx={{ height: "100%" }}
             >
               Reservar
@@ -133,9 +137,12 @@ SimpleBookingCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   categories: PropTypes.instanceOf(Array),
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
   action: PropTypes.shape({
     type: PropTypes.oneOf(["external", "internal"]).isRequired,
     route: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
     color: PropTypes.oneOf([
       "primary",
       "secondary",

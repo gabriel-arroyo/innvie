@@ -13,8 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useParams } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useParams } from "react-router-dom";
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -35,17 +35,21 @@ import DateInput from "pages/Innvie/Home/components/Date/DateInput";
 // import Testimonials from "pages/LandingPages/Rental/sections/Testimonials";
 // import Faq from "pages/LandingPages/Rental/sections/Faq";
 // import Contact from "pages/LandingPages/Rental/sections/Contact";
+import { useEffect } from "react";
 
 // Images
 import bgImage from "../../../assets/images/photos/innvie1.png";
 
-import Offers from "../Home/components/Offers/offers";
+import OffersSwipe from "../Home/sections/OffersSwipe";
 import Places from "./sections/Places";
 // import Amenities from "../Home/sections/Amenities";
 
 function Options() {
-  const showAlert = false;
   const { startDate, endDate } = useParams();
+  useEffect(() => {
+    console.log(startDate, endDate);
+  }, [startDate, endDate]);
+
   const matches = useMediaQuery("(min-width:1000px)");
   return (
     <>
@@ -121,7 +125,7 @@ function Options() {
           <DateInput startDate={startDate} endDate={endDate} />
         </div>
 
-        {showAlert && (
+        {!startDate && (
           <Container sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <MKAlert color="error" dismissible sx={{ width: "540px" }}>
               <Icon fontSize="small">warning</Icon>&nbsp; Favor de seleccionar una fecha para
@@ -129,41 +133,33 @@ function Options() {
             </MKAlert>
           </Container>
         )}
-        <Places />
+        <Places startDate={startDate} endDate={endDate} />
         {/* <Testimonials />
         <Faq />
         <Contact /> */}
         <Container>
           <br />
           <br />
-          <br />
-          <br />
         </Container>
-        <Offers
+        <OffersSwipe
           cards={[
             {
-              variant: "contained",
+              variant: "gradient",
               color: "primary",
-              icon: "shuffle_on",
-              title: "Oferta 1",
-              description:
-                "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
+              icon: "local_offer",
+              title: "7x6",
+              description: "Paga 6 noches y la séptima es gratis. ",
+              description2: "Válido solamente al pagar 6 noches por adelantado.",
+              description3: "Ahorra 90 USD o más.",
             },
             {
               variant: "gradient",
               color: "primary",
-              icon: "beenhere",
-              title: "Oferta 2",
-              description:
-                "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
-            },
-            {
-              variant: "contained",
-              color: "primary",
-              icon: "ballot",
-              title: "Oferta 3",
-              description:
-                "The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever.",
+              icon: "local_offer",
+              title: "3 Noches gratis",
+              description: "Paga 2 semanas y obtén 3 noches gratis.",
+              description2: "Válido solamente al pagar 2 semanas por adelantado.",
+              description3: "Ahorra 195 USD",
             },
           ]}
         />

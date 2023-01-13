@@ -16,12 +16,12 @@ Coded by www.creative-tim.com
 import { useEffect } from "react";
 
 // react-router components
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { Provider } from "jotai";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 // @mui material components
-import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
 
 // Otis Kit PRO themes
 import theme from "assets/theme";
@@ -29,26 +29,26 @@ import Home from "pages/Innvie/Home";
 
 // Otis Kit PRO routes
 // import routes from "innvie.routes";
-import Reserve from "pages/Innvie/Reserve";
-import Options from "pages/Innvie/Options";
 import Confirmation from "pages/Innvie/Confirmation";
+import Options from "pages/Innvie/Options";
+import Reserve from "pages/Innvie/Reserve";
 // import Layout from "pages/Innvie/Layouts/BasicLayout";
 // import Login from "pages/Innvie/Authentication/Login";
 // import Register from "pages/Innvie/Authentication/Register";
-import Layout from "pages/Innvie/Layouts/BasicLayout";
+import bgImage from "assets/images/bg-sign-in-cover.jpeg";
+import Admin from "pages/Innvie/Admin";
+import History from "pages/Innvie/Admin/History";
+import NewRoom from "pages/Innvie/Admin/NewRoom";
+import Rooms from "pages/Innvie/Admin/Rooms";
 import Login from "pages/Innvie/Authentication/Login";
 import Register from "pages/Innvie/Authentication/Register";
-import CoverLayout from "pages/Innvie/Layouts/CoverLayout";
-import bgImage from "assets/images/bg-sign-in-cover.jpeg";
-import MyReservations from "pages/Innvie/MyReservations";
-import Rooms from "pages/Innvie/Admin/Rooms";
-import NewRoom from "pages/Innvie/Admin/NewRoom";
-import History from "pages/Innvie/Admin/History";
-import NavbarLayout from "pages/Innvie/Layouts/NavbarLayout";
 import Checkin from "pages/Innvie/Checkin";
+import Layout from "pages/Innvie/Layouts/BasicLayout";
+import CoverLayout from "pages/Innvie/Layouts/CoverLayout";
+import NavbarLayout from "pages/Innvie/Layouts/NavbarLayout";
+import MyReservations from "pages/Innvie/MyReservations";
 import Terms from "pages/Innvie/TermsAndConditions";
 import ApiTest from "pages/Tests/apitest";
-import Admin from "pages/Innvie/Admin";
 import img from "./assets/images/shapes/bg-tile1.svg";
 // Images
 
@@ -89,7 +89,7 @@ export default function App() {
               <Route index element={<Home />} />
 
               <Route path="/options/:startDate/:endDate" element={<Options />} />
-              <Route path="/reserve" element={<Reserve />} />
+              <Route path="/reserve/:startDate/:endDate/:type" element={<Reserve />} />
               <Route path="/confirmation" element={<Confirmation />} />
               {/* {getRoutes(routes)} */}
               <Route path="/myreservations" element={<MyReservations />} />
