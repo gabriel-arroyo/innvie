@@ -90,12 +90,13 @@ export default function App() {
 
               <Route path="/options/:startDate/:endDate" element={<Options />} />
               <Route path="/reserve/:startDate/:endDate/:type" element={<Reserve />} />
-              <Route path="/confirmation" element={<Confirmation />} />
+
               {/* {getRoutes(routes)} */}
               <Route path="/myreservations" element={<MyReservations />} />
             </Route>
             <Route path="/admin" element={<NavbarLayout />}>
               <Route index element={<Admin />} />
+
               <Route path="/admin/rooms" element={<Rooms />} />
               <Route path="/admin/newroom" element={<NewRoom />} />
               <Route path="/admin/history" element={<History />} />
@@ -106,6 +107,7 @@ export default function App() {
               <Route path="/authentication/register" element={<Register />} />
               <Route path="/authentication/checkin" element={<Checkin />} />
             </Route>
+            <Route path="/confirmation" element={<Confirmation />} />
             <Route path="/test/api" element={<ApiTest />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

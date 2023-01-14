@@ -65,10 +65,7 @@ function useRoom() {
     setError(false);
     setLoading(true);
     const roomsData = [];
-    let q = query(collectionRef);
-    if (array.length > 0) {
-      q = query(collectionRef, where("number", "not-in", array));
-    }
+    const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       // eslint-disable-next-line
@@ -78,7 +75,7 @@ function useRoom() {
       return null;
     }
     querySnapshot.forEach((room) => {
-      if (room.data().type === type) {
+      if (room.data().type === type && !array.includes(room.data().number)) {
         roomsData.push({ ...room.data(), id: room.id });
       }
     });

@@ -29,14 +29,6 @@ import MKTypography from "components/MKTypography";
 import DateInput from "pages/Innvie/Home/components/Date/DateInput";
 // Otis Kit PRO examples
 
-// Rental page sections
-// import Search from "pages/LandingPages/Rental/sections/Search";
-// import Places from "pages/LandingPages/Rental/sections/Places";
-// import Testimonials from "pages/LandingPages/Rental/sections/Testimonials";
-// import Faq from "pages/LandingPages/Rental/sections/Faq";
-// import Contact from "pages/LandingPages/Rental/sections/Contact";
-import { useEffect } from "react";
-
 // Images
 import bgImage from "../../../assets/images/photos/innvie1.png";
 
@@ -46,9 +38,6 @@ import Places from "./sections/Places";
 
 function Options() {
   const { startDate, endDate } = useParams();
-  useEffect(() => {
-    console.log(startDate, endDate);
-  }, [startDate, endDate]);
 
   const matches = useMediaQuery("(min-width:1000px)");
   return (
@@ -94,19 +83,6 @@ function Options() {
           </Grid>
         </Container>
       </MKBox>
-      {/* <Card
-        sx={{
-          p: 2,
-          mx: { xs: 2, lg: 3 },
-          mt: -8,
-          mb: 4,
-          backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
-          backdropFilter: "saturate(200%) blur(30px)",
-          boxShadow: ({ boxShadows: { xxl } }) => xxl,
-          overflow: "hidden",
-        }}
-      > */}
-      {/* <Search /> */}
       <Container>
         <div
           style={{
@@ -134,9 +110,6 @@ function Options() {
           </Container>
         )}
         <Places startDate={startDate} endDate={endDate} />
-        {/* <Testimonials />
-        <Faq />
-        <Contact /> */}
         <Container>
           <br />
           <br />

@@ -26,7 +26,10 @@ import PlacesGrid from "../Home/sections/PlacesGrid";
 
 function Confirmation() {
   return (
-    <CustomLayout title="Confirmación de reservación" subtitle="¡Tu transacción fue exitosa!">
+    <CustomLayout
+      title="Confirmación de reservación"
+      subtitle="Gracias por su pago. Su pago se ha completado y le hemos enviado un recibo de su compra por correo electrónico. Para ver los detalles de la transacción, inicie sesión en su cuenta PayPal."
+    >
       <MKBox position="relative" zIndex={10} px={{ xs: 1, sm: 0 }} mt={8}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>

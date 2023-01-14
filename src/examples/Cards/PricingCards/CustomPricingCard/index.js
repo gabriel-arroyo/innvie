@@ -25,29 +25,12 @@ import Icon from "@mui/material/Icon";
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
+import MKTypography from "components/MKTypography";
 
 function CustomPricingCard({ color, badge, price, specifications, action, shadow }) {
   const renderSpecifications = specifications.map(({ label, singlePrice, discount }) => (
     <MKBox key={label} display="flex" alignItems="center" justifyContent="space-between" p={1}>
-      {/* <MKBox
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        width="1.5rem"
-        height="1.5rem"
-        mr={2}
-        mt={-0.125}
-      >
-        <MKTypography
-          variant="body1"
-          color={color === "white" ? "text" : "white"}
-          sx={{ lineHeight: 0 }}
-        >
-          <Icon>{includes ? "done" : "remove"}</Icon>
-        </MKTypography>
-      </MKBox> */}
       <MKTypography
         variant="body2"
         color={color === "white" ? "text" : "white"}
@@ -62,11 +45,45 @@ function CustomPricingCard({ color, badge, price, specifications, action, shadow
           fontWeight="regular"
           textAlign="right"
         >
-          {discount ? "- " : ""}${singlePrice}
+          {discount ? "- " : ""}
+          {singlePrice}
         </MKTypography>
       )}
     </MKBox>
   ));
+
+  function RenderData() {
+    if (!action) return null;
+    if (action.type === "internal") {
+      <MKBox mt={3}>
+        <MKButton
+          component={Link}
+          to={action.route}
+          variant="gradient"
+          color={action.color}
+          fullWidth
+        >
+          {action.label}&nbsp;
+          <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+        </MKButton>
+      </MKBox>;
+    } else if (action === "buy") {
+      <MKBox mt={3}>
+        <MKButton
+          component="a"
+          href={action.route}
+          target="_blank"
+          rel="noreferrer"
+          variant="gradient"
+          color={action.color}
+          fullWidth
+        >
+          {action.label}&nbsp;
+          <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+        </MKButton>
+      </MKBox>;
+    }
+  }
 
   return (
     <Card sx={{ boxShadow: ({ boxShadows: { lg } }) => (shadow ? lg : "none") }}>
@@ -123,37 +140,10 @@ function CustomPricingCard({ color, badge, price, specifications, action, shadow
             </MKTypography>
           </MKBox>
         </MKBox>
+
         <MKBox pb={3} px={3}>
           {renderSpecifications}
-          {action.type === "internal" ? (
-            <MKBox mt={3}>
-              <MKButton
-                component={Link}
-                to={action.route}
-                variant="gradient"
-                color={action.color}
-                fullWidth
-              >
-                {action.label}&nbsp;
-                <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
-              </MKButton>
-            </MKBox>
-          ) : (
-            <MKBox mt={3}>
-              <MKButton
-                component="a"
-                href={action.route}
-                target="_blank"
-                rel="noreferrer"
-                variant="gradient"
-                color={action.color}
-                fullWidth
-              >
-                {action.label}&nbsp;
-                <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
-              </MKButton>
-            </MKBox>
-          )}
+          {action && <RenderData />}
         </MKBox>
       </MKBox>
     </Card>

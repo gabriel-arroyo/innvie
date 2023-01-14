@@ -119,8 +119,28 @@ function useCalendar() {
   }
 
   async function addReservation(room, startDate, endDate) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+    // eslint-disable-next-line no-console
+    console.log("reserving", room, startDate, endDate);
+    let start = new Date();
+    let end = new Date();
+    try {
+      start = new Date(`${startDate}, 14:45:00`);
+      end = new Date(`${endDate}, 11:30:00`);
+      if (start > end) {
+        setError("Start date must be before end date");
+        return;
+      }
+    } catch (e) {
+      setError("Invalid date format");
+      return;
+    }
+
+    if (!room) {
+      // eslint-disable-next-line no-console
+      console.log("no room");
+      setError("No room");
+      return;
+    }
 
     if (!room.number) {
       // eslint-disable-next-line no-console
@@ -132,14 +152,6 @@ function useCalendar() {
       // eslint-disable-next-line no-console
       console.error("No room type");
       setError("No room type");
-      return;
-    }
-
-    const reserved = await getAvailability(room.type, start, end);
-    const found = reserved.find((r) => r.room === room.number);
-    if (!found) {
-      console.error("Room not available");
-      setError("Room not available");
       return;
     }
 

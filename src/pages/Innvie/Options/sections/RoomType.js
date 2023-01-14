@@ -1,15 +1,13 @@
 import { Grid } from "@mui/material";
 import MKBox from "components/MKBox";
-import SimpleBookingCard from "examples/Cards/BookingCards/SimpleBookingCard";
 import PropTypes from "prop-types";
+import BookingCard from "./BoockingCard";
 
 function RoomType({ type, startDate, endDate }) {
-  console.log(startDate, endDate);
-
   return (
     <Grid item xs={12} md={6} lg={4}>
       <MKBox mt={3}>
-        <SimpleBookingCard
+        <BookingCard
           image={type.photos[0] ?? "https://picsum.photos/200/300"}
           title={type.type}
           description={type.description}
