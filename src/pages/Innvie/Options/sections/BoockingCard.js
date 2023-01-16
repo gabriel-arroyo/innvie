@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { Fragment, useEffect } from "react";
 
 // react-router components
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
@@ -29,9 +29,25 @@ import useCalendar from "api/useCalendar";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
+import { useAtom } from "jotai";
+import { reservedEndDate, reservedStartDate } from "states/reservedDate";
+import selectedPrice from "states/selectedPrice";
+import selectedType from "states/selectedType";
 
-function BookingCard({ image, title: type, description, categories, action, startDate, endDate }) {
+function BookingCard({ image, type, description, accesories, action }) {
   const { available, getAvailableRoom } = useCalendar();
+  const [startDate] = useAtom(reservedStartDate);
+  const [endDate] = useAtom(reservedEndDate);
+  const [, setType] = useAtom(selectedType);
+  const [, setPrice] = useAtom(selectedPrice);
+  const navigate = useNavigate();
+
+  const handleReserve = () => {
+    setType(type);
+    setPrice(action.price);
+    navigate("/reserve/");
+  };
+
   useEffect(() => {
     getAvailableRoom(type, startDate, endDate).then();
   }, []);
@@ -67,7 +83,7 @@ function BookingCard({ image, title: type, description, categories, action, star
         />
       </MKBox>
       <MKBox p={3} mt={-2} height="100%">
-        {categories.length > 0 && (
+        {accesories.length > 0 && (
           <MKTypography
             display="block"
             variant="button"
@@ -75,7 +91,7 @@ function BookingCard({ image, title: type, description, categories, action, star
             fontWeight="regular"
             mb={0.75}
           >
-            {categories.map((category) => (
+            {accesories.map((category) => (
               <Fragment key={category}>{category}&nbsp;&bull;&nbsp;</Fragment>
             ))}
           </MKTypography>
@@ -88,37 +104,22 @@ function BookingCard({ image, title: type, description, categories, action, star
             {description}
           </MKTypography>
         </MKBox>
-        {action.type === "external" ? (
-          <MKButton
-            component={Link}
-            href={action.route}
-            target="_blank"
-            rel="noreferrer"
-            variant="outlined"
-            size="small"
-            disabled={action.disabled}
-            color={action.color ? action.color : "dark"}
-          >
-            {action.label}
-          </MKButton>
-        ) : (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <MKTypography fontWeight="bold" sx={{ color: "#0D283C" }}>
-              {action.label}
-            </MKTypography>
 
-            <MKButton
-              component={Link}
-              to={`/reserve/${startDate}/${endDate}/${type}`}
-              variant="gradient"
-              color="error"
-              disabled={!available}
-              sx={{ height: "100%" }}
-            >
-              Reservar
-            </MKButton>
-          </div>
-        )}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <MKTypography fontWeight="bold" sx={{ color: "#0D283C" }}>
+            ${action.price.toFixed(2)}
+          </MKTypography>
+
+          <MKButton
+            variant="gradient"
+            color="error"
+            disabled={!available}
+            sx={{ height: "100%" }}
+            onClick={handleReserve}
+          >
+            Reservar
+          </MKButton>
+        </div>
       </MKBox>
     </Card>
   );
@@ -126,17 +127,16 @@ function BookingCard({ image, title: type, description, categories, action, star
 
 // Setting default props for the SimpleBookingCard
 BookingCard.defaultProps = {
-  categories: [],
+  accesories: [],
+  description: "",
 };
 
 // Typechecking props for the SimpleBookingCard
 BookingCard.propTypes = {
   image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  categories: PropTypes.instanceOf(Array),
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  accesories: PropTypes.instanceOf(Array),
   action: PropTypes.shape({
     type: PropTypes.oneOf(["external", "internal"]).isRequired,
     route: PropTypes.string.isRequired,
@@ -151,7 +151,7 @@ BookingCard.propTypes = {
       "dark",
       "light",
     ]),
-    label: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
   }).isRequired,
 };
 

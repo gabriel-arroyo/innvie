@@ -14,7 +14,6 @@ Coded by www.creative-tim.com
 */
 
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useParams } from "react-router-dom";
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -30,6 +29,8 @@ import DateInput from "pages/Innvie/Home/components/Date/DateInput";
 // Otis Kit PRO examples
 
 // Images
+import { useAtom } from "jotai";
+import { reservedEndDate, reservedStartDate } from "states/reservedDate";
 import bgImage from "../../../assets/images/photos/innvie1.png";
 
 import OffersSwipe from "../Home/sections/OffersSwipe";
@@ -37,7 +38,8 @@ import Places from "./sections/Places";
 // import Amenities from "../Home/sections/Amenities";
 
 function Options() {
-  const { startDate, endDate } = useParams();
+  const [startDate] = useAtom(reservedStartDate);
+  const [endDate] = useAtom(reservedEndDate);
 
   const matches = useMediaQuery("(min-width:1000px)");
   return (
@@ -109,7 +111,7 @@ function Options() {
             </MKAlert>
           </Container>
         )}
-        <Places startDate={startDate} endDate={endDate} />
+        <Places />
         <Container>
           <br />
           <br />

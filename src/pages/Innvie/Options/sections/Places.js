@@ -14,7 +14,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import useType from "api/useType";
-import PropTypes from "prop-types";
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -27,29 +26,19 @@ import MKBox from "components/MKBox";
 // Images
 import RoomType from "./RoomType";
 
-function Places({ startDate, endDate }) {
+function Places() {
   const { types } = useType();
   return (
     <MKBox component="section" py={3}>
       <Container>
         <Grid container spacing={3} sx={{ mt: 3 }}>
-          {types.map((type) => (
-            <RoomType type={type} startDate={startDate} endDate={endDate} />
+          {types.map((typeObject) => (
+            <RoomType typeObject={typeObject} />
           ))}
         </Grid>
       </Container>
     </MKBox>
   );
 }
-
-Places.defaultProps = {
-  startDate: new Date(),
-  endDate: new Date(),
-};
-
-Places.propTypes = {
-  startDate: PropTypes.any,
-  endDate: PropTypes.any,
-};
 
 export default Places;

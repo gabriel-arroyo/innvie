@@ -21,10 +21,21 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
 // Otis Kit PRO examples
+import { useAtom } from "jotai";
+import loggedUser from "states/loggedUser";
+import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
+import selectedPrice from "states/selectedPrice";
+import selectedType from "states/selectedType";
 import CustomLayout from "../../../layouts/sections/components/CustomLayout";
 import PlacesGrid from "../Home/sections/PlacesGrid";
 
 function Confirmation() {
+  const [user] = useAtom(loggedUser);
+  const [startDate] = useAtom(reservedStartDate);
+  const [endDate] = useAtom(reservedEndDate);
+  const [days] = useAtom(reservedDays);
+  const [type] = useAtom(selectedType);
+  const [price] = useAtom(selectedPrice);
   return (
     <CustomLayout
       title="Confirmación de reservación"
@@ -35,13 +46,13 @@ function Confirmation() {
           <Grid item xs={12} lg={4}>
             <MKBox>
               <MKTypography variant="h6" fontWeight="bold" mb={2}>
-                John Smith
+                {`${user.first_name} ${user.last_name}`}
               </MKTypography>
-              <MKTypography variant="h4">Habitación modelo 1</MKTypography>
+              <MKTypography variant="h4">{`Habitación ${type}`}</MKTypography>
               <br />
-              <MKTypography>Fecha de ingreso: 11/11/11 13:00</MKTypography>
-              <MKTypography>Fecha de salida: 12/12/12 12:00</MKTypography>
-              <MKTypography>2 noches</MKTypography>
+              <MKTypography>{`Fecha de ingreso: ${startDate}`}</MKTypography>
+              <MKTypography>{`Fecha de salida: ${endDate}`}</MKTypography>
+              <MKTypography>{`${days} noches`}</MKTypography>
               <MKBox pt={3} pb={2} px={2} textAlign="center">
                 <MKBox my={1}>
                   <MKTypography variant="h1" color="text">
@@ -54,7 +65,7 @@ function Confirmation() {
                     >
                       $
                     </MKTypography>
-                    119.00
+                    {price}
                   </MKTypography>
                 </MKBox>
               </MKBox>
@@ -62,7 +73,7 @@ function Confirmation() {
           </Grid>
           <Grid item xs={12} lg={4} display="flex" flexDirection="column" alignItems="center">
             <MKTypography variant="h6" fontWeight="bold" mb={2}>
-              johnsmith@email.com
+              {user.email}
             </MKTypography>
             <MKTypography>Código de reservación</MKTypography>
             <MKTypography variant="h3">A5AD5F4ASNH</MKTypography>

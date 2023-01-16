@@ -88,8 +88,8 @@ export default function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
 
-              <Route path="/options/:startDate/:endDate" element={<Options />} />
-              <Route path="/reserve/:startDate/:endDate/:type" element={<Reserve />} />
+              <Route path="/options/" element={<Options />} />
+              <Route path="/reserve/" element={<Reserve />} />
 
               {/* {getRoutes(routes)} */}
               <Route path="/myreservations" element={<MyReservations />} />

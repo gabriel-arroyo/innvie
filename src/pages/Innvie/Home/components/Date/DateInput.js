@@ -1,23 +1,22 @@
-import React from "react";
 // react-router-dom components
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
-import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import MKDatePicker from "components/MKDatePicker";
+import MKInput from "components/MKInput";
 import MKTypography from "components/MKTypography";
-import { getTomorrowDate, getCurrentDate, getDaysDifference } from "tools/getDate";
 import { useAtom } from "jotai";
-import { reservedEndDate, reservedStartDate, reservedDays } from "states/reservedDate";
+import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
+import { getCurrentDate, getDaysDifference, getTomorrowDate } from "tools/getDate";
 
 function DateInput({ startDate, endDate }) {
   const matches = useMediaQuery("(min-width:1000px)");
-  const [stateStartDate, setStartDate] = useAtom(reservedStartDate);
-  const [stateEndDate, setEndDate] = useAtom(reservedEndDate);
-  const [stateDays, setDays] = useAtom(reservedDays);
+  const [, setStartDate] = useAtom(reservedStartDate);
+  const [, setEndDate] = useAtom(reservedEndDate);
+  const [days, setDays] = useAtom(reservedDays);
   const onChangeDate = (e) => {
     const [start, end] = e;
     setStartDate(getCurrentDate(start));
@@ -74,7 +73,7 @@ function DateInput({ startDate, endDate }) {
         <MKTypography variant="h6" color="primary">
           Días
         </MKTypography>
-        <MKInput type="text" value={stateDays} sx={{ width: "50px", pointerEvents: "none" }} />
+        <MKInput type="text" value={days} sx={{ width: "50px", pointerEvents: "none" }} />
       </Grid>
       <Grid
         item
@@ -88,7 +87,7 @@ function DateInput({ startDate, endDate }) {
       >
         <MKButton
           component={Link}
-          to={`/options/${stateStartDate}/${stateEndDate}`}
+          to="/options"
           variant="gradient"
           color="error"
           sx={{ width: "500px", padding: "14px" }}

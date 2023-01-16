@@ -3,22 +3,20 @@ import MKBox from "components/MKBox";
 import PropTypes from "prop-types";
 import BookingCard from "./BoockingCard";
 
-function RoomType({ type, startDate, endDate }) {
+function RoomType({ typeObject }) {
   return (
     <Grid item xs={12} md={6} lg={4}>
       <MKBox mt={3}>
         <BookingCard
-          image={type.photos[0] ?? "https://picsum.photos/200/300"}
-          title={type.type}
-          description={type.description}
-          categories={type.accessories}
-          startDate={startDate}
-          endDate={endDate}
+          image={typeObject.photos[0] ?? "https://picsum.photos/200/300"}
+          type={typeObject.type}
+          description={typeObject.description}
+          accessories={typeObject.accessories}
           action={{
             type: "internal",
-            route: "/reserve/2022-01-01/2022-01-02/1",
+            route: "/reserve",
             color: "info",
-            label: `$${type.price}.00`,
+            price: typeObject.price,
             disabled: false,
           }}
         />
@@ -29,9 +27,7 @@ function RoomType({ type, startDate, endDate }) {
 
 RoomType.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  type: PropTypes.object.isRequired,
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
+  typeObject: PropTypes.object.isRequired,
 };
 
 export default RoomType;

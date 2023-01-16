@@ -13,7 +13,10 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -25,40 +28,36 @@ import MKTypography from "components/MKTypography";
 // Otis Kit PRO examples
 import { Checkbox } from "@mui/material";
 import useCalendar from "api/useCalendar";
-import useType from "api/useType";
-import MKButton from "components/MKButton";
 import CustomPricingCard from "examples/Cards/PricingCards/CustomPricingCard";
 import { useAtom } from "jotai";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import loggedUser from "states/loggedUser";
+import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
+import selectedPrice from "states/selectedPrice";
+import selectedType from "states/selectedType";
 import BlancLayout from "../Layouts/BlancLayout";
 
 function Reserve() {
   const [user] = useAtom(loggedUser);
-  const { startDate, endDate, type } = useParams();
+  const [startDate] = useAtom(reservedStartDate);
+  const [endDate] = useAtom(reservedEndDate);
+  const [days] = useAtom(reservedDays);
+  const [type] = useAtom(selectedType);
+  const [price] = useAtom(selectedPrice);
+  const navigate = useNavigate();
   const { getAvailableRoom } = useCalendar();
   const [room, setRoom] = useState({});
-  const [typeData, setTypeData] = useState({});
-  const [days, setDays] = useState(1);
-  const { getType } = useType();
-  console.log(room);
+  const [terms, setTerms] = useState(false);
+  const impuestos = 0.0425;
 
-  const getDaysNumber = () => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const diffTime = Math.abs(end - start);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    setDays(diffDays);
+  const handleCheck = () => {
+    setTerms(!terms);
   };
 
   useEffect(() => {
     getAvailableRoom(type, startDate, endDate).then((r) => {
       setRoom(r);
     });
-    getType(type).then((r) => {
-      setTypeData(r);
-    });
-    getDaysNumber();
   }, []);
   const [party, setParty] = useState(0);
   const [adults, setAdults] = useState(0);
@@ -101,6 +100,14 @@ function Reserve() {
     setAdults(newAdults);
   };
 
+  const onApprove = (data, actions) =>
+    actions.order.capture().then((details) => {
+      console.log(`Transaction completed by ${details.payer.name.given_name}`);
+      console.log(details.status);
+      console.log("selected room", room);
+      navigate("/confirmation");
+    });
+
   return (
     <BlancLayout title="Reservación">
       <MKBox position="relative" zIndex={10} px={{ xs: 1, sm: 0 }}>
@@ -108,14 +115,17 @@ function Reserve() {
           <Grid item xs={12} lg={4}>
             <CustomPricingCard
               badge={{ color: "light", label: "cotización" }}
-              price={{ currency: "$", value: days * typeData.price }}
+              price={{ currency: "$", value: days * price }}
               specifications={[
-                { label: `Habitación ${type}`, singlePrice: `$${typeData.price}` },
+                { label: `Habitación ${type}`, singlePrice: `$${price}` },
                 { label: `${days} día${days > 1 ? "s" : ""}` },
                 { label: `Entrada:`, singlePrice: startDate },
                 { label: `Salida:`, singlePrice: endDate },
                 // { label: "Descuento", singlePrice: "50.00", discount: true },
-                { label: "Impuestos", singlePrice: `$${0.0425 * typeData.price}` },
+                {
+                  label: "Impuestos",
+                  singlePrice: `${days} x $${impuestos * price}`,
+                },
               ]}
               action={{
                 type: "internal",
@@ -223,7 +233,7 @@ function Reserve() {
                   </Grid>
                 </Grid>
                 <MKBox display="flex" alignItems="center" ml={-1}>
-                  <Checkbox />
+                  <Checkbox onChange={handleCheck} />
                   <MKTypography
                     variant="button"
                     fontWeight="regular"
@@ -244,19 +254,14 @@ function Reserve() {
                   </MKTypography>
                 </MKBox>
               </MKBox>
-              <MKBox mt={3}>
-                <MKButton
-                  component="a"
-                  href="http://www.google.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  variant="gradient"
-                  color="error"
-                  fullWidth
-                >
-                  Pagar
-                </MKButton>
-              </MKBox>
+              {terms && (
+                <MKBox mt={3}>
+                  <PayButton
+                    price={price * days * impuestos + price * days}
+                    onApprove={onApprove}
+                  />
+                </MKBox>
+              )}
             </MKBox>
           </Grid>
         </Grid>
@@ -266,3 +271,30 @@ function Reserve() {
 }
 
 export default Reserve;
+
+// pay button arrow function component
+function PayButton({ price, onApprove }) {
+  const stringPrice = parseFloat(price.toString()).toFixed(2);
+  return (
+    <PayPalScriptProvider
+      options={{
+        "client-id":
+          "AV6fcal5XwIGN4OXUc9cZ3GmOTLfp4JYhpGH39hP92nxNjQlMvsXmHib_jpGlOK7pkGInHd0oEutDvD0",
+      }}
+    >
+      <PayPalButtons
+        createOrder={(data, actions) =>
+          actions.order.create({
+            purchase_units: [{ amount: { value: stringPrice } }],
+          })
+        }
+        onApprove={onApprove}
+      />
+    </PayPalScriptProvider>
+  );
+}
+
+PayButton.propTypes = {
+  price: PropTypes.number.isRequired,
+  onApprove: PropTypes.func.isRequired,
+};

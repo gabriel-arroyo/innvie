@@ -7,16 +7,16 @@ import Checkbox from "@mui/material/Checkbox";
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
+import MKInput from "components/MKInput";
+import MKTypography from "components/MKTypography";
 
 import { Grid } from "@mui/material";
 import useUser from "api/useUser";
-import { v4 as uuidv4 } from "uuid";
 import { useAtom } from "jotai";
-import loggedUser from "states/loggedUser";
 import TermsModal from "pages/Innvie/TermsAndConditions/modal";
+import loggedUser from "states/loggedUser";
+import { v4 as uuidv4 } from "uuid";
 
 function Register() {
   const [error, setError] = useState(null);
