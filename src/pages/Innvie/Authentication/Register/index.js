@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // @mui material components
@@ -13,9 +13,7 @@ import MKTypography from "components/MKTypography";
 
 import { Grid } from "@mui/material";
 import useUser from "api/useUser";
-import { useAtom } from "jotai";
 import TermsModal from "pages/Innvie/TermsAndConditions/modal";
-import loggedUser from "states/loggedUser";
 import { v4 as uuidv4 } from "uuid";
 
 function Register() {
@@ -25,16 +23,6 @@ function Register() {
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  const [, setLogged] = useState(false);
-  const { getCurrentUser } = useUser();
-  const [, setUser] = useAtom(loggedUser);
-
-  useEffect(() => {
-    if (getCurrentUser()) {
-      setLogged(true);
-      setUser(getCurrentUser());
-    }
-  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

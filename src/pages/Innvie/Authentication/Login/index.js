@@ -19,6 +19,7 @@ import { useAtom } from "jotai";
 import loggedUser from "states/loggedUser";
 // @mui material components
 import Card from "@mui/material/Card";
+import PropTypes from "prop-types";
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
@@ -27,7 +28,7 @@ import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import useUser from "api/useUser";
 
-function Login() {
+function Login({ modal }) {
   const [logged, setLogged] = useState(false);
   const { login, logout, getCurrentUser } = useUser();
   const [message, setMessage] = useState("");
@@ -162,31 +163,41 @@ function Login() {
                 ingresar
               </MKButton>
             )}
-            {logged && (
+            {logged && !modal && (
               <MKButton component={Link} to="/" variant="gradient" color="error" fullWidth>
                 regresar
               </MKButton>
             )}
           </MKBox>
-          <MKBox mt={3} mb={1} textAlign="center">
-            <MKTypography variant="button" color="text">
-              ¿No tienes una cuenta?{" "}
-              <MKTypography
-                component={Link}
-                to="/authentication/register"
-                variant="button"
-                color="info"
-                fontWeight="medium"
-                textGradient
-              >
-                Regístrate
+          {!modal && (
+            <MKBox mt={3} mb={1} textAlign="center">
+              <MKTypography variant="button" color="text">
+                ¿No tienes una cuenta?{" "}
+                <MKTypography
+                  component={Link}
+                  to="/authentication/register"
+                  variant="button"
+                  color="info"
+                  fontWeight="medium"
+                  textGradient
+                >
+                  Regístrate
+                </MKTypography>
               </MKTypography>
-            </MKTypography>
-          </MKBox>
+            </MKBox>
+          )}
         </MKBox>
       </MKBox>
     </Card>
   );
 }
+
+Login.defaultProps = {
+  modal: false,
+};
+
+Login.propTypes = {
+  modal: PropTypes.bool,
+};
 
 export default Login;

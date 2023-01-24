@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 
 // react-router components
 import { useNavigate } from "react-router-dom";
@@ -35,9 +35,9 @@ import selectedPrice from "states/selectedPrice";
 import selectedType from "states/selectedType";
 
 function BookingCard({ image, type, description, accessories, action }) {
-  const { available, getAvailableRoom } = useCalendar();
   const [startDate] = useAtom(reservedStartDate);
   const [endDate] = useAtom(reservedEndDate);
+  const { available } = useCalendar({ type, startDate, endDate });
   const [, setType] = useAtom(selectedType);
   const [, setPrice] = useAtom(selectedPrice);
   const navigate = useNavigate();
@@ -47,10 +47,6 @@ function BookingCard({ image, type, description, accessories, action }) {
     setPrice(action.price);
     navigate("/reserve/");
   };
-
-  useEffect(() => {
-    getAvailableRoom(type, startDate, endDate).then();
-  }, []);
 
   return (
     <Card sx={{ height: "100%" }}>

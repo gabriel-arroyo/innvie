@@ -24,41 +24,38 @@ import Grid from "@mui/material/Grid";
 import MKBox from "components/MKBox";
 import MKInput from "components/MKInput";
 import MKTypography from "components/MKTypography";
+import MKButton from "components/MKButton";
 
 // Otis Kit PRO examples
 import { Checkbox } from "@mui/material";
+import useUser from "api/useUser";
 import useCalendar from "api/useCalendar";
 import CustomPricingCard from "examples/Cards/PricingCards/CustomPricingCard";
 import { useAtom } from "jotai";
 import { useNavigate } from "react-router-dom";
-import loggedUser from "states/loggedUser";
 import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
 import selectedType from "states/selectedType";
 import BlancLayout from "../Layouts/BlancLayout";
+import LoginModal from "../Authentication/Login/LoginModal";
 
 function Reserve() {
-  const [user] = useAtom(loggedUser);
   const [startDate] = useAtom(reservedStartDate);
   const [endDate] = useAtom(reservedEndDate);
   const [days] = useAtom(reservedDays);
   const [type] = useAtom(selectedType);
   const [price] = useAtom(selectedPrice);
   const navigate = useNavigate();
-  const { getAvailableRoom } = useCalendar();
-  const [room, setRoom] = useState({});
+  const { room } = useCalendar({ type, startDate, endDate });
   const [terms, setTerms] = useState(false);
   const impuestos = 0.0425;
+  const { currentUser: user, logged, getAndUpdateUser } = useUser();
+  const nameRef = useRef(null);
 
   const handleCheck = () => {
     setTerms(!terms);
   };
 
-  useEffect(() => {
-    getAvailableRoom(type, startDate, endDate).then((r) => {
-      setRoom(r);
-    });
-  }, []);
   const [party, setParty] = useState(0);
   const [adults, setAdults] = useState(0);
   const [kids, setKids] = useState(0);
@@ -105,11 +102,30 @@ function Reserve() {
       console.log(`Transaction completed by ${details.payer.name.given_name}`);
       console.log(details.status);
       console.log("selected room", room);
-      navigate("/confirmation");
+      console.log("ref", nameRef.current.value);
+      // getAndUpdateUser();
+      // navigate("/confirmation");
     });
+
+  const onChangeName = () => {
+    // change ref here
+  };
+
+  const printReference = () => {
+    console.log("references");
+    console.log(nameRef.current.value);
+  };
+
+  const temp = () => {
+    getAndUpdateUser();
+    navigate("/confirmation");
+  };
 
   return (
     <BlancLayout title="Reservación">
+      <button type="button" disabled onClick={temp}>
+        test
+      </button>
       <MKBox position="relative" zIndex={10} px={{ xs: 1, sm: 0 }}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>
@@ -137,14 +153,17 @@ function Reserve() {
           </Grid>
           <Grid item xs={12} lg={4}>
             <MKBox p={3} bgColor="white" shadow="sm" borderRadius={10}>
+              {!logged && <LoginModal />}
               <MKBox component="form" role="form">
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <MKBox mb={2}>
                       <MKInput
+                        ref={nameRef}
                         type="text"
                         label="Nombre"
                         value={user?.first_name ?? ""}
+                        onChange={onChangeName}
                         fullWidth
                       />
                     </MKBox>
@@ -254,6 +273,7 @@ function Reserve() {
                   </MKTypography>
                 </MKBox>
               </MKBox>
+              <MKButton onClick={printReference}>rerefence</MKButton>
               {terms && (
                 <MKBox mt={3}>
                   <PayButton
