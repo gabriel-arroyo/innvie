@@ -32,7 +32,7 @@ function Map() {
           />
         </Box>
         <MKTypography variant="body1" color="white" mb={4} align="center" mt={2}>
-          Adress 1234, City, State, Zip
+          18732 Dix Toledo HWY, Brownstown MI 48193
         </MKTypography>
       </Container>
     </MKBox>

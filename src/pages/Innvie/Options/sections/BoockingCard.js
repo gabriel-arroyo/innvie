@@ -34,7 +34,7 @@ import { reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
 import selectedType from "states/selectedType";
 
-function BookingCard({ image, type, description, accesories, action }) {
+function BookingCard({ image, type, description, accessories, action }) {
   const { available, getAvailableRoom } = useCalendar();
   const [startDate] = useAtom(reservedStartDate);
   const [endDate] = useAtom(reservedEndDate);
@@ -83,7 +83,7 @@ function BookingCard({ image, type, description, accesories, action }) {
         />
       </MKBox>
       <MKBox p={3} mt={-2} height="100%">
-        {accesories.length > 0 && (
+        {accessories.length > 0 && (
           <MKTypography
             display="block"
             variant="button"
@@ -91,7 +91,7 @@ function BookingCard({ image, type, description, accesories, action }) {
             fontWeight="regular"
             mb={0.75}
           >
-            {accesories.map((category) => (
+            {accessories.map((category) => (
               <Fragment key={category}>{category}&nbsp;&bull;&nbsp;</Fragment>
             ))}
           </MKTypography>
@@ -127,7 +127,7 @@ function BookingCard({ image, type, description, accesories, action }) {
 
 // Setting default props for the SimpleBookingCard
 BookingCard.defaultProps = {
-  accesories: [],
+  accessories: [],
   description: "",
 };
 
@@ -136,7 +136,7 @@ BookingCard.propTypes = {
   image: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   description: PropTypes.string,
-  accesories: PropTypes.instanceOf(Array),
+  accessories: PropTypes.instanceOf(Array),
   action: PropTypes.shape({
     type: PropTypes.oneOf(["external", "internal"]).isRequired,
     route: PropTypes.string.isRequired,

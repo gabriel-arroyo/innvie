@@ -92,31 +92,11 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
 
+  const useUserName = (name = "") => (name === "Ingresar" ? user?.first_name ?? "No user" : name);
   const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
       key={name}
-      name={name ?? ""}
-      icon={icon}
-      href={href}
-      route={route}
-      collapse={Boolean(collapse)}
-      onMouseEnter={({ currentTarget }) => {
-        if (collapse) {
-          setDropdown(currentTarget);
-          setDropdownEl(currentTarget);
-          setDropdownName(name);
-        }
-      }}
-      onMouseLeave={() => collapse && setDropdown(null)}
-      light={light}
-    />
-  ));
-
-  const useUserName = (name = "") => (name === "Ingresar" ? user?.first_name ?? "No user" : name);
-  const renderLoggedNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
-    <DefaultNavbarDropdown
-      key={name}
-      name={useUserName(name)}
+      name={useUserName(name) === "No user" ? "" : useUserName(name)}
       icon={icon}
       href={href}
       route={route}
@@ -709,7 +689,7 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
             ml="auto"
             mr={center ? "auto" : 0}
           >
-            {user ? renderLoggedNavbarItems : renderNavbarItems}
+            {renderNavbarItems}
           </MKBox>
           {user?.admin && (
             <DefaultNavbarDropdown
