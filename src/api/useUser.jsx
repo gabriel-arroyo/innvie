@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import {
   collection,
   deleteDoc,
@@ -118,24 +119,32 @@ function useUser() {
   }
 
   async function getAndUpdateUser(updatedUser) {
+    console.log("updating user", updatedUser);
     let foundUser = {};
     if (!updatedUser) return;
     if (updatedUser.id) {
-      foundUser = getUserById(updatedUser.id);
+      foundUser = await getUserById(updatedUser.id);
+      console.log("found user with id:", foundUser);
     } else if (updatedUser.email) {
-      foundUser = getUserByEmail(updatedUser.email);
+      foundUser = await getUserByEmail(updatedUser.email);
+      console.log("found user with email", foundUser);
     }
     if (!foundUser) {
-      foundUser = updatedUser;
+      console.log("No found user");
+      foundUser = { ...updatedUser, id: uuidv4() };
     }
     const updatedUserWithTimestamp = {
       ...foundUser,
       ...updatedUser,
       lastUpdate: serverTimestamp(),
     };
+    console.log(
+      "🚀 ~ file: useUser.jsx:137 ~ getAndUpdateUser ~ updatedUserWithTimestamp",
+      updatedUserWithTimestamp
+    );
     try {
       const docRef = doc(collectionRef, foundUser.id);
-      updateDoc(docRef, updatedUserWithTimestamp);
+      await updateDoc(docRef, updatedUserWithTimestamp);
     } catch (error) {
       // eslint-disable-next-line
       console.log(error);

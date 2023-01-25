@@ -41,7 +41,7 @@ function Register() {
       email: event.target.email.value,
       password: event.target.password.value,
       id: uuidv4(),
-      licence: event.target.licence.value,
+      license: event.target.license.value,
     };
     Promise.resolve(addUser(newUser)).then((res) => {
       if (res) {
@@ -101,7 +101,7 @@ function Register() {
                 <MKInput type="email" name="email" label="Email" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" name="licence" label="Licence Number" fullWidth />
+                <MKInput type="text" name="license" label="License Number" fullWidth />
               </MKBox>
               {insertError && (
                 <p

@@ -24,7 +24,6 @@ import Grid from "@mui/material/Grid";
 import MKBox from "components/MKBox";
 import MKInput from "components/MKInput";
 import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
 
 // Otis Kit PRO examples
 import { Checkbox } from "@mui/material";
@@ -50,7 +49,17 @@ function Reserve() {
   const [terms, setTerms] = useState(false);
   const impuestos = 0.0425;
   const { currentUser: user, logged, getAndUpdateUser } = useUser();
-  const nameRef = useRef(null);
+  const [formName, setFormName] = useState("");
+  const [formLastName, setFormLastName] = useState("");
+  const [formPhone, setFormPhone] = useState("");
+  const [formAddress, setFormAddress] = useState("");
+  const [formCity, setFormCity] = useState("");
+  const [formCountry, setFormCountry] = useState("");
+  const [formZipCode, setFormZipCode] = useState("");
+  const [formEmail, setFormEmail] = useState("");
+  const [formLicense, setFormLicense] = useState("");
+  const [formPassword, setFormPassword] = useState("");
+  const [formConfirPassword, setFormConfirPassword] = useState("");
 
   const handleCheck = () => {
     setTerms(!terms);
@@ -97,29 +106,85 @@ function Reserve() {
     setAdults(newAdults);
   };
 
-  const onApprove = (data, actions) =>
-    actions.order.capture().then((details) => {
-      console.log(`Transaction completed by ${details.payer.name.given_name}`);
-      console.log(details.status);
-      console.log("selected room", room);
-      console.log("ref", nameRef.current.value);
-      // getAndUpdateUser();
-      // navigate("/confirmation");
-    });
-
-  const onChangeName = () => {
-    // change ref here
+  const onApprove = async (data, actions) => {
+    const details = await actions.order.capture();
+    console.log(`Transaction ${details.status} by ${details.payer.name.given_name}`);
+    console.log("selected room", room?.number ?? "ND");
+    const newUser = {
+      first_name: formName ?? "",
+      last_name: formLastName ?? "",
+      phone: formPhone ?? "",
+      address: formAddress ?? "",
+      city: formCity ?? "",
+      country: formCountry ?? "",
+      zipcode: formZipCode ?? "",
+      email: formEmail ?? "",
+      license: formLicense ?? "",
+    };
+    await getAndUpdateUser(newUser);
   };
 
-  const printReference = () => {
-    console.log("references");
-    console.log(nameRef.current.value);
+  const onNameChange = (e) => {
+    setFormName(e.target.value);
+  };
+
+  const onLastNameChange = (e) => {
+    setFormLastName(e.target.value);
+  };
+
+  const onPhoneChange = (e) => {
+    setFormPhone(e.target.value);
+  };
+
+  const onAddressChange = (e) => {
+    setFormAddress(e.target.value);
+  };
+
+  const onCityChange = (e) => {
+    setFormCity(e.target.value);
+  };
+
+  const onCountryChange = (e) => {
+    setFormCountry(e.target.value);
+  };
+
+  const onZipCodeChange = (e) => {
+    setFormZipCode(e.target.value);
+  };
+
+  const onEmailChange = (e) => {
+    setFormEmail(e.target.value);
+  };
+
+  const onLiceseChange = (e) => {
+    setFormLicense(e.target.value);
+  };
+
+  const onPasswordChange = (e) => {
+    setFormPassword(e.target.value);
+  };
+
+  const onConfirmPasswordChange = (e) => {
+    setFormConfirPassword(e.target.value);
   };
 
   const temp = () => {
     getAndUpdateUser();
     navigate("/confirmation");
   };
+
+  useEffect(() => {
+    if (!user) return;
+    setFormName(user.first_name);
+    setFormLastName(user.last_name);
+    setFormPhone(user.phone);
+    setFormAddress(user.address);
+    setFormCity(user.city);
+    setFormCountry(user.country);
+    setFormZipCode(user.zipcode);
+    setFormEmail(user.email);
+    setFormLicense(user.license);
+  }, [user]);
 
   return (
     <BlancLayout title="Reservación">
@@ -159,11 +224,10 @@ function Reserve() {
                   <Grid item xs={6}>
                     <MKBox mb={2}>
                       <MKInput
-                        ref={nameRef}
+                        onChange={onNameChange}
+                        value={formName}
                         type="text"
                         label="Nombre"
-                        value={user?.first_name ?? ""}
-                        onChange={onChangeName}
                         fullWidth
                       />
                     </MKBox>
@@ -171,46 +235,74 @@ function Reserve() {
                       <MKInput
                         type="text"
                         label="Apellido"
-                        value={user?.last_name ?? ""}
+                        value={formLastName}
+                        onChange={onLastNameChange}
                         fullWidth
                       />
                     </MKBox>
                     <MKBox mb={2}>
-                      <MKInput type="text" label="Teléfono" value={user?.phone ?? ""} fullWidth />
+                      <MKInput
+                        type="text"
+                        label="Teléfono"
+                        value={formPhone}
+                        onChange={onPhoneChange}
+                        fullWidth
+                      />
                     </MKBox>
                     <MKBox mb={2}>
                       <MKInput
                         type="text"
                         label="Dirección"
-                        value={user?.address ?? ""}
+                        value={formAddress}
+                        onChange={onAddressChange}
                         fullWidth
                       />
                     </MKBox>
                     <MKBox mb={2}>
-                      <MKInput type="text" label="Ciudad" value={user?.city ?? ""} fullWidth />
+                      <MKInput
+                        type="text"
+                        label="Ciudad"
+                        value={formCity}
+                        onChange={onCityChange}
+                        fullWidth
+                      />
                     </MKBox>
                     <MKBox mb={2}>
-                      <MKInput type="text" label="País" value={user?.country ?? ""} fullWidth />
+                      <MKInput
+                        type="text"
+                        label="País"
+                        value={formCountry}
+                        onChange={onCountryChange}
+                        fullWidth
+                      />
                     </MKBox>
                     <MKBox mb={2}>
                       <MKInput
                         type="text"
                         label="Código Postal"
-                        value={user?.zipcode ?? ""}
+                        value={formZipCode}
+                        onChange={onZipCodeChange}
                         fullWidth
                       />
                     </MKBox>
                   </Grid>
                   <Grid item xs={6}>
                     <MKBox mb={2}>
-                      <MKInput type="email" label="Email" value={user?.email ?? ""} fullWidth />
+                      <MKInput
+                        type="email"
+                        label="Email"
+                        value={formEmail}
+                        onChange={onEmailChange}
+                        fullWidth
+                      />
                     </MKBox>
                     <MKBox mb={2}>
                       <MKInput
                         type="text"
-                        name="licence"
-                        label="Licence Number"
-                        value={user?.licence ?? ""}
+                        name="license"
+                        label="License Number"
+                        value={formLicense}
+                        onChange={onLiceseChange}
                         fullWidth
                       />
                     </MKBox>
@@ -244,10 +336,22 @@ function Reserve() {
                       </MKBox>
                     </Grid>
                     <MKBox mb={2}>
-                      <MKInput type="password" label="Contraseña" fullWidth />
+                      <MKInput
+                        type="password"
+                        label="Contraseña"
+                        value={formPassword}
+                        onChange={onPasswordChange}
+                        fullWidth
+                      />
                     </MKBox>
                     <MKBox mb={2}>
-                      <MKInput type="password" label="Repite Contraseña" fullWidth />
+                      <MKInput
+                        type="password"
+                        label="Repite Contraseña"
+                        value={formConfirPassword}
+                        onChange={onConfirmPasswordChange}
+                        fullWidth
+                      />
                     </MKBox>
                   </Grid>
                 </Grid>
@@ -273,7 +377,6 @@ function Reserve() {
                   </MKTypography>
                 </MKBox>
               </MKBox>
-              <MKButton onClick={printReference}>rerefence</MKButton>
               {terms && (
                 <MKBox mt={3}>
                   <PayButton
