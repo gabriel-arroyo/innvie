@@ -48,7 +48,7 @@ function Reserve() {
   const { room } = useCalendar({ type, startDate, endDate });
   const [terms, setTerms] = useState(false);
   const impuestos = 0.0425;
-  const { currentUser: user, logged, getAndUpdateUser } = useUser();
+  const { currentUser: user, logged, getAndUpdateUser, checkEmail, mailExists } = useUser();
   const [formName, setFormName] = useState("");
   const [formLastName, setFormLastName] = useState("");
   const [formPhone, setFormPhone] = useState("");
@@ -60,6 +60,7 @@ function Reserve() {
   const [formLicense, setFormLicense] = useState("");
   const [formPassword, setFormPassword] = useState("");
   const [formConfirPassword, setFormConfirPassword] = useState("");
+  const [coincidentPassword, setCoincidentPassword] = useState(true);
 
   const handleCheck = () => {
     setTerms(!terms);
@@ -122,6 +123,9 @@ function Reserve() {
       license: formLicense ?? "",
     };
     await getAndUpdateUser(newUser);
+    setTimeout(() => {
+      navigate("/confirmation");
+    }, 1000);
   };
 
   const onNameChange = (e) => {
@@ -152,8 +156,14 @@ function Reserve() {
     setFormZipCode(e.target.value);
   };
 
-  const onEmailChange = (e) => {
+  let countdown;
+  const onEmailChange = async (e) => {
     setFormEmail(e.target.value);
+    clearTimeout(countdown);
+    countdown = setTimeout(() => {
+      console.log("email changed");
+      checkEmail(e.target.value);
+    }, 3000);
   };
 
   const onLiceseChange = (e) => {
@@ -162,15 +172,12 @@ function Reserve() {
 
   const onPasswordChange = (e) => {
     setFormPassword(e.target.value);
+    setCoincidentPassword(formConfirPassword === e.target.value);
   };
 
   const onConfirmPasswordChange = (e) => {
     setFormConfirPassword(e.target.value);
-  };
-
-  const temp = () => {
-    getAndUpdateUser();
-    navigate("/confirmation");
+    setCoincidentPassword(formPassword === e.target.value);
   };
 
   useEffect(() => {
@@ -188,9 +195,6 @@ function Reserve() {
 
   return (
     <BlancLayout title="Reservación">
-      <button type="button" disabled onClick={temp}>
-        test
-      </button>
       <MKBox position="relative" zIndex={10} px={{ xs: 1, sm: 0 }}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>
@@ -220,121 +224,133 @@ function Reserve() {
             <MKBox p={3} bgColor="white" shadow="sm" borderRadius={10}>
               {!logged && <LoginModal />}
               <MKBox component="form" role="form">
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
+                <Grid item xs={12}>
+                  <MKBox mb={2}>
+                    <MKInput
+                      onChange={onNameChange}
+                      value={formName}
+                      type="text"
+                      label="Nombre"
+                      fullWidth
+                    />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="text"
+                      label="Apellido"
+                      value={formLastName}
+                      onChange={onLastNameChange}
+                      fullWidth
+                    />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="text"
+                      label="Teléfono"
+                      value={formPhone}
+                      onChange={onPhoneChange}
+                      fullWidth
+                    />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="text"
+                      label="Dirección"
+                      value={formAddress}
+                      onChange={onAddressChange}
+                      fullWidth
+                    />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="text"
+                      label="Ciudad"
+                      value={formCity}
+                      onChange={onCityChange}
+                      fullWidth
+                    />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="text"
+                      label="País"
+                      value={formCountry}
+                      onChange={onCountryChange}
+                      fullWidth
+                    />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="text"
+                      label="Código Postal"
+                      value={formZipCode}
+                      onChange={onZipCodeChange}
+                      fullWidth
+                    />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="email"
+                      label="Email"
+                      value={formEmail}
+                      onChange={onEmailChange}
+                      fullWidth
+                    />
+                  </MKBox>
+                  {mailExists && (
+                    <MKTypography
+                      fontWeight="regular"
+                      fontSize={12}
+                      color="error"
+                      textAlign="center"
+                    >
+                      Este correo ya está registrado. Ingrese con su cuenta
+                    </MKTypography>
+                  )}
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="text"
+                      name="license"
+                      label="License Number"
+                      value={formLicense}
+                      onChange={onLiceseChange}
+                      fullWidth
+                    />
+                  </MKBox>
+                </Grid>
+                <Grid item xs={12} py={4}>
+                  <Grid item>
                     <MKBox mb={2}>
                       <MKInput
-                        onChange={onNameChange}
-                        value={formName}
-                        type="text"
-                        label="Nombre"
-                        fullWidth
+                        type="number"
+                        name="party"
+                        label="Número de ocupantes"
+                        value={party}
+                        onChange={handlePartyChange}
                       />
                     </MKBox>
                     <MKBox mb={2}>
                       <MKInput
-                        type="text"
-                        label="Apellido"
-                        value={formLastName}
-                        onChange={onLastNameChange}
-                        fullWidth
+                        type="number"
+                        name="adults"
+                        label="Adultos"
+                        value={adults}
+                        onChange={handleAdultsChange}
                       />
                     </MKBox>
                     <MKBox mb={2}>
                       <MKInput
-                        type="text"
-                        label="Teléfono"
-                        value={formPhone}
-                        onChange={onPhoneChange}
-                        fullWidth
-                      />
-                    </MKBox>
-                    <MKBox mb={2}>
-                      <MKInput
-                        type="text"
-                        label="Dirección"
-                        value={formAddress}
-                        onChange={onAddressChange}
-                        fullWidth
-                      />
-                    </MKBox>
-                    <MKBox mb={2}>
-                      <MKInput
-                        type="text"
-                        label="Ciudad"
-                        value={formCity}
-                        onChange={onCityChange}
-                        fullWidth
-                      />
-                    </MKBox>
-                    <MKBox mb={2}>
-                      <MKInput
-                        type="text"
-                        label="País"
-                        value={formCountry}
-                        onChange={onCountryChange}
-                        fullWidth
-                      />
-                    </MKBox>
-                    <MKBox mb={2}>
-                      <MKInput
-                        type="text"
-                        label="Código Postal"
-                        value={formZipCode}
-                        onChange={onZipCodeChange}
-                        fullWidth
+                        type="number"
+                        name="children"
+                        label="Niños"
+                        value={kids}
+                        onChange={handleKidsChange}
                       />
                     </MKBox>
                   </Grid>
-                  <Grid item xs={6}>
-                    <MKBox mb={2}>
-                      <MKInput
-                        type="email"
-                        label="Email"
-                        value={formEmail}
-                        onChange={onEmailChange}
-                        fullWidth
-                      />
-                    </MKBox>
-                    <MKBox mb={2}>
-                      <MKInput
-                        type="text"
-                        name="license"
-                        label="License Number"
-                        value={formLicense}
-                        onChange={onLiceseChange}
-                        fullWidth
-                      />
-                    </MKBox>
-                    <Grid item>
-                      <MKBox mb={2}>
-                        <MKInput
-                          type="number"
-                          name="party"
-                          label="Número de ocupantes"
-                          value={party}
-                          onChange={handlePartyChange}
-                        />
-                      </MKBox>
-                      <MKBox mb={2}>
-                        <MKInput
-                          type="number"
-                          name="adults"
-                          label="Adultos"
-                          value={adults}
-                          onChange={handleAdultsChange}
-                        />
-                      </MKBox>
-                      <MKBox mb={2}>
-                        <MKInput
-                          type="number"
-                          name="children"
-                          label="Niños"
-                          value={kids}
-                          onChange={handleKidsChange}
-                        />
-                      </MKBox>
-                    </Grid>
+                </Grid>
+                {!logged && (
+                  <Grid item xs={12}>
                     <MKBox mb={2}>
                       <MKInput
                         type="password"
@@ -353,8 +369,18 @@ function Reserve() {
                         fullWidth
                       />
                     </MKBox>
+                    {!coincidentPassword && (
+                      <MKTypography
+                        fontWeight="regular"
+                        fontSize={12}
+                        color="error"
+                        textAlign="center"
+                      >
+                        Las contraseñas no coinciden
+                      </MKTypography>
+                    )}
                   </Grid>
-                </Grid>
+                )}
                 <MKBox display="flex" alignItems="center" ml={-1}>
                   <Checkbox onChange={handleCheck} />
                   <MKTypography
@@ -377,7 +403,11 @@ function Reserve() {
                   </MKTypography>
                 </MKBox>
               </MKBox>
-              {terms && (
+              {!terms || mailExists || !coincidentPassword || !formEmail || party < 1 ? (
+                <MKTypography fontWeight="regular" color="error" sx={{ textAlign: "center" }}>
+                  Por favor llene todos los campos correctamente
+                </MKTypography>
+              ) : (
                 <MKBox mt={3}>
                   <PayButton
                     price={price * days * impuestos + price * days}

@@ -23,6 +23,7 @@ function useUser() {
   const collectionRef = collection(db, "users");
   const [currentUser, setCurrentUser] = useAtom(loggedUser);
   const [logged, setLogged] = useState(false);
+  const [mailExists, setMailExists] = useState(false);
 
   async function getAllUsers() {
     const q = query(collectionRef);
@@ -104,6 +105,20 @@ function useUser() {
       console.log(error);
       return false;
     }
+    return true;
+  }
+
+  async function checkEmail(userEmail) {
+    const q = query(collectionRef, where("email", "==", userEmail));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      // eslint-disable-next-line
+      console.log("wrong email");
+      setMailExists(false);
+      return false;
+    }
+    console.log(`email ${userEmail} exists`);
+    setMailExists(true);
     return true;
   }
 
@@ -200,20 +215,22 @@ function useUser() {
     }
   }
 
-  async function login(myemail, password) {
-    const q = query(
-      collectionRef,
-      where("email", "==", myemail),
-      where("password", "==", password)
-    );
+  async function checkPassword(email, password) {
+    const q = query(collectionRef, where("email", "==", email), where("password", "==", password));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       // eslint-disable-next-line
       console.log("wrong email or password");
-      return false;
+      return null;
     }
-    localStorage.setItem("user", JSON.stringify(querySnapshot.docs[0].data()));
-    setCurrentUser(querySnapshot.docs[0].data());
+    return querySnapshot.docs[0].data();
+  }
+
+  async function login(myemail, password) {
+    const result = await checkPassword(myemail, password);
+    if (!result) return false;
+    localStorage.setItem("user", JSON.stringify(result));
+    setCurrentUser(result);
     return true;
   }
 
@@ -255,6 +272,7 @@ function useUser() {
     data,
     logged,
     currentUser,
+    mailExists,
     addUser,
     addOrUpdateUser,
     deleteUser,
@@ -264,6 +282,7 @@ function useUser() {
     insertError,
     login,
     logout,
+    checkEmail,
     getCurrentUser,
     getAllUsers,
     getUserByEmail,
