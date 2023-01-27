@@ -103,7 +103,7 @@ function BookingCard({ image, type, description, accessories, action }) {
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <MKTypography fontWeight="bold" sx={{ color: "#0D283C" }}>
-            ${action.price.toFixed(2)}
+            ${parseFloat(action.price).toFixed(2)}
           </MKTypography>
 
           <MKButton

@@ -57,6 +57,7 @@ function NewRoomType({ room }) {
     setError,
     types,
     addType,
+    updateType,
     addPhoto,
     getPhotos,
     photos,
@@ -108,8 +109,11 @@ function NewRoomType({ room }) {
   const handleAddPhoto = async (e) => {
     e.preventDefault();
     const url = await addPhoto(e.target.files[0]);
+    console.log("🚀 ~ file: index.js:112 ~ handleAddPhoto ~ url", url);
     if (url) {
       setPhotos([...photos, url]);
+      const updatedRoom = { ...cacheRoom, photos: [...photos, url] };
+      setCacheRoom(updatedRoom);
     }
   };
 
@@ -151,8 +155,13 @@ function NewRoomType({ room }) {
 
     console.log(cacheRoom);
     addType(cacheRoom).then((success) => {
+      console.log("success?", success);
       if (success) {
         e.target.reset();
+      } else {
+        updateType(cacheRoom).then(() => {
+          console.log("actualización concluida");
+        });
       }
     });
     setDefault();

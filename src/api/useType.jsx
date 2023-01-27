@@ -83,11 +83,12 @@ function useType(room) {
   }
 
   async function addPhoto(file) {
+    const id = uuid();
     try {
-      const photoRef = ref(storage, `rooms/${uuid()}`);
-      const snapshot = await uploadBytes(photoRef, file);
+      const photoRef = ref(storage, `rooms/${id}`);
+      await uploadBytes(photoRef, file);
       const url = await getDownloadURL(photoRef);
-      console.log(snapshot);
+      console.log(url);
       return url;
     } catch (e) {
       console.log(e);
@@ -182,6 +183,23 @@ function useType(room) {
     }
   }
 
+  async function getByName(name) {
+    setLoading(true);
+    try {
+      const q = query(collectionRef, where("type", "==", name));
+      const querySnapshot = await getDocs(q);
+      const items = [];
+      querySnapshot.forEach((d) => {
+        items.push({ ...d.data(), id: d.id });
+      });
+      setTypes(items);
+      setLoading(false);
+      setError(false);
+    } catch (e) {
+      setError(e);
+    }
+  }
+
   useEffect(() => {
     const q = query(collectionRef);
     setLoading(true);
@@ -208,6 +226,7 @@ function useType(room) {
     setCacheRoom,
     setDefault,
     getType,
+    getByName,
     getAll,
     addType,
     addPhoto,
