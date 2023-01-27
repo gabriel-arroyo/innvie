@@ -175,7 +175,7 @@ function NewRoomType({ room }) {
   }
 
   return (
-    <Card sx={{ width: "700px", margin: "auto", marginTop: "30px" }}>
+    <Card sx={{ width: "auto", maxWidth: "700px", margin: "auto", marginTop: "30px" }}>
       <SectionTitle title="Crea o edita un tipo de habitación" />
       <NewEditSwitch editSwitch={editSwitch} handleChangeNew={handleChangeNew} />
       {/* eslint-disable-next-line react/jsx-no-bind */}
@@ -215,6 +215,23 @@ function NewRoomType({ room }) {
                 value={cacheRoom.category}
               />
             </MKBox>
+            {cacheRoom.category === "Departamento" && (
+              <MKBox mb={2}>
+                <MKInput
+                  type="number"
+                  name="rooms"
+                  label="Habitaciones"
+                  defaultValue={0}
+                  fullWidth
+                  value={cacheRoom?.rooms ?? 0}
+                  onChange={(e) => {
+                    let rooms = cacheRoom?.rooms ?? 0;
+                    rooms = e.target.value ?? rooms;
+                    setCacheRoom({ ...cacheRoom, rooms });
+                  }}
+                />
+              </MKBox>
+            )}
             <MKBox mb={2}>
               <MKInput
                 type="number"
@@ -242,6 +259,36 @@ function NewRoomType({ room }) {
                   const beds = cacheRoom.beds ?? {};
                   beds.full = e.target.value;
                   setCacheRoom({ ...cacheRoom, beds });
+                }}
+              />
+            </MKBox>
+            <MKBox mb={2}>
+              <MKInput
+                type="number"
+                name="single"
+                label="Camas Single"
+                defaultValue={0}
+                fullWidth
+                value={cacheRoom.beds?.single ?? 0}
+                onChange={(e) => {
+                  const beds = cacheRoom.beds ?? {};
+                  beds.single = e.target.value;
+                  setCacheRoom({ ...cacheRoom, beds });
+                }}
+              />
+            </MKBox>
+            <MKBox mb={2}>
+              <MKInput
+                type="number"
+                name="sofas"
+                label="Sofas"
+                defaultValue={0}
+                fullWidth
+                value={cacheRoom.sofas ?? 0}
+                onChange={(e) => {
+                  let sofas = cacheRoom.sofas ?? 0;
+                  sofas = e.target.value;
+                  setCacheRoom({ ...cacheRoom, sofas });
                 }}
               />
             </MKBox>
@@ -332,6 +379,46 @@ function NewRoomType({ room }) {
                 name="fullbath"
                 label="Full bath"
               />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={cacheRoom?.accessories?.includes("stovetop")}
+                    onChange={(e) => setAccesory(e, "stovetop")}
+                  />
+                }
+                name="stovetop"
+                label="Stovetop"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={cacheRoom?.accessories?.includes("diningtable")}
+                    onChange={(e) => setAccesory(e, "diningtable")}
+                  />
+                }
+                name="diningtable"
+                label="Dining Table"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={cacheRoom?.accessories?.includes("fridge")}
+                    onChange={(e) => setAccesory(e, "fridge")}
+                  />
+                }
+                name="fridge"
+                label="Fridge"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={cacheRoom?.accessories?.includes("sink")}
+                    onChange={(e) => setAccesory(e, "sink")}
+                  />
+                }
+                name="sink"
+                label="Sink"
+              />
             </MKBox>
           </Grid>
           <Grid item xs={12}>
@@ -372,16 +459,18 @@ function NewRoomType({ room }) {
           >
             Guardar
           </MKButton>
-          <MKButton
-            sx={{ mt: 2 }}
-            variant="gradient"
-            color="error"
-            fullWidth
-            disabled={!cacheRoom?.type}
-            onClick={handleDeleteType}
-          >
-            Eliminar
-          </MKButton>
+          {!editSwitch && (
+            <MKButton
+              sx={{ mt: 2 }}
+              variant="gradient"
+              color="error"
+              fullWidth
+              disabled={!cacheRoom?.type}
+              onClick={handleDeleteType}
+            >
+              Eliminar
+            </MKButton>
+          )}
         </MKBox>
       </MKBox>
       {!editSwitch && (

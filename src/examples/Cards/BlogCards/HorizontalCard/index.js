@@ -28,7 +28,7 @@ import MuiLink from "@mui/material/Link";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
-function HorizontalCard({ image, title, description, action }) {
+function HorizontalCard({ image, title, description, action, url }) {
   const cardActionStyles = {
     display: "flex",
     alignItems: "center",
@@ -45,7 +45,7 @@ function HorizontalCard({ image, title, description, action }) {
   };
 
   return (
-    <Card sx={{ flexGrow: 1, display: "flex", flexDirection: "row" }}>
+    <Card sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
       <MKBox position="relative" borderRadius="lg" ml={-2}>
         <MKBox
           component="img"
@@ -53,8 +53,8 @@ function HorizontalCard({ image, title, description, action }) {
           alt={title}
           borderRadius="lg"
           shadow="md"
-          width="12vw"
-          height="12vw"
+          width="25vw"
+          height="25vw"
           position="relative"
           zIndex={1}
         />
@@ -75,7 +75,7 @@ function HorizontalCard({ image, title, description, action }) {
             color="info"
             textGradient
           >
-            https://goo.gl/maps/Kttg1XnZgsSEyZH28
+            {url}
           </MKTypography>
         </MKBox>
         {action.type === "external" ? (
@@ -130,6 +130,7 @@ HorizontalCard.propTypes = {
     ]),
     label: PropTypes.string.isRequired,
   }).isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default HorizontalCard;

@@ -27,6 +27,7 @@ import { reservedDays, reservedEndDate, reservedStartDate } from "states/reserve
 import selectedPrice from "states/selectedPrice";
 import selectedType from "states/selectedType";
 import CustomLayout from "../../../layouts/sections/components/CustomLayout";
+import Map from "../Home/components/Map/map";
 import PlacesGrid from "../Home/sections/PlacesGrid";
 
 function Confirmation() {
@@ -46,7 +47,9 @@ function Confirmation() {
           <Grid item xs={12} lg={4}>
             <MKBox>
               <MKTypography variant="h6" fontWeight="bold" mb={2}>
-                {`${user.first_name} ${user.last_name}`}
+                {`${user?.first_name ? user.first_name : ""} ${
+                  user?.last_name ? user.last_name : ""
+                }`}
               </MKTypography>
               <MKTypography variant="h4">{`Habitación ${type}`}</MKTypography>
               <br />
@@ -73,27 +76,18 @@ function Confirmation() {
           </Grid>
           <Grid item xs={12} lg={4} display="flex" flexDirection="column" alignItems="center">
             <MKTypography variant="h6" fontWeight="bold" mb={2}>
-              {user.email}
+              {user?.email ? user.email : ""}
             </MKTypography>
             <MKTypography>Código de reservación</MKTypography>
             <MKTypography variant="h3">A5AD5F4ASNH</MKTypography>
           </Grid>
         </Grid>
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} lg={4}>
-            <MKBox
-              component="img"
-              src="https://thumbs.dreamstime.com/z/square-map-river-streets-parks-vector-54040512.jpg"
-              alt="test"
-              borderRadius="lg"
-              shadow="md"
-              width="85%"
-              position="relative"
-              zIndex={1}
-            />
-          </Grid>
+        <Grid container spacing={3} mt={5} justifyContent="center">
+          <Map />
           <Grid item xs={12} lg={4} display="flex" flexDirection="column" justifyContent="center">
-            <MKTypography sx={{ lineHeight: "2.5" }}>Calle #1234, Ciudad, Estado</MKTypography>
+            <MKTypography sx={{ lineHeight: "2.5" }}>
+              18732 Dix Toledo HWY Brownstown MI 48193
+            </MKTypography>
 
             <MKTypography
               component="a"
@@ -103,7 +97,7 @@ function Confirmation() {
               color="info"
               textGradient
             >
-              https://goo.gl/maps/Kttg1XnZgsSEyZH28
+              https://goo.gl/maps/FSwxYwTz11N4b7828
             </MKTypography>
           </Grid>
         </Grid>

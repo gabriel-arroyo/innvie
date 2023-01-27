@@ -60,7 +60,15 @@ function CustomLayout({ title, subtitle, children }) {
         />
       </MKBox>
       <Container sx={{ mt: 6 }}>
-        <Grid container item xs={12} flexDirection="column" justifyContent="center" mx="auto">
+        <Grid
+          container
+          item
+          xs={12}
+          flexDirection="column"
+          justifyContent="center"
+          mx="auto"
+          width="fit-content"
+        >
           <Box width="100%" display="flex" justifyContent="center" mb={3}>
             <img
               src="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-azul.png?alt=media&token=609c519b-5244-4f6e-b05a-4a6781442f84"
@@ -68,10 +76,10 @@ function CustomLayout({ title, subtitle, children }) {
               width="15%"
             />
           </Box>
-          <MKTypography variant="h3" mb={1} sx={{ textAlign: "center" }}>
+          <MKTypography variant="h3" mb={1} sx={{ textAlign: "center", width: "fit-content" }}>
             {title}
           </MKTypography>
-          <MKTypography variant="body1" mb={1} sx={{ textAlign: "center" }}>
+          <MKTypography variant="body1" mb={1} sx={{ textAlign: "center", width: "fit-content" }}>
             {subtitle}
           </MKTypography>
           {children}

@@ -675,10 +675,10 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
                 component="img"
                 src={logoUrl}
                 alt="logo"
-                width="280px"
+                width={{ xs: "150px", lg: "190px" }}
                 position="absolute"
                 zIndex={1}
-                sx={{ top: "80px" }}
+                sx={{ top: "100px" }}
                 className="logo"
               />
             )}

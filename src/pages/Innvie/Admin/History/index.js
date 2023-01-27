@@ -92,7 +92,7 @@ function History({ historyFilter }) {
         </MKBox>
       ) : null}
       <Container>
-        <Grid container item xs={12} lg={5} md={8} mx="auto">
+        <Grid container item xs={12} lg={10} md={8} mx="auto">
           <Table columns={columns} rows={rows} />
         </Grid>
       </Container>

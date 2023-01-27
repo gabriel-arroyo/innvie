@@ -63,18 +63,7 @@ export default function BasicTabs() {
         <Rooms setTab={setTab} setHistoryFilter={setHistoryFilter} />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <NewRoomType
-          room={{
-            name: "Single3",
-            type: "Departamento",
-            beds: { queen: 2, full: 1 },
-            price: 230,
-            accessories: ["microwave", "desk", "tv", "dish", "wifi", "minifridge"],
-            photos: [
-              "https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/rooms%2F5091cd34-5873-4163-8acc-ad4e258544c0?alt=media&token=0d1f011c-1ddb-4a1f-bcc0-a90466147be0",
-            ],
-          }}
-        />
+        <NewRoomType />
       </TabPanel>
       <TabPanel value={tab} index={2}>
         <History historyFilter={historyFilter} setHistoryFilter={setHistoryFilter} />
