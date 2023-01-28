@@ -60,7 +60,6 @@ function useUser() {
       foundUser = { ...user.data(), id: user.id };
     });
     setData([foundUser]);
-    setCurrentUser(foundUser);
     setLoading(false);
     return foundUser;
   }

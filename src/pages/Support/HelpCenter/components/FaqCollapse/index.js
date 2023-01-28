@@ -26,9 +26,17 @@ import MKTypography from "components/MKTypography";
 
 // Otis Kit PRO components
 import borders from "assets/theme/base/borders";
+import { useEffect, useState } from "react";
+import { getStatus } from "tools/getDate";
 
-function FaqCollapse({ title, open, children, ...rest }) {
+function FaqCollapse({ title, open, startDate, endDate, children, ...rest }) {
   const { borderWidth, borderColor } = borders;
+  const [status, setStatus] = useState("Pending");
+
+  useEffect(() => {
+    const calculatedStatus = getStatus(startDate, endDate);
+    setStatus(calculatedStatus);
+  }, []);
 
   return (
     <MKBox mb={2}>
@@ -56,12 +64,12 @@ function FaqCollapse({ title, open, children, ...rest }) {
           </Grid>
           <Grid item xs={12} lg={2}>
             <MKTypography variant="h5" color={open ? "dark" : "text"} sx={{ userSelect: "none" }}>
-              Pending
+              {status}
             </MKTypography>
           </Grid>
           <Grid item xs={12} lg={3}>
             <MKTypography variant="h5" color={open ? "dark" : "text"} sx={{ userSelect: "none" }}>
-              11/11/11 - 12/12/12
+              {startDate} - {endDate}
             </MKTypography>
           </Grid>
         </Grid>
@@ -85,6 +93,8 @@ function FaqCollapse({ title, open, children, ...rest }) {
 // Typechecking props for the FaqCollapse
 FaqCollapse.propTypes = {
   title: PropTypes.string.isRequired,
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
 };

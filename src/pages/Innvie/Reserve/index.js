@@ -45,7 +45,7 @@ function Reserve() {
   const [type] = useAtom(selectedType);
   const [price] = useAtom(selectedPrice);
   const navigate = useNavigate();
-  const { room } = useCalendar({ type, startDate, endDate });
+  const { room, addReservation } = useCalendar({ type, startDate, endDate });
   const [terms, setTerms] = useState(false);
   const impuestos = 0.0425;
   const { currentUser: user, logged, getAndUpdateUser, checkEmail, mailExists } = useUser();
@@ -123,8 +123,9 @@ function Reserve() {
       license: formLicense ?? "",
     };
     await getAndUpdateUser(newUser);
+    const code = await addReservation(formEmail, room, startDate, endDate);
     setTimeout(() => {
-      navigate("/confirmation");
+      navigate(`/confirmation/${code}`);
     }, 1000);
   };
 

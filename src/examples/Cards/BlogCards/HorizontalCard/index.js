@@ -53,8 +53,8 @@ function HorizontalCard({ image, title, description, action, url }) {
           alt={title}
           borderRadius="lg"
           shadow="md"
-          width="25vw"
-          height="25vw"
+          width={{ xs: "25vw", lg: "15vw" }}
+          heigth={{ xs: "25px", lg: "15vw" }}
           position="relative"
           zIndex={1}
         />

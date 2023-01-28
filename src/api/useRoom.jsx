@@ -183,6 +183,32 @@ function useRoom() {
     setLoading(false);
   }
 
+  async function updateRoomStatus(number, status) {
+    setError(false);
+    setLoading(true);
+    const roomToUpdate = await getRoomByNumber(number);
+    if (!roomToUpdate) {
+      setError("Room not found");
+      setLoading(false);
+      return;
+    }
+    const updatedRoomWithTimestamp = {
+      ...roomToUpdate,
+      status,
+      lastUpdate: serverTimestamp(),
+    };
+    try {
+      const docRef = doc(collectionRef, roomToUpdate.id);
+      updateDoc(docRef, updatedRoomWithTimestamp);
+    } catch (e) {
+      // eslint-disable-next-line
+      console.error("error:", e);
+      setError(e);
+    }
+    addAction("updateRoom", updatedRoomWithTimestamp);
+    setLoading(false);
+  }
+
   async function deleteRoomByNumber(roomNumber) {
     setError(false);
     try {
@@ -249,6 +275,7 @@ function useRoom() {
     getRoomsNotInArray,
     deleteRoomByType,
     updateRoom,
+    updateRoomStatus,
     getRoomByNumber,
     getRoomsByType,
     deleteAllRooms,

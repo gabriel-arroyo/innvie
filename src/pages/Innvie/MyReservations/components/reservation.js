@@ -1,41 +1,52 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from "react";
 import MKTypography from "components/MKTypography";
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import useUser from "api/useUser";
 import MKBox from "components/MKBox";
 import Map from "components/Map";
 import image from "../../../../assets/images/photos/IMG_2.JPG";
+import { getDaysDifference } from "../../../../tools/getDate";
 
-function Reservation() {
+function Reservation({ type, email, code, startDate, endDate }) {
+  const { data, getUserByEmail } = useUser();
+
+  useEffect(() => {
+    getUserByEmail(email);
+  }, []);
+
   return (
     <Container>
       <MKTypography variant="h3" align="center" fontWeight="bold" gutterBottom sx={{ mb: "20px" }}>
-        Habitación Sencilla
+        {type}
       </MKTypography>
       <Grid container spacing={2} display="flex" alignItems="center">
         <Grid item xs={4}>
           <Container>
-            <MKTypography variant="body1">John Smith</MKTypography>
+            <MKTypography variant="body1">
+              {data.first_name}, {data.last_name}
+            </MKTypography>
           </Container>
         </Grid>
         <Grid item xs={4}>
           <Container>
-            <MKTypography variant="body1">john.smith@mail.com</MKTypography>
+            <MKTypography variant="body1">{email}</MKTypography>
           </Container>
         </Grid>
         <Grid item xs={4}>
           <Container>
-            <MKTypography variant="body1"> 844 0123 456</MKTypography>
+            <MKTypography variant="body1">{data.phone}</MKTypography>
           </Container>
         </Grid>
         <Grid item xs={4}>
-          <Dates />
+          <Dates startDate={startDate} endDate={endDate} />
         </Grid>
         <Grid item xs={4}>
           <Times />
         </Grid>
         <Grid item xs={4}>
-          <Codigo />
+          <Codigo code={code} />
         </Grid>
         <Grid item xs={4}>
           <MKBox
@@ -62,11 +73,18 @@ function Reservation() {
 
 export default Reservation;
 
-function Dates() {
+function Dates({ startDate, endDate }) {
+  const [days, setDays] = useState();
+  useEffect(() => {
+    const calcDays = getDaysDifference(startDate, endDate);
+    setDays(calcDays);
+  }, []);
   return (
     <Container>
-      <MKTypography variant="body1">1/1/2022 - 2/2/2022</MKTypography>
-      <MKTypography variant="body2">2 Noches</MKTypography>
+      <MKTypography variant="body1">
+        {startDate} - {endDate}
+      </MKTypography>
+      <MKTypography variant="body2">{days} Noches</MKTypography>
     </Container>
   );
 }
@@ -80,12 +98,12 @@ function Times() {
   );
 }
 
-function Codigo() {
+function Codigo({ code }) {
   return (
     <Container>
       <MKTypography variant="body2">Código de reservación</MKTypography>
       <MKTypography variant="h4" fontWeight="bold">
-        SA98DF87AS9
+        {code}
       </MKTypography>
     </Container>
   );
@@ -94,7 +112,7 @@ function Codigo() {
 function Address() {
   return (
     <Container sx={{ textAlign: "right" }}>
-      <MKTypography variant="body2">Calle #23, Ciudad, Estado</MKTypography>
+      <MKTypography variant="body2">18732 Dix Toledo HWY Brownstown MI 48193</MKTypography>
       <MKTypography variant="body2">Info para llegar</MKTypography>
       <a href="https://goo.gl/maps/yQH8Jj7wZBYu1fLo7">https://goo.gl/maps/yQH8Jj7wZBYu1fLo7</a>
     </Container>

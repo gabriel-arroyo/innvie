@@ -16,7 +16,7 @@ function useCalendar({ type, startDate, endDate }) {
   const [calendar, setCalendar] = useState([]);
   const [calendarError, setError] = useState(false);
   const collectionRef = collection(db, "calendar");
-  const { roomsAvailable, getRoomsNotInArray } = useRoom();
+  const { roomsAvailable, getRoomsNotInArray, updateRoomStatus } = useRoom();
   const [available, setAvailable] = useState(false);
   const [room, setRoom] = useState({});
 
@@ -112,7 +112,15 @@ function useCalendar({ type, startDate, endDate }) {
     }
   }
 
+  async function getReservationsByEmail(email) {
+    const cal = await getMany("email", "==", email);
+    if (cal) {
+      setCalendar(cal);
+    }
+  }
+
   async function saveReservation(reservation) {
+    let id = null;
     const newReservationWithTimestamp = {
       ...reservation,
       lastUpdate: serverTimestamp(),
@@ -120,18 +128,19 @@ function useCalendar({ type, startDate, endDate }) {
     try {
       const docRef = doc(collectionRef);
       await setDoc(docRef, newReservationWithTimestamp);
+      id = docRef.id;
     } catch (e) {
       // eslint-disable-next-line
       console.log("error:", e);
       setError(e);
-      return false;
+      return null;
     }
-    return true;
+    return id;
   }
 
-  async function addReservation(_room, _startDate, _endDate) {
+  async function addReservation(_email, _room, _startDate, _endDate) {
     // eslint-disable-next-line no-console
-    console.log("reserving", _room, _startDate, _endDate);
+    console.log("reserving", _email, _room, _startDate, _endDate);
     let start = new Date();
     let end = new Date();
     try {
@@ -139,31 +148,31 @@ function useCalendar({ type, startDate, endDate }) {
       end = new Date(`${_endDate}, 11:30:00`);
       if (start > end) {
         setError("Start date must be before end date");
-        return;
+        return null;
       }
     } catch (e) {
       setError("Invalid date format");
-      return;
+      return null;
     }
 
     if (!_room) {
       // eslint-disable-next-line no-console
       console.log("no room");
       setError("No room");
-      return;
+      return null;
     }
 
     if (!_room.number) {
       // eslint-disable-next-line no-console
       console.error("No room number");
       setError("No room number");
-      return;
+      return null;
     }
     if (!_room.type) {
       // eslint-disable-next-line no-console
       console.error("No room type");
       setError("No room type");
-      return;
+      return null;
     }
 
     setError(false);
@@ -172,9 +181,12 @@ function useCalendar({ type, startDate, endDate }) {
       startDate: start,
       endDate: end,
       room: _room.number,
+      email: _email,
       lastUpdate: serverTimestamp(),
     };
-    await saveReservation(newReservationWithTimestamp);
+    const id = await saveReservation(newReservationWithTimestamp);
+    await updateRoomStatus(_room.number, "ocuppied");
+    return id;
   }
 
   useEffect(() => {
@@ -189,6 +201,7 @@ function useCalendar({ type, startDate, endDate }) {
     roomsAvailable,
     available,
     addReservation,
+    getReservationsByEmail,
     getAvailability,
     getAvailableRoom,
     getCalendar,

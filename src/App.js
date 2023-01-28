@@ -107,7 +107,7 @@ export default function App() {
               <Route path="/authentication/register" element={<Register />} />
               <Route path="/authentication/checkin" element={<Checkin />} />
             </Route>
-            <Route path="/confirmation" element={<Confirmation />} />
+            <Route path="/confirmation/:code" element={<Confirmation />} />
             <Route path="/test/api" element={<ApiTest />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

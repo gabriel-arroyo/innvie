@@ -76,7 +76,7 @@ function CustomLayout({ title, subtitle, children }) {
               width="15%"
             />
           </Box>
-          <MKTypography variant="h3" mb={1} sx={{ textAlign: "center", width: "fit-content" }}>
+          <MKTypography variant="h3" mb={1} sx={{ textAlign: "center", width: "auto" }}>
             {title}
           </MKTypography>
           <MKTypography variant="body1" mb={1} sx={{ textAlign: "center", width: "fit-content" }}>

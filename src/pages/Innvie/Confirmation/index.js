@@ -15,11 +15,10 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Grid from "@mui/material/Grid";
-
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-
+import { useParams } from "react-router-dom";
 // Otis Kit PRO examples
 import { useAtom } from "jotai";
 import loggedUser from "states/loggedUser";
@@ -31,6 +30,7 @@ import Map from "../Home/components/Map/map";
 import PlacesGrid from "../Home/sections/PlacesGrid";
 
 function Confirmation() {
+  const params = useParams();
   const [user] = useAtom(loggedUser);
   const [startDate] = useAtom(reservedStartDate);
   const [endDate] = useAtom(reservedEndDate);
@@ -79,7 +79,7 @@ function Confirmation() {
               {user?.email ? user.email : ""}
             </MKTypography>
             <MKTypography>Código de reservación</MKTypography>
-            <MKTypography variant="h3">A5AD5F4ASNH</MKTypography>
+            <MKTypography variant="h3">{params.code.substring(0, 6)}</MKTypography>
           </Grid>
         </Grid>
         <Grid container spacing={3} mt={5} justifyContent="center">

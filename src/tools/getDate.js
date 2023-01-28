@@ -17,3 +17,14 @@ export const getDaysDifference = (startDate, endDate) => {
   if (Number.isNaN(days)) return 0;
   return days;
 };
+
+export function getStatus(startDate, endDate) {
+  const today = new Date();
+  if (startDate > today) {
+    return "Pending";
+  }
+  if (startDate <= today && endDate >= today) {
+    return "Open";
+  }
+  return "Done";
+}
