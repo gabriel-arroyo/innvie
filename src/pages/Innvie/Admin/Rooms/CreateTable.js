@@ -77,8 +77,6 @@ RoomHistoryButton.propTypes = {
 
 // create table react function component receive columns, rooms and types as props
 function CreateTable({ rooms, types, loading, updateRoom, setTab, setHistoryFilter }) {
-  const [rows, setRows] = useState([]);
-
   const columns = [
     { name: "ID", align: "left" },
     { name: "Tipo", align: "left" },
@@ -87,9 +85,14 @@ function CreateTable({ rooms, types, loading, updateRoom, setTab, setHistoryFilt
     { name: "Full", align: "center" },
     { name: "Estado", align: "center" },
     { name: "Entrada", align: "center" },
+    { name: "Check_in", align: "center" },
+    { name: "Salida", align: "center" },
+    { name: "Check_out", align: "center" },
+    { name: "Ocupante", align: "center" },
     { name: "Comentarios", align: "center" },
-    { name: "history", align: "center" },
+    { name: "History", align: "center" },
   ];
+  const [rows, setRows] = useState([]);
 
   const callback = useCallback(() => {
     if (
@@ -112,8 +115,12 @@ function CreateTable({ rooms, types, loading, updateRoom, setTab, setHistoryFilt
         Full: data.beds.full,
         Estado: <RoomMenu room={data} updateRoom={updateRoom} />,
         Entrada: data.entry,
+        Salida: data.exit,
+        Check_in: data.checkin,
+        Check_out: data.checkout,
+        Ocupante: data.email,
         Comentarios: data.comment,
-        history: (
+        History: (
           <RoomHistoryButton
             number={data.number}
             setTab={setTab}
