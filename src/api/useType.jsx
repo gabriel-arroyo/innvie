@@ -15,6 +15,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import db, { storage } from "../firebase";
+import useHistory from "./useHistory";
 
 function useType(room) {
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,7 @@ function useType(room) {
   const [types, setTypes] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [cacheRoom, setCacheRoom] = useState(room);
+  const { addAction } = useHistory();
   const collectionRef = collection(db, "types");
   const defaultRoom = {
     type: "",
@@ -147,8 +149,9 @@ function useType(room) {
     setError(false);
     const updatedTypeWithTimestamp = { ...updatedType, lastUpdate: serverTimestamp() };
     try {
-      const docRef = doc(collectionRef, updatedType.type);
+      const docRef = doc(collectionRef, updatedType.id);
       updateDoc(docRef, updatedTypeWithTimestamp);
+      addAction("updateType", updatedType);
     } catch (e) {
       // eslint-disable-next-line
       console.log(e);

@@ -3,6 +3,7 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  orderBy,
   query,
   serverTimestamp,
   setDoc,
@@ -41,7 +42,7 @@ function useHistory() {
     return commentsOptions[action];
   }
 
-  async function addAction(action, room) {
+  async function addAction(action, room, email = "") {
     setError(false);
     const actionId = action.includes("Type") ? room.type : room.number;
     const acitonWithTimestamp = {
@@ -51,6 +52,7 @@ function useHistory() {
       number: room.number ?? "",
       type: room.type ?? "",
       category: room.category ?? "",
+      email,
     };
     try {
       const docRef = doc(collectionRef);
@@ -161,7 +163,7 @@ function useHistory() {
     const historyData = [];
     setError(false);
     try {
-      const q = query(collectionRef, where("actionId", "!=", ""));
+      const q = query(collectionRef, orderBy("lastUpdate", "desc"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((roomData) => {
         historyData.push({ ...roomData.data(), id: roomData.id });

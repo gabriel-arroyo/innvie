@@ -66,6 +66,7 @@ function History({ historyFilter }) {
           date: element.lastUpdate.toDate().toLocaleDateString(),
           action: element.action,
           id: element.actionId,
+          email: element.email,
         };
         allRows.push(row);
       });
@@ -76,6 +77,7 @@ function History({ historyFilter }) {
 
   const columns = [
     { name: "date", align: "center" },
+    { name: "email", align: "center" },
     { name: "action", align: "center" },
     { name: "id", align: "center" },
   ];
