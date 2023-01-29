@@ -61,7 +61,7 @@ function PlacesGrid() {
     {
       title: "Puente Ambassador",
       description:
-        "Nos encontramos a menos de 20 minutos de el puente Ambassador que es un puente colgante internacional que une Detroit, en el Estado estadounidense de Míchigan, con Windsor en la provincia canadiense de Ontario.",
+        "Nos encontramos a menos de 20 minutos del puente Ambassador que es un puente colgante internacional que une Detroit, en el Estado estadounidense de Míchigan, con Windsor en la provincia canadiense de Ontario.",
       image: post6,
       url: "https://goo.gl/maps/wCeJwGJqmEYQqChy8",
     },

@@ -123,7 +123,8 @@ function Checkin() {
                   {password}
                 </MKTypography>
                 <MKTypography variant="body1" fontWeight="medium" color="primary" mt={1}>
-                  Ingrese esta contraseña en la cerradura de su cuarto para ingresar.
+                  Las instrucciones y el código de ingreso será enviado a su correo electrónico. Al
+                  llegar digítelo en la cerradura.
                 </MKTypography>
               </>
             )}
