@@ -4,7 +4,7 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import Table from "examples/Tables/Table";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RoomMenu from "./RoomMenu";
 
@@ -91,20 +91,20 @@ function CreateTable({ rooms, types, loading, updateRoom, setTab, setHistoryFilt
     { name: "history", align: "center" },
   ];
 
-  useEffect(() => {
+  const callback = useCallback(() => {
     if (
-      !(columns && rooms && types) ||
+      !columns ||
+      !rooms ||
+      !types ||
       columns.length === 0 ||
       rooms.length === 0 ||
       types.length === 0
     )
       return;
-    const allrows = [];
-    rooms.forEach((element) => {
-      // find a type for this room
+    const allrows = rooms.map((element) => {
       const typeForThisRoom = types.find((type) => type.type === element.type);
       const data = { ...element, ...typeForThisRoom };
-      const row = {
+      return {
         ID: <RoomId name={data.number} />,
         Tipo: <RoomType category={data.type} subCategory={data.category} />,
         Habitaciones: data.rooms,
@@ -121,10 +121,13 @@ function CreateTable({ rooms, types, loading, updateRoom, setTab, setHistoryFilt
           />
         ),
       };
-      allrows.push(row);
     });
     setRows(allrows);
   }, [loading, rooms, types]);
+
+  useEffect(() => {
+    callback();
+  }, [callback]);
 
   return (
     <div>

@@ -38,6 +38,7 @@ import Offers from "../components/Offers/offers";
 
 function OffersSwipe({ cards }) {
   const matches = useMediaQuery("(min-width:1000px)");
+  // eslint-disable-next-line no-console
   console.log(matches);
   // install SwiperJS modules
   SwiperCore.use([Autoplay, Navigation]);
