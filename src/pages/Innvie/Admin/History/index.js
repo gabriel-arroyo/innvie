@@ -35,7 +35,7 @@ RoomId.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-function RoomType({ category, subCategory }) {
+function RoomTypeItem({ category, subCategory }) {
   return (
     <MKBox display="flex" flexDirection="column">
       <MKTypography variant="caption" fontWeight="medium" color="text">
@@ -49,7 +49,7 @@ function RoomType({ category, subCategory }) {
 }
 
 // Typechecking props for the Role
-RoomType.propTypes = {
+RoomTypeItem.propTypes = {
   category: PropTypes.string.isRequired,
   subCategory: PropTypes.string.isRequired,
 };

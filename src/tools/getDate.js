@@ -28,3 +28,14 @@ export function getStatus(startDate, endDate) {
   }
   return "Done";
 }
+
+export function parseDate(date) {
+  if (!date) return "";
+  let str = "";
+  try {
+    str = date.toISOString().substring(0, 10);
+  } catch (error) {
+    console.log("fecha ilegible", date);
+  }
+  return str;
+}

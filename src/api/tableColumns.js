@@ -1,0 +1,16 @@
+export default [
+  { name: "ID", align: "left" },
+  { name: "Tipo", align: "left" },
+  { name: "Habitaciones", align: "center" },
+  { name: "Queen", align: "center" },
+  { name: "Full", align: "center" },
+  { name: "Single", align: "center" },
+  { name: "Estado", align: "center" },
+  { name: "Entrada", align: "center" },
+  { name: "Check_in", align: "center" },
+  { name: "Salida", align: "center" },
+  { name: "Check_out", align: "center" },
+  { name: "Ocupante", align: "center" },
+  { name: "Comentarios", align: "center" },
+  { name: "History", align: "center" },
+];
