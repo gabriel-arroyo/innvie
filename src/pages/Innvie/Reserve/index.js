@@ -35,6 +35,8 @@ import { useNavigate } from "react-router-dom";
 import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
 import selectedType from "states/selectedType";
+import taxes from "constants/taxes";
+import roundTo from "tools/round";
 import BlancLayout from "../Layouts/BlancLayout";
 import LoginModal from "../Authentication/Login/LoginModal";
 
@@ -47,7 +49,6 @@ function Reserve() {
   const navigate = useNavigate();
   const { room, addReservation } = useCalendar({ type, startDate, endDate });
   const [terms, setTerms] = useState(false);
-  const impuestos = 0.0425;
   const { currentUser: user, logged, getAndUpdateUser, checkEmail, mailExists } = useUser();
   const [formName, setFormName] = useState("");
   const [formLastName, setFormLastName] = useState("");
@@ -201,7 +202,10 @@ function Reserve() {
           <Grid item xs={12} lg={4}>
             <CustomPricingCard
               badge={{ color: "light", label: "cotización" }}
-              price={{ currency: "$", value: days * price }}
+              price={{
+                currency: "$",
+                value: roundTo(days * price + days * price * taxes, 2),
+              }}
               specifications={[
                 { label: `Habitación ${type}`, singlePrice: `$${price}` },
                 { label: `${days} día${days > 1 ? "s" : ""}` },
@@ -210,7 +214,7 @@ function Reserve() {
                 // { label: "Descuento", singlePrice: "50.00", discount: true },
                 {
                   label: "Impuestos",
-                  singlePrice: `${days} x $${impuestos * price}`,
+                  singlePrice: `$${taxes * price * days}`,
                 },
               ]}
               action={{
@@ -410,10 +414,7 @@ function Reserve() {
                 </MKTypography>
               ) : (
                 <MKBox mt={3}>
-                  <PayButton
-                    price={price * days * impuestos + price * days}
-                    onApprove={onApprove}
-                  />
+                  <PayButton price={price * days * taxes + price * days} onApprove={onApprove} />
                 </MKBox>
               )}
             </MKBox>

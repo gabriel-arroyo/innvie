@@ -42,6 +42,7 @@ export default {
   "&:disabled": {
     pointerEvent: "none",
     opacity: 0.65,
+    background: "#111 !important",
   },
 
   "& .material-icons": {

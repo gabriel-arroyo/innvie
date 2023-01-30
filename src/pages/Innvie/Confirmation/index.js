@@ -25,6 +25,8 @@ import loggedUser from "states/loggedUser";
 import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
 import selectedType from "states/selectedType";
+import taxes from "constants/taxes";
+import roundTo from "tools/round";
 import CustomLayout from "../../../layouts/sections/components/CustomLayout";
 import Map from "../Home/components/Map/map";
 import PlacesGrid from "../Home/sections/PlacesGrid";
@@ -43,6 +45,17 @@ function Confirmation() {
       subtitle="Gracias por su pago. Su pago se ha completado y le hemos enviado un recibo de su compra por correo electrónico. Para ver los detalles de la transacción, inicie sesión en su cuenta PayPal."
     >
       <MKBox position="relative" zIndex={10} px={{ xs: 1, sm: 0 }} mt={8}>
+        <MKTypography
+          variant="h5"
+          fontWeight="normal"
+          mb={8}
+          justifyContent="center"
+          textAlign="center"
+          fullwidth
+        >
+          A su llegada al hotel, se le proporcionarán instrucciones detalladas para acceder a su
+          habitación a través de su correo electrónico.
+        </MKTypography>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>
             <MKBox>
@@ -68,7 +81,7 @@ function Confirmation() {
                     >
                       $
                     </MKTypography>
-                    {price}
+                    {roundTo(price * days + price * days * taxes, 2)}
                   </MKTypography>
                 </MKBox>
               </MKBox>
