@@ -34,7 +34,7 @@ import { useAtom } from "jotai";
 import { useNavigate } from "react-router-dom";
 import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
-import selectedType from "states/selectedType";
+import { selectedType, maxOccupantsInType } from "states/selectedType";
 import taxes from "constants/taxes";
 import roundTo from "tools/round";
 import BlancLayout from "../Layouts/BlancLayout";
@@ -45,6 +45,7 @@ function Reserve() {
   const [endDate] = useAtom(reservedEndDate);
   const [days] = useAtom(reservedDays);
   const [type] = useAtom(selectedType);
+  const [max] = useAtom(maxOccupantsInType);
   const [price] = useAtom(selectedPrice);
   const navigate = useNavigate();
   const { room, addReservation } = useCalendar({ type, startDate, endDate });
@@ -76,7 +77,7 @@ function Reserve() {
   });
   const handlePartyChange = (e) => {
     const intParty = parseInt(e.target.value, 10);
-    if (intParty < 0) return;
+    if (intParty < 1 || intParty > max) return;
     const intKids = parseInt(kids, 10);
     const intAdults = parseInt(adults, 10);
     const up = intParty > intKids + intAdults;
@@ -94,7 +95,7 @@ function Reserve() {
     const intParty = parseInt(party, 10);
     const newKids = intParty - intAdults;
     if (newKids < 0) return;
-    if (intAdults < 0) return;
+    if (intAdults < 1) return;
     setKids(newKids);
     setAdults(intAdults);
   };

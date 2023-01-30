@@ -24,7 +24,7 @@ import { useAtom } from "jotai";
 import loggedUser from "states/loggedUser";
 import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
-import selectedType from "states/selectedType";
+import { selectedType } from "states/selectedType";
 import taxes from "constants/taxes";
 import roundTo from "tools/round";
 import CustomLayout from "../../../layouts/sections/components/CustomLayout";

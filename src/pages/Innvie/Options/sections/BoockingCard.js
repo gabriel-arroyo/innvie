@@ -32,18 +32,20 @@ import MKTypography from "components/MKTypography";
 import { useAtom } from "jotai";
 import { reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
-import selectedType from "states/selectedType";
+import { selectedType, maxOccupantsInType } from "states/selectedType";
 
-function BookingCard({ image, type, description, accessories, action }) {
+function BookingCard({ image, max, type, description, accessories, action }) {
   const [startDate] = useAtom(reservedStartDate);
   const [endDate] = useAtom(reservedEndDate);
   const { available } = useCalendar({ type, startDate, endDate });
   const [, setType] = useAtom(selectedType);
+  const [, setMax] = useAtom(maxOccupantsInType);
   const [, setPrice] = useAtom(selectedPrice);
   const navigate = useNavigate();
 
   const handleReserve = () => {
     setType(type);
+    setMax(max);
     setPrice(action.price);
     navigate("/reserve/");
   };
@@ -131,6 +133,7 @@ BookingCard.defaultProps = {
 BookingCard.propTypes = {
   image: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  max: PropTypes.number.isRequired,
   description: PropTypes.string,
   accessories: PropTypes.instanceOf(Array),
   action: PropTypes.shape({

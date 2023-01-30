@@ -1,5 +1,4 @@
 import { atom } from "jotai";
 
-const selectedType = atom(null);
-
-export default selectedType;
+export const selectedType = atom(null);
+export const maxOccupantsInType = atom(0);

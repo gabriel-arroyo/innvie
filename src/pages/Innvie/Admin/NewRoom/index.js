@@ -302,6 +302,21 @@ function NewRoomType({ room }) {
               />
             </MKBox>
             <MKBox mb={2}>
+              <MKInput
+                type="number"
+                name="maxOccupants"
+                label="Máximo número de ocupantes"
+                defaultValue={0}
+                fullWidth
+                value={cacheRoom.maxOccupants ?? 0}
+                onChange={(e) => {
+                  let maxOccupants = cacheRoom.maxOccupants ?? 0;
+                  maxOccupants = e.target.value;
+                  setCacheRoom({ ...cacheRoom, maxOccupants });
+                }}
+              />
+            </MKBox>
+            <MKBox mb={2}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="outlined-adornment-amount">Precio</InputLabel>
                 <OutlinedInput

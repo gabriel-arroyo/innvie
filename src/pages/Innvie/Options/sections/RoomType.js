@@ -10,6 +10,7 @@ function RoomType({ typeObject }) {
         <BookingCard
           image={typeObject.photos[0] ?? "https://picsum.photos/300/200"}
           type={typeObject.type}
+          max={typeObject.maxOccupants}
           description={typeObject.description}
           accessories={typeObject.accessories}
           action={{
