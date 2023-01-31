@@ -35,14 +35,12 @@ import footerRoutes from "footer.routes";
 
 // Images
 import bgImage from "assets/images/bg-rental.jpeg";
-import routes from "../../../innvie.routes";
 import Room from "./components/room";
 
 function Selected() {
   return (
     <>
       <DefaultNavbar
-        routes={routes}
         logoUrl="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-blanco.png?alt=media&token=e4c69723-59be-4dfc-b1b7-b1d5c3f2513f"
         transparent
         light

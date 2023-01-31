@@ -41,7 +41,6 @@ import footerRoutes from "footer.routes";
 // Images
 import CenteredFooter from "examples/Footers/CenteredFooter";
 import bgImage from "../../../assets/images/photos/IMG_0535.JPG";
-import routes from "../../../innvie.routes";
 
 import Offers from "../../Innvie/Home/components/Offers/offers";
 import Places2 from "../../Innvie/Home/sections/Amenities";
@@ -51,7 +50,6 @@ function Rental() {
   return (
     <>
       <DefaultNavbar
-        routes={routes}
         logoUrl="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-blanco.png?alt=media&token=e4c69723-59be-4dfc-b1b7-b1d5c3f2513f"
         transparent
         light

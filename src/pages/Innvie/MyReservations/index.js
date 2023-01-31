@@ -21,7 +21,6 @@ import Card from "@mui/material/Card";
 // Otis Kit PRO components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-import FaqCollapse from "pages/Support/HelpCenter/components/FaqCollapse";
 // Otis Kit PRO examples
 // import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
@@ -33,11 +32,16 @@ import FaqCollapse from "pages/Support/HelpCenter/components/FaqCollapse";
 
 // Images
 import bgImage from "assets/images/bg-rental.jpeg";
-
-import Reservation from "./components/reservation";
+import { v4 as uuid } from "uuid";
+import loggedUser from "states/loggedUser";
+import { useAtom } from "jotai";
+import useMyReservations from "api/useMyReservations";
+import FaqCollapse from "./components/collapse";
 
 function MyReservations() {
   const [collapse, setCollapse] = useState(false);
+  const [currentUser] = useAtom(loggedUser);
+  const { calendar } = useMyReservations({ email: currentUser?.email });
 
   return (
     <>
@@ -97,21 +101,16 @@ function MyReservations() {
         <Container>
           <Grid container justifyContent="center">
             <Grid item xs={12} md={10}>
-              <FaqCollapse
-                title="Reservación 4"
-                startDate=""
-                endDate=""
-                open={collapse === 1}
-                onClick={() => (collapse === 1 ? setCollapse(false) : setCollapse(1))}
-              >
-                <Reservation
-                  type="type"
-                  email="mail"
-                  code="12"
-                  startDate="2023/02/02"
-                  endDate="2023/03/03"
+              {calendar.map((item, i) => (
+                <FaqCollapse
+                  key={uuid()}
+                  title={`Reservación ${calendar.length - i}`}
+                  user={currentUser}
+                  event={item}
+                  open={collapse === i + 1}
+                  onClick={() => (collapse === i + 1 ? setCollapse(false) : setCollapse(i + 1))}
                 />
-              </FaqCollapse>
+              ))}
             </Grid>
           </Grid>
         </Container>

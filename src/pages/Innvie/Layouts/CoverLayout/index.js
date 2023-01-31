@@ -7,13 +7,12 @@ import footerRoutes from "footer.routes";
 import CenteredFooter from "examples/Footers/CenteredFooter";
 import image from "../../../../assets/images/photos/innvie4.png";
 import logo from "../../../../assets/images/innvie/logos/logo-stay-white.svg";
-import routes from "../../../../innvie.routes";
 
 function CoverLayout() {
   return (
     <>
       <MKBox bgColor="white" shadow="sm" py={0.25}>
-        <DefaultNavbar routes={routes} logoUrl={logo} transparent relative sticky />
+        <DefaultNavbar logoUrl={logo} transparent relative sticky />
       </MKBox>
       <MKBox
         width="calc(100% - 2rem)"

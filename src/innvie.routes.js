@@ -5,7 +5,7 @@ import Checkin from "pages/Innvie/Checkin";
 import InnvieHome from "pages/Innvie/Home";
 import MyReservations from "pages/Innvie/MyReservations";
 
-const routes = [
+export const routes = [
   {
     name: "Home",
     icon: <Icon>home</Icon>,
@@ -17,12 +17,6 @@ const routes = [
     icon: <Icon>menu</Icon>,
     route: "/authentication/checkin",
     component: <Checkin />,
-  },
-  {
-    name: "Mis Reservaciones",
-    icon: <Icon>check</Icon>,
-    route: "/myreservations",
-    component: <MyReservations />,
   },
   // {
   //   name: "Blog",
@@ -64,4 +58,65 @@ const routes = [
   },
 ];
 
-export default routes;
+export const adminRoutes = [
+  {
+    name: "Home",
+    icon: <Icon>home</Icon>,
+    route: "/",
+    component: <InnvieHome />,
+  },
+  {
+    name: "Checkin/Checkout",
+    icon: <Icon>menu</Icon>,
+    route: "/authentication/checkin",
+    component: <Checkin />,
+  },
+  {
+    name: "Mis Reservaciones",
+    icon: <Icon>check</Icon>,
+    route: "/myreservations",
+    component: <MyReservations />,
+  },
+  {
+    name: "Ingresar",
+    icon: <Icon>person</Icon>,
+    collapse: [
+      {
+        name: "Ingresar",
+        route: "/authentication",
+        component: <Login />,
+      },
+      {
+        name: "Registrarse",
+        route: "/authentication/register",
+        component: <Register />,
+      },
+    ],
+  },
+];
+
+export const mobileLoggedRoutes = [
+  {
+    name: "Home",
+    icon: <Icon>home</Icon>,
+    route: "/",
+    component: <InnvieHome />,
+  },
+  {
+    name: "Checkin/Checkout",
+    icon: <Icon>menu</Icon>,
+    route: "/authentication/checkin",
+    component: <Checkin />,
+  },
+  {
+    name: "Mis Reservaciones",
+    icon: <Icon>check</Icon>,
+    route: "/myreservations",
+    component: <MyReservations />,
+  },
+  {
+    name: "Salir",
+    route: "/authentication",
+    component: <Login />,
+  },
+];

@@ -29,14 +29,12 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 // Otis Kit PRO page layout routes
 import footerRoutes from "footer.routes";
 import DefaultFooter from "examples/Footers/DefaultFooter";
-import routes from "../../../../innvie.routes";
 
 function CoverLayout({ coverHeight, image, children }) {
   return (
     <MKBox height="calc(100vh - 1rem)">
       <MKBox width="100%" position="absolute" top="0.25rem">
         <DefaultNavbar
-          routes={routes}
           logoUrl="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-blanco2.png?alt=media&token=cabde339-12a3-4b84-8879-1e945fdc7696"
           transparent
           light

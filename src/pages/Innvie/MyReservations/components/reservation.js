@@ -3,50 +3,46 @@ import React, { useEffect, useState } from "react";
 import MKTypography from "components/MKTypography";
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import useUser from "api/useUser";
 import MKBox from "components/MKBox";
 import Map from "components/Map";
 import image from "../../../../assets/images/photos/IMG_2.JPG";
-import { getDaysDifference } from "../../../../tools/getDate";
+import { getDaysDifference, parseDate } from "../../../../tools/getDate";
 
-function Reservation({ type, email, code, startDate, endDate }) {
-  const { data, getUserByEmail } = useUser();
-
-  useEffect(() => {
-    getUserByEmail(email);
-  }, []);
-
+function Reservation({ user, event }) {
+  if (!user) {
+    return <h1>Loading...</h1>;
+  }
   return (
     <Container>
       <MKTypography variant="h3" align="center" fontWeight="bold" gutterBottom sx={{ mb: "20px" }}>
-        {type}
+        {event.type}
       </MKTypography>
       <Grid container spacing={2} display="flex" alignItems="center">
         <Grid item xs={4}>
           <Container>
             <MKTypography variant="body1">
-              {data.first_name}, {data.last_name}
+              {user?.first_name}, {user?.last_name}
             </MKTypography>
           </Container>
         </Grid>
         <Grid item xs={4}>
           <Container>
-            <MKTypography variant="body1">{email}</MKTypography>
+            <MKTypography variant="body1">{user?.email}</MKTypography>
           </Container>
         </Grid>
         <Grid item xs={4}>
           <Container>
-            <MKTypography variant="body1">{data.phone}</MKTypography>
+            <MKTypography variant="body1">{user.phone}</MKTypography>
           </Container>
         </Grid>
         <Grid item xs={4}>
-          <Dates startDate={startDate} endDate={endDate} />
+          <Dates startDate={parseDate(event.startDate)} endDate={parseDate(event.endDate)} />
         </Grid>
         <Grid item xs={4}>
           <Times />
         </Grid>
         <Grid item xs={4}>
-          <Codigo code={code} />
+          <Codigo code={event.id.substring(0, 6)} />
         </Grid>
         <Grid item xs={4}>
           <MKBox
@@ -114,7 +110,9 @@ function Address() {
     <Container sx={{ textAlign: "right" }}>
       <MKTypography variant="body2">18732 Dix Toledo HWY Brownstown MI 48193</MKTypography>
       <MKTypography variant="body2">Info para llegar</MKTypography>
-      <a href="https://goo.gl/maps/yQH8Jj7wZBYu1fLo7">https://goo.gl/maps/yQH8Jj7wZBYu1fLo7</a>
+      <a href="https://goo.gl/maps/HPMADd47LReDdC3p6" target="_blank" rel="noreferrer">
+        https://goo.gl/maps/HPMADd47LReDdC3p6
+      </a>
     </Container>
   );
 }

@@ -31,14 +31,12 @@ import CenteredFooter from "examples/Footers/CenteredFooter";
 import Breadcrumbs from "examples/Breadcrumbs";
 
 // Routes
-import routes from "../../../../innvie.routes";
 
 function BaseLayout({ breadcrumb, title, children }) {
   return (
     <MKBox display="flex" flexDirection="column" bgColor="white" minHeight="100vh">
       <MKBox bgColor="white" shadow="sm" py={0.25}>
         <DefaultNavbar
-          routes={routes}
           action={{
             type: "external",
             route: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",

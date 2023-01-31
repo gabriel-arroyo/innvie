@@ -48,8 +48,9 @@ import { useAtom } from "jotai";
 import Login from "pages/Innvie/Authentication/Login";
 import loggedUser from "states/loggedUser";
 import "./Navbar.css";
+import { routes, adminRoutes } from "innvie.routes";
 
-function DefaultNavbar({ routes, transparent, light, action, sticky, relative, center, logoUrl }) {
+function DefaultNavbar({ transparent, light, action, sticky, relative, center, logoUrl }) {
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
@@ -93,25 +94,27 @@ function DefaultNavbar({ routes, transparent, light, action, sticky, relative, c
   }, []);
 
   const useUserName = (name = "") => (name === "Ingresar" ? user?.first_name ?? "No user" : name);
-  const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
-    <DefaultNavbarDropdown
-      key={name}
-      name={useUserName(name) === "No user" ? "" : useUserName(name)}
-      icon={icon}
-      href={href}
-      route={route}
-      collapse={Boolean(collapse)}
-      onMouseEnter={({ currentTarget }) => {
-        if (collapse) {
-          setDropdown(currentTarget);
-          setDropdownEl(currentTarget);
-          setDropdownName(name);
-        }
-      }}
-      onMouseLeave={() => collapse && setDropdown(null)}
-      light={light}
-    />
-  ));
+  const renderNavbarItems = (!user ? routes : adminRoutes).map(
+    ({ name, icon, href, route, collapse }) => (
+      <DefaultNavbarDropdown
+        key={name}
+        name={useUserName(name) === "No user" ? "" : useUserName(name)}
+        icon={icon}
+        href={href}
+        route={route}
+        collapse={Boolean(collapse)}
+        onMouseEnter={({ currentTarget }) => {
+          if (collapse) {
+            setDropdown(currentTarget);
+            setDropdownEl(currentTarget);
+            setDropdownName(name);
+          }
+        }}
+        onMouseLeave={() => collapse && setDropdown(null)}
+        light={light}
+      />
+    )
+  );
 
   // Render the routes on the dropdown menu
   const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {

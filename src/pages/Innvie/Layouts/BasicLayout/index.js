@@ -4,14 +4,13 @@ import { Outlet } from "react-router-dom";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import CenteredFooter from "examples/Footers/CenteredFooter";
 import footerRoutes from "../../../../footer.routes";
-import routes from "../../../../innvie.routes";
 import img from "../../../../assets/images/innvie/logos/logo-stay-white.svg";
 
 function Layout() {
   return (
     <>
       <MKBox bgColor="white" shadow="sm" py={0.25}>
-        <DefaultNavbar routes={routes} logoUrl={img} transparent relative sticky />
+        <DefaultNavbar logoUrl={img} transparent relative sticky />
       </MKBox>
       <main>
         <Outlet />
