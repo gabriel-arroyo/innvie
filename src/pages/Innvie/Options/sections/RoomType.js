@@ -8,11 +8,7 @@ function RoomType({ typeObject }) {
     <Grid item xs={12} md={6} lg={4}>
       <MKBox mt={3}>
         <BookingCard
-          image={typeObject.photos[0] ?? "https://picsum.photos/300/200"}
-          type={typeObject.type}
-          max={typeObject.maxOccupants}
-          description={typeObject.description}
-          accessories={typeObject.accessories}
+          type={typeObject}
           action={{
             type: "internal",
             route: "/reserve",

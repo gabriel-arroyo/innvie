@@ -102,10 +102,6 @@ function NewRoomType({ room }) {
     }
   };
 
-  const handleChangeDescription = async (e) => {
-    setCacheRoom({ ...cacheRoom, description: e.target.value });
-  };
-
   const handleAddPhoto = async (e) => {
     e.preventDefault();
     const url = await addPhoto(e.target.files[0]);
@@ -446,15 +442,6 @@ function NewRoomType({ room }) {
             </MKBox>
           </Grid>
           <Grid item xs={12}>
-            <MKBox mb={2}>
-              <MKInput
-                type="text"
-                name="description"
-                label="Descripción"
-                fullWidth
-                onChange={handleChangeDescription}
-              />
-            </MKBox>
             <MKBox mb={2}>
               <MKInput
                 type="file"

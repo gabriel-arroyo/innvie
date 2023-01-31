@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 // react-router components
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,7 @@ import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 
 // Otis Kit PRO components
+import { v4 as uuid } from "uuid";
 import useCalendar from "api/useCalendar";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
@@ -33,8 +34,9 @@ import { useAtom } from "jotai";
 import { reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
 import { selectedType, maxOccupantsInType } from "states/selectedType";
+import SwipeImages from "./SwipeImages";
 
-function BookingCard({ image, max, type, description, accessories, action }) {
+function BookingCard({ type, action }) {
   const [startDate] = useAtom(reservedStartDate);
   const [endDate] = useAtom(reservedEndDate);
   const { available } = useCalendar({ type, startDate, endDate });
@@ -42,46 +44,46 @@ function BookingCard({ image, max, type, description, accessories, action }) {
   const [, setMax] = useAtom(maxOccupantsInType);
   const [, setPrice] = useAtom(selectedPrice);
   const navigate = useNavigate();
+  const [photos, setPhotos] = useState(["http://via.placeholder.com/640x360"]);
+
+  const [data, setData] = useState([]);
 
   const handleReserve = () => {
-    setType(type);
-    setMax(max);
+    setType(type.type);
+    setMax(type.maxOccupants);
     setPrice(action.price);
     navigate("/reserve/");
   };
 
+  useEffect(() => {
+    let tempData = [];
+    const copyOfBeds = Object.entries(type.beds);
+    const bedsDifferentToZero = copyOfBeds.filter((t) => Number(t[1]) !== 0);
+    const beds = bedsDifferentToZero.map(
+      (t) =>
+        `${t[1]} ${t[0][0].toUpperCase() + t[0].substring(1)} bed${Number(t[1]) > 1 ? "s" : ""}`
+    );
+    tempData = [...beds];
+    if (type?.accessories?.find((a) => a === "minifridge")) {
+      tempData.push("You can ask for a mini fridge");
+    }
+    let temp = [];
+    if (type?.photos && type.photos.length > 0) {
+      temp = [...type.photos];
+    } else {
+      temp.push("http://via.placeholder.com/640x360");
+    }
+    setData(tempData);
+    setPhotos(temp);
+  }, []);
+
   return (
     <Card sx={{ height: "100%" }}>
-      <MKBox position="relative" borderRadius="lg" mx={2} mt={-3} height="100%">
-        <MKBox
-          component="img"
-          src={image}
-          alt={type}
-          borderRadius="lg"
-          shadow="md"
-          width="100%"
-          position="relative"
-          zIndex={1}
-          height="100%"
-        />
-        <MKBox
-          borderRadius="lg"
-          shadow="md"
-          width="100%"
-          height="100%"
-          position="absolute"
-          left={0}
-          top={0}
-          sx={{
-            backgroundImage: `url(${image})`,
-            transform: "scale(0.94)",
-            filter: "blur(12px)",
-            backgroundSize: "cover",
-          }}
-        />
+      <MKBox position="relative" borderRadius="lg" mx={2} mt={-3} mb={5} height="100%">
+        <SwipeImages type={type} photos={photos} />
       </MKBox>
-      <MKBox p={3} mt={-2} height="100%">
-        {accessories.length > 0 && (
+      <MKBox p={3} mt={-8} height="100%">
+        {type.accessories.length > 0 && (
           <MKTypography
             display="block"
             variant="button"
@@ -89,18 +91,22 @@ function BookingCard({ image, max, type, description, accessories, action }) {
             fontWeight="regular"
             mb={0.75}
           >
-            {accessories.map((category) => (
-              <Fragment key={category}>{category}&nbsp;&bull;&nbsp;</Fragment>
-            ))}
+            {type.accessories
+              .filter((a) => a !== "minifridge")
+              .map((category) => (
+                <Fragment key={category}>{category}&nbsp;&bull;&nbsp;</Fragment>
+              ))}
           </MKTypography>
         )}
         <MKTypography display="inline" variant="h5" fontWeight="bold">
-          {type}
+          {type.type}
         </MKTypography>
-        <MKBox mt={1} mb={3}>
-          <MKTypography variant="body2" component="p" color="text">
-            {description}
-          </MKTypography>
+        <MKBox mt={1} mb={3} ml={4} sx={{ fontSize: "1rem" }}>
+          <ul>
+            {data.map((item) => (
+              <li key={uuid()}>{item}</li>
+            ))}
+          </ul>
         </MKBox>
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -123,19 +129,10 @@ function BookingCard({ image, max, type, description, accessories, action }) {
   );
 }
 
-// Setting default props for the SimpleBookingCard
-BookingCard.defaultProps = {
-  accessories: [],
-  description: "",
-};
-
 // Typechecking props for the SimpleBookingCard
 BookingCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  max: PropTypes.number.isRequired,
-  description: PropTypes.string,
-  accessories: PropTypes.instanceOf(Array),
+  // eslint-disable-next-line react/forbid-prop-types
+  type: PropTypes.object.isRequired,
   action: PropTypes.shape({
     type: PropTypes.oneOf(["external", "internal"]).isRequired,
     route: PropTypes.string.isRequired,
