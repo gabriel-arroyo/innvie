@@ -22,7 +22,7 @@ import MKTypography from "components/MKTypography";
 import RoomList from "components/RoomList";
 import SectionTitle from "components/SectionTitle";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ImageSwipe from "./imageswipe";
 
 function NewEditSwitch({ editSwitch, handleChangeNew }) {
@@ -50,8 +50,15 @@ NewEditSwitch.propTypes = {
 };
 
 function NewRoomType({ room }) {
-  const { roomsByType, deleteRoomByNumber, addRoom, roomError, getRoomsByType, deleteRoomByType } =
-    useRoom();
+  const {
+    roomsByType,
+    deleteRoomByNumber,
+    addRoom,
+    roomError,
+    getRoomsByType,
+    deleteRoomByType,
+    nextRoomNumber,
+  } = useRoom();
   const {
     error,
     setError,
@@ -71,9 +78,12 @@ function NewRoomType({ room }) {
   } = useType(room);
   const options = ["Habitación", "Departamento"];
   const [editSwitch, setEditSwitch] = useState(true);
-  const [roomNumber, setRoomNumber] = useState("");
+  const [roomNumber, setRoomNumber] = useState(nextRoomNumber);
   const [roomComment, setRoomComment] = useState("");
 
+  useEffect(() => {
+    setRoomNumber(nextRoomNumber);
+  }, [nextRoomNumber]);
   const resetAll = () => {
     if (editSwitch) {
       getAll();
@@ -177,6 +187,7 @@ function NewRoomType({ room }) {
         e.target.reset();
       }
     });
+    setRoomNumber((r) => r + 1);
   }
 
   return (

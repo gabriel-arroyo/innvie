@@ -67,6 +67,9 @@ function BookingCard({ type, action }) {
     if (type?.accessories?.find((a) => a === "minifridge")) {
       tempData.push("You can ask for a mini fridge");
     }
+    if (typeof type?.sofas !== "undefined") {
+      tempData.push(`${type.sofas} Sofa cama`);
+    }
     let temp = [];
     if (type?.photos && type.photos.length > 0) {
       temp = [...type.photos];

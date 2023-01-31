@@ -9,7 +9,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import db from "../firebase";
 import useHistory from "./useHistory";
 
@@ -21,6 +21,39 @@ function useRoom() {
   const [roomsByType, setRoomsByType] = useState([]);
   const [roomsAvailable, setRoomsAvailable] = useState([]);
   const collectionRef = collection(db, "rooms");
+  const [nextRoomNumber, setNextRoomNumber] = useState(1);
+
+  function getMinNotUsed(array) {
+    const sortedArray = array.sort((a, b) => a - b);
+    let min = 1;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < sortedArray.length; i++) {
+      if (sortedArray[i] > min) {
+        break;
+      }
+      min = sortedArray[i] + 1;
+    }
+    return min;
+  }
+
+  async function getNextRoomNumber() {
+    const q = query(collectionRef);
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      console.log("no data!");
+      return 1;
+    }
+    const numbers = [];
+    let minNumber = 1;
+    querySnapshot.forEach((room) => {
+      numbers.push(room.data().number);
+    });
+    console.log("🚀 ~ file: useRoom.jsx:49 ~ querySnapshot.forEach ~ numbers", numbers);
+    minNumber = getMinNotUsed(numbers);
+    setNextRoomNumber(minNumber);
+    return minNumber;
+  }
 
   async function getRoomsByType(roomType) {
     if (!roomType) return null;
@@ -262,11 +295,17 @@ function useRoom() {
     return roomsData;
   }
 
+  useEffect(() => {
+    getNextRoomNumber();
+  }, []);
+
   return {
     loading,
     rooms,
     roomsByType,
+    nextRoomNumber,
     roomsAvailable,
+    getNextRoomNumber,
     addRoom,
     deleteRoom,
     getRooms,
