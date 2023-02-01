@@ -26,20 +26,20 @@ import Card from "@mui/material/Card";
 
 // Otis Kit PRO components
 import { v4 as uuid } from "uuid";
-import useCalendar from "api/useCalendar";
+// import useCalendar from "api/useCalendar";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import { useAtom } from "jotai";
-import { reservedEndDate, reservedStartDate } from "states/reservedDate";
+// import { reservedEndDate, reservedStartDate } from "states/reservedDate";
 import selectedPrice from "states/selectedPrice";
 import { selectedType, maxOccupantsInType } from "states/selectedType";
 import SwipeImages from "./SwipeImages";
 
 function BookingCard({ type, action }) {
-  const [startDate] = useAtom(reservedStartDate);
-  const [endDate] = useAtom(reservedEndDate);
-  const { available } = useCalendar({ type, startDate, endDate });
+  // const [startDate] = useAtom(reservedStartDate);
+  // const [endDate] = useAtom(reservedEndDate);
+  // const { available } = useCalendar({ type, startDate, endDate });
   const [, setType] = useAtom(selectedType);
   const [, setMax] = useAtom(maxOccupantsInType);
   const [, setPrice] = useAtom(selectedPrice);
@@ -81,7 +81,7 @@ function BookingCard({ type, action }) {
   }, []);
 
   return (
-    <Card sx={{ height: "100%" }}>
+    <Card sx={{ height: "480px" }}>
       <MKBox position="relative" borderRadius="lg" mx={2} mt={-3} mb={5} height="100%">
         <SwipeImages type={type} photos={photos} />
       </MKBox>
@@ -120,7 +120,7 @@ function BookingCard({ type, action }) {
           <MKButton
             variant="gradient"
             color="error"
-            disabled={!available}
+            disabled={Math.random() >= 0.5}
             sx={{ height: "100%" }}
             onClick={handleReserve}
           >

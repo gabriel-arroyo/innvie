@@ -23,6 +23,7 @@ function useType(room) {
   const [types, setTypes] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [cacheRoom, setCacheRoom] = useState(room);
+  const [price, setPrice] = useState(0);
   const { addAction } = useHistory();
   const collectionRef = collection(db, "types");
   const defaultRoom = {
@@ -188,10 +189,10 @@ function useType(room) {
 
   async function getByName(name) {
     setLoading(true);
+    const items = [];
     try {
       const q = query(collectionRef, where("type", "==", name));
       const querySnapshot = await getDocs(q);
-      const items = [];
       querySnapshot.forEach((d) => {
         items.push({ ...d.data(), id: d.id });
       });
@@ -201,6 +202,19 @@ function useType(room) {
     } catch (e) {
       setError(e);
     }
+    if (items.length > 0) {
+      return items[0];
+    }
+    return [];
+  }
+
+  async function getPriceByName(name) {
+    const type = await getByName(name);
+    if (type?.price) {
+      setPrice(type.price);
+      return type.price;
+    }
+    return 0;
   }
 
   useEffect(() => {
@@ -224,11 +238,13 @@ function useType(room) {
     loading,
     types,
     photos,
+    price,
     setPhotos,
     cacheRoom,
     setCacheRoom,
     setDefault,
     getType,
+    getPriceByName,
     getByName,
     getAll,
     addType,

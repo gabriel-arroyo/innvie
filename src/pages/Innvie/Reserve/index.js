@@ -13,8 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
 // @mui material components
@@ -39,6 +37,7 @@ import taxes from "constants/taxes";
 import roundTo from "tools/round";
 import BlancLayout from "../Layouts/BlancLayout";
 import LoginModal from "../Authentication/Login/LoginModal";
+import PayButton from "./PayButton";
 
 function Reserve() {
   const [startDate] = useAtom(reservedStartDate);
@@ -427,30 +426,3 @@ function Reserve() {
 }
 
 export default Reserve;
-
-// pay button arrow function component
-function PayButton({ price, onApprove }) {
-  const stringPrice = parseFloat(price.toString()).toFixed(2);
-  return (
-    <PayPalScriptProvider
-      options={{
-        "client-id":
-          "AV6fcal5XwIGN4OXUc9cZ3GmOTLfp4JYhpGH39hP92nxNjQlMvsXmHib_jpGlOK7pkGInHd0oEutDvD0",
-      }}
-    >
-      <PayPalButtons
-        createOrder={(data, actions) =>
-          actions.order.create({
-            purchase_units: [{ amount: { value: stringPrice } }],
-          })
-        }
-        onApprove={onApprove}
-      />
-    </PayPalScriptProvider>
-  );
-}
-
-PayButton.propTypes = {
-  price: PropTypes.number.isRequired,
-  onApprove: PropTypes.func.isRequired,
-};

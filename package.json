@@ -33,6 +33,7 @@
     "flatpickr": "4.6.13",
     "jotai": "^1.8.4",
     "material-ui-popup-state": "^5.0.4",
+    "moment": "^2.29.4",
     "prop-types": "15.8.1",
     "react": "18.1.0",
     "react-copy-to-clipboard": "5.1.0",

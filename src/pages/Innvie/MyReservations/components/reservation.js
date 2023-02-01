@@ -1,23 +1,47 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+import PayButton from "pages/Innvie/Reserve/PayButton";
 import MKTypography from "components/MKTypography";
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import MKBox from "components/MKBox";
 import Map from "components/Map";
-import image from "../../../../assets/images/photos/IMG_2.JPG";
-import { getDaysDifference, parseDate } from "../../../../tools/getDate";
+import MKDatePicker from "components/MKDatePicker";
+import { useEffect, useState } from "react";
+import useType from "api/useType";
+import ImageSwipe from "pages/Innvie/Admin/NewRoom/imageswipe";
+import roundTo from "tools/round";
+import { getDaysDifference, isBefore, parseDate, removeDateRange } from "../../../../tools/getDate";
 
 function Reservation({ user, event }) {
+  const { getPhotos, photos } = useType();
   if (!user) {
     return <h1>Loading...</h1>;
   }
+  useEffect(() => {
+    getPhotos(event.type);
+  }, []);
+
   return (
     <Container>
       <MKTypography variant="h3" align="center" fontWeight="bold" gutterBottom sx={{ mb: "20px" }}>
         {event.type}
       </MKTypography>
       <Grid container spacing={2} display="flex" alignItems="center">
+        <Grid item xs={4}>
+          <Container>
+            <MKTypography variant="body1">Nombre:</MKTypography>
+          </Container>
+        </Grid>
+        <Grid item xs={4}>
+          <Container>
+            <MKTypography variant="body1">Email:</MKTypography>
+          </Container>
+        </Grid>
+        <Grid item xs={4}>
+          <Container>
+            <MKTypography variant="body1">Teléfono:</MKTypography>
+          </Container>
+        </Grid>
         <Grid item xs={4}>
           <Container>
             <MKTypography variant="body1">
@@ -36,7 +60,12 @@ function Reservation({ user, event }) {
           </Container>
         </Grid>
         <Grid item xs={4}>
-          <Dates startDate={parseDate(event.startDate)} endDate={parseDate(event.endDate)} />
+          {/* <Dates startDate={parseDate(event.startDate)} endDate={parseDate(event.endDate)} /> */}
+          <SelectDate
+            startDate={parseDate(event.startDate)}
+            endDate={parseDate(event.endDate)}
+            type={event.type}
+          />
         </Grid>
         <Grid item xs={4}>
           <Times />
@@ -45,16 +74,7 @@ function Reservation({ user, event }) {
           <Codigo code={event.id.substring(0, 6)} />
         </Grid>
         <Grid item xs={4}>
-          <MKBox
-            component="img"
-            src={image}
-            alt="test"
-            borderRadius="lg"
-            shadow="md"
-            width="100%"
-            position="relative"
-            zIndex={1}
-          />
+          <ImageSwipe images={photos} />
         </Grid>
         <Grid item xs={4}>
           <Address />
@@ -69,21 +89,106 @@ function Reservation({ user, event }) {
 
 export default Reservation;
 
-function Dates({ startDate, endDate }) {
+function SelectDate({ startDate, endDate, type }) {
+  const [newStart, setNewStart] = useState(startDate);
+  const [newEnd, setNewEnd] = useState(endDate);
   const [days, setDays] = useState();
+  const [unpaidStart, setUnpaidStart] = useState();
+  const [unpaidEnd, setUnpaidEnd] = useState();
+  const [dateDifference, setDateDifference] = useState(false);
+  const { getPriceByName, price } = useType();
+  console.log("🚀 ~ file: reservation.js:84 ~ SelectDate ~ price", price);
+  const [before, setBefore] = useState(false);
+
+  const onChangeDate = (e) => {
+    const [estart, eend] = e;
+    const start = parseDate(estart);
+    const end = parseDate(eend);
+    setNewStart(start);
+    setNewEnd(end);
+    const result = removeDateRange(start, end, startDate, endDate);
+    setUnpaidStart(result.startDate);
+    setUnpaidEnd(result.endDate);
+    setDateDifference(start !== startDate || end !== endDate);
+  };
+  const onApprove = () => {
+    console.log("🚀 ~ file: reservation.js:82 ~ onChangeDate ~ start", newStart);
+    console.log("🚀 ~ file: reservation.js:82 ~ onChangeDate ~ end", newEnd);
+  };
   useEffect(() => {
-    const calcDays = getDaysDifference(startDate, endDate);
+    const calcDays = getDaysDifference(newStart, newEnd);
+    const b = isBefore(newEnd, endDate);
+    setBefore(b);
     setDays(calcDays);
-  }, []);
+    getPriceByName(type);
+  }, [newEnd]);
   return (
-    <Container>
-      <MKTypography variant="body1">
-        {startDate} - {endDate}
-      </MKTypography>
+    <Grid
+      item
+      sm={10}
+      xs={10}
+      lg={5}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       <MKTypography variant="body2">{days} Noches</MKTypography>
-    </Container>
+      <MKTypography variant="h6" color="primary" sx={{ width: "200px", textAlign: "center" }}>
+        Fecha inicial / final
+      </MKTypography>
+      <MKDatePicker
+        type="date"
+        options={{ mode: "range", defaultDate: [startDate, endDate] }}
+        variant="standard"
+        placeholder="Please select date"
+        fullWidth
+        sx={{ width: "20vw", p: "20px" }}
+        onChange={onChangeDate}
+      />
+      {dateDifference && !before && (
+        <>
+          <MKTypography variant="body3" width={180} textAlign="center" color="error">
+            Las siguientes fechas están disponibles:
+          </MKTypography>
+          <MKTypography variant="body3" width={180} textAlign="center" color="error">
+            {unpaidStart} to {unpaidEnd}
+          </MKTypography>
+          <MKTypography variant="body" color="error" fontWeight="bold" my={2}>
+            Cambiar reservación
+          </MKTypography>
+          <MKTypography>
+            Precio total: ${roundTo(price * days + price * days * 4.08, 2)}
+          </MKTypography>
+          <PayButton price={price * days + price * days * 4.08} onApprove={onApprove} />
+        </>
+      )}
+      {dateDifference && before && (
+        <MKTypography variant="body3" textAlign="center" color="error">
+          Para solicitar su devolución favor de pasar al mostrador principal
+        </MKTypography>
+      )}
+    </Grid>
   );
 }
+
+// function Dates({ startDate, endDate }) {
+//   const [days, setDays] = useState();
+//   useEffect(() => {
+//     const calcDays = getDaysDifference(startDate, endDate);
+//     setDays(calcDays);
+//   }, []);
+//   return (
+//     <Container>
+//       <MKTypography variant="body1">
+//         {startDate} - {endDate}
+//       </MKTypography>
+//       <MKTypography variant="body2">{days} Noches</MKTypography>
+//     </Container>
+//   );
+// }
 
 function Times() {
   return (

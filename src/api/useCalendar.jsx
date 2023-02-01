@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import {
   collection,
   doc,
+  documentId,
   getDocs,
   query,
   serverTimestamp,
@@ -57,6 +58,42 @@ function useCalendar({ type, startDate, endDate }) {
 
   function checkIntersection(range1, range2) {
     return range1.startDate < range2.endDate && range2.startDate < range1.endDate;
+  }
+
+  async function getRoomAvailability(_room, _startDate, _endDate, _id = null) {
+    const range = {
+      startDate: new Date(_startDate ?? startDate),
+      endDate: new Date(_endDate ?? endDate),
+    };
+    const results = [];
+    const today = new Date();
+    let q = query(collectionRef, where("number", "==", _room), where("endDate", ">=", today));
+    if (_id) {
+      q = query(
+        collectionRef,
+        where("number", "==", _room),
+        where("endDate", ">=", today),
+        where(documentId(), "!=", _id)
+      );
+    }
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((d) => {
+      const dateRange = {
+        ...d.data(),
+        startDate: d.data().startDate.toDate(),
+        endDate: d.data().endDate.toDate(),
+      };
+      if (checkIntersection(range, dateRange)) {
+        results.push({
+          ...d.data(),
+          startDate: d.data().startDate.toDate(),
+          endDate: d.data().endDate.toDate(),
+        });
+      }
+    });
+    const found = results.find((r) => r.room === _room).length > 0;
+    setAvailable(!found);
+    return !found;
   }
 
   async function getAvailability(_type, _startDate, _endDate) {
@@ -203,6 +240,7 @@ function useCalendar({ type, startDate, endDate }) {
     addReservation,
     getReservationsByEmail,
     getAvailability,
+    getRoomAvailability,
     getAvailableRoom,
     getCalendar,
     getMany,

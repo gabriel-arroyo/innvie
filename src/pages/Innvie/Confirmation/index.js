@@ -53,8 +53,8 @@ function Confirmation() {
           textAlign="center"
           fullwidth
         >
-          A su llegada al hotel, se le proporcionarán instrucciones detalladas para acceder a su
-          habitación a través de su correo electrónico.
+          Se le proporcionarán instrucciones detalladas para acceder a su habitación a través de su
+          correo electrónico.
         </MKTypography>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>
@@ -71,7 +71,10 @@ function Confirmation() {
               <MKTypography>{`${days} noches`}</MKTypography>
               <MKBox pt={3} pb={2} px={2} textAlign="center">
                 <MKBox my={1}>
+                  <MKTypography>Costo de habitación: ${price * days}.00</MKTypography>
+                  <MKTypography>Tax: ${roundTo(taxes * days * price, 2)}</MKTypography>
                   <MKTypography variant="h1" color="text">
+                    Total:{" "}
                     <MKTypography
                       display="inline"
                       component="small"

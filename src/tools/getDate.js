@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 export const getCurrentDate = (date = new Date()) => {
   const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   return currentDate;
@@ -38,4 +40,44 @@ export function parseDate(date) {
     console.log("fecha ilegible", date);
   }
   return str;
+}
+
+export function removeDateRange(sdBig, edBig, sdSmall, edSmall) {
+  if (!sdBig || !edBig || !sdSmall || !edSmall) return [];
+  const startDateA = moment(sdBig);
+  const endDateA = moment(edBig);
+  const startDateB = moment(sdSmall);
+  const endDateB = moment(edSmall);
+
+  const dateRanges = [];
+
+  if (startDateB.isBefore(startDateA)) {
+    if (endDateB.isBefore(startDateA)) {
+      dateRanges.push({ start: startDateA, end: endDateA });
+    } else if (endDateB.isBefore(endDateA)) {
+      dateRanges.push({ start: startDateA, end: endDateB.clone().subtract(1, "days") });
+      dateRanges.push({ start: endDateB.clone().add(1, "days"), end: endDateA });
+    } else {
+      dateRanges.push({ start: startDateA, end: startDateB.clone().subtract(1, "days") });
+    }
+  } else if (startDateB.isBefore(endDateA)) {
+    if (endDateB.isBefore(endDateA)) {
+      dateRanges.push({ start: startDateB.clone().add(1, "days"), end: endDateA });
+    } else {
+      dateRanges.push({ start: startDateB.clone().add(1, "days"), end: endDateA });
+    }
+  } else {
+    dateRanges.push({ start: startDateA, end: endDateA });
+  }
+  if (!dateRanges || dateRanges.length < 1) return [];
+  const { start, end } = dateRanges[0];
+  const rstart = start.add(1, "days").format("YYYY-MM-DD");
+  const rend = end.format("YYYY-MM-DD");
+  return { startDate: rstart, endDate: rend };
+}
+
+export function isBefore(date1, date2) {
+  const dateA = moment(date1);
+  const dateB = moment(date2);
+  return dateA.isBefore(dateB);
 }
