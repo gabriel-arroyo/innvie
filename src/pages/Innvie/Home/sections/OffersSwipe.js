@@ -15,33 +15,33 @@ Coded by www.creative-tim.com
 */
 
 // SwiperJS
-import SwiperCore, { Autoplay, Navigation } from "swiper";
+import SwiperCore, { Autoplay, Navigation } from "swiper"
 // SwiperJS react components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react"
 
 // SwiperJS styles
-import "swiper/css";
-import "swiper/css/navigation";
-import PropTypes from "prop-types";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import "swiper/css"
+import "swiper/css/navigation"
+import PropTypes from "prop-types"
+import useMediaQuery from "@mui/material/useMediaQuery"
 
 // Pricing page components
 
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"
 // Images
 // import bg1 from "assets/images/bg2.jpg";
-import Container from "@mui/material/Container";
-import MKBox from "components/MKBox";
-import Grid from "@mui/material/Grid";
-import React from "react";
-import Offers from "../components/Offers/offers";
+import Container from "@mui/material/Container"
+import MKBox from "components/MKBox"
+import Grid from "@mui/material/Grid"
+import React from "react"
+import Offers from "../components/Offers/offers"
 
 function OffersSwipe({ cards }) {
-  const matches = useMediaQuery("(min-width:1000px)");
+  const matches = useMediaQuery("(min-width:1000px)")
   // eslint-disable-next-line no-console
-  console.log(matches);
+  console.log(matches)
   // install SwiperJS modules
-  SwiperCore.use([Autoplay, Navigation]);
+  SwiperCore.use([Autoplay, Navigation])
   return (
     <div style={{ marginBottom: "20px" }}>
       <Grid
@@ -92,11 +92,11 @@ function OffersSwipe({ cards }) {
         }}
       />
     </div>
-  );
+  )
 }
 
-export default OffersSwipe;
+export default OffersSwipe
 
 OffersSwipe.propTypes = {
   cards: PropTypes.instanceOf(Array).isRequired,
-};
+}

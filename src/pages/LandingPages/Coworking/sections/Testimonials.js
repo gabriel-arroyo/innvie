@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 // import Stack from "@mui/material/Stack";
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function Testimonials() {
   const image =
-    "https://images.unsplash.com/photo-1521668576204-57ae3afee860?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80";
+    "https://images.unsplash.com/photo-1521668576204-57ae3afee860?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80"
 
   return (
     <MKBox component="section" position="relative" py={6}>
@@ -122,7 +122,7 @@ function Testimonials() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Testimonials;
+export default Testimonials

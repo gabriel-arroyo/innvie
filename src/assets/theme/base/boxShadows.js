@@ -20,12 +20,12 @@ Coded by www.creative-tim.com
  */
 
 // Otis Kit PRO Base Styles
-import colors from "assets/theme/base/colors";
+import colors from "assets/theme/base/colors"
 
 // Otis Kit PRO Helper Functions
-import boxShadow from "assets/theme/functions/boxShadow";
+import boxShadow from "assets/theme/functions/boxShadow"
 
-const { black, white, tabs, coloredShadows } = colors;
+const { black, white, tabs, coloredShadows } = colors
 
 export default {
   xs: boxShadow([0, 2], [9, -5], black.main, 0.15),
@@ -113,4 +113,4 @@ export default {
   tabsBoxShadow: {
     indicator: boxShadow([0, 1], [5, 1], tabs.indicator.boxShadow, 1),
   },
-};
+}

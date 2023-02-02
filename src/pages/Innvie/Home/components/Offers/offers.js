@@ -1,8 +1,8 @@
-import React from "react";
-import Grid from "@mui/material/Grid";
-import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
-import PropTypes from "prop-types";
-import { Container } from "@mui/material";
+import React from "react"
+import Grid from "@mui/material/Grid"
+import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard"
+import PropTypes from "prop-types"
+import { Container } from "@mui/material"
 
 function Offers({ cards }) {
   return (
@@ -47,11 +47,11 @@ function Offers({ cards }) {
         )}
       </Grid>
     </Container>
-  );
+  )
 }
 
-export default Offers;
+export default Offers
 
 Offers.propTypes = {
   cards: PropTypes.instanceOf(Array).isRequired,
-};
+}

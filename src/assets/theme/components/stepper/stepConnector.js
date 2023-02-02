@@ -14,11 +14,11 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import borders from "assets/theme/base/borders";
-import colors from "assets/theme/base/colors";
+import borders from "assets/theme/base/borders"
+import colors from "assets/theme/base/colors"
 
-const { white } = colors;
-const { borderWidth } = borders;
+const { white } = colors
+const { borderWidth } = borders
 
 export default {
   styleOverrides: {
@@ -47,4 +47,4 @@ export default {
       opacity: 0.5,
     },
   },
-};
+}

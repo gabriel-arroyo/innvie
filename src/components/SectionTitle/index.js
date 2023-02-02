@@ -1,6 +1,6 @@
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import PropTypes from "prop-types";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import PropTypes from "prop-types"
 
 export default function SectionTitle({ title }) {
   return (
@@ -19,9 +19,9 @@ export default function SectionTitle({ title }) {
         {title}
       </MKTypography>
     </MKBox>
-  );
+  )
 }
 
 SectionTitle.propTypes = {
   title: PropTypes.string.isRequired,
-};
+}

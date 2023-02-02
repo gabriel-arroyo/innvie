@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKInput from "components/MKInput"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Images
 // import bgImage from "../../../../assets/images/patron1.png";
@@ -222,7 +222,7 @@ function Contact() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Contact;
+export default Contact

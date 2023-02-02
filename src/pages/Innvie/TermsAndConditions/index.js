@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import TermsModal from "./modal";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import TermsModal from "./modal"
 
 // Otis Kit PRO examples
 // import DefaultNavbar from "examples/Navbars/DefaultNavbar";
@@ -105,7 +105,7 @@ function Terms() {
         <DefaultFooter content={footerRoutes} />
       </MKBox> */}
     </>
-  );
+  )
 }
 
-export default Terms;
+export default Terms

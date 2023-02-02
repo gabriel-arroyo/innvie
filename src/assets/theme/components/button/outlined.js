@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO Base Styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
+import colors from "assets/theme/base/colors"
+import typography from "assets/theme/base/typography"
 
 // Otis Kit PRO Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { transparent, light, info, secondary } = colors;
-const { size } = typography;
+const { transparent, light, info, secondary } = colors
+const { size } = typography
 
 export default {
   base: {
@@ -77,4 +77,4 @@ export default {
       backgroundColor: transparent.main,
     },
   },
-};
+}

@@ -14,21 +14,21 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Stack from "@mui/material/Stack"
+import Divider from "@mui/material/Divider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKBadge from "components/MKBadge";
-import MKButton from "components/MKButton";
-import MKAvatar from "components/MKAvatar";
-import MKTypography from "components/MKTypography";
-import MKSocialButton from "components/MKSocialButton";
+import MKBox from "components/MKBox"
+import MKBadge from "components/MKBadge"
+import MKButton from "components/MKButton"
+import MKAvatar from "components/MKAvatar"
+import MKTypography from "components/MKTypography"
+import MKSocialButton from "components/MKSocialButton"
 
 // Images
-import profilePicture from "assets/images/team-2.jpg";
+import profilePicture from "assets/images/team-2.jpg"
 
 function ContentTwo() {
   return (
@@ -87,7 +87,7 @@ function ContentTwo() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default ContentTwo;
+export default ContentTwo

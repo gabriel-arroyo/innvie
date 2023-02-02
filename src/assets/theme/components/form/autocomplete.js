@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import boxShadows from "assets/theme/base/boxShadows";
-import typography from "assets/theme/base/typography";
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
+import boxShadows from "assets/theme/base/boxShadows"
+import typography from "assets/theme/base/typography"
+import colors from "assets/theme/base/colors"
+import borders from "assets/theme/base/borders"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { lg } = boxShadows;
-const { size } = typography;
-const { text, white, transparent, light, dark, gradients } = colors;
-const { borderRadius } = borders;
+const { lg } = boxShadows
+const { size } = typography
+const { text, white, transparent, light, dark, gradients } = colors
+const { borderRadius } = borders
 
 export default {
   styleOverrides: {
@@ -95,4 +95,4 @@ export default {
       },
     },
   },
-};
+}

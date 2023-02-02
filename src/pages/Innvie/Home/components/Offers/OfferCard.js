@@ -14,19 +14,19 @@ Coded by www.creative-tim.com
 */
 
 // react-router components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
-import MuiLink from "@mui/material/Link";
+import Card from "@mui/material/Card"
+import Icon from "@mui/material/Icon"
+import MuiLink from "@mui/material/Link"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function OfferCard({ title, description, action }) {
   const cardActionStyles = {
@@ -42,7 +42,7 @@ function OfferCard({ title, description, action }) {
       {
         transform: `translateX(6px)`,
       },
-  };
+  }
 
   return (
     <Card sx={{ flexGrow: 1, backgroundColor: "#2c8ea2", height: "100%" }}>
@@ -84,7 +84,7 @@ function OfferCard({ title, description, action }) {
         )}
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Typechecking props for the RaisedBlogCard
@@ -106,6 +106,6 @@ OfferCard.propTypes = {
     ]),
     label: PropTypes.string.isRequired,
   }).isRequired,
-};
+}
 
-export default OfferCard;
+export default OfferCard

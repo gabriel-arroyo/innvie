@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Images
-import bgImage from "assets/images/bg3.jpg";
+import bgImage from "assets/images/bg3.jpg"
 
 function CtaThree() {
   return (
@@ -57,7 +57,7 @@ function CtaThree() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default CtaThree;
+export default CtaThree

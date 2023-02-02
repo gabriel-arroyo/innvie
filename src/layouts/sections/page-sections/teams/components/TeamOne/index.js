@@ -14,22 +14,22 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-import Tooltip from "@mui/material/Tooltip";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
+import Tooltip from "@mui/material/Tooltip"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import TransparentTeamCard from "examples/Cards/TeamCards/TransparentTeamCard";
+import TransparentTeamCard from "examples/Cards/TeamCards/TransparentTeamCard"
 
 // Images
-import team1 from "assets/images/bruce-mars.jpg";
-import team2 from "assets/images/team-3.jpg";
-import team3 from "assets/images/team-4.jpg";
+import team1 from "assets/images/bruce-mars.jpg"
+import team2 from "assets/images/team-3.jpg"
+import team3 from "assets/images/team-4.jpg"
 
 function Team1() {
   const socialIcons = (
@@ -68,7 +68,7 @@ function Team1() {
         />
       </Tooltip>
     </>
-  );
+  )
 
   return (
     <MKBox component="section" py={6}>
@@ -128,7 +128,7 @@ function Team1() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Team1;
+export default Team1

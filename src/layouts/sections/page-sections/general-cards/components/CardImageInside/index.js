@@ -14,17 +14,17 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import DefaultBlogCard from "examples/Cards/BlogCards/DefaultBlogCard";
+import DefaultBlogCard from "examples/Cards/BlogCards/DefaultBlogCard"
 
 // Images
-import image from "assets/images/annie-spratt.jpg";
-import author from "assets/images/marie.jpg";
+import image from "assets/images/annie-spratt.jpg"
+import author from "assets/images/marie.jpg"
 
 function CardImageInside() {
   return (
@@ -48,7 +48,7 @@ function CardImageInside() {
         />
       </Grid>
     </MKBox>
-  );
+  )
 }
 
-export default CardImageInside;
+export default CardImageInside

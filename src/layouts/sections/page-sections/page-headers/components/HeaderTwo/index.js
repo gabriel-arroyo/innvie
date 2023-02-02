@@ -14,26 +14,26 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react"
 
 // typed-js
-import * as Typed from "typed.js";
+import * as Typed from "typed.js"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Link from "@mui/material/Link"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Images
-import bgImage from "assets/images/bg-about-us.jpg";
+import bgImage from "assets/images/bg-about-us.jpg"
 
 function HeaderTwo() {
-  const typedJSRef = useRef(null);
+  const typedJSRef = useRef(null)
 
   // Setting up typedJS
   useEffect(() => {
@@ -44,10 +44,10 @@ function HeaderTwo() {
       backDelay: 200,
       startDelay: 500,
       loop: true,
-    });
+    })
 
-    return () => typedJS.destroy();
-  }, []);
+    return () => typedJS.destroy()
+  }, [])
 
   return (
     <MKBox component="header" position="relative" height="100%">
@@ -210,7 +210,7 @@ function HeaderTwo() {
         </Container>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
-export default HeaderTwo;
+export default HeaderTwo

@@ -14,21 +14,21 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKBadge from "components/MKBadge";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKBadge from "components/MKBadge"
+import MKTypography from "components/MKTypography"
 
 // Images
-import bg1 from "assets/images/bg.jpg";
-import bg2 from "assets/images/examples/content-1.jpg";
-import bg3 from "assets/images/examples/content-2.jpg";
-import bg4 from "assets/images/examples/content-3.jpg";
-import bg5 from "assets/images/examples/content-4.jpg";
-import bg6 from "assets/images/examples/content-5.jpg";
+import bg1 from "assets/images/bg.jpg"
+import bg2 from "assets/images/examples/content-1.jpg"
+import bg3 from "assets/images/examples/content-2.jpg"
+import bg4 from "assets/images/examples/content-3.jpg"
+import bg5 from "assets/images/examples/content-4.jpg"
+import bg6 from "assets/images/examples/content-5.jpg"
 
 function ContentOne() {
   return (
@@ -135,7 +135,7 @@ function ContentOne() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default ContentOne;
+export default ContentOne

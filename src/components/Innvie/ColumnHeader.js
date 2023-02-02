@@ -1,7 +1,7 @@
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import React from "react";
-import PropTypes from "prop-types";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import React from "react"
+import PropTypes from "prop-types"
 
 function ColumnHeader({ title }) {
   return (
@@ -10,11 +10,11 @@ function ColumnHeader({ title }) {
         {title}
       </MKTypography>
     </MKBox>
-  );
+  )
 }
 
 ColumnHeader.propTypes = {
   title: PropTypes.string.isRequired,
-};
+}
 
-export default ColumnHeader;
+export default ColumnHeader

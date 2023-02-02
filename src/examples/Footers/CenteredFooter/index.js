@@ -14,28 +14,28 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
+import Link from "@mui/material/Link"
+import Grid from "@mui/material/Grid"
+import Stack from "@mui/material/Stack"
 
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import PinterestIcon from "@mui/icons-material/Pinterest";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import FacebookIcon from "@mui/icons-material/Facebook"
+import TwitterIcon from "@mui/icons-material/Twitter"
+import InstagramIcon from "@mui/icons-material/Instagram"
+import PinterestIcon from "@mui/icons-material/Pinterest"
+import GitHubIcon from "@mui/icons-material/GitHub"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function CenteredFooter({ company, links, socials }) {
-  const { href, name } = company;
-  console.log(links);
-  const year = new Date().getFullYear();
+  const { href, name } = company
+  console.log(links)
+  const year = new Date().getFullYear()
 
   // const renderLinks = links.map((link, key) => {
   //   const elementKey = `${link.name}-${key}`;
@@ -55,7 +55,7 @@ function CenteredFooter({ company, links, socials }) {
   // });
 
   const renderSocials = socials.map((social, key) => {
-    const elementKey = `${social.link}-${key}`;
+    const elementKey = `${social.link}-${key}`
 
     return (
       <MKTypography
@@ -68,8 +68,8 @@ function CenteredFooter({ company, links, socials }) {
       >
         {social.icon}
       </MKTypography>
-    );
-  });
+    )
+  })
 
   return (
     <MKBox component="footer" py={6}>
@@ -108,7 +108,7 @@ function CenteredFooter({ company, links, socials }) {
         </Grid>
       </Grid>
     </MKBox>
-  );
+  )
 }
 
 // Setting default values for the props of CenteredFooter
@@ -159,13 +159,13 @@ CenteredFooter.defaultProps = {
       link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
     },
   ],
-};
+}
 
 // Typechecking props for the CenteredFooter
 CenteredFooter.propTypes = {
   company: PropTypes.instanceOf(Object),
   links: PropTypes.instanceOf(Array),
   socials: PropTypes.instanceOf(Array),
-};
+}
 
-export default CenteredFooter;
+export default CenteredFooter

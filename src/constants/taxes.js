@@ -1,3 +1,3 @@
-const taxes = 0.0425;
+const taxes = 0.0425
 
-export default taxes;
+export default taxes

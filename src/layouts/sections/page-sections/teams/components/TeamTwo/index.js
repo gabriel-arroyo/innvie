@@ -14,23 +14,23 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import HorizontalTeamCard from "examples/Cards/TeamCards/HorizontalTeamCard";
+import HorizontalTeamCard from "examples/Cards/TeamCards/HorizontalTeamCard"
 
 // Images
-import bgImage from "assets/images/examples/city.jpg";
-import team1 from "assets/images/team-5.jpg";
-import team2 from "assets/images/bruce-mars.jpg";
-import team3 from "assets/images/ivana-squares.jpg";
-import team4 from "assets/images/ivana-square.jpg";
+import bgImage from "assets/images/examples/city.jpg"
+import team1 from "assets/images/team-5.jpg"
+import team2 from "assets/images/bruce-mars.jpg"
+import team3 from "assets/images/ivana-squares.jpg"
+import team4 from "assets/images/ivana-square.jpg"
 
 function TeamTwo() {
   return (
@@ -117,7 +117,7 @@ function TeamTwo() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default TeamTwo;
+export default TeamTwo

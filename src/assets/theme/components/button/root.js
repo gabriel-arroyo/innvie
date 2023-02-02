@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO Base Styles
-import typography from "assets/theme/base/typography";
-import borders from "assets/theme/base/borders";
+import typography from "assets/theme/base/typography"
+import borders from "assets/theme/base/borders"
 
 // Otis Kit PRO Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { fontWeightBold, size } = typography;
-const { borderRadius } = borders;
+const { fontWeightBold, size } = typography
+const { borderRadius } = borders
 
 export default {
   display: "inline-flex",
@@ -49,4 +49,4 @@ export default {
     fontSize: pxToRem(15),
     marginTop: pxToRem(-2),
   },
-};
+}

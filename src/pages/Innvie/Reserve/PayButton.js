@@ -1,9 +1,9 @@
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import PropTypes from "prop-types";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js"
+import PropTypes from "prop-types"
 
 // pay button arrow function component
 function PayButton({ price, onApprove }) {
-  const stringPrice = parseFloat(price.toString()).toFixed(2);
+  const stringPrice = parseFloat(price.toString()).toFixed(2)
   return (
     <PayPalScriptProvider
       options={{
@@ -20,11 +20,11 @@ function PayButton({ price, onApprove }) {
         onApprove={onApprove}
       />
     </PayPalScriptProvider>
-  );
+  )
 }
 PayButton.propTypes = {
   price: PropTypes.number.isRequired,
   onApprove: PropTypes.func.isRequired,
-};
+}
 
-export default PayButton;
+export default PayButton

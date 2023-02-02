@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
-import boxShadows from "assets/theme/base/boxShadows";
+import colors from "assets/theme/base/colors"
+import borders from "assets/theme/base/borders"
+import boxShadows from "assets/theme/base/boxShadows"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { grey, white } = colors;
-const { borderRadius } = borders;
-const { tabsBoxShadow } = boxShadows;
+const { grey, white } = colors
+const { borderRadius } = borders
+const { tabsBoxShadow } = boxShadows
 
 export default {
   styleOverrides: {
@@ -60,4 +60,4 @@ export default {
       transition: "all 500ms ease",
     },
   },
-};
+}

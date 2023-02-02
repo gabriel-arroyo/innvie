@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO Base Styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
-import typography from "assets/theme/base/typography";
+import colors from "assets/theme/base/colors"
+import borders from "assets/theme/base/borders"
+import typography from "assets/theme/base/typography"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { inputBorderColor, info, grey, transparent } = colors;
-const { borderRadius } = borders;
-const { size } = typography;
+const { inputBorderColor, info, grey, transparent } = colors
+const { borderRadius } = borders
+const { size } = typography
 
 export default {
   styleOverrides: {
@@ -63,4 +63,4 @@ export default {
       padding: 0,
     },
   },
-};
+}

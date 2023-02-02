@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
+import colors from "assets/theme/base/colors"
+import typography from "assets/theme/base/typography"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { dark } = colors;
-const { size, fontWeightBold } = typography;
+const { dark } = colors
+const { size, fontWeightBold } = typography
 
 export default {
   styleOverrides: {
@@ -45,4 +45,4 @@ export default {
       },
     },
   },
-};
+}

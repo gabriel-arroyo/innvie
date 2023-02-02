@@ -13,23 +13,23 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Snackbar from "@mui/material/Snackbar";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Snackbar from "@mui/material/Snackbar"
 
 // @mui icons
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from "@mui/icons-material/Close"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
 
 function ToastMessage() {
-  const [show, setShow] = useState(false);
-  const toggleSnackbar = () => setShow(!show);
+  const [show, setShow] = useState(false)
+  const toggleSnackbar = () => setShow(!show)
 
   const toastStyles = ({
     palette: { info },
@@ -46,13 +46,13 @@ function ToastMessage() {
       px: 2,
       py: 0.5,
     },
-  });
+  })
 
   const toastTemplate = (
     <MKBox display="flex" justifyContent="space-between" alignItems="center" color="white">
       Hello, world! This is a notification message.
     </MKBox>
-  );
+  )
 
   return (
     <MKBox component="section" py={6}>
@@ -75,7 +75,7 @@ function ToastMessage() {
         />
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default ToastMessage;
+export default ToastMessage

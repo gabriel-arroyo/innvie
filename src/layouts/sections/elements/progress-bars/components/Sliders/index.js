@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Slider from "@mui/material/Slider";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Stack from "@mui/material/Stack"
+import Slider from "@mui/material/Slider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 function Sliders() {
   return (
@@ -34,7 +34,7 @@ function Sliders() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Sliders;
+export default Sliders

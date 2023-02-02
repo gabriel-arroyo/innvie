@@ -14,19 +14,19 @@ Coded by www.creative-tim.com
 */
 
 // react-router components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
-import MuiLink from "@mui/material/Link";
+import Card from "@mui/material/Card"
+import Icon from "@mui/material/Icon"
+import MuiLink from "@mui/material/Link"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function HorizontalCard({ image, title, description, action, url }) {
   const cardActionStyles = {
@@ -42,7 +42,7 @@ function HorizontalCard({ image, title, description, action, url }) {
       {
         transform: `translateX(6px)`,
       },
-  };
+  }
 
   return (
     <Card sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
@@ -107,7 +107,7 @@ function HorizontalCard({ image, title, description, action, url }) {
         )}
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Typechecking props for the RaisedBlogCard
@@ -131,6 +131,6 @@ HorizontalCard.propTypes = {
     label: PropTypes.string.isRequired,
   }).isRequired,
   url: PropTypes.string.isRequired,
-};
+}
 
-export default HorizontalCard;
+export default HorizontalCard

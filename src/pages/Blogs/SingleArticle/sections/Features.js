@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function Features() {
   const data = [
@@ -48,7 +48,7 @@ function Features() {
       icon: "contacts",
       name: "Modern Interface",
     },
-  ];
+  ]
 
   return (
     <MKBox component="section" py={8}>
@@ -67,7 +67,7 @@ function Features() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Features;
+export default Features

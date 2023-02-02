@@ -14,9 +14,9 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import PropTypes from "prop-types";
-import Autocomplete from "@mui/material/Autocomplete";
-import MKInput from "components/MKInput";
+import PropTypes from "prop-types"
+import Autocomplete from "@mui/material/Autocomplete"
+import MKInput from "components/MKInput"
 
 // Otis Kit PRO components
 
@@ -28,21 +28,21 @@ function SelectPicker({ options, onChange, value, ...rest }) {
       onChange={onChange}
       renderInput={(params) => <MKInput {...params} {...rest} />}
     />
-  );
+  )
 }
 
 SelectPicker.defaultProps = {
   options: [],
   value: "",
   onChange: () => {
-    console.log("onChange not defined");
+    console.log("onChange not defined")
   },
-};
+}
 
 SelectPicker.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.string),
-};
+}
 
-export default SelectPicker;
+export default SelectPicker

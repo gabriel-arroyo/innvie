@@ -14,22 +14,22 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Divider from "@mui/material/Divider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function DetailedFooter({ content }) {
-  const { brand, socials, menus, copyright } = content;
+  const { brand, socials, menus, copyright } = content
 
   return (
     <MKBox component="footer">
@@ -44,7 +44,7 @@ function DetailedFooter({ content }) {
             </MKTypography>
             <MKBox display="flex" alignItems="center">
               {socials.map(({ icon, link }, key) => {
-                const elementKey = `${link}-${key}`;
+                const elementKey = `${link}-${key}`
 
                 return (
                   <MKTypography
@@ -60,7 +60,7 @@ function DetailedFooter({ content }) {
                   >
                     {icon}
                   </MKTypography>
-                );
+                )
               })}
             </MKBox>
           </Grid>
@@ -117,12 +117,12 @@ function DetailedFooter({ content }) {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the DetailedFooter
 DetailedFooter.propTypes = {
   content: PropTypes.instanceOf(Object).isRequired,
-};
+}
 
-export default DetailedFooter;
+export default DetailedFooter

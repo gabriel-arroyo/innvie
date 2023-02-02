@@ -15,12 +15,12 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
+import MKBox from "components/MKBox"
+import MKInput from "components/MKInput"
 
 function InputError() {
   return (
@@ -31,7 +31,7 @@ function InputError() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default InputError;
+export default InputError

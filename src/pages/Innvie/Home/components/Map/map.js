@@ -1,9 +1,9 @@
-import React from "react";
-import { Box } from "@mui/material";
-import MKTypography from "components/MKTypography";
-import MKBox from "components/MKBox";
-import Container from "@mui/material/Container";
-import "./map.css";
+import React from "react"
+import { Box } from "@mui/material"
+import MKTypography from "components/MKTypography"
+import MKBox from "components/MKBox"
+import Container from "@mui/material/Container"
+import "./map.css"
 
 function Map() {
   return (
@@ -36,7 +36,7 @@ function Map() {
         </MKTypography>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Map;
+export default Map

@@ -14,23 +14,23 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import CenteredFooter from "examples/Footers/CenteredFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import CenteredFooter from "examples/Footers/CenteredFooter"
 
 // Routes
-import { Box } from "@mui/material";
+import { Box } from "@mui/material"
 
 function CustomLayout({ title, subtitle, children }) {
   return (
@@ -87,7 +87,7 @@ function CustomLayout({ title, subtitle, children }) {
         <CenteredFooter />
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the CustomLayout
@@ -95,10 +95,10 @@ CustomLayout.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   children: PropTypes.node.isRequired,
-};
+}
 
 CustomLayout.defaultProps = {
   subtitle: "",
-};
+}
 
-export default CustomLayout;
+export default CustomLayout

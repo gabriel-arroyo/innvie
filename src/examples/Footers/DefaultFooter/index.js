@@ -14,21 +14,21 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function DefaultFooter({ content }) {
-  const { brand, socials, menus, copyright } = content;
+  const { brand, socials, menus, copyright } = content
 
   return (
     <MKBox component="footer">
@@ -43,7 +43,7 @@ function DefaultFooter({ content }) {
             </MKBox>
             <MKBox display="flex" alignItems="center" mt={3}>
               {socials.map(({ icon, link }, key) => {
-                const elementKey = `${link}-${key}`;
+                const elementKey = `${link}-${key}`
 
                 return (
                   <MKTypography
@@ -59,7 +59,7 @@ function DefaultFooter({ content }) {
                   >
                     {icon}
                   </MKTypography>
-                );
+                )
               })}
             </MKBox>
           </Grid>
@@ -111,12 +111,12 @@ function DefaultFooter({ content }) {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the DefaultFooter
 DefaultFooter.propTypes = {
   content: PropTypes.instanceOf(Object).isRequired,
-};
+}
 
-export default DefaultFooter;
+export default DefaultFooter

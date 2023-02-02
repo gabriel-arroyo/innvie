@@ -13,31 +13,31 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react"
 
 // react-router components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import useCalendar from "api/useCalendar";
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import useCalendar from "api/useCalendar"
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 function SimpleBookingCard({ image, title, description, categories, action, startDate, endDate }) {
-  const { available, getAvailableRoom } = useCalendar();
+  const { available, getAvailableRoom } = useCalendar()
 
   useEffect(() => {
     getAvailableRoom(title, startDate, endDate).then((room) => {
-      console.log("room", room);
-    });
-  }, []);
+      console.log("room", room)
+    })
+  }, [])
   return (
     <Card sx={{ height: "100%" }}>
       <MKBox position="relative" borderRadius="lg" mx={2} mt={-3} height="100%">
@@ -123,13 +123,13 @@ function SimpleBookingCard({ image, title, description, categories, action, star
         )}
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Setting default props for the SimpleBookingCard
 SimpleBookingCard.defaultProps = {
   categories: [],
-};
+}
 
 // Typechecking props for the SimpleBookingCard
 SimpleBookingCard.propTypes = {
@@ -155,6 +155,6 @@ SimpleBookingCard.propTypes = {
     ]),
     label: PropTypes.string.isRequired,
   }).isRequired,
-};
+}
 
-export default SimpleBookingCard;
+export default SimpleBookingCard

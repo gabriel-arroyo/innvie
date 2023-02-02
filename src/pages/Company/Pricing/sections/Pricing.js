@@ -13,35 +13,35 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import AppBar from "@mui/material/AppBar"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKBadge from "components/MKBadge";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKBadge from "components/MKBadge"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultPricingCard from "examples/Cards/PricingCards/DefaultPricingCard";
+import DefaultPricingCard from "examples/Cards/PricingCards/DefaultPricingCard"
 
 // Imags
 const bgImage =
-  "https://images.unsplash.com/photo-1467541473380-93479a5a3ffa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2246&amp;q=80";
+  "https://images.unsplash.com/photo-1467541473380-93479a5a3ffa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2246&amp;q=80"
 
 function Pricing() {
-  const [activeTab, setActiveTab] = useState(0);
-  const [tabType, setTabType] = useState("monthly");
+  const [activeTab, setActiveTab] = useState(0)
+  const [tabType, setTabType] = useState("monthly")
 
   const handleTabType = ({ currentTarget }, newValue) => {
-    setActiveTab(newValue);
-    setTabType(currentTarget.id);
-  };
+    setActiveTab(newValue)
+    setTabType(currentTarget.id)
+  }
 
   return (
     <MKBox component="section" py={{ xs: 0, lg: 7 }}>
@@ -177,7 +177,7 @@ function Pricing() {
         </Container>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
-export default Pricing;
+export default Pricing

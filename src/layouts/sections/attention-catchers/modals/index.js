@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "layouts/sections/components/BaseLayout"
+import View from "layouts/sections/components/View"
 
 // Modals page components
-import SimpleModal from "layouts/sections/attention-catchers/modals/components/SimpleModal";
-import NotificationModal from "layouts/sections/attention-catchers/modals/components/NotificationModal";
+import SimpleModal from "layouts/sections/attention-catchers/modals/components/SimpleModal"
+import NotificationModal from "layouts/sections/attention-catchers/modals/components/NotificationModal"
 
 // Modals page components code
-import simpleModalCode from "layouts/sections/attention-catchers/modals/components/SimpleModal/code";
-import notificationModalCode from "layouts/sections/attention-catchers/modals/components/NotificationModal/code";
+import simpleModalCode from "layouts/sections/attention-catchers/modals/components/SimpleModal/code"
+import notificationModalCode from "layouts/sections/attention-catchers/modals/components/NotificationModal/code"
 
 function Modals() {
   return (
@@ -41,7 +41,7 @@ function Modals() {
         <NotificationModal />
       </View>
     </BaseLayout>
-  );
+  )
 }
 
-export default Modals;
+export default Modals

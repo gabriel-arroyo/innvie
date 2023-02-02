@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 function ColoredBackgroundCard({ color, image, label, title, description, action }) {
   return (
@@ -97,14 +97,14 @@ function ColoredBackgroundCard({ color, image, label, title, description, action
         )}
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Setting default values for the props of ColoredBackgroundCard
 ColoredBackgroundCard.defaultProps = {
   color: "info",
   label: "",
-};
+}
 
 // Typechecking props for the ColoredBackgroundCard
 ColoredBackgroundCard.propTypes = {
@@ -127,6 +127,6 @@ ColoredBackgroundCard.propTypes = {
     route: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   }).isRequired,
-};
+}
 
-export default ColoredBackgroundCard;
+export default ColoredBackgroundCard

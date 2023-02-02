@@ -13,13 +13,13 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { forwardRef } from "react";
+import { forwardRef } from "react"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // Custom styles for MKTypography
-import MKTypographyRoot from "components/MKTypography/MKTypographyRoot";
+import MKTypographyRoot from "components/MKTypography/MKTypographyRoot"
 
 const MKTypography = forwardRef(
   (
@@ -41,7 +41,7 @@ const MKTypography = forwardRef(
       {children}
     </MKTypographyRoot>
   )
-);
+)
 
 // Setting default values for the props of MKTypography
 MKTypography.defaultProps = {
@@ -51,7 +51,7 @@ MKTypography.defaultProps = {
   verticalAlign: "unset",
   textGradient: false,
   opacity: 1,
-};
+}
 
 // Typechecking props for the MKTypography
 MKTypography.propTypes = {
@@ -84,6 +84,6 @@ MKTypography.propTypes = {
   textGradient: PropTypes.bool,
   children: PropTypes.node.isRequired,
   opacity: PropTypes.number,
-};
+}
 
-export default MKTypography;
+export default MKTypography

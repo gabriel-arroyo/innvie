@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import borders from "assets/theme/base/borders";
-import colors from "assets/theme/base/colors";
+import borders from "assets/theme/base/borders"
+import colors from "assets/theme/base/colors"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { borderRadius } = borders;
-const { light } = colors;
+const { borderRadius } = borders
+const { light } = colors
 
 export default {
   styleOverrides: {
@@ -48,4 +48,4 @@ export default {
       transition: "width 0.6s ease !important",
     },
   },
-};
+}

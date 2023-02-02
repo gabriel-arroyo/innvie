@@ -13,21 +13,21 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import useType from "api/useType";
+import useType from "api/useType"
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 // import Icon from "@mui/material/Icon";
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 // import MKPagination from "components/MKPagination";
 
 // Images
-import RoomType from "./RoomType";
+import RoomType from "./RoomType"
 
 function Places() {
-  const { types } = useType();
+  const { types } = useType()
   return (
     <MKBox component="section" py={3}>
       <Container>
@@ -38,7 +38,7 @@ function Places() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Places;
+export default Places

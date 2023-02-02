@@ -1,34 +1,34 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Checkbox from "@mui/material/Checkbox";
+import Card from "@mui/material/Card"
+import Checkbox from "@mui/material/Checkbox"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKInput from "components/MKInput";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKInput from "components/MKInput"
+import MKTypography from "components/MKTypography"
 
-import { Grid } from "@mui/material";
-import useUser from "api/useUser";
-import TermsModal from "pages/Innvie/TermsAndConditions/modal";
-import { v4 as uuidv4 } from "uuid";
+import { Grid } from "@mui/material"
+import useUser from "api/useUser"
+import TermsModal from "pages/Innvie/TermsAndConditions/modal"
+import { v4 as uuidv4 } from "uuid"
 
 function Register() {
-  const [error, setError] = useState(null);
-  const { addUser, insertError } = useUser();
-  const [checked, setChecked] = React.useState(false);
+  const [error, setError] = useState(null)
+  const { addUser, insertError } = useUser()
+  const [checked, setChecked] = React.useState(false)
   const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
+    setChecked(event.target.checked)
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     if (event.target.password.value !== event.target.password_confirmation.value) {
-      setError("Las contraseñas no coinciden");
-      return;
+      setError("Las contraseñas no coinciden")
+      return
     }
     const newUser = {
       first_name: event.target.first_name.value,
@@ -42,14 +42,14 @@ function Register() {
       password: event.target.password.value,
       id: uuidv4(),
       license: event.target.license.value,
-    };
+    }
     Promise.resolve(addUser(newUser)).then((res) => {
       if (res) {
-        event.target.reset();
-        setChecked(false);
+        event.target.reset()
+        setChecked(false)
       }
-    });
-  };
+    })
+  }
   return (
     <Card sx={{ width: "700px" }}>
       <MKBox
@@ -175,7 +175,7 @@ function Register() {
         </MKBox>
       </MKBox>
     </Card>
-  );
+  )
 }
 
-export default Register;
+export default Register

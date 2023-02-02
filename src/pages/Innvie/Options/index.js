@@ -13,35 +13,35 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import useMediaQuery from "@mui/material/useMediaQuery";
+import useMediaQuery from "@mui/material/useMediaQuery"
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 // import Card from "@mui/material/Card";
-import MKAlert from "components/MKAlert";
+import MKAlert from "components/MKAlert"
 // @mui material components
-import Icon from "@mui/material/Icon";
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import DateInput from "pages/Innvie/Home/components/Date/DateInput";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import DateInput from "pages/Innvie/Home/components/Date/DateInput"
 // Otis Kit PRO examples
 
 // Images
-import { useAtom } from "jotai";
-import { reservedEndDate, reservedStartDate } from "states/reservedDate";
-import bgImage from "../../../assets/images/photos/innvie1.png";
+import { useAtom } from "jotai"
+import { reservedEndDate, reservedStartDate } from "states/reservedDate"
+import bgImage from "../../../assets/images/photos/innvie1.png"
 
-import OffersSwipe from "../Home/sections/OffersSwipe";
-import Places from "./sections/Places";
+import OffersSwipe from "../Home/sections/OffersSwipe"
+import Places from "./sections/Places"
 // import Amenities from "../Home/sections/Amenities";
 
 function Options() {
-  const [startDate] = useAtom(reservedStartDate);
-  const [endDate] = useAtom(reservedEndDate);
+  const [startDate] = useAtom(reservedStartDate)
+  const [endDate] = useAtom(reservedEndDate)
 
-  const matches = useMediaQuery("(min-width:1000px)");
+  const matches = useMediaQuery("(min-width:1000px)")
   return (
     <>
       <MKBox
@@ -142,7 +142,7 @@ function Options() {
       </Container>
       {/* </Card> */}
     </>
-  );
+  )
 }
 
-export default Options;
+export default Options

@@ -14,17 +14,17 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Images
-import bgPattern from "assets/images/shapes/pattern-lines.svg";
-import laptop from "assets/images/macbook-2.png";
+import bgPattern from "assets/images/shapes/pattern-lines.svg"
+import laptop from "assets/images/macbook-2.png"
 
 function Banner() {
   return (
@@ -79,7 +79,7 @@ function Banner() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Banner;
+export default Banner

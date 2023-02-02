@@ -14,20 +14,20 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import SimpleFooter from "examples/Footers/SimpleFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import SimpleFooter from "examples/Footers/SimpleFooter"
 
 // Otis Kit PRO page layout routes
-import routes from "routes";
+import routes from "routes"
 
 function BasicLayout({ image, children }) {
   return (
@@ -73,13 +73,13 @@ function BasicLayout({ image, children }) {
         <SimpleFooter light />
       </MKBox>
     </>
-  );
+  )
 }
 
 // Typechecking props for the BasicLayout
 BasicLayout.propTypes = {
   image: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-};
+}
 
-export default BasicLayout;
+export default BasicLayout

@@ -13,45 +13,45 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
 // prop-types is a library for type checking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // react-copy-to-clipboard components
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import { CopyToClipboard } from "react-copy-to-clipboard"
 
 // react-syntax-highlighter components
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { prism } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { prism } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 // @mui material components
-import Grid from "@mui/material/Grid";
-import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Slide from "@mui/material/Slide";
+import Grid from "@mui/material/Grid"
+import AppBar from "@mui/material/AppBar"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
+import Slide from "@mui/material/Slide"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKAlert from "components/MKAlert";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKAlert from "components/MKAlert"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO base styles
-import colors from "assets/theme/base/colors";
+import colors from "assets/theme/base/colors"
 
 function View({ children, code, title, height, ...rest }) {
-  const { grey } = colors;
+  const { grey } = colors
 
-  const [activeTab, setActiveTab] = useState(0);
-  const [success, setSuccess] = useState(false);
+  const [activeTab, setActiveTab] = useState(0)
+  const [success, setSuccess] = useState(false)
 
-  const handleTabType = (event, newValue) => setActiveTab(newValue);
+  const handleTabType = (event, newValue) => setActiveTab(newValue)
 
   useEffect(() => {
-    setTimeout(() => setSuccess(false), 3000);
-  }, [success]);
+    setTimeout(() => setSuccess(false), 3000)
+  }, [success])
 
   return (
     <MKBox
@@ -174,13 +174,13 @@ function View({ children, code, title, height, ...rest }) {
         </MKBox>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Setting default props for the View
 View.defaultProps = {
   height: "auto",
-};
+}
 
 // Typechecking props for the View
 View.propTypes = {
@@ -188,6 +188,6 @@ View.propTypes = {
   code: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   height: PropTypes.string,
-};
+}
 
-export default View;
+export default View

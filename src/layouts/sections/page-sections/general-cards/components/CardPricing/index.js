@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import SimplePricingCard from "examples/Cards/PricingCards/SimplePricingCard";
+import SimplePricingCard from "examples/Cards/PricingCards/SimplePricingCard"
 
 function CardPricing() {
   return (
@@ -42,7 +42,7 @@ function CardPricing() {
         />
       </Grid>
     </MKBox>
-  );
+  )
 }
 
-export default CardPricing;
+export default CardPricing

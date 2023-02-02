@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import DefaultCounterCard from "examples/Cards/CounterCards/DefaultCounterCard";
+import DefaultCounterCard from "examples/Cards/CounterCards/DefaultCounterCard"
 
 function StatsOne() {
   return (
@@ -52,7 +52,7 @@ function StatsOne() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default StatsOne;
+export default StatsOne

@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Stack from "@mui/material/Stack";
+import Stack from "@mui/material/Stack"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKAvatar from "components/MKAvatar";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKAvatar from "components/MKAvatar"
+import MKTypography from "components/MKTypography"
 
 function TransparentTeamCard({ image, name, position, description, socials }) {
   return (
@@ -69,14 +69,14 @@ function TransparentTeamCard({ image, name, position, description, socials }) {
         </Stack>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Setting default props for the TransparentTeamCard
 TransparentTeamCard.defaultProps = {
   description: "",
   socials: "",
-};
+}
 
 // Typechecking props for the TransparentTeamCard
 TransparentTeamCard.propTypes = {
@@ -85,6 +85,6 @@ TransparentTeamCard.propTypes = {
   position: PropTypes.string.isRequired,
   description: PropTypes.string,
   socials: PropTypes.node,
-};
+}
 
-export default TransparentTeamCard;
+export default TransparentTeamCard

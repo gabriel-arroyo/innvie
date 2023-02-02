@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function AboutUs() {
   const data = [
@@ -54,7 +54,7 @@ function AboutUs() {
       title: "Developer platform and third-party integrations",
       items: ["Over 100 extensions", "Developer Dashboard"],
     },
-  ];
+  ]
 
   return (
     <MKBox component="section" py={12} px={1}>
@@ -95,7 +95,7 @@ function AboutUs() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default AboutUs;
+export default AboutUs

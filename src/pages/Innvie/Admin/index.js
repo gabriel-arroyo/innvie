@@ -1,15 +1,15 @@
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import Typography from "@mui/material/Typography";
-import PropTypes from "prop-types";
-import * as React from "react";
-import History from "./History";
-import NewRoomType from "./NewRoom";
-import Rooms from "./Rooms";
+import Box from "@mui/material/Box"
+import Tab from "@mui/material/Tab"
+import Tabs from "@mui/material/Tabs"
+import Typography from "@mui/material/Typography"
+import PropTypes from "prop-types"
+import * as React from "react"
+import History from "./History"
+import NewRoomType from "./NewRoom"
+import Rooms from "./Rooms"
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, ...other } = props
 
   return (
     <div
@@ -27,29 +27,29 @@ function TabPanel(props) {
         </Box>
       )}
     </div>
-  );
+  )
 }
 
 TabPanel.propTypes = {
   children: PropTypes.node.isRequired,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
-};
+}
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
-  };
+  }
 }
 
 export default function BasicTabs() {
-  const [tab, setTab] = React.useState(0);
-  const [historyFilter, setHistoryFilter] = React.useState("all");
+  const [tab, setTab] = React.useState(0)
+  const [historyFilter, setHistoryFilter] = React.useState("all")
 
   const handleChange = (event, newValue) => {
-    setTab(newValue);
-  };
+    setTab(newValue)
+  }
 
   return (
     <Box sx={{ width: "90%", paddingTop: "230px", margin: "auto" }}>
@@ -70,5 +70,5 @@ export default function BasicTabs() {
         <History historyFilter={historyFilter} setHistoryFilter={setHistoryFilter} />
       </TabPanel>
     </Box>
-  );
+  )
 }

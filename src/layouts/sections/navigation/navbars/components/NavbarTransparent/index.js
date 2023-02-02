@@ -15,10 +15,10 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
 
 // Routes
-import routes from "routes";
+import routes from "routes"
 
 function NavbarTransparent() {
   return (
@@ -34,7 +34,7 @@ function NavbarTransparent() {
       relative
       center
     />
-  );
+  )
 }
 
-export default NavbarTransparent;
+export default NavbarTransparent

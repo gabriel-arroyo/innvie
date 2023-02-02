@@ -14,37 +14,37 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useRef, useState } from "react";
+import { useRef, useState } from "react"
 
 // SwiperJS
-import SwiperCore, { Autoplay, Navigation } from "swiper";
+import SwiperCore, { Autoplay, Navigation } from "swiper"
 
 // SwiperJS react components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react"
 
 // SwiperJS styles
-import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css"
+import "swiper/css/navigation"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function Steps() {
   // install SwiperJS modules
-  SwiperCore.use([Autoplay, Navigation]);
+  SwiperCore.use([Autoplay, Navigation])
 
   // SwiperJS navigation buttons ref
-  const navigationPrevRef = useRef(null);
-  const navigationNextRef = useRef(null);
+  const navigationPrevRef = useRef(null)
+  const navigationNextRef = useRef(null)
 
-  const [swiperEl, setSwiperEl] = useState(null);
+  const [swiperEl, setSwiperEl] = useState(null)
 
-  const slideTo = (index) => swiperEl && swiperEl.slideTo(index);
+  const slideTo = (index) => swiperEl && swiperEl.slideTo(index)
 
   const slides = [
     {
@@ -75,7 +75,7 @@ function Steps() {
       title: "Never give up",
       description: "Everyone’s born confident, and everything’s taken away from you.",
     },
-  ];
+  ]
 
   const steps = [
     {
@@ -94,7 +94,7 @@ function Steps() {
       number: "04",
       label: "Never give up",
     },
-  ];
+  ]
 
   // Swiper navigation buttons styles
   const navigationStyles = {
@@ -105,22 +105,22 @@ function Steps() {
     "&:hover, &:focus": {
       opacity: 1,
     },
-  };
+  }
 
   return (
     <MKBox component="section" py={12} position="relative">
       <Container>
         <Swiper
           onInit={(swiper) => {
-            setSwiperEl(swiper);
+            setSwiperEl(swiper)
 
-            const { navigation: nav } = swiper.params;
-            const { navigation } = swiper;
+            const { navigation: nav } = swiper.params
+            const { navigation } = swiper
 
-            nav.prevEl = navigationPrevRef.current;
-            nav.nextEl = navigationNextRef.current;
-            navigation.init();
-            navigation.update();
+            nav.prevEl = navigationPrevRef.current
+            nav.nextEl = navigationNextRef.current
+            navigation.init()
+            navigation.update()
           }}
           autoplay={{ delay: 5000 }}
           speed={800}
@@ -216,7 +216,7 @@ function Steps() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Steps;
+export default Steps

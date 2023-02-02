@@ -15,30 +15,30 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-import Grid from "@mui/material/Grid";
+import PropTypes from "prop-types"
+import Grid from "@mui/material/Grid"
 // @mui material components
-import Icon from "@mui/material/Icon";
-import Collapse from "@mui/material/Collapse";
+import Icon from "@mui/material/Icon"
+import Collapse from "@mui/material/Collapse"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import { getStatus, parseDate } from "tools/getDate";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import { getStatus, parseDate } from "tools/getDate"
 
 // Otis Kit PRO components
-import borders from "assets/theme/base/borders";
-import { useEffect, useState } from "react";
-import Reservation from "./reservation";
+import borders from "assets/theme/base/borders"
+import { useEffect, useState } from "react"
+import Reservation from "./reservation"
 
 function FaqCollapse({ title, user, event, open, ...rest }) {
-  const { borderWidth, borderColor } = borders;
-  const [status, setStatus] = useState("Pending");
+  const { borderWidth, borderColor } = borders
+  const [status, setStatus] = useState("Pending")
 
   useEffect(() => {
-    const calculatedStatus = getStatus(event.startDate, event.endDate);
-    setStatus(calculatedStatus);
-  }, []);
+    const calculatedStatus = getStatus(event.startDate, event.endDate)
+    setStatus(calculatedStatus)
+  }, [])
 
   return (
     <MKBox mb={2}>
@@ -89,7 +89,7 @@ function FaqCollapse({ title, user, event, open, ...rest }) {
         </MKBox>
       </Collapse>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the FaqCollapse
@@ -98,6 +98,6 @@ FaqCollapse.propTypes = {
   user: PropTypes.object.isRequired,
   event: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
-};
+}
 
-export default FaqCollapse;
+export default FaqCollapse

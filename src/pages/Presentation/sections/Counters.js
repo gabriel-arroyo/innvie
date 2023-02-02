@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Divider from "@mui/material/Divider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import DefaultCounterCard from "examples/Cards/CounterCards/DefaultCounterCard";
+import DefaultCounterCard from "examples/Cards/CounterCards/DefaultCounterCard"
 
 function Counters() {
   return (
@@ -57,7 +57,7 @@ function Counters() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Counters;
+export default Counters

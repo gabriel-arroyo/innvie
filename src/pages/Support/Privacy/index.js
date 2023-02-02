@@ -14,21 +14,21 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import DefaultFooter from "examples/Footers/DefaultFooter"
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "routes"
+import footerRoutes from "footer.routes"
 
 function Privacy() {
   return (
@@ -204,7 +204,7 @@ function Privacy() {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Privacy;
+export default Privacy

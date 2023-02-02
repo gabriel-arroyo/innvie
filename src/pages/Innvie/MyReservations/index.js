@@ -12,15 +12,15 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useState } from "react";
+import { useState } from "react"
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 // Otis Kit PRO examples
 // import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
@@ -31,17 +31,17 @@ import MKTypography from "components/MKTypography";
 // import Contact from "pages/LandingPages/Rental/sections/Contact";
 
 // Images
-import bgImage from "assets/images/bg-rental.jpeg";
-import { v4 as uuid } from "uuid";
-import loggedUser from "states/loggedUser";
-import { useAtom } from "jotai";
-import useMyReservations from "api/useMyReservations";
-import FaqCollapse from "./components/collapse";
+import bgImage from "assets/images/bg-rental.jpeg"
+import { v4 as uuid } from "uuid"
+import loggedUser from "states/loggedUser"
+import { useAtom } from "jotai"
+import useMyReservations from "api/useMyReservations"
+import FaqCollapse from "./components/collapse"
 
 function MyReservations() {
-  const [collapse, setCollapse] = useState(false);
-  const [currentUser] = useAtom(loggedUser);
-  const { calendar } = useMyReservations({ email: currentUser?.email });
+  const [collapse, setCollapse] = useState(false)
+  const [currentUser] = useAtom(loggedUser)
+  const { calendar } = useMyReservations({ email: currentUser?.email })
 
   return (
     <>
@@ -116,7 +116,7 @@ function MyReservations() {
         </Container>
       </Card>
     </>
-  );
+  )
 }
 
-export default MyReservations;
+export default MyReservations

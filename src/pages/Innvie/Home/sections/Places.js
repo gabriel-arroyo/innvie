@@ -1,11 +1,11 @@
-import React from "react";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import React from "react"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import PlacesCards from "./PlacesCards";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import PlacesCards from "./PlacesCards"
 
 function Places() {
   return (
@@ -27,7 +27,7 @@ function Places() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Places;
+export default Places

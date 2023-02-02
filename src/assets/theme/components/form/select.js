@@ -14,12 +14,12 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import colors from "assets/theme/base/colors";
+import colors from "assets/theme/base/colors"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { transparent } = colors;
+const { transparent } = colors
 
 export default {
   styleOverrides: {
@@ -44,4 +44,4 @@ export default {
       display: "none",
     },
   },
-};
+}

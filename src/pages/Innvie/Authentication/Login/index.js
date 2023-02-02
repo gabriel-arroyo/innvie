@@ -12,73 +12,73 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 // react-router-dom components
-import { Link } from "react-router-dom";
-import { useAtom } from "jotai";
-import loggedUser from "states/loggedUser";
+import { Link } from "react-router-dom"
+import { useAtom } from "jotai"
+import loggedUser from "states/loggedUser"
 // @mui material components
-import Card from "@mui/material/Card";
-import PropTypes from "prop-types";
+import Card from "@mui/material/Card"
+import PropTypes from "prop-types"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-import useUser from "api/useUser";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKInput from "components/MKInput"
+import MKButton from "components/MKButton"
+import useUser from "api/useUser"
 
 function Login({ modal }) {
-  const [logged, setLogged] = useState(false);
-  const { login, logout, getCurrentUser } = useUser();
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(null);
+  const [logged, setLogged] = useState(false)
+  const { login, logout, getCurrentUser } = useUser()
+  const [message, setMessage] = useState("")
+  const [error, setError] = useState(null)
 
-  const [user, setUser] = useAtom(loggedUser);
+  const [user, setUser] = useAtom(loggedUser)
 
   useEffect(() => {
     if (getCurrentUser()) {
-      setLogged(true);
-      setUser(getCurrentUser());
+      setLogged(true)
+      setUser(getCurrentUser())
     }
-  }, []);
+  }, [])
 
   const handleLogin = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     // eslint-disable-next-line
-    console.log("login");
-    const success = await login(event.target.email.value, event.target.password.value);
+    console.log("login")
+    const success = await login(event.target.email.value, event.target.password.value)
     if (success) {
       // eslint-disable-next-line
-      console.log("user logged");
-      setLogged(true);
-      setError(null);
+      console.log("user logged")
+      setLogged(true)
+      setError(null)
     } else {
       // eslint-disable-next-line
-      console.log("login failed");
-      setLogged(false);
-      setError("Usuario o contraseña incorrectos");
+      console.log("login failed")
+      setLogged(false)
+      setError("Usuario o contraseña incorrectos")
     }
-  };
+  }
 
   const handleLogout = async () => {
-    await logout();
-    setLogged(false);
-    setError(false);
-  };
+    await logout()
+    setLogged(false)
+    setError(false)
+  }
 
   function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
+    return /\S+@\S+\.\S+/.test(email)
   }
   const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
-      setError("Email inválido");
+      setError("Email inválido")
     } else {
-      setError(null);
+      setError(null)
     }
 
-    setMessage(event.target.value);
-  };
+    setMessage(event.target.value)
+  }
   return (
     <Card>
       <MKBox
@@ -189,15 +189,15 @@ function Login({ modal }) {
         </MKBox>
       </MKBox>
     </Card>
-  );
+  )
 }
 
 Login.defaultProps = {
   modal: false,
-};
+}
 
 Login.propTypes = {
   modal: PropTypes.bool,
-};
+}
 
-export default Login;
+export default Login

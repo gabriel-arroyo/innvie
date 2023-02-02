@@ -13,50 +13,50 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react"
 
 // rellax
-import Rellax from "rellax";
+import Rellax from "rellax"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import DefaultFooter from "examples/Footers/DefaultFooter"
 
 // About Us page sections
-import Information from "pages/Blogs/SingleArticle/sections/Information";
-import Steps from "pages/Blogs/SingleArticle/sections/Steps";
-import OurEfforts from "pages/Blogs/SingleArticle/sections/OurEfforts";
-import Features from "pages/Blogs/SingleArticle/sections/Features";
-import Posts from "pages/Blogs/SingleArticle/sections/Posts";
-import Support from "pages/Blogs/SingleArticle/sections/Support";
+import Information from "pages/Blogs/SingleArticle/sections/Information"
+import Steps from "pages/Blogs/SingleArticle/sections/Steps"
+import OurEfforts from "pages/Blogs/SingleArticle/sections/OurEfforts"
+import Features from "pages/Blogs/SingleArticle/sections/Features"
+import Posts from "pages/Blogs/SingleArticle/sections/Posts"
+import Support from "pages/Blogs/SingleArticle/sections/Support"
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "routes"
+import footerRoutes from "footer.routes"
 
 // Images
-import bgImage from "assets/images/bg5.jpg";
+import bgImage from "assets/images/bg5.jpg"
 
 function SingleArticle() {
-  const headerRef = useRef(null);
+  const headerRef = useRef(null)
 
   // Setting up rellax
   useEffect(() => {
     const parallax = new Rellax(headerRef.current, {
       speed: -6,
-    });
+    })
 
-    return () => parallax.destroy();
-  }, []);
+    return () => parallax.destroy()
+  }, [])
 
   return (
     <>
@@ -153,7 +153,7 @@ function SingleArticle() {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default SingleArticle;
+export default SingleArticle

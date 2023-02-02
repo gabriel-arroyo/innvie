@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKAvatar from "components/MKAvatar";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKAvatar from "components/MKAvatar"
 
 function SimpleReviewCard({ image, name, username, review }) {
   return (
@@ -87,13 +87,13 @@ function SimpleReviewCard({ image, name, username, review }) {
         </MKBox>
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Setting default values for the props of SimpleReviewCard
 SimpleReviewCard.defaultProps = {
   username: "",
-};
+}
 
 // Typechecking props for the SimpleReviewCard
 SimpleReviewCard.propTypes = {
@@ -101,6 +101,6 @@ SimpleReviewCard.propTypes = {
   name: PropTypes.string.isRequired,
   username: PropTypes.string,
   review: PropTypes.string.isRequired,
-};
+}
 
-export default SimpleReviewCard;
+export default SimpleReviewCard

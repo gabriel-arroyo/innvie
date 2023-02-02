@@ -15,21 +15,21 @@ Coded by www.creative-tim.com
 
 // Otis Kit PRO components
 
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "layouts/sections/components/BaseLayout"
+import View from "layouts/sections/components/View"
 
 // CTA page components
-import CtaOne from "layouts/sections/page-sections/cta/components/CtaOne";
-import CtaTwo from "layouts/sections/page-sections/cta/components/CtaTwo";
-import CtaThree from "layouts/sections/page-sections/cta/components/CtaThree";
+import CtaOne from "layouts/sections/page-sections/cta/components/CtaOne"
+import CtaTwo from "layouts/sections/page-sections/cta/components/CtaTwo"
+import CtaThree from "layouts/sections/page-sections/cta/components/CtaThree"
 
 // CTA page components code
-import ctaOneCode from "layouts/sections/page-sections/cta/components/CtaOne/code";
-import ctaTwoCode from "layouts/sections/page-sections/cta/components/CtaTwo/code";
-import ctaThreeCode from "layouts/sections/page-sections/cta/components/CtaThree/code";
+import ctaOneCode from "layouts/sections/page-sections/cta/components/CtaOne/code"
+import ctaTwoCode from "layouts/sections/page-sections/cta/components/CtaTwo/code"
+import ctaThreeCode from "layouts/sections/page-sections/cta/components/CtaThree/code"
 
 // CTA page components code
 function Cta() {
@@ -53,7 +53,7 @@ function Cta() {
         <CtaThree />
       </View>
     </BaseLayout>
-  );
+  )
 }
 
-export default Cta;
+export default Cta

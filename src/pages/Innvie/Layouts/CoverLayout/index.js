@@ -1,12 +1,12 @@
-import React from "react";
-import MKBox from "components/MKBox";
-import { Outlet } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import footerRoutes from "footer.routes";
-import CenteredFooter from "examples/Footers/CenteredFooter";
-import image from "../../../../assets/images/photos/innvie4.png";
-import logo from "../../../../assets/images/innvie/logos/logo-stay-white.svg";
+import React from "react"
+import MKBox from "components/MKBox"
+import { Outlet } from "react-router-dom"
+import Grid from "@mui/material/Grid"
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import footerRoutes from "footer.routes"
+import CenteredFooter from "examples/Footers/CenteredFooter"
+import image from "../../../../assets/images/photos/innvie4.png"
+import logo from "../../../../assets/images/innvie/logos/logo-stay-white.svg"
 
 function CoverLayout() {
   return (
@@ -48,7 +48,7 @@ function CoverLayout() {
         <CenteredFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default CoverLayout;
+export default CoverLayout

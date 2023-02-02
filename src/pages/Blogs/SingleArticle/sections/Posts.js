@@ -14,23 +14,23 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultBlogCard from "examples/Cards/BlogCards/DefaultBlogCard";
+import DefaultBlogCard from "examples/Cards/BlogCards/DefaultBlogCard"
 
 // Images
-import post1 from "assets/images/examples/color2.jpg";
-import post2 from "assets/images/examples/color3.jpg";
-import post3 from "assets/images/examples/color1.jpg";
-import author1 from "assets/images/team-2.jpg";
-import author2 from "assets/images/ivana-squares.jpg";
-import author3 from "assets/images/marie.jpg";
+import post1 from "assets/images/examples/color2.jpg"
+import post2 from "assets/images/examples/color3.jpg"
+import post3 from "assets/images/examples/color1.jpg"
+import author1 from "assets/images/team-2.jpg"
+import author2 from "assets/images/ivana-squares.jpg"
+import author3 from "assets/images/marie.jpg"
 
 function Posts() {
   return (
@@ -91,7 +91,7 @@ function Posts() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Posts;
+export default Posts

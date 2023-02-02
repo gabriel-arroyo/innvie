@@ -15,32 +15,32 @@ Coded by www.creative-tim.com
 */
 
 // SwiperJS
-import useMediaQuery from "@mui/material/useMediaQuery";
-import SwiperCore, { Autoplay, Navigation } from "swiper";
+import useMediaQuery from "@mui/material/useMediaQuery"
+import SwiperCore, { Autoplay, Navigation } from "swiper"
 
 // SwiperJS react components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react"
 
 // SwiperJS styles
-import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css"
+import "swiper/css/navigation"
 
 // Pricing page components
-import SliderBackground from "pages/Innvie/Home/components/Background";
+import SliderBackground from "pages/Innvie/Home/components/Background"
 
 // Images;
 // import bg1 from "assets/images/bg2.jpg";
-import { Card } from "@mui/material";
-import Container from "@mui/material/Container";
-import bg1 from "../../../../assets/images/photos/innvie1.png";
-import bg2 from "../../../../assets/images/photos/innvie2.png";
-import bg3 from "../../../../assets/images/photos/innvie3.png";
-import DateInput from "../components/Date/DateInput";
+import { Card } from "@mui/material"
+import Container from "@mui/material/Container"
+import bg1 from "../../../../assets/images/photos/innvie1.png"
+import bg2 from "../../../../assets/images/photos/innvie2.png"
+import bg3 from "../../../../assets/images/photos/innvie3.png"
+import DateInput from "../components/Date/DateInput"
 
 function Header() {
   // install SwiperJS modules
-  SwiperCore.use([Autoplay, Navigation]);
-  const matches = useMediaQuery("(min-width:1000px)");
+  SwiperCore.use([Autoplay, Navigation])
+  const matches = useMediaQuery("(min-width:1000px)")
 
   return (
     <>
@@ -85,7 +85,7 @@ function Header() {
         </Container>
       </div>
     </>
-  );
+  )
 }
 
-export default Header;
+export default Header

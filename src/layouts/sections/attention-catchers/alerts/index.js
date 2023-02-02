@@ -14,20 +14,20 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "layouts/sections/components/BaseLayout"
+import View from "layouts/sections/components/View"
 
 // ALerts page components
-import SimpleAlerts from "layouts/sections/attention-catchers/alerts/components/SimpleAlerts";
-import AlertsWithLinks from "layouts/sections/attention-catchers/alerts/components/AlertsWithLinks";
-import AlertWithContent from "layouts/sections/attention-catchers/alerts/components/AlertWithContent";
-import DismissingAlert from "layouts/sections/attention-catchers/alerts/components/DismissingAlert";
+import SimpleAlerts from "layouts/sections/attention-catchers/alerts/components/SimpleAlerts"
+import AlertsWithLinks from "layouts/sections/attention-catchers/alerts/components/AlertsWithLinks"
+import AlertWithContent from "layouts/sections/attention-catchers/alerts/components/AlertWithContent"
+import DismissingAlert from "layouts/sections/attention-catchers/alerts/components/DismissingAlert"
 
 // ALerts page components code
-import simpleAlertsCode from "layouts/sections/attention-catchers/alerts/components/SimpleAlerts/code";
-import alertsWithLinksCode from "layouts/sections/attention-catchers/alerts/components/AlertsWithLinks/code";
-import alertWithContentCode from "layouts/sections/attention-catchers/alerts/components/AlertWithContent/code";
-import dismissingAlertCode from "layouts/sections/attention-catchers/alerts/components/DismissingAlert/code";
+import simpleAlertsCode from "layouts/sections/attention-catchers/alerts/components/SimpleAlerts/code"
+import alertsWithLinksCode from "layouts/sections/attention-catchers/alerts/components/AlertsWithLinks/code"
+import alertWithContentCode from "layouts/sections/attention-catchers/alerts/components/AlertWithContent/code"
+import dismissingAlertCode from "layouts/sections/attention-catchers/alerts/components/DismissingAlert/code"
 
 function Alerts() {
   return (
@@ -51,7 +51,7 @@ function Alerts() {
         <DismissingAlert />
       </View>
     </BaseLayout>
-  );
+  )
 }
 
-export default Alerts;
+export default Alerts

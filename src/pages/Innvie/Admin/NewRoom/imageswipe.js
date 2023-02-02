@@ -15,26 +15,26 @@ Coded by www.creative-tim.com
 */
 
 // SwiperJS
-import SwiperCore, { Autoplay, Navigation } from "swiper";
+import SwiperCore, { Autoplay, Navigation } from "swiper"
 // SwiperJS react components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react"
 
 // SwiperJS styles
-import "swiper/css";
-import "swiper/css/navigation";
-import PropTypes from "prop-types";
+import "swiper/css"
+import "swiper/css/navigation"
+import PropTypes from "prop-types"
 
 // Pricing page components
 
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"
 // Images
 // import bg1 from "assets/images/bg2.jpg";
-import React from "react";
-import MKBox from "components/MKBox";
+import React from "react"
+import MKBox from "components/MKBox"
 
 function ImageSwipe({ images }) {
   // install SwiperJS modules
-  SwiperCore.use([Autoplay, Navigation]);
+  SwiperCore.use([Autoplay, Navigation])
   return (
     <Swiper
       autoplay={{ delay: 5000 }}
@@ -62,11 +62,11 @@ function ImageSwipe({ images }) {
         </SwiperSlide>
       ))}
     </Swiper>
-  );
+  )
 }
 
-export default ImageSwipe;
+export default ImageSwipe
 
 ImageSwipe.propTypes = {
   images: PropTypes.instanceOf(Array).isRequired,
-};
+}

@@ -14,24 +14,24 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKPagination from "components/MKPagination";
+import MKBox from "components/MKBox"
+import MKPagination from "components/MKPagination"
 
 // Otis Kit PRO components
-import SimpleBookingCard from "examples/Cards/BookingCards/SimpleBookingCard";
+import SimpleBookingCard from "examples/Cards/BookingCards/SimpleBookingCard"
 
 // Images
-import product1 from "../../../../assets/images/photos/IMG_1.JPG";
-import product2 from "../../../../assets/images/photos/IMG_2.JPG";
-import product3 from "../../../../assets/images/photos/IMG_3.JPG";
-import product4 from "../../../../assets/images/photos/IMG_4.JPG";
-import product5 from "../../../../assets/images/photos/IMG_5.JPG";
-import product6 from "../../../../assets/images/photos/IMG_6.JPG";
+import product1 from "../../../../assets/images/photos/IMG_1.JPG"
+import product2 from "../../../../assets/images/photos/IMG_2.JPG"
+import product3 from "../../../../assets/images/photos/IMG_3.JPG"
+import product4 from "../../../../assets/images/photos/IMG_4.JPG"
+import product5 from "../../../../assets/images/photos/IMG_5.JPG"
+import product6 from "../../../../assets/images/photos/IMG_6.JPG"
 
 function Places() {
   const actionProps = {
@@ -39,7 +39,7 @@ function Places() {
     route: "/pages/landing-pages/rental",
     color: "info",
     label: "$123.00",
-  };
+  }
 
   return (
     <MKBox component="section" py={3}>
@@ -164,7 +164,7 @@ function Places() {
         </MKBox>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Places;
+export default Places

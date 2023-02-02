@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function SimpleBackgroundCard({ image, title, description }) {
   return (
@@ -52,7 +52,7 @@ function SimpleBackgroundCard({ image, title, description }) {
         </MKTypography>
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Typechecking props for the SimpleBackgroundCard
@@ -60,6 +60,6 @@ SimpleBackgroundCard.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.node.isRequired,
-};
+}
 
-export default SimpleBackgroundCard;
+export default SimpleBackgroundCard

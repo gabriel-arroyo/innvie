@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "layouts/sections/components/BaseLayout"
+import View from "layouts/sections/components/View"
 
 // Stats page components
-import StatsOne from "layouts/sections/page-sections/stats/components/StatsOne";
-import StatsTwo from "layouts/sections/page-sections/stats/components/StatsTwo";
-import StatsThree from "layouts/sections/page-sections/stats/components/StatsThree";
+import StatsOne from "layouts/sections/page-sections/stats/components/StatsOne"
+import StatsTwo from "layouts/sections/page-sections/stats/components/StatsTwo"
+import StatsThree from "layouts/sections/page-sections/stats/components/StatsThree"
 
 // Stats page components code
-import statsOneCode from "layouts/sections/page-sections/stats/components/StatsOne/code";
-import statsTwoCode from "layouts/sections/page-sections/stats/components/StatsTwo/code";
-import statsThreeCode from "layouts/sections/page-sections/stats/components/StatsThree/code";
+import statsOneCode from "layouts/sections/page-sections/stats/components/StatsOne/code"
+import statsTwoCode from "layouts/sections/page-sections/stats/components/StatsTwo/code"
+import statsThreeCode from "layouts/sections/page-sections/stats/components/StatsThree/code"
 
 function Stats() {
   return (
@@ -46,7 +46,7 @@ function Stats() {
         <StatsThree />
       </View>
     </BaseLayout>
-  );
+  )
 }
 
-export default Stats;
+export default Stats

@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Divider from "@mui/material/Divider";
-import Icon from "@mui/material/Icon";
-import Tooltip from "@mui/material/Tooltip";
+import Card from "@mui/material/Card"
+import Divider from "@mui/material/Divider"
+import Icon from "@mui/material/Icon"
+import Tooltip from "@mui/material/Tooltip"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function TodoList() {
   return (
@@ -85,7 +85,7 @@ function TodoList() {
         </Tooltip>
       </MKBox>
     </Card>
-  );
+  )
 }
 
-export default TodoList;
+export default TodoList

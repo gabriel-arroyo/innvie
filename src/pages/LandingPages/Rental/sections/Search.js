@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Autocomplete from "@mui/material/Autocomplete";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Autocomplete from "@mui/material/Autocomplete"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKInput from "components/MKInput";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKInput from "components/MKInput"
 // import MKDatePicker from "components/MKDatePicker";
-import MKButton from "components/MKButton";
+import MKButton from "components/MKButton"
 
 function Search() {
   return (
@@ -71,7 +71,7 @@ function Search() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Search;
+export default Search

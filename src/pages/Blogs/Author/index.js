@@ -14,25 +14,25 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Card from "@mui/material/Card";
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
 
 // Author page sections
-import Profile from "pages/Blogs/Author/sections/Profile";
-import Posts from "pages/Blogs/Author/sections/Posts";
-import Contact from "pages/Blogs/Author/sections/Contact";
-import Footer from "pages/Blogs/Author/sections/Footer";
+import Profile from "pages/Blogs/Author/sections/Profile"
+import Posts from "pages/Blogs/Author/sections/Posts"
+import Contact from "pages/Blogs/Author/sections/Contact"
+import Footer from "pages/Blogs/Author/sections/Footer"
 
 // Routes
-import routes from "routes";
+import routes from "routes"
 
 // Images
-import bgImage from "assets/images/city-profile.jpg";
+import bgImage from "assets/images/city-profile.jpg"
 
 function Author() {
   return (
@@ -82,7 +82,7 @@ function Author() {
         <Footer />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Author;
+export default Author

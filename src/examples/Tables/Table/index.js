@@ -13,39 +13,39 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useMemo } from "react";
+import { useMemo } from "react"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // uuid is a library for generating unique id
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"
 
 // @mui material components
-import MuiTable from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
+import MuiTable from "@mui/material/Table"
+import TableBody from "@mui/material/TableBody"
+import TableContainer from "@mui/material/TableContainer"
+import TableRow from "@mui/material/TableRow"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKAvatar from "components/MKAvatar";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKAvatar from "components/MKAvatar"
+import MKTypography from "components/MKTypography"
 
 function Table({ columns, rows }) {
   const renderColumns = columns.map(({ name, align, width }, key) => {
-    let pl;
-    let pr;
+    let pl
+    let pr
 
     if (key === 0) {
-      pl = 3;
-      pr = 3;
+      pl = 3
+      pr = 3
     } else if (key === columns.length - 1) {
-      pl = 3;
-      pr = 3;
+      pl = 3
+      pr = 3
     } else {
-      pl = 1;
-      pr = 1;
+      pl = 1
+      pr = 1
     }
 
     return (
@@ -68,14 +68,14 @@ function Table({ columns, rows }) {
       >
         {name.toUpperCase()}
       </MKBox>
-    );
-  });
+    )
+  })
 
   const renderRows = rows.map((row, key) => {
-    const rowKey = `row-${key}`;
+    const rowKey = `row-${key}`
 
     const tableRow = columns.map(({ name, align }) => {
-      let template;
+      let template
 
       if (Array.isArray(row[name])) {
         template = (
@@ -96,7 +96,7 @@ function Table({ columns, rows }) {
               </MKTypography>
             </MKBox>
           </MKBox>
-        );
+        )
       } else {
         template = (
           <MKBox
@@ -117,14 +117,14 @@ function Table({ columns, rows }) {
               {row[name]}
             </MKTypography>
           </MKBox>
-        );
+        )
       }
 
-      return template;
-    });
+      return template
+    })
 
-    return <TableRow key={rowKey}>{tableRow}</TableRow>;
-  });
+    return <TableRow key={rowKey}>{tableRow}</TableRow>
+  })
 
   return useMemo(
     () => (
@@ -138,19 +138,19 @@ function Table({ columns, rows }) {
       </TableContainer>
     ),
     [columns, rows]
-  );
+  )
 }
 
 // Setting default values for the props of Table
 Table.defaultProps = {
   columns: [],
   rows: [{}],
-};
+}
 
 // Typechecking props for the Table
 Table.propTypes = {
   columns: PropTypes.instanceOf(Array),
   rows: PropTypes.instanceOf(Array),
-};
+}
 
-export default Table;
+export default Table

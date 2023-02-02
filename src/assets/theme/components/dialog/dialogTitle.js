@@ -14,12 +14,12 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import typography from "assets/theme/base/typography";
+import typography from "assets/theme/base/typography"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { size } = typography;
+const { size } = typography
 
 export default {
   styleOverrides: {
@@ -28,4 +28,4 @@ export default {
       fontSize: size.xl,
     },
   },
-};
+}

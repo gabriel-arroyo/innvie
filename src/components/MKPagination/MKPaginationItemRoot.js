@@ -14,27 +14,27 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import { styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles"
 
 // Otis Kit PRO components
-import MKButton from "components/MKButton";
+import MKButton from "components/MKButton"
 
 export default styled(MKButton)(({ theme, ownerState }) => {
-  const { borders, functions, typography, palette } = theme;
-  const { variant, paginationSize, active } = ownerState;
+  const { borders, functions, typography, palette } = theme
+  const { variant, paginationSize, active } = ownerState
 
-  const { borderColor } = borders;
-  const { pxToRem } = functions;
-  const { fontWeightRegular, size: fontSize } = typography;
-  const { light } = palette;
+  const { borderColor } = borders
+  const { pxToRem } = functions
+  const { fontWeightRegular, size: fontSize } = typography
+  const { light } = palette
 
   // width, height, minWidth and minHeight values
-  let sizeValue = pxToRem(36);
+  let sizeValue = pxToRem(36)
 
   if (paginationSize === "small") {
-    sizeValue = pxToRem(30);
+    sizeValue = pxToRem(30)
   } else if (paginationSize === "large") {
-    sizeValue = pxToRem(46);
+    sizeValue = pxToRem(46)
   }
 
   return {
@@ -58,5 +58,5 @@ export default styled(MKButton)(({ theme, ownerState }) => {
       backgroundColor: light.main,
       borderColor,
     },
-  };
-});
+  }
+})

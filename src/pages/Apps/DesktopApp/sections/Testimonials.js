@@ -14,27 +14,27 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Divider from "@mui/material/Divider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO components
-import MiniReviewCard from "examples/Cards/ReviewCards/MiniReviewCard";
+import MiniReviewCard from "examples/Cards/ReviewCards/MiniReviewCard"
 
 // Images
-import review1 from "assets/images/team-3.jpg";
-import review2 from "assets/images/marie.jpg";
-import review3 from "assets/images/team-2.jpg";
-import apple from "assets/images/logos/gray-logos/logo-apple.svg";
-import facebook from "assets/images/logos/gray-logos/logo-facebook.svg";
-import behance from "assets/images/logos/gray-logos/logo-behance.svg";
-import spotify from "assets/images/logos/gray-logos/logo-spotify.svg";
-import coinbase from "assets/images/logos/gray-logos/logo-coinbase.svg";
-import pinterest from "assets/images/logos/gray-logos/logo-pinterest.svg";
+import review1 from "assets/images/team-3.jpg"
+import review2 from "assets/images/marie.jpg"
+import review3 from "assets/images/team-2.jpg"
+import apple from "assets/images/logos/gray-logos/logo-apple.svg"
+import facebook from "assets/images/logos/gray-logos/logo-facebook.svg"
+import behance from "assets/images/logos/gray-logos/logo-behance.svg"
+import spotify from "assets/images/logos/gray-logos/logo-spotify.svg"
+import coinbase from "assets/images/logos/gray-logos/logo-coinbase.svg"
+import pinterest from "assets/images/logos/gray-logos/logo-pinterest.svg"
 
 function Testimonials() {
   return (
@@ -105,7 +105,7 @@ function Testimonials() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Testimonials;
+export default Testimonials

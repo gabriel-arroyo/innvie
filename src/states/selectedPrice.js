@@ -1,5 +1,5 @@
-import { atom } from "jotai";
+import { atom } from "jotai"
 
-const selectedPrice = atom(0);
+const selectedPrice = atom(0)
 
-export default selectedPrice;
+export default selectedPrice

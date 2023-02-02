@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Divider from "@mui/material/Divider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKAlert from "components/MKAlert";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKAlert from "components/MKAlert"
+import MKTypography from "components/MKTypography"
 
 function AlertWithContent() {
   return (
@@ -50,7 +50,7 @@ function AlertWithContent() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default AlertWithContent;
+export default AlertWithContent

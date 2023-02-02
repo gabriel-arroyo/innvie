@@ -14,24 +14,24 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKInput from "components/MKInput"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import DefaultFooter from "examples/Footers/DefaultFooter"
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "routes"
+import footerRoutes from "footer.routes"
 
 // Image
-import bgImage from "assets/images/illustrations/illustration-reset.jpg";
+import bgImage from "assets/images/illustrations/illustration-reset.jpg"
 
 function ContactUs() {
   return (
@@ -143,7 +143,7 @@ function ContactUs() {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default ContactUs;
+export default ContactUs

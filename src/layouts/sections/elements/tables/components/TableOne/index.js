@@ -14,25 +14,25 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKBadge from "components/MKBadge";
-import MKAvatar from "components/MKAvatar";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKBadge from "components/MKBadge"
+import MKAvatar from "components/MKAvatar"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import Table from "examples/Tables/Table";
+import Table from "examples/Tables/Table"
 
 // Images
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+import team2 from "assets/images/team-2.jpg"
+import team3 from "assets/images/team-3.jpg"
+import team4 from "assets/images/team-4.jpg"
 
 // Components
 function Author({ image, name, email }) {
@@ -50,7 +50,7 @@ function Author({ image, name, email }) {
         </MKTypography>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the Author
@@ -58,7 +58,7 @@ Author.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-};
+}
 
 function Role({ job, org }) {
   return (
@@ -70,14 +70,14 @@ function Role({ job, org }) {
         {org}
       </MKTypography>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the Role
 Role.propTypes = {
   job: PropTypes.string.isRequired,
   org: PropTypes.string.isRequired,
-};
+}
 
 function TableOne() {
   const { columns, rows } = {
@@ -247,7 +247,7 @@ function TableOne() {
         ),
       },
     ],
-  };
+  }
 
   return (
     <MKBox component="section" py={12}>
@@ -257,7 +257,7 @@ function TableOne() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default TableOne;
+export default TableOne

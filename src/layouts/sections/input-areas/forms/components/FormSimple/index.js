@@ -13,23 +13,23 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Switch from "@mui/material/Switch";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Switch from "@mui/material/Switch"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKInput from "components/MKInput"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 function FormSimple() {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(true)
 
-  const handleChecked = () => setChecked(!checked);
+  const handleChecked = () => setChecked(!checked)
 
   return (
     <MKBox component="section" py={12}>
@@ -88,7 +88,7 @@ function FormSimple() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default FormSimple;
+export default FormSimple

@@ -1,10 +1,10 @@
 // Otis Kit PRO base styles
-import colors from "assets/theme/base/colors";
+import colors from "assets/theme/base/colors"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "assets/theme/functions/pxToRem"
 
-const { white } = colors;
+const { white } = colors
 
 export default {
   ".swiper-button-prev, .swiper-button-next": {
@@ -24,4 +24,4 @@ export default {
       opacity: 1,
     },
   },
-};
+}

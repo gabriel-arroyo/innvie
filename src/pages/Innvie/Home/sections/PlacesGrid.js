@@ -1,27 +1,27 @@
-import React from "react";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import React from "react"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Images
-import author1 from "assets/images/team-2.jpg";
+import author1 from "assets/images/team-2.jpg"
 // import author2 from "assets/images/ivana-squares.jpg";
-import HorizontalCard from "examples/Cards/BlogCards/HorizontalCard";
+import HorizontalCard from "examples/Cards/BlogCards/HorizontalCard"
 
 function PlacesGrid() {
   const post1 =
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/83/a0/c8/exterior.jpg?w=700&h=-1&s=1";
-  const post2 = "https://www.adonde-y-cuando.es/site/images/illustration/detroit-michigan_723.jpg";
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/83/a0/c8/exterior.jpg?w=700&h=-1&s=1"
+  const post2 = "https://www.adonde-y-cuando.es/site/images/illustration/detroit-michigan_723.jpg"
   const post3 =
-    "https://www.greatlakescruises.com/uploads/1/0/6/4/106440933/lake-erie-s-history-orig_orig.jpg";
-  const post4 = "https://static.toiimg.com/photo/49334503.cms";
+    "https://www.greatlakescruises.com/uploads/1/0/6/4/106440933/lake-erie-s-history-orig_orig.jpg"
+  const post4 = "https://static.toiimg.com/photo/49334503.cms"
   const post5 =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Kv2WRRK12mvC0h9CGmYyPS88f6cml1fzaA&usqp=CAU";
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Kv2WRRK12mvC0h9CGmYyPS88f6cml1fzaA&usqp=CAU"
   const post6 =
-    "https://www.bridgemi.com/sites/default/files/styles/full_width_image/public/2021-07/Ambassador%20Bridge.jpg?itok=xkdUsWye";
+    "https://www.bridgemi.com/sites/default/files/styles/full_width_image/public/2021-07/Ambassador%20Bridge.jpg?itok=xkdUsWye"
   const cards = [
     {
       title: "Motor City Casino",
@@ -65,7 +65,7 @@ function PlacesGrid() {
       image: post6,
       url: "https://goo.gl/maps/wCeJwGJqmEYQqChy8",
     },
-  ];
+  ]
   return (
     <MKBox component="section" py={7}>
       <Container>
@@ -103,7 +103,7 @@ function PlacesGrid() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default PlacesGrid;
+export default PlacesGrid

@@ -14,39 +14,39 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Snackbar from "@mui/material/Snackbar";
-import IconButton from "@mui/material/IconButton";
-import Icon from "@mui/material/Icon";
-import Divider from "@mui/material/Divider";
-import Fade from "@mui/material/Fade";
+import Snackbar from "@mui/material/Snackbar"
+import IconButton from "@mui/material/IconButton"
+import Icon from "@mui/material/Icon"
+import Divider from "@mui/material/Divider"
+import Fade from "@mui/material/Fade"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Custom styles for the MKSnackbar
-import MKSnackbarIconRoot from "components/MKSnackbar/MKSnackbarIconRoot";
+import MKSnackbarIconRoot from "components/MKSnackbar/MKSnackbarIconRoot"
 
 function MKSnackbar({ color, icon, title, dateTime, content, close, bgWhite, ...rest }) {
-  let titleColor;
-  let dateTimeColor;
-  let dividerColor;
+  let titleColor
+  let dateTimeColor
+  let dividerColor
 
   if (bgWhite) {
-    titleColor = color;
-    dateTimeColor = "dark";
-    dividerColor = false;
+    titleColor = color
+    dateTimeColor = "dark"
+    dividerColor = false
   } else if (color === "light") {
-    titleColor = "dark";
-    dateTimeColor = "text";
-    dividerColor = false;
+    titleColor = "dark"
+    dateTimeColor = "text"
+    dividerColor = false
   } else {
-    titleColor = "white";
-    dateTimeColor = "white";
-    dividerColor = true;
+    titleColor = "white"
+    dateTimeColor = "white"
+    dividerColor = true
   }
 
   return (
@@ -128,14 +128,14 @@ function MKSnackbar({ color, icon, title, dateTime, content, close, bgWhite, ...
         </MKBox>
       </MKBox>
     </Snackbar>
-  );
+  )
 }
 
 // Setting default values for the props of MKSnackbar
 MKSnackbar.defaultProps = {
   bgWhite: false,
   color: "info",
-};
+}
 
 // Typechecking props for MKSnackbar
 MKSnackbar.propTypes = {
@@ -155,6 +155,6 @@ MKSnackbar.propTypes = {
   content: PropTypes.node.isRequired,
   close: PropTypes.func.isRequired,
   bgWhite: PropTypes.bool,
-};
+}
 
-export default MKSnackbar;
+export default MKSnackbar

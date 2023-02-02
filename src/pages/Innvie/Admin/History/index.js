@@ -1,19 +1,19 @@
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Material Kit 2 PRO React components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 // import MKAvatar from "components/MKAvatar";
-import MKTypography from "components/MKTypography";
+import MKTypography from "components/MKTypography"
 
 // Material Kit 2 PRO React examples
-import useHistory from "api/useHistory";
-import Table from "examples/Tables/Table";
-import { useEffect, useState } from "react";
+import useHistory from "api/useHistory"
+import Table from "examples/Tables/Table"
+import { useEffect, useState } from "react"
 
 // Images
 
@@ -27,13 +27,13 @@ function RoomId({ name }) {
         </MKTypography>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the Author
 RoomId.propTypes = {
   name: PropTypes.string.isRequired,
-};
+}
 
 function RoomTypeItem({ category, subCategory }) {
   return (
@@ -45,21 +45,21 @@ function RoomTypeItem({ category, subCategory }) {
         {subCategory}
       </MKTypography>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the Role
 RoomTypeItem.propTypes = {
   category: PropTypes.string.isRequired,
   subCategory: PropTypes.string.isRequired,
-};
+}
 
 function History({ historyFilter }) {
-  const { loading, getCompleteHistory } = useHistory();
-  const [rows, setRows] = useState();
+  const { loading, getCompleteHistory } = useHistory()
+  const [rows, setRows] = useState()
 
   useEffect(() => {
-    const allRows = [];
+    const allRows = []
     getCompleteHistory().then((h) => {
       h.forEach((element) => {
         const row = {
@@ -67,20 +67,20 @@ function History({ historyFilter }) {
           action: element.action,
           id: element.actionId,
           email: element.email,
-        };
-        allRows.push(row);
-      });
-      setRows(allRows);
-      console.log("allrows", allRows);
-    });
-  }, [loading]);
+        }
+        allRows.push(row)
+      })
+      setRows(allRows)
+      console.log("allrows", allRows)
+    })
+  }, [loading])
 
   const columns = [
     { name: "date", align: "center" },
     { name: "email", align: "center" },
     { name: "action", align: "center" },
     { name: "id", align: "center" },
-  ];
+  ]
 
   return (
     <MKBox component="section">
@@ -99,11 +99,11 @@ function History({ historyFilter }) {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
 History.propTypes = {
   historyFilter: PropTypes.string.isRequired,
-};
+}
 
-export default History;
+export default History

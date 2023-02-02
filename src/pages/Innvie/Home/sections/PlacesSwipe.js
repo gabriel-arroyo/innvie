@@ -15,30 +15,30 @@ Coded by www.creative-tim.com
 */
 
 // SwiperJS
-import SwiperCore, { Autoplay, Navigation } from "swiper";
-import MKTypography from "components/MKTypography";
+import SwiperCore, { Autoplay, Navigation } from "swiper"
+import MKTypography from "components/MKTypography"
 // SwiperJS react components
-import { Swiper, SwiperSlide } from "swiper/react";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { Swiper, SwiperSlide } from "swiper/react"
+import useMediaQuery from "@mui/material/useMediaQuery"
 
 // SwiperJS styles
-import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css"
+import "swiper/css/navigation"
 
 // Pricing page components
 
 // Images
 // import bg1 from "assets/images/bg2.jpg";
-import Container from "@mui/material/Container";
-import MKBox from "components/MKBox";
-import Grid from "@mui/material/Grid";
-import PlacesCards from "./PlacesCards";
+import Container from "@mui/material/Container"
+import MKBox from "components/MKBox"
+import Grid from "@mui/material/Grid"
+import PlacesCards from "./PlacesCards"
 // import PlacesCards2 from "./PlacesCards2";
 
 function PlacesSwipe() {
-  const matches = useMediaQuery("(min-width:1000px)");
+  const matches = useMediaQuery("(min-width:1000px)")
   // install SwiperJS modules
-  SwiperCore.use([Autoplay, Navigation]);
+  SwiperCore.use([Autoplay, Navigation])
 
   return (
     <div style={{ marginBottom: "20px" }}>
@@ -100,7 +100,7 @@ function PlacesSwipe() {
         }}
       />
     </div>
-  );
+  )
 }
 
-export default PlacesSwipe;
+export default PlacesSwipe

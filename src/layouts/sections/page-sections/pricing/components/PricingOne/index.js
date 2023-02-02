@@ -13,30 +13,30 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import AppBar from "@mui/material/AppBar"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultPricingCard from "examples/Cards/PricingCards/DefaultPricingCard";
+import DefaultPricingCard from "examples/Cards/PricingCards/DefaultPricingCard"
 
 function PricingOne() {
-  const [activeTab, setActiveTab] = useState(0);
-  const [tabType, setTabType] = useState("monthly");
+  const [activeTab, setActiveTab] = useState(0)
+  const [tabType, setTabType] = useState("monthly")
 
   const handleTabType = ({ currentTarget }, newValue) => {
-    setActiveTab(newValue);
-    setTabType(currentTarget.id);
-  };
+    setActiveTab(newValue)
+    setTabType(currentTarget.id)
+  }
 
   return (
     <MKBox component="section" pb={3}>
@@ -154,7 +154,7 @@ function PricingOne() {
         </Container>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
-export default PricingOne;
+export default PricingOne

@@ -1,6 +1,6 @@
-import MKTypography from "components/MKTypography";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import MKTypography from "components/MKTypography"
+import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 
 export default function RoomAction({ id }) {
   return (
@@ -13,8 +13,8 @@ export default function RoomAction({ id }) {
     >
       {id}
     </MKTypography>
-  );
+  )
 }
 RoomAction.propTypes = {
   id: PropTypes.string.isRequired,
-};
+}

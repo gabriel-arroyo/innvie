@@ -13,21 +13,21 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Popover from "@mui/material/Popover";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Stack from "@mui/material/Stack"
+import Popover from "@mui/material/Popover"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 function Popovers() {
-  const [popover, setPopover] = useState(null);
+  const [popover, setPopover] = useState(null)
   const [popoverOrigin, setPopoverOrigin] = useState({
     anchorOrigin: {
       vertical: "top",
@@ -37,10 +37,10 @@ function Popovers() {
       vertical: "bottom",
       horizontal: "center",
     },
-  });
+  })
 
-  const togglePopover = ({ currentTarget }) => setPopover(currentTarget);
-  const closePopover = () => setPopover(null);
+  const togglePopover = ({ currentTarget }) => setPopover(currentTarget)
+  const closePopover = () => setPopover(null)
 
   const popoverTemplate = (
     <Popover open={Boolean(popover)} anchorEl={popover} onClose={closePopover} {...popoverOrigin}>
@@ -51,7 +51,7 @@ function Popovers() {
         </MKTypography>
       </MKBox>
     </Popover>
-  );
+  )
 
   return (
     <MKBox component="section" py={12}>
@@ -62,7 +62,7 @@ function Popovers() {
               variant="gradient"
               color="info"
               onClick={(event) => {
-                togglePopover(event);
+                togglePopover(event)
                 setPopoverOrigin({
                   anchorOrigin: {
                     vertical: "top",
@@ -72,7 +72,7 @@ function Popovers() {
                     vertical: "bottom",
                     horizontal: "center",
                   },
-                });
+                })
               }}
             >
               popover on top
@@ -81,7 +81,7 @@ function Popovers() {
               variant="gradient"
               color="info"
               onClick={(event) => {
-                togglePopover(event);
+                togglePopover(event)
                 setPopoverOrigin({
                   anchorOrigin: {
                     vertical: "center",
@@ -91,7 +91,7 @@ function Popovers() {
                     vertical: "center",
                     horizontal: "left",
                   },
-                });
+                })
               }}
             >
               popover on right
@@ -100,7 +100,7 @@ function Popovers() {
               variant="gradient"
               color="info"
               onClick={(event) => {
-                togglePopover(event);
+                togglePopover(event)
                 setPopoverOrigin({
                   anchorOrigin: {
                     vertical: "center",
@@ -110,7 +110,7 @@ function Popovers() {
                     vertical: "center",
                     horizontal: "right",
                   },
-                });
+                })
               }}
             >
               popover on left
@@ -119,7 +119,7 @@ function Popovers() {
               variant="gradient"
               color="info"
               onClick={(event) => {
-                togglePopover(event);
+                togglePopover(event)
                 setPopoverOrigin({
                   anchorOrigin: {
                     vertical: "bottom",
@@ -129,7 +129,7 @@ function Popovers() {
                     vertical: "top",
                     horizontal: "center",
                   },
-                });
+                })
               }}
             >
               popover on bottom
@@ -139,7 +139,7 @@ function Popovers() {
         {popoverTemplate}
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Popovers;
+export default Popovers

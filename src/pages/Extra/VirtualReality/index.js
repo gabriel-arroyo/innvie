@@ -14,36 +14,36 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Tooltip from "@mui/material/Tooltip";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Tooltip from "@mui/material/Tooltip"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKAvatar from "components/MKAvatar";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKAvatar from "components/MKAvatar"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import DefaultFooter from "examples/Footers/DefaultFooter"
 
 // VirtualReality page components
-import TodoList from "pages/Extra/VirtualReality/components/TodoList";
-import TodoCard from "pages/Extra/VirtualReality/components/TodoCard";
-import Emails from "pages/Extra/VirtualReality/components/Emails";
-import MediaPlayer from "pages/Extra/VirtualReality/components/MediaPlayer";
-import Messages from "pages/Extra/VirtualReality/components/Messages";
+import TodoList from "pages/Extra/VirtualReality/components/TodoList"
+import TodoCard from "pages/Extra/VirtualReality/components/TodoCard"
+import Emails from "pages/Extra/VirtualReality/components/Emails"
+import MediaPlayer from "pages/Extra/VirtualReality/components/MediaPlayer"
+import Messages from "pages/Extra/VirtualReality/components/Messages"
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "routes"
+import footerRoutes from "footer.routes"
 
 // Images
-import bgImage from "assets/images/vr-bg.jpg";
-import team1 from "assets/images/team-1.jpg";
-import sunCloud from "assets/images/small-logos/icon-sun-cloud.png";
+import bgImage from "assets/images/vr-bg.jpg"
+import team1 from "assets/images/team-1.jpg"
+import sunCloud from "assets/images/small-logos/icon-sun-cloud.png"
 
 function VirtualReality() {
   return (
@@ -196,7 +196,7 @@ function VirtualReality() {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default VirtualReality;
+export default VirtualReality

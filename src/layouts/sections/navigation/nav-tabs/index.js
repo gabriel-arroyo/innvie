@@ -14,21 +14,21 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "layouts/sections/components/BaseLayout"
+import View from "layouts/sections/components/View"
 
 // Stats page components
-import TabsSimple from "layouts/sections/navigation/nav-tabs/components/TabsSimple";
-import TabsWithIcons from "layouts/sections/navigation/nav-tabs/components/TabsWithIcons";
-import TabsVertical from "layouts/sections/navigation/nav-tabs/components/TabsVertical";
+import TabsSimple from "layouts/sections/navigation/nav-tabs/components/TabsSimple"
+import TabsWithIcons from "layouts/sections/navigation/nav-tabs/components/TabsWithIcons"
+import TabsVertical from "layouts/sections/navigation/nav-tabs/components/TabsVertical"
 
 // Stats page components code
-import tabsSimpleCode from "layouts/sections/navigation/nav-tabs/components/TabsSimple/code";
-import tabsWithIconsCode from "layouts/sections/navigation/nav-tabs/components/TabsWithIcons/code";
-import tabsVerticalCode from "layouts/sections/navigation/nav-tabs/components/TabsVertical/code";
+import tabsSimpleCode from "layouts/sections/navigation/nav-tabs/components/TabsSimple/code"
+import tabsWithIconsCode from "layouts/sections/navigation/nav-tabs/components/TabsWithIcons/code"
+import tabsVerticalCode from "layouts/sections/navigation/nav-tabs/components/TabsVertical/code"
 
 function NavTabs() {
   return (
@@ -55,7 +55,7 @@ function NavTabs() {
         </MKBox>
       </View>
     </BaseLayout>
-  );
+  )
 }
 
-export default NavTabs;
+export default NavTabs

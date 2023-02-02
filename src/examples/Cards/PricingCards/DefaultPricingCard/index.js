@@ -14,19 +14,19 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
+import Card from "@mui/material/Card"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKButton from "components/MKButton"
 
 function DefaultPricingCard({ color, badge, price, specifications, action, shadow }) {
   const renderSpecifications = specifications.map(({ label, includes }) => (
@@ -56,7 +56,7 @@ function DefaultPricingCard({ color, badge, price, specifications, action, shado
         {label}
       </MKTypography>
     </MKBox>
-  ));
+  ))
 
   return (
     <Card sx={{ boxShadow: ({ boxShadows: { lg } }) => (shadow ? lg : "none") }}>
@@ -140,14 +140,14 @@ function DefaultPricingCard({ color, badge, price, specifications, action, shado
         </MKBox>
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Setting default props for the DefaultPricingCard
 DefaultPricingCard.defaultProps = {
   color: "white",
   shadow: true,
-};
+}
 
 // Typechecking props for the DefaultPricingCard
 DefaultPricingCard.propTypes = {
@@ -197,6 +197,6 @@ DefaultPricingCard.propTypes = {
     ]).isRequired,
   }).isRequired,
   shadow: PropTypes.bool,
-};
+}
 
-export default DefaultPricingCard;
+export default DefaultPricingCard

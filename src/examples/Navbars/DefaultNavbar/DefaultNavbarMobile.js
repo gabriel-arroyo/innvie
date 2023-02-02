@@ -13,33 +13,33 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // react-router components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Collapse from "@mui/material/Collapse";
-import MuiLink from "@mui/material/Link";
+import Collapse from "@mui/material/Collapse"
+import MuiLink from "@mui/material/Link"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
-import { routes, mobileLoggedRoutes } from "innvie.routes";
-import { useAtom } from "jotai";
-import loggedUser from "states/loggedUser";
+import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown"
+import { routes, mobileLoggedRoutes } from "innvie.routes"
+import { useAtom } from "jotai"
+import loggedUser from "states/loggedUser"
 
 function DefaultNavbarMobile({ open }) {
-  const [collapse, setCollapse] = useState("");
-  const [user] = useAtom(loggedUser);
+  const [collapse, setCollapse] = useState("")
+  const [user] = useAtom(loggedUser)
 
-  const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name));
+  const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name))
   const renderNavbarItems = routes.map(
     ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
       <DefaultNavbarDropdown
@@ -151,7 +151,7 @@ function DefaultNavbarMobile({ open }) {
         )}
       </DefaultNavbarDropdown>
     )
-  );
+  )
 
   const renderLoggedNavbarItems = mobileLoggedRoutes.map(
     ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
@@ -264,7 +264,7 @@ function DefaultNavbarMobile({ open }) {
         )}
       </DefaultNavbarDropdown>
     )
-  );
+  )
 
   return (
     <Collapse in={Boolean(open)} timeout="auto" unmountOnExit>
@@ -272,12 +272,12 @@ function DefaultNavbarMobile({ open }) {
         {!user ? renderNavbarItems : renderLoggedNavbarItems}
       </MKBox>
     </Collapse>
-  );
+  )
 }
 
 // Typechecking props for the DefaultNavbarMobile
 DefaultNavbarMobile.propTypes = {
   open: PropTypes.oneOfType([PropTypes.bool, PropTypes.instanceOf(Object)]).isRequired,
-};
+}
 
-export default DefaultNavbarMobile;
+export default DefaultNavbarMobile

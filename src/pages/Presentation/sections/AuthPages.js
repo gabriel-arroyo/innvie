@@ -14,31 +14,31 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKButton from "components/MKButton"
 
 // Presentation page components
-import ExampleCard from "pages/Presentation/components/ExampleCard";
+import ExampleCard from "pages/Presentation/components/ExampleCard"
 
 // Images
-import bgPattern from "assets/images/shapes/pattern-lines.svg";
+import bgPattern from "assets/images/shapes/pattern-lines.svg"
 
 function AuthPages() {
   // pages images
   const img1 =
-    "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/account/sign-up-cover.jpg";
+    "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/account/sign-up-cover.jpg"
   const img2 =
-    "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/account/reset-cover.jpg";
+    "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/account/reset-cover.jpg"
   const img3 =
-    "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/account/signin-basic.jpg";
+    "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/account/signin-basic.jpg"
 
   return (
     <MKBox position="relative" variant="gradient" bgColor="dark" mt={{ xs: 0, lg: 12 }} mx={-2}>
@@ -100,7 +100,7 @@ function AuthPages() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default AuthPages;
+export default AuthPages

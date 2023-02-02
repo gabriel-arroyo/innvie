@@ -1,15 +1,15 @@
 // @mui material components
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid"
+import Container from "@mui/material/Container"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Images
-import image from "assets/images/examples/blog2.jpg";
-import DateInput from "../../Home/components/Date/DateInput";
+import image from "assets/images/examples/blog2.jpg"
+import DateInput from "../../Home/components/Date/DateInput"
 
 function Room() {
   return (
@@ -85,7 +85,7 @@ function Room() {
         Política de privacidad
       </MKTypography>
     </MKBox>
-  );
+  )
 }
 
-export default Room;
+export default Room

@@ -13,16 +13,16 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import DefaultFooter from "examples/Footers/DefaultFooter"
 
 // Rental page sections
 // import Search from "pages/LandingPages/Rental/sections/Search";
@@ -31,11 +31,11 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 // import Contact from "pages/LandingPages/Rental/sections/Contact";
 
 // Routes
-import footerRoutes from "footer.routes";
+import footerRoutes from "footer.routes"
 
 // Images
-import bgImage from "assets/images/bg-rental.jpeg";
-import Room from "./components/room";
+import bgImage from "assets/images/bg-rental.jpeg"
+import Room from "./components/room"
 
 function Selected() {
   return (
@@ -103,7 +103,7 @@ function Selected() {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Selected;
+export default Selected

@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKInput from "components/MKInput"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Images
-import image from "assets/images/examples/blog2.jpg";
+import image from "assets/images/examples/blog2.jpg"
 
 function StatsOne() {
   return (
@@ -65,7 +65,7 @@ function StatsOne() {
         </Grid>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
-export default StatsOne;
+export default StatsOne

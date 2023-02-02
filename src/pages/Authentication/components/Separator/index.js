@@ -14,8 +14,8 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function Separator() {
   const separatorStyles = {
@@ -25,7 +25,7 @@ function Separator() {
     height: "1px",
     position: "relative",
     verticalAlign: "middle",
-  };
+  }
 
   return (
     <MKBox my={3} position="relative" textAlign="center">
@@ -60,7 +60,7 @@ function Separator() {
         or continue with
       </MKTypography>
     </MKBox>
-  );
+  )
 }
 
-export default Separator;
+export default Separator

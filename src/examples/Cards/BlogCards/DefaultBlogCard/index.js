@@ -14,19 +14,19 @@ Coded by www.creative-tim.com
 */
 
 // react-router components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
-import MuiLink from "@mui/material/Link";
+import Card from "@mui/material/Card"
+import MuiLink from "@mui/material/Link"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKAvatar from "components/MKAvatar";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKAvatar from "components/MKAvatar"
 
 function DefaultBlogCard({ image, category, title, description, author, raised, action }) {
   const imageTemplate = (
@@ -61,7 +61,7 @@ function DefaultBlogCard({ image, category, title, description, author, raised, 
         }
       />
     </>
-  );
+  )
 
   return (
     <Card>
@@ -134,7 +134,7 @@ function DefaultBlogCard({ image, category, title, description, author, raised, 
         )}
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Setting default props for the DefaultBlogCard
@@ -142,7 +142,7 @@ DefaultBlogCard.defaultProps = {
   category: false,
   author: false,
   raised: true,
-};
+}
 
 // Typechecking props for the DefaultBlogCard
 DefaultBlogCard.propTypes = {
@@ -177,6 +177,6 @@ DefaultBlogCard.propTypes = {
     type: PropTypes.oneOf(["external", "internal"]).isRequired,
     route: PropTypes.string.isRequired,
   }).isRequired,
-};
+}
 
-export default DefaultBlogCard;
+export default DefaultBlogCard

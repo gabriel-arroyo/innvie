@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for type checking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Icon from "@mui/material/Icon";
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function AboutUsOption({ icon, content }) {
   return (
@@ -44,13 +44,13 @@ function AboutUsOption({ icon, content }) {
         {content}
       </MKTypography>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the AboutUsOption
 AboutUsOption.propTypes = {
   icon: PropTypes.string.isRequired,
   content: PropTypes.node.isRequired,
-};
+}
 
-export default AboutUsOption;
+export default AboutUsOption

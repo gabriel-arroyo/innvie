@@ -1,7 +1,7 @@
-import React from "react";
-import MKBox from "components/MKBox";
-import { Outlet } from "react-router-dom";
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import React from "react"
+import MKBox from "components/MKBox"
+import { Outlet } from "react-router-dom"
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
 
 function NavbarLayout() {
   return (
@@ -19,7 +19,7 @@ function NavbarLayout() {
       </main>
       <MKBox pt={6} px={1} mt={6} sx={{ backgroundColor: "transparent" }} />
     </>
-  );
+  )
 }
 
-export default NavbarLayout;
+export default NavbarLayout

@@ -37,66 +37,66 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Icon from "@mui/material/Icon";
+import Icon from "@mui/material/Icon"
 
 // Pages
-import CoworkingPage from "layouts/pages/landing-pages/coworking";
-import Rental from "layouts/pages/landing-pages/rental";
-import AboutUs from "layouts/pages/company/about-us";
-import Pricing from "layouts/pages/company/pricing";
-import HelpCenter from "layouts/pages/support/help-center";
-import ContactUs from "layouts/pages/support/contact-us";
-import Faq from "layouts/pages/support/faq";
-import Privacy from "layouts/pages/support/privacy";
-import DesktopApp from "layouts/pages/apps/desktop-app";
-import SingleArticle from "layouts/pages/blogs/single-article";
-import Author from "layouts/pages/blogs/author";
-import VirtualRealityPage from "layouts/pages/extra/virtual-reality";
+import CoworkingPage from "layouts/pages/landing-pages/coworking"
+import Rental from "layouts/pages/landing-pages/rental"
+import AboutUs from "layouts/pages/company/about-us"
+import Pricing from "layouts/pages/company/pricing"
+import HelpCenter from "layouts/pages/support/help-center"
+import ContactUs from "layouts/pages/support/contact-us"
+import Faq from "layouts/pages/support/faq"
+import Privacy from "layouts/pages/support/privacy"
+import DesktopApp from "layouts/pages/apps/desktop-app"
+import SingleArticle from "layouts/pages/blogs/single-article"
+import Author from "layouts/pages/blogs/author"
+import VirtualRealityPage from "layouts/pages/extra/virtual-reality"
 
 // Account
-import SignInBasicPage from "layouts/authentication/sign-in/basic";
-import SignInCoverPage from "layouts/authentication/sign-in/cover";
-import SignInIllustration from "layouts/authentication/sign-in/illustration";
-import SignInSimplePage from "layouts/authentication/sign-in/simple";
-import SignUpCoverPage from "layouts/authentication/sign-up/cover";
-import ResetPasswordPage from "layouts/authentication/reset-password/cover";
+import SignInBasicPage from "layouts/authentication/sign-in/basic"
+import SignInCoverPage from "layouts/authentication/sign-in/cover"
+import SignInIllustration from "layouts/authentication/sign-in/illustration"
+import SignInSimplePage from "layouts/authentication/sign-in/simple"
+import SignUpCoverPage from "layouts/authentication/sign-up/cover"
+import ResetPasswordPage from "layouts/authentication/reset-password/cover"
 
 // Sections
-import PageHeaders from "layouts/sections/page-sections/page-headers";
-import Features from "layouts/sections/page-sections/featuers";
-import PricingSection from "layouts/sections/page-sections/pricing";
-import FaqSection from "layouts/sections/page-sections/faq";
-import BlogPosts from "layouts/sections/page-sections/blog-posts";
-import Testimonials from "layouts/sections/page-sections/testimonials";
-import Teams from "layouts/sections/page-sections/teams";
-import Stats from "layouts/sections/page-sections/stats";
-import Cta from "layouts/sections/page-sections/cta";
-import Applications from "layouts/sections/page-sections/applications";
-import LogoAreas from "layouts/sections/page-sections/logo-areas";
-import Footers from "layouts/sections/page-sections/footers";
-import GeneralCards from "layouts/sections/page-sections/general-cards";
-import ContentSections from "layouts/sections/page-sections/content-sections";
-import Navbars from "layouts/sections/navigation/navbars";
-import NavTabs from "layouts/sections/navigation/nav-tabs";
-import Pagination from "layouts/sections/navigation/pagination";
-import Newsletters from "layouts/sections/input-areas/newsletters";
-import ContactSections from "layouts/sections/input-areas/contact-sections";
-import Inputs from "layouts/sections/input-areas/inputs";
-import Forms from "layouts/sections/input-areas/forms";
-import Alerts from "layouts/sections/attention-catchers/alerts";
-import Notifications from "layouts/sections/attention-catchers/notifications";
-import Modals from "layouts/sections/attention-catchers/modals";
-import TooltipsPopovers from "layouts/sections/attention-catchers/tooltips-popovers";
-import Avatars from "layouts/sections/elements/avatars";
-import Badges from "layouts/sections/elements/badges";
-import BreadcrumbsEl from "layouts/sections/elements/breadcrumbs";
-import Buttons from "layouts/sections/elements/buttons";
-import Dropdowns from "layouts/sections/elements/dropdowns";
-import ProgressBars from "layouts/sections/elements/progress-bars";
-import SocialButtons from "layouts/sections/elements/social-buttons";
-import Tables from "layouts/sections/elements/tables";
-import Toggles from "layouts/sections/elements/toggles";
-import Typography from "layouts/sections/elements/typography";
+import PageHeaders from "layouts/sections/page-sections/page-headers"
+import Features from "layouts/sections/page-sections/featuers"
+import PricingSection from "layouts/sections/page-sections/pricing"
+import FaqSection from "layouts/sections/page-sections/faq"
+import BlogPosts from "layouts/sections/page-sections/blog-posts"
+import Testimonials from "layouts/sections/page-sections/testimonials"
+import Teams from "layouts/sections/page-sections/teams"
+import Stats from "layouts/sections/page-sections/stats"
+import Cta from "layouts/sections/page-sections/cta"
+import Applications from "layouts/sections/page-sections/applications"
+import LogoAreas from "layouts/sections/page-sections/logo-areas"
+import Footers from "layouts/sections/page-sections/footers"
+import GeneralCards from "layouts/sections/page-sections/general-cards"
+import ContentSections from "layouts/sections/page-sections/content-sections"
+import Navbars from "layouts/sections/navigation/navbars"
+import NavTabs from "layouts/sections/navigation/nav-tabs"
+import Pagination from "layouts/sections/navigation/pagination"
+import Newsletters from "layouts/sections/input-areas/newsletters"
+import ContactSections from "layouts/sections/input-areas/contact-sections"
+import Inputs from "layouts/sections/input-areas/inputs"
+import Forms from "layouts/sections/input-areas/forms"
+import Alerts from "layouts/sections/attention-catchers/alerts"
+import Notifications from "layouts/sections/attention-catchers/notifications"
+import Modals from "layouts/sections/attention-catchers/modals"
+import TooltipsPopovers from "layouts/sections/attention-catchers/tooltips-popovers"
+import Avatars from "layouts/sections/elements/avatars"
+import Badges from "layouts/sections/elements/badges"
+import BreadcrumbsEl from "layouts/sections/elements/breadcrumbs"
+import Buttons from "layouts/sections/elements/buttons"
+import Dropdowns from "layouts/sections/elements/dropdowns"
+import ProgressBars from "layouts/sections/elements/progress-bars"
+import SocialButtons from "layouts/sections/elements/social-buttons"
+import Tables from "layouts/sections/elements/tables"
+import Toggles from "layouts/sections/elements/toggles"
+import Typography from "layouts/sections/elements/typography"
 // import Home from "pages/Innvie/Home";
 // import Reservation from "pages/Innvie/Reservation";
 // import Selected from "pages/Innvie/Selected";
@@ -529,6 +529,6 @@ const routes = [
       },
     ],
   },
-];
+]
 
-export default routes;
+export default routes

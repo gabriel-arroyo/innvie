@@ -14,21 +14,21 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Mataerial Kit 2 PRO React components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Mataerial Kit 2 PRO React examples
-import Breadcrumbs from "examples/Breadcrumbs";
+import Breadcrumbs from "examples/Breadcrumbs"
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "layouts/sections/components/BaseLayout"
+import View from "layouts/sections/components/View"
 
 // Breadcrumbs page components code
-import breadcrumbsCode from "layouts/sections/elements/breadcrumbs/code";
+import breadcrumbsCode from "layouts/sections/elements/breadcrumbs/code"
 
 function BreadcrumbsEl() {
   return (
@@ -70,7 +70,7 @@ function BreadcrumbsEl() {
         </MKBox>
       </View>
     </BaseLayout>
-  );
+  )
 }
 
-export default BreadcrumbsEl;
+export default BreadcrumbsEl

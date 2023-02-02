@@ -14,17 +14,17 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO components
-import ColoredBackgroundCard from "examples/Cards/BackgroundCards/ColoredBackgroundCard";
-import InfoBackgroundCard from "examples/Cards/BackgroundCards/InfoBackgroundCard";
+import ColoredBackgroundCard from "examples/Cards/BackgroundCards/ColoredBackgroundCard"
+import InfoBackgroundCard from "examples/Cards/BackgroundCards/InfoBackgroundCard"
 
 function BlogPostOne() {
   return (
@@ -116,7 +116,7 @@ function BlogPostOne() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default BlogPostOne;
+export default BlogPostOne

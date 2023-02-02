@@ -14,29 +14,29 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import DefaultBlogCard from "examples/Cards/BlogCards/DefaultBlogCard";
+import DefaultBlogCard from "examples/Cards/BlogCards/DefaultBlogCard"
 
 // Images
-import author1 from "assets/images/team-2.jpg";
-import author2 from "assets/images/ivana-squares.jpg";
-import author3 from "assets/images/marie.jpg";
-import RaisedBlogCard from "examples/Cards/BlogCards/RaisedBlogCard";
-import SimpleBlogCard from "examples/Cards/BlogCards/SimpleBlogCard";
+import author1 from "assets/images/team-2.jpg"
+import author2 from "assets/images/ivana-squares.jpg"
+import author3 from "assets/images/marie.jpg"
+import RaisedBlogCard from "examples/Cards/BlogCards/RaisedBlogCard"
+import SimpleBlogCard from "examples/Cards/BlogCards/SimpleBlogCard"
 
 function BlogPostThree() {
   const post1 =
-    "https://images.unsplash.com/photo-1592489637182-8c172d6d7826?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2300&q=80";
+    "https://images.unsplash.com/photo-1592489637182-8c172d6d7826?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2300&q=80"
   const post2 =
-    "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2300&q=80";
+    "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2300&q=80"
   const post3 =
-    "https://images.unsplash.com/photo-1444877466744-dc2f2af2b931?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2300&q=80";
+    "https://images.unsplash.com/photo-1444877466744-dc2f2af2b931?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2300&q=80"
 
   return (
     <MKBox component="section" py={7}>
@@ -87,7 +87,7 @@ function BlogPostThree() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default BlogPostThree;
+export default BlogPostThree

@@ -1,10 +1,10 @@
-import React from "react";
-import MKBox from "components/MKBox";
-import { Outlet } from "react-router-dom";
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import CenteredFooter from "examples/Footers/CenteredFooter";
-import footerRoutes from "../../../../footer.routes";
-import img from "../../../../assets/images/innvie/logos/logo-stay-white.svg";
+import React from "react"
+import MKBox from "components/MKBox"
+import { Outlet } from "react-router-dom"
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import CenteredFooter from "examples/Footers/CenteredFooter"
+import footerRoutes from "../../../../footer.routes"
+import img from "../../../../assets/images/innvie/logos/logo-stay-white.svg"
 
 function Layout() {
   return (
@@ -19,7 +19,7 @@ function Layout() {
         <CenteredFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

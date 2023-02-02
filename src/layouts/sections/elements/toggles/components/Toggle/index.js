@@ -13,21 +13,21 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Switch from "@mui/material/Switch";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Switch from "@mui/material/Switch"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function Toggle() {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false)
 
-  const toggleSwitch = () => setChecked(!checked);
+  const toggleSwitch = () => setChecked(!checked)
 
   return (
     <MKBox component="section" py={8}>
@@ -49,7 +49,7 @@ function Toggle() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Toggle;
+export default Toggle

@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import TransparentBlogCard from "examples/Cards/BlogCards/TransparentBlogCard";
+import TransparentBlogCard from "examples/Cards/BlogCards/TransparentBlogCard"
 
 // Images
-import image from "assets/images/products/product-1-min.jpg";
+import image from "assets/images/products/product-1-min.jpg"
 
 function CardWithColoredShadow() {
   return (
@@ -42,7 +42,7 @@ function CardWithColoredShadow() {
         />
       </Grid>
     </MKBox>
-  );
+  )
 }
 
-export default CardWithColoredShadow;
+export default CardWithColoredShadow

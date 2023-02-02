@@ -1,7 +1,7 @@
-import { Grid } from "@mui/material";
-import MKBox from "components/MKBox";
-import PropTypes from "prop-types";
-import BookingCard from "./BoockingCard";
+import { Grid } from "@mui/material"
+import MKBox from "components/MKBox"
+import PropTypes from "prop-types"
+import BookingCard from "./BoockingCard"
 
 function RoomType({ typeObject }) {
   return (
@@ -19,12 +19,12 @@ function RoomType({ typeObject }) {
         />
       </MKBox>
     </Grid>
-  );
+  )
 }
 
 RoomType.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   typeObject: PropTypes.object.isRequired,
-};
+}
 
-export default RoomType;
+export default RoomType

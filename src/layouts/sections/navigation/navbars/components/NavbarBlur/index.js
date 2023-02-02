@@ -15,10 +15,10 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
 
 // Routes
-import routes from "routes";
+import routes from "routes"
 
 function NavbarBlur() {
   return (
@@ -33,7 +33,7 @@ function NavbarBlur() {
       relative
       center
     />
-  );
+  )
 }
 
-export default NavbarBlur;
+export default NavbarBlur

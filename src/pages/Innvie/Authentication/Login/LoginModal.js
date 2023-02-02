@@ -13,20 +13,20 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Modal from "@mui/material/Modal";
+import Container from "@mui/material/Container"
+import Modal from "@mui/material/Modal"
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
-import Login from ".";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
+import Login from "."
 
 function LoginModal() {
-  const [show, setShow] = useState(false);
-  const toggleModal = () => setShow(!show);
+  const [show, setShow] = useState(false)
+  const toggleModal = () => setShow(!show)
 
   return (
     <MKBox component="section" py={0}>
@@ -65,7 +65,7 @@ function LoginModal() {
         </Modal>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default LoginModal;
+export default LoginModal

@@ -14,34 +14,34 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
-import Divider from "@mui/material/Divider";
+import Card from "@mui/material/Card"
+import Icon from "@mui/material/Icon"
+import Divider from "@mui/material/Divider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKButton from "components/MKButton"
 
 function SimplePricingCard({ variant, color, title, description, price, specifications, action }) {
-  let titleColor = "white";
-  let priceColor = "white";
-  let buttonColor = "white";
+  let titleColor = "white"
+  let priceColor = "white"
+  let buttonColor = "white"
 
   if (variant === "contained") {
-    titleColor = color;
-    priceColor = color;
-    buttonColor = color;
+    titleColor = color
+    priceColor = color
+    buttonColor = color
   } else if (variant === "gradient" && color === "light") {
-    titleColor = "dark";
-    priceColor = "dark";
-    buttonColor = "dark";
+    titleColor = "dark"
+    priceColor = "dark"
+    buttonColor = "dark"
   }
 
   const renderSpecifications = specifications.map((specification) => (
@@ -72,7 +72,7 @@ function SimplePricingCard({ variant, color, title, description, price, specific
         {specification}
       </MKTypography>
     </MKBox>
-  ));
+  ))
 
   return (
     <Card sx={{ width: "100%", height: "100%", overflow: "hidden" }}>
@@ -149,14 +149,14 @@ function SimplePricingCard({ variant, color, title, description, price, specific
         <MKBox p={3}>{renderSpecifications}</MKBox>
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Setting default props for the SimplePricingCard
 SimplePricingCard.defaultProps = {
   color: "dark",
   variant: "contained",
-};
+}
 
 // Typechecking props for the SimplePricingCard
 SimplePricingCard.propTypes = {
@@ -183,6 +183,6 @@ SimplePricingCard.propTypes = {
     route: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   }).isRequired,
-};
+}
 
-export default SimplePricingCard;
+export default SimplePricingCard

@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // react-router-dom components
 // import { Link } from "react-router-dom";
 
 // @mui material components
-import Icon from "@mui/material/Icon";
-import MuiLink from "@mui/material/Link";
+import Icon from "@mui/material/Icon"
+import MuiLink from "@mui/material/Link"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function FilledInfoCard({
   variant,
@@ -51,7 +51,7 @@ function FilledInfoCard({
     "&:hover .material-icons-round, &:focus .material-icons-round": {
       transform: `translateX(6px)`,
     },
-  };
+  }
 
   // let iconColor = color;
   // const iconColor = "white";
@@ -123,7 +123,7 @@ function FilledInfoCard({
         ) : null} */}
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Setting default props for the FilledInfoCard
@@ -133,7 +133,7 @@ FilledInfoCard.defaultProps = {
   action: false,
   description2: "",
   description3: "",
-};
+}
 
 // Typechecking props for the FilledInfoCard
 FilledInfoCard.propTypes = {
@@ -161,6 +161,6 @@ FilledInfoCard.propTypes = {
       label: PropTypes.string.isRequired,
     }),
   ]),
-};
+}
 
-export default FilledInfoCard;
+export default FilledInfoCard

@@ -13,27 +13,27 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Modal from "@mui/material/Modal";
-import Divider from "@mui/material/Divider";
-import Slide from "@mui/material/Slide";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Modal from "@mui/material/Modal"
+import Divider from "@mui/material/Divider"
+import Slide from "@mui/material/Slide"
+import Icon from "@mui/material/Icon"
 
 // @mui icons
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from "@mui/icons-material/Close"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 function NotificationModal() {
-  const [show, setShow] = useState(false);
-  const toggleModal = () => setShow(!show);
+  const [show, setShow] = useState(false)
+  const toggleModal = () => setShow(!show)
 
   return (
     <MKBox component="section" py={6}>
@@ -97,7 +97,7 @@ function NotificationModal() {
         </Modal>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default NotificationModal;
+export default NotificationModal

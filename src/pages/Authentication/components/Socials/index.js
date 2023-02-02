@@ -14,8 +14,8 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO components
-import MKButton from "components/MKButton";
-import MKBox from "components/MKBox";
+import MKButton from "components/MKButton"
+import MKBox from "components/MKBox"
 
 function Socials() {
   return (
@@ -70,7 +70,7 @@ function Socials() {
         </svg>
       </MKButton>
     </MKBox>
-  );
+  )
 }
 
-export default Socials;
+export default Socials

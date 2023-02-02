@@ -1,7 +1,7 @@
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Card } from "@mui/material";
-import MKBox from "components/MKBox";
-import PropTypes from "prop-types";
+import DeleteIcon from "@mui/icons-material/Delete"
+import { Card } from "@mui/material"
+import MKBox from "components/MKBox"
+import PropTypes from "prop-types"
 
 export default function RoomList({ rooms, deleteRoom }) {
   return (
@@ -23,16 +23,16 @@ export default function RoomList({ rooms, deleteRoom }) {
           </MKBox>
         ))}
     </Card>
-  );
+  )
 }
 RoomList.defaultProps = {
   rooms: [{ number: "", comment: "" }],
   deleteRoom: () => console.log("test"),
-};
+}
 
 RoomList.propTypes = {
   rooms: PropTypes.arrayOf(
     PropTypes.shape({ number: PropTypes.string, comment: PropTypes.string })
   ),
   deleteRoom: PropTypes.func,
-};
+}

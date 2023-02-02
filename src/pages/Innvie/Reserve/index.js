@@ -13,105 +13,105 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react"
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKInput from "components/MKInput"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import { Checkbox } from "@mui/material";
-import useUser from "api/useUser";
-import useCalendar from "api/useCalendar";
-import CustomPricingCard from "examples/Cards/PricingCards/CustomPricingCard";
-import { useAtom } from "jotai";
-import { useNavigate } from "react-router-dom";
-import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
-import selectedPrice from "states/selectedPrice";
-import { selectedType, maxOccupantsInType } from "states/selectedType";
-import taxes from "constants/taxes";
-import roundTo from "tools/round";
-import BlancLayout from "../Layouts/BlancLayout";
-import LoginModal from "../Authentication/Login/LoginModal";
-import PayButton from "./PayButton";
+import { Checkbox } from "@mui/material"
+import useUser from "api/useUser"
+import useCalendar from "api/useCalendar"
+import CustomPricingCard from "examples/Cards/PricingCards/CustomPricingCard"
+import { useAtom } from "jotai"
+import { useNavigate } from "react-router-dom"
+import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate"
+import selectedPrice from "states/selectedPrice"
+import { selectedType, maxOccupantsInType } from "states/selectedType"
+import taxes from "constants/taxes"
+import roundTo from "tools/round"
+import BlancLayout from "../Layouts/BlancLayout"
+import LoginModal from "../Authentication/Login/LoginModal"
+import PayButton from "./PayButton"
 
 function Reserve() {
-  const [startDate] = useAtom(reservedStartDate);
-  const [endDate] = useAtom(reservedEndDate);
-  const [days] = useAtom(reservedDays);
-  const [type] = useAtom(selectedType);
-  const [max] = useAtom(maxOccupantsInType);
-  const [price] = useAtom(selectedPrice);
-  const navigate = useNavigate();
-  const { room, addReservation } = useCalendar({ type, startDate, endDate });
-  const [terms, setTerms] = useState(false);
-  const { currentUser: user, logged, getAndUpdateUser, checkEmail, mailExists } = useUser();
-  const [formName, setFormName] = useState("");
-  const [formLastName, setFormLastName] = useState("");
-  const [formPhone, setFormPhone] = useState("");
-  const [formAddress, setFormAddress] = useState("");
-  const [formCity, setFormCity] = useState("");
-  const [formCountry, setFormCountry] = useState("");
-  const [formZipCode, setFormZipCode] = useState("");
-  const [formEmail, setFormEmail] = useState("");
-  const [formLicense, setFormLicense] = useState("");
-  const [formPassword, setFormPassword] = useState("");
-  const [formConfirPassword, setFormConfirPassword] = useState("");
-  const [coincidentPassword, setCoincidentPassword] = useState(true);
+  const [startDate] = useAtom(reservedStartDate)
+  const [endDate] = useAtom(reservedEndDate)
+  const [days] = useAtom(reservedDays)
+  const [type] = useAtom(selectedType)
+  const [max] = useAtom(maxOccupantsInType)
+  const [price] = useAtom(selectedPrice)
+  const navigate = useNavigate()
+  const { room, addReservation } = useCalendar({ type, startDate, endDate })
+  const [terms, setTerms] = useState(false)
+  const { currentUser: user, logged, getAndUpdateUser, checkEmail, mailExists } = useUser()
+  const [formName, setFormName] = useState("")
+  const [formLastName, setFormLastName] = useState("")
+  const [formPhone, setFormPhone] = useState("")
+  const [formAddress, setFormAddress] = useState("")
+  const [formCity, setFormCity] = useState("")
+  const [formCountry, setFormCountry] = useState("")
+  const [formZipCode, setFormZipCode] = useState("")
+  const [formEmail, setFormEmail] = useState("")
+  const [formLicense, setFormLicense] = useState("")
+  const [formPassword, setFormPassword] = useState("")
+  const [formConfirPassword, setFormConfirPassword] = useState("")
+  const [coincidentPassword, setCoincidentPassword] = useState(true)
 
   const handleCheck = () => {
-    setTerms(!terms);
-  };
+    setTerms(!terms)
+  }
 
-  const [party, setParty] = useState(0);
-  const [adults, setAdults] = useState(0);
-  const [kids, setKids] = useState(0);
-  const count = useRef(0);
+  const [party, setParty] = useState(0)
+  const [adults, setAdults] = useState(0)
+  const [kids, setKids] = useState(0)
+  const count = useRef(0)
   useEffect(() => {
-    count.current += 1;
-  });
+    count.current += 1
+  })
   const handlePartyChange = (e) => {
-    const intParty = parseInt(e.target.value, 10);
-    if (intParty < 1 || intParty > max) return;
-    const intKids = parseInt(kids, 10);
-    const intAdults = parseInt(adults, 10);
-    const up = intParty > intKids + intAdults;
+    const intParty = parseInt(e.target.value, 10)
+    if (intParty < 1 || intParty > max) return
+    const intKids = parseInt(kids, 10)
+    const intAdults = parseInt(adults, 10)
+    const up = intParty > intKids + intAdults
     if (up || !(intAdults === 1 && intKids > 0)) {
-      const newAdults = intParty - intKids;
-      setAdults(newAdults);
+      const newAdults = intParty - intKids
+      setAdults(newAdults)
     } else {
-      const newKids = intParty - intAdults;
-      setKids(newKids);
+      const newKids = intParty - intAdults
+      setKids(newKids)
     }
-    setParty(intParty > 0 ? intParty : 0);
-  };
+    setParty(intParty > 0 ? intParty : 0)
+  }
   const handleAdultsChange = (e) => {
-    const intAdults = parseInt(e.target.value, 10);
-    const intParty = parseInt(party, 10);
-    const newKids = intParty - intAdults;
-    if (newKids < 0) return;
-    if (intAdults < 1) return;
-    setKids(newKids);
-    setAdults(intAdults);
-  };
+    const intAdults = parseInt(e.target.value, 10)
+    const intParty = parseInt(party, 10)
+    const newKids = intParty - intAdults
+    if (newKids < 0) return
+    if (intAdults < 1) return
+    setKids(newKids)
+    setAdults(intAdults)
+  }
   const handleKidsChange = (e) => {
-    const intKids = parseInt(e.target.value, 10);
-    const intParty = parseInt(party, 10);
-    const newAdults = intParty - intKids;
-    if (newAdults < 0) return;
-    if (intKids < 0) return;
-    setKids(intKids);
-    setAdults(newAdults);
-  };
+    const intKids = parseInt(e.target.value, 10)
+    const intParty = parseInt(party, 10)
+    const newAdults = intParty - intKids
+    if (newAdults < 0) return
+    if (intKids < 0) return
+    setKids(intKids)
+    setAdults(newAdults)
+  }
 
   const onApprove = async (data, actions) => {
-    const details = await actions.order.capture();
-    console.log(`Transaction ${details.status} by ${details.payer.name.given_name}`);
-    console.log("selected room", room?.number ?? "ND");
+    const details = await actions.order.capture()
+    console.log(`Transaction ${details.status} by ${details.payer.name.given_name}`)
+    console.log("selected room", room?.number ?? "ND")
     const newUser = {
       first_name: formName ?? "",
       last_name: formLastName ?? "",
@@ -122,78 +122,78 @@ function Reserve() {
       zipcode: formZipCode ?? "",
       email: formEmail ?? "",
       license: formLicense ?? "",
-    };
-    await getAndUpdateUser(newUser);
-    const code = await addReservation(formEmail, room, startDate, endDate);
+    }
+    await getAndUpdateUser(newUser)
+    const code = await addReservation(formEmail, room, startDate, endDate)
     setTimeout(() => {
-      navigate(`/confirmation/${code}`);
-    }, 1000);
-  };
+      navigate(`/confirmation/${code}`)
+    }, 1000)
+  }
 
   const onNameChange = (e) => {
-    setFormName(e.target.value);
-  };
+    setFormName(e.target.value)
+  }
 
   const onLastNameChange = (e) => {
-    setFormLastName(e.target.value);
-  };
+    setFormLastName(e.target.value)
+  }
 
   const onPhoneChange = (e) => {
-    setFormPhone(e.target.value);
-  };
+    setFormPhone(e.target.value)
+  }
 
   const onAddressChange = (e) => {
-    setFormAddress(e.target.value);
-  };
+    setFormAddress(e.target.value)
+  }
 
   const onCityChange = (e) => {
-    setFormCity(e.target.value);
-  };
+    setFormCity(e.target.value)
+  }
 
   const onCountryChange = (e) => {
-    setFormCountry(e.target.value);
-  };
+    setFormCountry(e.target.value)
+  }
 
   const onZipCodeChange = (e) => {
-    setFormZipCode(e.target.value);
-  };
+    setFormZipCode(e.target.value)
+  }
 
-  let countdown;
+  let countdown
   const onEmailChange = async (e) => {
-    setFormEmail(e.target.value);
-    clearTimeout(countdown);
+    setFormEmail(e.target.value)
+    clearTimeout(countdown)
     countdown = setTimeout(() => {
-      console.log("email changed");
-      checkEmail(e.target.value);
-    }, 3000);
-  };
+      console.log("email changed")
+      checkEmail(e.target.value)
+    }, 3000)
+  }
 
   const onLiceseChange = (e) => {
-    setFormLicense(e.target.value);
-  };
+    setFormLicense(e.target.value)
+  }
 
   const onPasswordChange = (e) => {
-    setFormPassword(e.target.value);
-    setCoincidentPassword(formConfirPassword === e.target.value);
-  };
+    setFormPassword(e.target.value)
+    setCoincidentPassword(formConfirPassword === e.target.value)
+  }
 
   const onConfirmPasswordChange = (e) => {
-    setFormConfirPassword(e.target.value);
-    setCoincidentPassword(formPassword === e.target.value);
-  };
+    setFormConfirPassword(e.target.value)
+    setCoincidentPassword(formPassword === e.target.value)
+  }
 
   useEffect(() => {
-    if (!user) return;
-    setFormName(user.first_name);
-    setFormLastName(user.last_name);
-    setFormPhone(user.phone);
-    setFormAddress(user.address);
-    setFormCity(user.city);
-    setFormCountry(user.country);
-    setFormZipCode(user.zipcode);
-    setFormEmail(user.email);
-    setFormLicense(user.license);
-  }, [user]);
+    if (!user) return
+    setFormName(user.first_name)
+    setFormLastName(user.last_name)
+    setFormPhone(user.phone)
+    setFormAddress(user.address)
+    setFormCity(user.city)
+    setFormCountry(user.country)
+    setFormZipCode(user.zipcode)
+    setFormEmail(user.email)
+    setFormLicense(user.license)
+  }, [user])
 
   return (
     <BlancLayout title="Reservación">
@@ -422,7 +422,7 @@ function Reserve() {
         </Grid>
       </MKBox>
     </BlancLayout>
-  );
+  )
 }
 
-export default Reserve;
+export default Reserve

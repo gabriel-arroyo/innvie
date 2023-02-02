@@ -14,24 +14,24 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
+import Divider from "@mui/material/Divider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultBackgroundCard from "examples/Cards/BackgroundCards/DefaultBackgroundCard";
+import DefaultBackgroundCard from "examples/Cards/BackgroundCards/DefaultBackgroundCard"
 
 // HelpCenter page components
-import ListItem from "pages/Support/HelpCenter/components/ListItem";
+import ListItem from "pages/Support/HelpCenter/components/ListItem"
 
 // Images
-import bgImage1 from "assets/images/examples/color1.jpg";
-import bgImage2 from "assets/images/examples/color3.jpg";
+import bgImage1 from "assets/images/examples/color1.jpg"
+import bgImage2 from "assets/images/examples/color3.jpg"
 
 function ApplicationTwo() {
   return (
@@ -129,7 +129,7 @@ function ApplicationTwo() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default ApplicationTwo;
+export default ApplicationTwo

@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO components
-import MKTypography from "components/MKTypography";
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DetailedFooter from "examples/Footers/DetailedFooter";
+import DetailedFooter from "examples/Footers/DetailedFooter"
 
 function FooterOne() {
-  const date = new Date().getFullYear();
+  const date = new Date().getFullYear()
 
   const footerContent = {
     brand: {
@@ -151,9 +151,9 @@ function FooterOne() {
         .
       </MKTypography>
     ),
-  };
+  }
 
-  return <DetailedFooter content={footerContent} />;
+  return <DetailedFooter content={footerContent} />
 }
 
-export default FooterOne;
+export default FooterOne

@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
-import CenteredBlogCard from "examples/Cards/BlogCards/CenteredBlogCard";
+import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard"
+import CenteredBlogCard from "examples/Cards/BlogCards/CenteredBlogCard"
 
 function FeaturesTwo() {
   return (
@@ -85,7 +85,7 @@ function FeaturesTwo() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default FeaturesTwo;
+export default FeaturesTwo

@@ -14,21 +14,21 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import CenteredFooter from "examples/Footers/CenteredFooter";
-import Breadcrumbs from "examples/Breadcrumbs";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import CenteredFooter from "examples/Footers/CenteredFooter"
+import Breadcrumbs from "examples/Breadcrumbs"
 
 // Routes
 
@@ -72,7 +72,7 @@ function BaseLayout({ breadcrumb, title, children }) {
         <CenteredFooter />
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the BaseLayout
@@ -80,6 +80,6 @@ BaseLayout.propTypes = {
   breadcrumb: PropTypes.instanceOf(Array).isRequired,
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-};
+}
 
-export default BaseLayout;
+export default BaseLayout

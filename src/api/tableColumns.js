@@ -13,4 +13,4 @@ export default [
   { name: "Ocupante", align: "center" },
   { name: "Comentarios", align: "center" },
   { name: "History", align: "center" },
-];
+]

@@ -1,9 +1,9 @@
-import Icon from "@mui/material/Icon";
-import Login from "pages/Innvie/Authentication/Login";
-import Register from "pages/Innvie/Authentication/Register";
-import Checkin from "pages/Innvie/Checkin";
-import InnvieHome from "pages/Innvie/Home";
-import MyReservations from "pages/Innvie/MyReservations";
+import Icon from "@mui/material/Icon"
+import Login from "pages/Innvie/Authentication/Login"
+import Register from "pages/Innvie/Authentication/Register"
+import Checkin from "pages/Innvie/Checkin"
+import InnvieHome from "pages/Innvie/Home"
+import MyReservations from "pages/Innvie/MyReservations"
 
 export const routes = [
   {
@@ -56,7 +56,7 @@ export const routes = [
       },
     ],
   },
-];
+]
 
 export const adminRoutes = [
   {
@@ -93,7 +93,7 @@ export const adminRoutes = [
       },
     ],
   },
-];
+]
 
 export const mobileLoggedRoutes = [
   {
@@ -119,4 +119,4 @@ export const mobileLoggedRoutes = [
     route: "/authentication",
     component: <Login />,
   },
-];
+]

@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "layouts/sections/components/BaseLayout"
+import View from "layouts/sections/components/View"
 
 // Toggles page components
-import Toggle from "layouts/sections/elements/toggles/components/Toggle";
-import ToggleContext from "layouts/sections/elements/toggles/components/ToggleContext";
+import Toggle from "layouts/sections/elements/toggles/components/Toggle"
+import ToggleContext from "layouts/sections/elements/toggles/components/ToggleContext"
 
 // Toggles page components code
-import toggleCode from "layouts/sections/elements/toggles/components/Toggle/code";
-import toggleContextCode from "layouts/sections/elements/toggles/components/ToggleContext/code";
+import toggleCode from "layouts/sections/elements/toggles/components/Toggle/code"
+import toggleContextCode from "layouts/sections/elements/toggles/components/ToggleContext/code"
 
 function Toggles() {
   return (
@@ -41,7 +41,7 @@ function Toggles() {
         <ToggleContext />
       </View>
     </BaseLayout>
-  );
+  )
 }
 
-export default Toggles;
+export default Toggles

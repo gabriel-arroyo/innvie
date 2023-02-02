@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Icon from "@mui/material/Icon";
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function RotatingCardFront({ color, image, icon, title, description }) {
   return (
@@ -58,14 +58,14 @@ function RotatingCardFront({ color, image, icon, title, description }) {
         </MKTypography>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Setting default props for the RotatingCardFront
 RotatingCardFront.defaultProps = {
   color: "info",
   icon: "",
-};
+}
 
 // Typechecking props for the RotatingCardFront
 RotatingCardFront.propTypes = {
@@ -83,6 +83,6 @@ RotatingCardFront.propTypes = {
   icon: PropTypes.node,
   title: PropTypes.node.isRequired,
   description: PropTypes.node.isRequired,
-};
+}
 
-export default RotatingCardFront;
+export default RotatingCardFront

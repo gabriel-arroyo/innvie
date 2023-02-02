@@ -14,12 +14,12 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Tooltip from "@mui/material/Tooltip";
+import Card from "@mui/material/Card"
+import Tooltip from "@mui/material/Tooltip"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function Emails() {
   return (
@@ -37,7 +37,7 @@ function Emails() {
         </Tooltip>
       </MKBox>
     </Card>
-  );
+  )
 }
 
-export default Emails;
+export default Emails

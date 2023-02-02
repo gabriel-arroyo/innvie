@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import ColoredBackgroundCard from "examples/Cards/BackgroundCards/ColoredBackgroundCard";
+import ColoredBackgroundCard from "examples/Cards/BackgroundCards/ColoredBackgroundCard"
 
 function ApplicationOne() {
   return (
@@ -98,7 +98,7 @@ function ApplicationOne() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default ApplicationOne;
+export default ApplicationOne

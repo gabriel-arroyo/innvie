@@ -1,15 +1,15 @@
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import FacebookIcon from "@mui/icons-material/Facebook"
+import TwitterIcon from "@mui/icons-material/Twitter"
+import YouTubeIcon from "@mui/icons-material/YouTube"
 
 // Otis Kit PRO components
-import MKTypography from "components/MKTypography";
+import MKTypography from "components/MKTypography"
 
 // Images
-import logoCT from "assets/images/logo-ct-dark.png";
+import logoCT from "assets/images/logo-ct-dark.png"
 
-const date = new Date().getFullYear();
+const date = new Date().getFullYear()
 
 export default {
   brand: {
@@ -123,4 +123,4 @@ export default {
       .
     </MKTypography>
   ),
-};
+}

@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKAvatar from "components/MKAvatar";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKAvatar from "components/MKAvatar"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Images
-import profilePicture from "assets/images/bruce-mars.jpg";
+import profilePicture from "assets/images/bruce-mars.jpg"
 
 function Profile() {
   return (
@@ -103,7 +103,7 @@ function Profile() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Profile;
+export default Profile

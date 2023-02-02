@@ -1,9 +1,9 @@
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MKBadge from "components/MKBadge";
-import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
-import { PropTypes } from "prop-types";
+import Button from "@mui/material/Button"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
+import MKBadge from "components/MKBadge"
+import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state"
+import { PropTypes } from "prop-types"
 
 function RoomState({ state }) {
   const states = {
@@ -11,7 +11,7 @@ function RoomState({ state }) {
     occupied: "warning",
     dirty: "error",
     maintenance: "info",
-  };
+  }
   return (
     <MKBadge
       component={Button}
@@ -21,12 +21,12 @@ function RoomState({ state }) {
       size="xs"
       container
     />
-  );
+  )
 }
 
 RoomState.propTypes = {
   state: PropTypes.string.isRequired,
-};
+}
 
 function RoomMenu({ room, updateRoom }) {
   const states = {
@@ -34,19 +34,19 @@ function RoomMenu({ room, updateRoom }) {
     occupied: "error",
     dirty: "warning",
     maintenance: "info",
-  };
+  }
   const handleAvailable = () => {
-    updateRoom({ ...room, status: "available" });
-  };
+    updateRoom({ ...room, status: "available" })
+  }
   const handleOcupied = () => {
-    updateRoom({ ...room, status: "occupied" });
-  };
+    updateRoom({ ...room, status: "occupied" })
+  }
   const handleDirty = () => {
-    updateRoom({ ...room, status: "dirty" });
-  };
+    updateRoom({ ...room, status: "dirty" })
+  }
   const handleMaintenance = () => {
-    updateRoom({ ...room, status: "maintenance" });
-  };
+    updateRoom({ ...room, status: "maintenance" })
+  }
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
@@ -63,36 +63,36 @@ function RoomMenu({ room, updateRoom }) {
           <Menu {...bindMenu(popupState)}>
             <MenuItem
               onClick={(e) => {
-                e.preventDefault();
-                handleAvailable();
-                popupState.close();
+                e.preventDefault()
+                handleAvailable()
+                popupState.close()
               }}
             >
               Available
             </MenuItem>
             <MenuItem
               onClick={(e) => {
-                e.preventDefault();
-                handleOcupied();
-                popupState.close();
+                e.preventDefault()
+                handleOcupied()
+                popupState.close()
               }}
             >
               Ocupied
             </MenuItem>
             <MenuItem
               onClick={(e) => {
-                e.preventDefault();
-                handleDirty();
-                popupState.close();
+                e.preventDefault()
+                handleDirty()
+                popupState.close()
               }}
             >
               Dirty
             </MenuItem>
             <MenuItem
               onClick={(e) => {
-                e.preventDefault();
-                handleMaintenance();
-                popupState.close();
+                e.preventDefault()
+                handleMaintenance()
+                popupState.close()
               }}
             >
               Maintenance
@@ -101,13 +101,13 @@ function RoomMenu({ room, updateRoom }) {
         </>
       )}
     </PopupState>
-  );
+  )
 }
 
 RoomMenu.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   room: PropTypes.object.isRequired,
   updateRoom: PropTypes.func.isRequired,
-};
+}
 
-export default RoomMenu;
+export default RoomMenu

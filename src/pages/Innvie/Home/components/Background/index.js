@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 function Background({ image }) {
   return (
@@ -36,12 +36,12 @@ function Background({ image }) {
         placeItems: "center",
       }}
     />
-  );
+  )
 }
 
 // Typechecking props for the Header
 Background.propTypes = {
   image: PropTypes.string.isRequired,
-};
+}
 
-export default Background;
+export default Background

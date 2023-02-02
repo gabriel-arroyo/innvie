@@ -11,19 +11,19 @@ import {
   InputLabel,
   OutlinedInput,
   Switch,
-} from "@mui/material";
-import useRoom from "api/useRoom";
-import useType from "api/useType";
-import SelectPicker from "components/Innvie/SelectPicker";
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKInput from "components/MKInput";
-import MKTypography from "components/MKTypography";
-import RoomList from "components/RoomList";
-import SectionTitle from "components/SectionTitle";
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import ImageSwipe from "./imageswipe";
+} from "@mui/material"
+import useRoom from "api/useRoom"
+import useType from "api/useType"
+import SelectPicker from "components/Innvie/SelectPicker"
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKInput from "components/MKInput"
+import MKTypography from "components/MKTypography"
+import RoomList from "components/RoomList"
+import SectionTitle from "components/SectionTitle"
+import PropTypes from "prop-types"
+import { useEffect, useState } from "react"
+import ImageSwipe from "./imageswipe"
 
 function NewEditSwitch({ editSwitch, handleChangeNew }) {
   return (
@@ -41,13 +41,13 @@ function NewEditSwitch({ editSwitch, handleChangeNew }) {
         </FormGroup>
       </Grid>
     </MKBox>
-  );
+  )
 }
 
 NewEditSwitch.propTypes = {
   editSwitch: PropTypes.bool.isRequired,
   handleChangeNew: PropTypes.func.isRequired,
-};
+}
 
 function NewRoomType({ room }) {
   const {
@@ -58,7 +58,7 @@ function NewRoomType({ room }) {
     getRoomsByType,
     deleteRoomByType,
     nextRoomNumber,
-  } = useRoom();
+  } = useRoom()
   const {
     error,
     setError,
@@ -75,108 +75,108 @@ function NewRoomType({ room }) {
     getType,
     setDefault,
     deleteTypeByName,
-  } = useType(room);
-  const options = ["Habitación", "Departamento"];
-  const [editSwitch, setEditSwitch] = useState(true);
-  const [roomNumber, setRoomNumber] = useState(nextRoomNumber);
-  const [roomComment, setRoomComment] = useState("");
+  } = useType(room)
+  const options = ["Habitación", "Departamento"]
+  const [editSwitch, setEditSwitch] = useState(true)
+  const [roomNumber, setRoomNumber] = useState(nextRoomNumber)
+  const [roomComment, setRoomComment] = useState("")
 
   useEffect(() => {
-    setRoomNumber(nextRoomNumber);
-  }, [nextRoomNumber]);
+    setRoomNumber(nextRoomNumber)
+  }, [nextRoomNumber])
   const resetAll = () => {
     if (editSwitch) {
-      getAll();
+      getAll()
     }
-    setDefault();
-    setEditSwitch(!editSwitch);
-    setPhotos([]);
-  };
+    setDefault()
+    setEditSwitch(!editSwitch)
+    setPhotos([])
+  }
 
   const handleChangeNew = (e) => {
-    e.preventDefault();
-    resetAll();
-  };
+    e.preventDefault()
+    resetAll()
+  }
 
   const handleChangeName = async (e) => {
     if (editSwitch) {
-      setCacheRoom({ ...cacheRoom, type: e.target.value });
+      setCacheRoom({ ...cacheRoom, type: e.target.value })
     }
     if (!editSwitch) {
-      setCacheRoom({ ...cacheRoom, type: e.target.innerText });
+      setCacheRoom({ ...cacheRoom, type: e.target.innerText })
     }
     if (!editSwitch && e.target.innerText) {
-      getType(e.target.innerText);
-      getPhotos(e.target.innerText);
-      getRoomsByType(e.target.innerText);
+      getType(e.target.innerText)
+      getPhotos(e.target.innerText)
+      getRoomsByType(e.target.innerText)
     }
-  };
+  }
 
   const handleAddPhoto = async (e) => {
-    e.preventDefault();
-    const url = await addPhoto(e.target.files[0]);
-    console.log("🚀 ~ file: index.js:112 ~ handleAddPhoto ~ url", url);
+    e.preventDefault()
+    const url = await addPhoto(e.target.files[0])
+    console.log("🚀 ~ file: index.js:112 ~ handleAddPhoto ~ url", url)
     if (url) {
-      setPhotos([...photos, url]);
-      const updatedRoom = { ...cacheRoom, photos: [...photos, url] };
-      setCacheRoom(updatedRoom);
+      setPhotos([...photos, url])
+      const updatedRoom = { ...cacheRoom, photos: [...photos, url] }
+      setCacheRoom(updatedRoom)
     }
-  };
+  }
 
   const handleDeleteType = async (e) => {
-    e.preventDefault();
-    await deleteTypeByName(cacheRoom.type);
-    await deleteRoomByType(cacheRoom.type);
-    resetAll();
-  };
+    e.preventDefault()
+    await deleteTypeByName(cacheRoom.type)
+    await deleteRoomByType(cacheRoom.type)
+    resetAll()
+  }
 
   const handleDeleteRoom = async (rn) => {
-    await deleteRoomByNumber(rn.toString());
-    await getRoomsByType(cacheRoom.type);
-  };
+    await deleteRoomByNumber(rn.toString())
+    await getRoomsByType(cacheRoom.type)
+  }
 
   const setAccesory = async (e, accesory) => {
-    const { checked } = e.target;
-    let { accessories } = cacheRoom;
-    const exists = accessories.indexOf(accesory) !== -1;
+    const { checked } = e.target
+    let { accessories } = cacheRoom
+    const exists = accessories.indexOf(accesory) !== -1
     if (checked && !exists) {
-      accessories.push(accesory);
+      accessories.push(accesory)
     }
     if (!checked && exists) {
-      accessories = accessories.filter((a) => a !== accesory);
+      accessories = accessories.filter((a) => a !== accesory)
     }
-    setCacheRoom({ ...cacheRoom, accessories });
-  };
+    setCacheRoom({ ...cacheRoom, accessories })
+  }
 
   async function hadleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     if (!cacheRoom?.type) {
-      setError("Ingrese un nombre");
-      return;
+      setError("Ingrese un nombre")
+      return
     }
     if (!cacheRoom?.category) {
-      setError("Ingrese una categoría");
-      return;
+      setError("Ingrese una categoría")
+      return
     }
 
-    console.log(cacheRoom);
+    console.log(cacheRoom)
     addType(cacheRoom).then((success) => {
-      console.log("success?", success);
+      console.log("success?", success)
       if (success) {
-        e.target.reset();
+        e.target.reset()
       } else {
         updateType(cacheRoom).then(() => {
-          console.log("actualización concluida");
-        });
+          console.log("actualización concluida")
+        })
       }
-    });
-    setDefault();
-    setEditSwitch(true);
-    setPhotos([]);
+    })
+    setDefault()
+    setEditSwitch(true)
+    setPhotos([])
   }
 
   async function handleAddRoom(e) {
-    e.preventDefault();
+    e.preventDefault()
     addRoom({
       number: roomNumber,
       comment: roomComment,
@@ -184,10 +184,10 @@ function NewRoomType({ room }) {
       typeId: cacheRoom.id,
     }).then((success) => {
       if (success) {
-        e.target.reset();
+        e.target.reset()
       }
-    });
-    setRoomNumber((r) => r + 1);
+    })
+    setRoomNumber((r) => r + 1)
   }
 
   return (
@@ -226,7 +226,7 @@ function NewRoomType({ room }) {
                 name="category"
                 label="Categoría"
                 onChange={(e) => {
-                  setCacheRoom({ ...cacheRoom, category: e.target.innerText });
+                  setCacheRoom({ ...cacheRoom, category: e.target.innerText })
                 }}
                 value={cacheRoom.category}
               />
@@ -241,9 +241,9 @@ function NewRoomType({ room }) {
                   fullWidth
                   value={cacheRoom?.rooms ?? 0}
                   onChange={(e) => {
-                    let rooms = cacheRoom?.rooms ?? 0;
-                    rooms = e.target.value ?? rooms;
-                    setCacheRoom({ ...cacheRoom, rooms });
+                    let rooms = cacheRoom?.rooms ?? 0
+                    rooms = e.target.value ?? rooms
+                    setCacheRoom({ ...cacheRoom, rooms })
                   }}
                 />
               </MKBox>
@@ -257,9 +257,9 @@ function NewRoomType({ room }) {
                 fullWidth
                 value={cacheRoom.beds?.queen ?? 0}
                 onChange={(e) => {
-                  const beds = cacheRoom.beds ?? {};
-                  beds.queen = e.target.value;
-                  setCacheRoom({ ...cacheRoom, beds });
+                  const beds = cacheRoom.beds ?? {}
+                  beds.queen = e.target.value
+                  setCacheRoom({ ...cacheRoom, beds })
                 }}
               />
             </MKBox>
@@ -272,9 +272,9 @@ function NewRoomType({ room }) {
                 fullWidth
                 value={cacheRoom.beds?.full ?? 0}
                 onChange={(e) => {
-                  const beds = cacheRoom.beds ?? {};
-                  beds.full = e.target.value;
-                  setCacheRoom({ ...cacheRoom, beds });
+                  const beds = cacheRoom.beds ?? {}
+                  beds.full = e.target.value
+                  setCacheRoom({ ...cacheRoom, beds })
                 }}
               />
             </MKBox>
@@ -287,9 +287,9 @@ function NewRoomType({ room }) {
                 fullWidth
                 value={cacheRoom.beds?.single ?? 0}
                 onChange={(e) => {
-                  const beds = cacheRoom.beds ?? {};
-                  beds.single = e.target.value;
-                  setCacheRoom({ ...cacheRoom, beds });
+                  const beds = cacheRoom.beds ?? {}
+                  beds.single = e.target.value
+                  setCacheRoom({ ...cacheRoom, beds })
                 }}
               />
             </MKBox>
@@ -302,9 +302,9 @@ function NewRoomType({ room }) {
                 fullWidth
                 value={cacheRoom.sofas ?? 0}
                 onChange={(e) => {
-                  let sofas = cacheRoom.sofas ?? 0;
-                  sofas = e.target.value;
-                  setCacheRoom({ ...cacheRoom, sofas });
+                  let sofas = cacheRoom.sofas ?? 0
+                  sofas = e.target.value
+                  setCacheRoom({ ...cacheRoom, sofas })
                 }}
               />
             </MKBox>
@@ -317,9 +317,9 @@ function NewRoomType({ room }) {
                 fullWidth
                 value={cacheRoom.maxOccupants ?? 0}
                 onChange={(e) => {
-                  let maxOccupants = cacheRoom.maxOccupants ?? 0;
-                  maxOccupants = e.target.value;
-                  setCacheRoom({ ...cacheRoom, maxOccupants });
+                  let maxOccupants = cacheRoom.maxOccupants ?? 0
+                  maxOccupants = e.target.value
+                  setCacheRoom({ ...cacheRoom, maxOccupants })
                 }}
               />
             </MKBox>
@@ -517,7 +517,7 @@ function NewRoomType({ room }) {
                   fullWidth
                   value={roomNumber ?? 0}
                   onChange={(e) => {
-                    setRoomNumber(e.target.value);
+                    setRoomNumber(e.target.value)
                   }}
                 />
               </MKBox>
@@ -528,7 +528,7 @@ function NewRoomType({ room }) {
                   label="Comentario"
                   fullWidth
                   onChange={(e) => {
-                    setRoomComment(e.target.value);
+                    setRoomComment(e.target.value)
                   }}
                 />
               </MKBox>
@@ -554,7 +554,7 @@ function NewRoomType({ room }) {
         </MKBox>
       )}
     </Card>
-  );
+  )
 }
 NewRoomType.defaultProps = {
   room: {
@@ -565,7 +565,7 @@ NewRoomType.defaultProps = {
     price: 0,
     category: "Habitación",
   },
-};
+}
 NewRoomType.propTypes = {
   room: PropTypes.shape({
     type: PropTypes.string,
@@ -575,6 +575,6 @@ NewRoomType.propTypes = {
     price: PropTypes.number,
     category: PropTypes.string,
   }),
-};
+}
 
-export default NewRoomType;
+export default NewRoomType

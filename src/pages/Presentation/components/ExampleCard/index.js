@@ -14,11 +14,11 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function ExampleCard({ image, name, count, ...rest }) {
   return (
@@ -59,20 +59,20 @@ function ExampleCard({ image, name, count, ...rest }) {
         </MKBox>
       ) : null}
     </MKBox>
-  );
+  )
 }
 
 // Setting default props for the ExampleCard
 ExampleCard.defaultProps = {
   name: "",
   count: 0,
-};
+}
 
 // Typechecking props for the ExampleCard
 ExampleCard.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string,
   count: PropTypes.number,
-};
+}
 
-export default ExampleCard;
+export default ExampleCard

@@ -1,5 +1,5 @@
-import { atom } from "jotai";
+import { atom } from "jotai"
 
-const loggedUser = atom(null);
+const loggedUser = atom(null)
 
-export default loggedUser;
+export default loggedUser

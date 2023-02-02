@@ -15,13 +15,13 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
 
 // Routes
-import routes from "routes";
+import routes from "routes"
 
 function NavbarDark() {
   return (
@@ -40,7 +40,7 @@ function NavbarDark() {
         center
       />
     </MKBox>
-  );
+  )
 }
 
-export default NavbarDark;
+export default NavbarDark

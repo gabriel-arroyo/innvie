@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // @mui material components
-import Collapse from "@mui/material/Collapse";
-import Icon from "@mui/material/Icon";
+import Collapse from "@mui/material/Collapse"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function DefaultNavbarDropdown({
   name,
@@ -43,12 +43,12 @@ function DefaultNavbarDropdown({
     href,
     target: "_blank",
     rel: "noreferrer",
-  };
+  }
 
   const routeComponent = {
     component: Link,
     to: route,
-  };
+  }
 
   return (
     <>
@@ -93,7 +93,7 @@ function DefaultNavbarDropdown({
         </Collapse>
       )}
     </>
-  );
+  )
 }
 
 // Setting default values for the props of DefaultNavbarDropdown
@@ -103,7 +103,7 @@ DefaultNavbarDropdown.defaultProps = {
   light: false,
   href: "",
   route: "",
-};
+}
 
 // Typechecking props for the DefaultNavbarDropdown
 DefaultNavbarDropdown.propTypes = {
@@ -115,6 +115,6 @@ DefaultNavbarDropdown.propTypes = {
   href: PropTypes.string,
   route: PropTypes.string,
   collapse: PropTypes.bool.isRequired,
-};
+}
 
-export default DefaultNavbarDropdown;
+export default DefaultNavbarDropdown

@@ -14,39 +14,39 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKBadge from "components/MKBadge";
-import MKTypography from "components/MKTypography";
-import MKSocialButton from "components/MKSocialButton";
+import MKBox from "components/MKBox"
+import MKBadge from "components/MKBadge"
+import MKTypography from "components/MKTypography"
+import MKSocialButton from "components/MKSocialButton"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
-import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import DefaultFooter from "examples/Footers/DefaultFooter"
+import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard"
 
 // Presentation page sections
-import Counters from "pages/Presentation/sections/Counters";
-import Information from "pages/Presentation/sections/Information";
-import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
-import AuthPages from "pages/Presentation/sections/AuthPages";
-import Pages from "pages/Presentation/sections/Pages";
-import Testimonials from "pages/Presentation/sections/Testimonials";
-import Pricing from "pages/Presentation/sections/Pricing";
+import Counters from "pages/Presentation/sections/Counters"
+import Information from "pages/Presentation/sections/Information"
+import DesignBlocks from "pages/Presentation/sections/DesignBlocks"
+import AuthPages from "pages/Presentation/sections/AuthPages"
+import Pages from "pages/Presentation/sections/Pages"
+import Testimonials from "pages/Presentation/sections/Testimonials"
+import Pricing from "pages/Presentation/sections/Pricing"
 
 // Presentation page components
-import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
+import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers"
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "routes"
+import footerRoutes from "footer.routes"
 
 // Images
-import bgImage from "assets/images/bg-presentation.jpg";
+import bgImage from "assets/images/bg-presentation.jpg"
 
 function Presentation() {
   return (
@@ -209,7 +209,7 @@ function Presentation() {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Presentation;
+export default Presentation

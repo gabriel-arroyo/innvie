@@ -14,12 +14,12 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Icon from "@mui/material/Icon";
-import Tooltip from "@mui/material/Tooltip";
+import Icon from "@mui/material/Icon"
+import Tooltip from "@mui/material/Tooltip"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function TodoCard() {
   return (
@@ -53,7 +53,7 @@ function TodoCard() {
         </MKBox>
       </Tooltip>
     </MKBox>
-  );
+  )
 }
 
-export default TodoCard;
+export default TodoCard

@@ -14,19 +14,19 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
+import Card from "@mui/material/Card"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 function CustomPricingCard({ color, badge, price, specifications, action, shadow }) {
   const renderSpecifications = specifications.map(({ label, singlePrice, discount }) => (
@@ -50,12 +50,12 @@ function CustomPricingCard({ color, badge, price, specifications, action, shadow
         </MKTypography>
       )}
     </MKBox>
-  ));
+  ))
 
   function RenderData() {
-    if (!action) return null;
+    if (!action) return null
     if (action.type === "internal") {
-      <MKBox mt={3}>
+      ;<MKBox mt={3}>
         <MKButton
           component={Link}
           to={action.route}
@@ -66,9 +66,9 @@ function CustomPricingCard({ color, badge, price, specifications, action, shadow
           {action.label}&nbsp;
           <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
         </MKButton>
-      </MKBox>;
+      </MKBox>
     } else if (action === "buy") {
-      <MKBox mt={3}>
+      ;<MKBox mt={3}>
         <MKButton
           component="a"
           href={action.route}
@@ -81,7 +81,7 @@ function CustomPricingCard({ color, badge, price, specifications, action, shadow
           {action.label}&nbsp;
           <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
         </MKButton>
-      </MKBox>;
+      </MKBox>
     }
   }
 
@@ -147,14 +147,14 @@ function CustomPricingCard({ color, badge, price, specifications, action, shadow
         </MKBox>
       </MKBox>
     </Card>
-  );
+  )
 }
 
 // Setting default props for the CustomPricingCard
 CustomPricingCard.defaultProps = {
   color: "white",
   shadow: true,
-};
+}
 
 // Typechecking props for the CustomPricingCard
 CustomPricingCard.propTypes = {
@@ -204,6 +204,6 @@ CustomPricingCard.propTypes = {
     ]).isRequired,
   }).isRequired,
   shadow: PropTypes.bool,
-};
+}
 
-export default CustomPricingCard;
+export default CustomPricingCard

@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import colors from "assets/theme/base/colors";
+import colors from "assets/theme/base/colors"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
-import boxShadow from "assets/theme/functions/boxShadow";
+import pxToRem from "assets/theme/functions/pxToRem"
+import boxShadow from "assets/theme/functions/boxShadow"
 
-const { white } = colors;
+const { white } = colors
 
 export default {
   styleOverrides: {
@@ -52,4 +52,4 @@ export default {
       },
     },
   },
-};
+}

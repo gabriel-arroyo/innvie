@@ -1,28 +1,28 @@
 // react-router-dom components
-import useMediaQuery from "@mui/material/useMediaQuery";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery"
+import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 
-import Grid from "@mui/material/Grid";
-import MKButton from "components/MKButton";
-import MKDatePicker from "components/MKDatePicker";
-import MKInput from "components/MKInput";
-import MKTypography from "components/MKTypography";
-import { useAtom } from "jotai";
-import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
-import { getCurrentDate, getDaysDifference, getTomorrowDate } from "tools/getDate";
+import Grid from "@mui/material/Grid"
+import MKButton from "components/MKButton"
+import MKDatePicker from "components/MKDatePicker"
+import MKInput from "components/MKInput"
+import MKTypography from "components/MKTypography"
+import { useAtom } from "jotai"
+import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate"
+import { getCurrentDate, getDaysDifference, getTomorrowDate } from "tools/getDate"
 
 function DateInput({ startDate, endDate }) {
-  const matches = useMediaQuery("(min-width:1000px)");
-  const [, setStartDate] = useAtom(reservedStartDate);
-  const [, setEndDate] = useAtom(reservedEndDate);
-  const [days, setDays] = useAtom(reservedDays);
+  const matches = useMediaQuery("(min-width:1000px)")
+  const [, setStartDate] = useAtom(reservedStartDate)
+  const [, setEndDate] = useAtom(reservedEndDate)
+  const [days, setDays] = useAtom(reservedDays)
   const onChangeDate = (e) => {
-    const [start, end] = e;
-    setStartDate(getCurrentDate(start));
-    setEndDate(getCurrentDate(end));
-    setDays(getDaysDifference(start, end));
-  };
+    const [start, end] = e
+    setStartDate(getCurrentDate(start))
+    setEndDate(getCurrentDate(end))
+    setDays(getDaysDifference(start, end))
+  }
   return (
     <Grid
       container
@@ -96,17 +96,17 @@ function DateInput({ startDate, endDate }) {
         </MKButton>
       </Grid>
     </Grid>
-  );
+  )
 }
 
-export default DateInput;
+export default DateInput
 
 DateInput.propTypes = {
   startDate: PropTypes.string,
   endDate: PropTypes.string,
-};
+}
 
 DateInput.defaultProps = {
   startDate: getCurrentDate(),
   endDate: getTomorrowDate(),
-};
+}

@@ -1,6 +1,6 @@
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import PropTypes from "prop-types";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import PropTypes from "prop-types"
 
 export default function RoomId({ name }) {
   return (
@@ -11,9 +11,9 @@ export default function RoomId({ name }) {
         </MKTypography>
       </MKBox>
     </MKBox>
-  );
+  )
 }
 // Typechecking props for the Author
 RoomId.propTypes = {
   name: PropTypes.string.isRequired,
-};
+}

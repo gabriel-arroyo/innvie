@@ -55,6 +55,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "check-format": "prettier --check .",
+    "check-lint": "eslint . --ext js --ext jsx",
+    "format": "prettier --write .",
+    "test-all": "npm run format && npm run check-format && npm run check-lint && npm run build",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "eslintConfig": {
@@ -78,12 +82,12 @@
   "devDependencies": {
     "eslint": "8.15.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-config-prettier": "8.5.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.5.0",
-    "prettier": "2.6.2"
+    "prettier": "^2.6.2"
   }
 }

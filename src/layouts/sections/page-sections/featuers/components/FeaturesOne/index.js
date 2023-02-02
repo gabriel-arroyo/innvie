@@ -14,17 +14,17 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
+import Stack from "@mui/material/Stack"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Coworking page component
-import AboutUsOption from "pages/LandingPages/Coworking/components/AboutUsOption";
+import AboutUsOption from "pages/LandingPages/Coworking/components/AboutUsOption"
 
 function FeaturesOne() {
   return (
@@ -103,7 +103,7 @@ function FeaturesOne() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default FeaturesOne;
+export default FeaturesOne

@@ -14,29 +14,29 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-import Grid from "@mui/material/Grid";
+import PropTypes from "prop-types"
+import Grid from "@mui/material/Grid"
 // @mui material components
-import Icon from "@mui/material/Icon";
-import Collapse from "@mui/material/Collapse";
+import Icon from "@mui/material/Icon"
+import Collapse from "@mui/material/Collapse"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO components
-import borders from "assets/theme/base/borders";
-import { useEffect, useState } from "react";
-import { getStatus } from "tools/getDate";
+import borders from "assets/theme/base/borders"
+import { useEffect, useState } from "react"
+import { getStatus } from "tools/getDate"
 
 function FaqCollapse({ title, open, startDate, endDate, children, ...rest }) {
-  const { borderWidth, borderColor } = borders;
-  const [status, setStatus] = useState("Pending");
+  const { borderWidth, borderColor } = borders
+  const [status, setStatus] = useState("Pending")
 
   useEffect(() => {
-    const calculatedStatus = getStatus(startDate, endDate);
-    setStatus(calculatedStatus);
-  }, []);
+    const calculatedStatus = getStatus(startDate, endDate)
+    setStatus(calculatedStatus)
+  }, [])
 
   return (
     <MKBox mb={2}>
@@ -87,7 +87,7 @@ function FaqCollapse({ title, open, startDate, endDate, children, ...rest }) {
         </MKBox>
       </Collapse>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the FaqCollapse
@@ -97,6 +97,6 @@ FaqCollapse.propTypes = {
   endDate: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
-};
+}
 
-export default FaqCollapse;
+export default FaqCollapse

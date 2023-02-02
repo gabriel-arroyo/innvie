@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 const imagesPrefix =
-  "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/pages";
+  "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/pages"
 
 export default [
   {
@@ -77,4 +77,4 @@ export default [
     name: "Virtual Reality",
     route: "/pages/extra/virtual-reality",
   },
-];
+]

@@ -14,39 +14,39 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 // import Card from "@mui/material/Card";
-import MKAlert from "components/MKAlert";
+import MKAlert from "components/MKAlert"
 // @mui material components
-import Icon from "@mui/material/Icon";
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import DateInput from "pages/Innvie/Home/components/Date/DateInput";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import DateInput from "pages/Innvie/Home/components/Date/DateInput"
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
 
 // Rental page sections
 // import Search from "pages/LandingPages/Rental/sections/Search";
-import Places from "pages/LandingPages/Rental/sections/Places";
+import Places from "pages/LandingPages/Rental/sections/Places"
 // import Testimonials from "pages/LandingPages/Rental/sections/Testimonials";
 // import Faq from "pages/LandingPages/Rental/sections/Faq";
 // import Contact from "pages/LandingPages/Rental/sections/Contact";
 
 // Routes
-import footerRoutes from "footer.routes";
+import footerRoutes from "footer.routes"
 
 // Images
-import CenteredFooter from "examples/Footers/CenteredFooter";
-import bgImage from "../../../assets/images/photos/IMG_0535.JPG";
+import CenteredFooter from "examples/Footers/CenteredFooter"
+import bgImage from "../../../assets/images/photos/IMG_0535.JPG"
 
-import Offers from "../../Innvie/Home/components/Offers/offers";
-import Places2 from "../../Innvie/Home/sections/Amenities";
+import Offers from "../../Innvie/Home/components/Offers/offers"
+import Places2 from "../../Innvie/Home/sections/Amenities"
 
 function Rental() {
-  const showAlert = false;
+  const showAlert = false
   return (
     <>
       <DefaultNavbar
@@ -180,7 +180,7 @@ function Rental() {
         <CenteredFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Rental;
+export default Rental

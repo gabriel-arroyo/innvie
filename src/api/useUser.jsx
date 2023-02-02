@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from "react"
+import { v4 as uuidv4 } from "uuid"
 import {
   collection,
   deleteDoc,
@@ -10,262 +10,262 @@ import {
   setDoc,
   updateDoc,
   where,
-} from "firebase/firestore";
+} from "firebase/firestore"
 
-import { useAtom } from "jotai";
-import loggedUser from "states/loggedUser";
-import db from "../firebase";
+import { useAtom } from "jotai"
+import loggedUser from "states/loggedUser"
+import db from "../firebase"
 
 function useUser() {
-  const [loading, setLoading] = useState(false);
-  const [insertError, setInsertError] = useState(false);
-  const [data, setData] = useState([]);
-  const collectionRef = collection(db, "users");
-  const [currentUser, setCurrentUser] = useAtom(loggedUser);
-  const [logged, setLogged] = useState(false);
-  const [mailExists, setMailExists] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [insertError, setInsertError] = useState(false)
+  const [data, setData] = useState([])
+  const collectionRef = collection(db, "users")
+  const [currentUser, setCurrentUser] = useAtom(loggedUser)
+  const [logged, setLogged] = useState(false)
+  const [mailExists, setMailExists] = useState(false)
 
   async function getAllUsers() {
-    const q = query(collectionRef);
-    setLoading(true);
-    const querySnapshot = await getDocs(q);
+    const q = query(collectionRef)
+    setLoading(true)
+    const querySnapshot = await getDocs(q)
     if (querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("no users found");
-      return null;
+      console.log("no users found")
+      return null
     }
-    const items = [];
+    const items = []
     querySnapshot.forEach((user) => {
-      items.push({ ...user.data(), id: user.id });
-    });
-    setData(items);
-    setLoading(false);
-    return items;
+      items.push({ ...user.data(), id: user.id })
+    })
+    setData(items)
+    setLoading(false)
+    return items
   }
 
   async function getUserByEmail(userEmail) {
-    let q = query(collectionRef);
+    let q = query(collectionRef)
     if (userEmail) {
-      q = query(collectionRef, where("email", "==", userEmail));
+      q = query(collectionRef, where("email", "==", userEmail))
     }
-    setLoading(true);
-    const querySnapshot = await getDocs(q);
+    setLoading(true)
+    const querySnapshot = await getDocs(q)
     if (querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("wrong email");
-      return null;
+      console.log("wrong email")
+      return null
     }
-    let foundUser = {};
+    let foundUser = {}
     querySnapshot.forEach((user) => {
-      foundUser = { ...user.data(), id: user.id };
-    });
-    setData([foundUser]);
-    setLoading(false);
-    return foundUser;
+      foundUser = { ...user.data(), id: user.id }
+    })
+    setData([foundUser])
+    setLoading(false)
+    return foundUser
   }
 
   async function getUserById(userId) {
-    const q = query(collectionRef, where("id", "==", userId));
-    setLoading(true);
-    const querySnapshot = await getDocs(q);
+    const q = query(collectionRef, where("id", "==", userId))
+    setLoading(true)
+    const querySnapshot = await getDocs(q)
     if (querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("wrong id");
-      return null;
+      console.log("wrong id")
+      return null
     }
-    let foundUser = {};
+    let foundUser = {}
     querySnapshot.forEach((user) => {
-      foundUser = { ...user.data(), id: user.id };
-    });
-    setData([foundUser]);
-    setCurrentUser(foundUser);
-    setLoading(false);
-    return foundUser;
+      foundUser = { ...user.data(), id: user.id }
+    })
+    setData([foundUser])
+    setCurrentUser(foundUser)
+    setLoading(false)
+    return foundUser
   }
 
   async function addUser(newUser) {
-    const q = query(collectionRef, where("email", "==", newUser.email));
-    const querySnapshot = await getDocs(q);
+    const q = query(collectionRef, where("email", "==", newUser.email))
+    const querySnapshot = await getDocs(q)
     if (!querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("user already exists");
-      setInsertError(true);
-      return false;
+      console.log("user already exists")
+      setInsertError(true)
+      return false
     }
 
-    setInsertError(false);
+    setInsertError(false)
 
-    const newUserWithTimestamp = { ...newUser, lastUpdate: serverTimestamp() };
+    const newUserWithTimestamp = { ...newUser, lastUpdate: serverTimestamp() }
     try {
-      const docRef = doc(collectionRef, newUser.id);
-      await setDoc(docRef, newUserWithTimestamp);
+      const docRef = doc(collectionRef, newUser.id)
+      await setDoc(docRef, newUserWithTimestamp)
     } catch (error) {
       // eslint-disable-next-line
-      console.log(error);
-      return false;
+      console.log(error)
+      return false
     }
-    return true;
+    return true
   }
 
   async function checkEmail(userEmail) {
-    const q = query(collectionRef, where("email", "==", userEmail));
-    const querySnapshot = await getDocs(q);
+    const q = query(collectionRef, where("email", "==", userEmail))
+    const querySnapshot = await getDocs(q)
     if (querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("wrong email");
-      setMailExists(false);
-      return false;
+      console.log("wrong email")
+      setMailExists(false)
+      return false
     }
-    console.log(`email ${userEmail} exists`);
-    setMailExists(true);
-    return true;
+    console.log(`email ${userEmail} exists`)
+    setMailExists(true)
+    return true
   }
 
   async function updateUser(updatedUser) {
-    const updatedUserWithTimestamp = { ...updatedUser, lastUpdate: serverTimestamp() };
+    const updatedUserWithTimestamp = { ...updatedUser, lastUpdate: serverTimestamp() }
     try {
-      const docRef = doc(collectionRef, updatedUser.id);
-      updateDoc(docRef, updatedUserWithTimestamp);
+      const docRef = doc(collectionRef, updatedUser.id)
+      updateDoc(docRef, updatedUserWithTimestamp)
     } catch (error) {
       // eslint-disable-next-line
-      console.log(error);
+      console.log(error)
     }
   }
 
   async function getAndUpdateUser(updatedUser) {
-    console.log("updating user", updatedUser);
-    let foundUser = {};
-    if (!updatedUser) return;
+    console.log("updating user", updatedUser)
+    let foundUser = {}
+    if (!updatedUser) return
     if (updatedUser.id) {
-      foundUser = await getUserById(updatedUser.id);
-      console.log("found user with id:", foundUser);
+      foundUser = await getUserById(updatedUser.id)
+      console.log("found user with id:", foundUser)
     } else if (updatedUser.email) {
-      foundUser = await getUserByEmail(updatedUser.email);
-      console.log("found user with email", foundUser);
+      foundUser = await getUserByEmail(updatedUser.email)
+      console.log("found user with email", foundUser)
     }
     if (!foundUser) {
-      console.log("No found user");
-      foundUser = { ...updatedUser, id: uuidv4() };
+      console.log("No found user")
+      foundUser = { ...updatedUser, id: uuidv4() }
     }
     const updatedUserWithTimestamp = {
       ...foundUser,
       ...updatedUser,
       lastUpdate: serverTimestamp(),
-    };
+    }
     console.log(
       "🚀 ~ file: useUser.jsx:137 ~ getAndUpdateUser ~ updatedUserWithTimestamp",
       updatedUserWithTimestamp
-    );
+    )
     try {
-      const docRef = doc(collectionRef, foundUser.id);
-      await updateDoc(docRef, updatedUserWithTimestamp);
+      const docRef = doc(collectionRef, foundUser.id)
+      await updateDoc(docRef, updatedUserWithTimestamp)
     } catch (error) {
       // eslint-disable-next-line
-      console.log(error);
+      console.log(error)
     }
   }
 
   async function addOrUpdateUser(newUser) {
-    const q = query(collectionRef, where("email", "==", newUser.email));
-    const querySnapshot = await getDocs(q);
+    const q = query(collectionRef, where("email", "==", newUser.email))
+    const querySnapshot = await getDocs(q)
     if (!querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("user already exists, updating");
-      await updateUser(newUser);
-      setInsertError(false);
-      return false;
+      console.log("user already exists, updating")
+      await updateUser(newUser)
+      setInsertError(false)
+      return false
     }
 
-    setInsertError(false);
+    setInsertError(false)
 
-    const newUserWithTimestamp = { ...newUser, lastUpdate: serverTimestamp() };
+    const newUserWithTimestamp = { ...newUser, lastUpdate: serverTimestamp() }
     try {
-      const docRef = doc(collectionRef, newUser.id);
-      await setDoc(docRef, newUserWithTimestamp);
+      const docRef = doc(collectionRef, newUser.id)
+      await setDoc(docRef, newUserWithTimestamp)
     } catch (error) {
       // eslint-disable-next-line
-      console.log(error);
-      return false;
+      console.log(error)
+      return false
     }
-    return true;
+    return true
   }
 
   async function deleteUser(id) {
     try {
-      const docRef = doc(collectionRef, id);
-      await deleteDoc(docRef);
+      const docRef = doc(collectionRef, id)
+      await deleteDoc(docRef)
     } catch (error) {
       // eslint-disable-next-line
-      console.log(error);
+      console.log(error)
     }
   }
 
   async function deleteAllUsers() {
     try {
-      const q = query(collectionRef);
-      const querySnapshot = await getDocs(q);
+      const q = query(collectionRef)
+      const querySnapshot = await getDocs(q)
       querySnapshot.forEach((userData) => {
-        const docRef = doc(collectionRef, userData.id);
-        deleteDoc(docRef);
-      });
+        const docRef = doc(collectionRef, userData.id)
+        deleteDoc(docRef)
+      })
     } catch (error) {
       // eslint-disable-next-line
-      console.log(error);
+      console.log(error)
     }
   }
 
   async function checkPassword(email, password) {
-    const q = query(collectionRef, where("email", "==", email), where("password", "==", password));
-    const querySnapshot = await getDocs(q);
+    const q = query(collectionRef, where("email", "==", email), where("password", "==", password))
+    const querySnapshot = await getDocs(q)
     if (querySnapshot.empty) {
       // eslint-disable-next-line
-      console.log("wrong email or password");
-      return null;
+      console.log("wrong email or password")
+      return null
     }
-    return querySnapshot.docs[0].data();
+    return querySnapshot.docs[0].data()
   }
 
   async function login(myemail, password) {
-    const result = await checkPassword(myemail, password);
-    if (!result) return false;
-    localStorage.setItem("user", JSON.stringify(result));
-    setCurrentUser(result);
-    return true;
+    const result = await checkPassword(myemail, password)
+    if (!result) return false
+    localStorage.setItem("user", JSON.stringify(result))
+    setCurrentUser(result)
+    return true
   }
 
   function saveLocalUser(selectedUser) {
     if (selectedUser) {
-      localStorage.setItem("user", selectedUser);
-      setCurrentUser(selectedUser);
+      localStorage.setItem("user", selectedUser)
+      setCurrentUser(selectedUser)
     }
-    setData([selectedUser]);
+    setData([selectedUser])
   }
 
   async function logout() {
-    localStorage.removeItem("user");
-    setData([]);
-    setCurrentUser(null);
+    localStorage.removeItem("user")
+    setData([])
+    setCurrentUser(null)
   }
 
   function getCurrentUser() {
     if (currentUser) {
-      setLogged(true);
-      return currentUser;
+      setLogged(true)
+      return currentUser
     }
 
-    const item = JSON.parse(localStorage.getItem("user"));
+    const item = JSON.parse(localStorage.getItem("user"))
     if (item) {
-      setLogged(true);
-      setCurrentUser(item);
-      return item;
+      setLogged(true)
+      setCurrentUser(item)
+      return item
     }
-    setLogged(false);
-    return null;
+    setLogged(false)
+    return null
   }
 
   useEffect(() => {
-    getCurrentUser();
-  }, []);
+    getCurrentUser()
+  }, [])
   return {
     loading,
     data,
@@ -287,7 +287,7 @@ function useUser() {
     getUserByEmail,
     saveLocalUser,
     getUserById,
-  };
+  }
 }
 
-export default useUser;
+export default useUser

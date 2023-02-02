@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // @mui material components
-import MuiLink from "@mui/material/Link";
+import MuiLink from "@mui/material/Link"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKButton from "components/MKButton"
 
 function RotatingCard({ color, image, title, description, action }) {
   return (
@@ -82,13 +82,13 @@ function RotatingCard({ color, image, title, description, action }) {
         )}
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Setting default props for the RotatingCard
 RotatingCard.defaultProps = {
   color: "info",
-};
+}
 
 // Typechecking props for the RotatingCard
 RotatingCard.propTypes = {
@@ -113,6 +113,6 @@ RotatingCard.propTypes = {
       label: PropTypes.string.isRequired,
     }),
   ]).isRequired,
-};
+}
 
-export default RotatingCard;
+export default RotatingCard

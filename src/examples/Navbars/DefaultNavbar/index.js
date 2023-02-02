@@ -14,69 +14,69 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react"
 
 // react-router components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import Grow from "@mui/material/Grow";
-import Icon from "@mui/material/Icon";
-import MuiLink from "@mui/material/Link";
-import Popper from "@mui/material/Popper";
+import Container from "@mui/material/Container"
+import Divider from "@mui/material/Divider"
+import Grid from "@mui/material/Grid"
+import Grow from "@mui/material/Grow"
+import Icon from "@mui/material/Icon"
+import MuiLink from "@mui/material/Link"
+import Popper from "@mui/material/Popper"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKButton from "components/MKButton"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
-import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
+import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown"
+import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile"
 
 // Otis Kit PRO base styles
-import breakpoints from "assets/theme/base/breakpoints";
+import breakpoints from "assets/theme/base/breakpoints"
 
-import useUser from "api/useUser";
-import { useAtom } from "jotai";
-import Login from "pages/Innvie/Authentication/Login";
-import loggedUser from "states/loggedUser";
-import "./Navbar.css";
-import { routes, adminRoutes } from "innvie.routes";
+import useUser from "api/useUser"
+import { useAtom } from "jotai"
+import Login from "pages/Innvie/Authentication/Login"
+import loggedUser from "states/loggedUser"
+import "./Navbar.css"
+import { routes, adminRoutes } from "innvie.routes"
 
 function DefaultNavbar({ transparent, light, action, sticky, relative, center, logoUrl }) {
-  const [dropdown, setDropdown] = useState("");
-  const [dropdownEl, setDropdownEl] = useState("");
-  const [dropdownName, setDropdownName] = useState("");
-  const [nestedDropdown, setNestedDropdown] = useState("");
-  const [nestedDropdownEl, setNestedDropdownEl] = useState("");
-  const [nestedDropdownName, setNestedDropdownName] = useState("");
-  const [arrowRef, setArrowRef] = useState(null);
-  const [mobileNavbar, setMobileNavbar] = useState(false);
-  const [mobileView, setMobileView] = useState(false);
+  const [dropdown, setDropdown] = useState("")
+  const [dropdownEl, setDropdownEl] = useState("")
+  const [dropdownName, setDropdownName] = useState("")
+  const [nestedDropdown, setNestedDropdown] = useState("")
+  const [nestedDropdownEl, setNestedDropdownEl] = useState("")
+  const [nestedDropdownName, setNestedDropdownName] = useState("")
+  const [arrowRef, setArrowRef] = useState(null)
+  const [mobileNavbar, setMobileNavbar] = useState(false)
+  const [mobileView, setMobileView] = useState(false)
 
-  const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
+  const openMobileNavbar = () => setMobileNavbar(!mobileNavbar)
 
-  const { getCurrentUser } = useUser();
-  const [user, setUser] = useAtom(loggedUser);
+  const { getCurrentUser } = useUser()
+  const [user, setUser] = useAtom(loggedUser)
   useEffect(() => {
     if (getCurrentUser()) {
-      setUser(getCurrentUser());
+      setUser(getCurrentUser())
     }
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
-        setMobileView(true);
-        setMobileNavbar(false);
+        setMobileView(true)
+        setMobileNavbar(false)
       } else {
-        setMobileView(false);
-        setMobileNavbar(false);
+        setMobileView(false)
+        setMobileNavbar(false)
       }
     }
 
@@ -84,16 +84,16 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
      The event listener that's calling the displayMobileNavbar function when 
      resizing the window.
     */
-    window.addEventListener("resize", displayMobileNavbar);
+    window.addEventListener("resize", displayMobileNavbar)
 
     // Call the displayMobileNavbar function to set the state with the initial value.
-    displayMobileNavbar();
+    displayMobileNavbar()
 
     // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", displayMobileNavbar);
-  }, []);
+    return () => window.removeEventListener("resize", displayMobileNavbar)
+  }, [])
 
-  const useUserName = (name = "") => (name === "Ingresar" ? user?.first_name ?? "No user" : name);
+  const useUserName = (name = "") => (name === "Ingresar" ? user?.first_name ?? "No user" : name)
   const renderNavbarItems = (!user ? routes : adminRoutes).map(
     ({ name, icon, href, route, collapse }) => (
       <DefaultNavbarDropdown
@@ -105,39 +105,39 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
         collapse={Boolean(collapse)}
         onMouseEnter={({ currentTarget }) => {
           if (collapse) {
-            setDropdown(currentTarget);
-            setDropdownEl(currentTarget);
-            setDropdownName(name);
+            setDropdown(currentTarget)
+            setDropdownEl(currentTarget)
+            setDropdownName(name)
           }
         }}
         onMouseLeave={() => collapse && setDropdown(null)}
         light={light}
       />
     )
-  );
+  )
 
   // Render the routes on the dropdown menu
   const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
-    let template;
+    let template
     // Render the dropdown menu that should be display as columns
     if (collapse && columns && name === dropdownName) {
       const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn);
+        const chunkIndex = Math.floor(index / rowsPerColumn)
 
         if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = [];
+          resultArray[chunkIndex] = []
         }
 
-        resultArray[chunkIndex].push(item);
+        resultArray[chunkIndex].push(item)
 
-        return resultArray;
-      }, []);
+        return resultArray
+      }, [])
 
       template = (
         <Grid key={name} container spacing={3} py={1} px={1.5}>
           {calculateColumns.map((cols, key) => {
-            const gridKey = `grid-${key}`;
-            const dividerKey = `divider-${key}`;
+            const gridKey = `grid-${key}`
+            const dividerKey = `divider-${key}`
 
             return (
               <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
@@ -200,10 +200,10 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
                   />
                 )}
               </Grid>
-            );
+            )
           })}
         </Grid>
-      );
+      )
 
       // Render the dropdown menu that should be display as list items
     } else if (collapse && name === dropdownName) {
@@ -213,12 +213,12 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
           href: item.href,
           target: "_blank",
           rel: "noreferrer",
-        };
+        }
 
         const routeComponent = {
           component: Link,
           to: item.route,
-        };
+        }
 
         return (
           <MKTypography
@@ -250,14 +250,14 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
             })}
             onMouseEnter={({ currentTarget }) => {
               if (item.dropdown) {
-                setNestedDropdown(currentTarget);
-                setNestedDropdownEl(currentTarget);
-                setNestedDropdownName(item.name);
+                setNestedDropdown(currentTarget)
+                setNestedDropdownEl(currentTarget)
+                setNestedDropdownName(item.name)
               }
             }}
             onMouseLeave={() => {
               if (item.dropdown) {
-                setNestedDropdown(null);
+                setNestedDropdown(null)
               }
             }}
           >
@@ -286,41 +286,41 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
               </Icon>
             )}
           </MKTypography>
-        );
-      });
+        )
+      })
     }
 
-    return template;
-  });
+    return template
+  })
 
   const renderLoggedRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
-    let template;
+    let template
     collapse = [
       {
         name: "Salir",
         route: "/authentication",
         component: <Login />,
       },
-    ];
+    ]
     // Render the dropdown menu that should be display as columns
     if (collapse && columns && name === dropdownName) {
       const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn);
+        const chunkIndex = Math.floor(index / rowsPerColumn)
 
         if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = [];
+          resultArray[chunkIndex] = []
         }
 
-        resultArray[chunkIndex].push(item);
+        resultArray[chunkIndex].push(item)
 
-        return resultArray;
-      }, []);
+        return resultArray
+      }, [])
 
       template = (
         <Grid key={name} container spacing={3} py={1} px={1.5}>
           {calculateColumns.map((cols, key) => {
-            const gridKey = `grid-${key}`;
-            const dividerKey = `divider-${key}`;
+            const gridKey = `grid-${key}`
+            const dividerKey = `divider-${key}`
 
             return (
               <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
@@ -383,10 +383,10 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
                   />
                 )}
               </Grid>
-            );
+            )
           })}
         </Grid>
-      );
+      )
 
       // Render the dropdown menu that should be display as list items
     } else if (collapse && name === dropdownName) {
@@ -396,12 +396,12 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
           href: item.href,
           target: "_blank",
           rel: "noreferrer",
-        };
+        }
 
         const routeComponent = {
           component: Link,
           to: item.route,
-        };
+        }
 
         return (
           <MKTypography
@@ -433,14 +433,14 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
             })}
             onMouseEnter={({ currentTarget }) => {
               if (item.dropdown) {
-                setNestedDropdown(currentTarget);
-                setNestedDropdownEl(currentTarget);
-                setNestedDropdownName(item.name);
+                setNestedDropdown(currentTarget)
+                setNestedDropdownEl(currentTarget)
+                setNestedDropdownName(item.name)
               }
             }}
             onMouseLeave={() => {
               if (item.dropdown) {
-                setNestedDropdown(null);
+                setNestedDropdown(null)
               }
             }}
           >
@@ -469,12 +469,12 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
               </Icon>
             )}
           </MKTypography>
-        );
-      });
+        )
+      })
     }
 
-    return template;
-  });
+    return template
+  })
 
   // Routes dropdown menu
   const dropdownMenu = (
@@ -497,8 +497,8 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
       onMouseEnter={() => setDropdown(dropdownEl)}
       onMouseLeave={() => {
         if (!nestedDropdown) {
-          setDropdown(null);
-          setDropdownName("");
+          setDropdown(null)
+          setDropdownName("")
         }
       }}
     >
@@ -523,13 +523,13 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
         </Grow>
       )}
     </Popper>
-  );
+  )
 
   // Render routes that are nested inside the dropdown menu routes
   const renderNestedRoutes = routes.map(({ collapse, columns }) =>
     collapse && !columns
       ? collapse.map(({ name: parentName, collapse: nestedCollapse }) => {
-          let template;
+          let template
 
           if (parentName === nestedDropdownName) {
             template =
@@ -540,12 +540,12 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
                   href: item.href,
                   target: "_blank",
                   rel: "noreferrer",
-                };
+                }
 
                 const routeComponent = {
                   component: Link,
                   to: item.route,
-                };
+                }
 
                 return (
                   <MKTypography
@@ -601,14 +601,14 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
                       </Icon>
                     )}
                   </MKTypography>
-                );
-              });
+                )
+              })
           }
 
-          return template;
+          return template
         })
       : null
-  );
+  )
 
   // Dropdown menu for the nested dropdowns
   const nestedDropdownMenu = (
@@ -620,12 +620,12 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
       transition
       style={{ zIndex: 10 }}
       onMouseEnter={() => {
-        setNestedDropdown(nestedDropdownEl);
+        setNestedDropdown(nestedDropdownEl)
       }}
       onMouseLeave={() => {
-        setNestedDropdown(null);
-        setNestedDropdownName("");
-        setDropdown(null);
+        setNestedDropdown(null)
+        setNestedDropdownName("")
+        setDropdown(null)
       }}
     >
       {({ TransitionProps }) => (
@@ -644,7 +644,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
         </Grow>
       )}
     </Popper>
-  );
+  )
 
   return (
     <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
@@ -764,7 +764,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
       {dropdownMenu}
       {nestedDropdownMenu}
     </Container>
-  );
+  )
 }
 // DefaultNavbar default props
 DefaultNavbar.defaultProps = {
@@ -776,7 +776,7 @@ DefaultNavbar.defaultProps = {
   center: false,
   logoUrl: null,
   brand: null,
-};
+}
 // Typechecking props for the DefaultNavbar
 DefaultNavbar.propTypes = {
   brand: PropTypes.string,
@@ -807,6 +807,6 @@ DefaultNavbar.propTypes = {
   sticky: PropTypes.bool,
   relative: PropTypes.bool,
   center: PropTypes.bool,
-};
+}
 
-export default DefaultNavbar;
+export default DefaultNavbar

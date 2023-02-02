@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Icon from "@mui/material/Icon";
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function DefaultInfoCard({ color, icon, title, description, direction, small }) {
   return (
@@ -58,7 +58,7 @@ function DefaultInfoCard({ color, icon, title, description, direction, small }) 
         {description}
       </MKTypography>
     </MKBox>
-  );
+  )
 }
 
 // Setting default props for the DefaultInfoCard
@@ -66,7 +66,7 @@ DefaultInfoCard.defaultProps = {
   color: "info",
   direction: "left",
   small: false,
-};
+}
 
 // Typechecking props for the DefaultInfoCard
 DefaultInfoCard.propTypes = {
@@ -85,6 +85,6 @@ DefaultInfoCard.propTypes = {
   description: PropTypes.string.isRequired,
   direction: PropTypes.oneOf(["left", "right", "center"]),
   small: PropTypes.bool,
-};
+}
 
-export default DefaultInfoCard;
+export default DefaultInfoCard

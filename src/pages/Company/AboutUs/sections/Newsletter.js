@@ -15,17 +15,17 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKInput from "components/MKInput"
+import MKButton from "components/MKButton"
 
 // Images
-import macbook from "assets/images/macbook.png";
+import macbook from "assets/images/macbook.png"
 
 function Newsletter() {
   return (
@@ -57,7 +57,7 @@ function Newsletter() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Newsletter;
+export default Newsletter

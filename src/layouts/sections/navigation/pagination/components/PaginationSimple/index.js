@@ -15,12 +15,12 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKPagination from "components/MKPagination";
+import MKPagination from "components/MKPagination"
 
 function PaginationSimple() {
   return (
@@ -43,7 +43,7 @@ function PaginationSimple() {
         </MKPagination>
       </Grid>
     </Container>
-  );
+  )
 }
 
-export default PaginationSimple;
+export default PaginationSimple

@@ -14,20 +14,20 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
 
 // Otis Kit PRO page layout routes
-import routes from "routes";
+import routes from "routes"
 
 function IllustrationLayout({ header, title, description, illustration, children }) {
   return (
@@ -78,7 +78,7 @@ function IllustrationLayout({ header, title, description, illustration, children
         </Grid>
       </Grid>
     </MKBox>
-  );
+  )
 }
 
 // Setting default values for the props of IllustrationLayout
@@ -87,7 +87,7 @@ IllustrationLayout.defaultProps = {
   title: "",
   description: "",
   illustration: "",
-};
+}
 
 // Typechecking props for the IllustrationLayout
 IllustrationLayout.propTypes = {
@@ -96,6 +96,6 @@ IllustrationLayout.propTypes = {
   description: PropTypes.string,
   children: PropTypes.node.isRequired,
   illustration: PropTypes.string,
-};
+}
 
-export default IllustrationLayout;
+export default IllustrationLayout

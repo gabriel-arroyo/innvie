@@ -14,20 +14,20 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
 // import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
-import Search from "../../sections/Search";
+import Search from "../../sections/Search"
 
 function Header({ image, label, title, description }) {
   return (
@@ -108,7 +108,7 @@ function Header({ image, label, title, description }) {
         </Grid> */}
       </Card>
     </>
-  );
+  )
 }
 
 // Typechecking props for the Header
@@ -118,6 +118,6 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   // cards: PropTypes.instanceOf(Array).isRequired,
-};
+}
 
-export default Header;
+export default Header

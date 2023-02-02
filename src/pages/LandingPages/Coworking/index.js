@@ -14,32 +14,32 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
+import Stack from "@mui/material/Stack"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKButton from "components/MKButton"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import DefaultFooter from "examples/Footers/DefaultFooter"
 
 // Coworking page sections
-import Information from "pages/LandingPages/Coworking/sections/Information";
-import Testimonials from "pages/LandingPages/Coworking/sections/Testimonials";
-import AboutUs from "pages/LandingPages/Coworking/sections/AboutUs";
-import Places from "pages/LandingPages/Coworking/sections/Places";
+import Information from "pages/LandingPages/Coworking/sections/Information"
+import Testimonials from "pages/LandingPages/Coworking/sections/Testimonials"
+import AboutUs from "pages/LandingPages/Coworking/sections/AboutUs"
+import Places from "pages/LandingPages/Coworking/sections/Places"
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "routes"
+import footerRoutes from "footer.routes"
 
 // Images
-import bgImage from "assets/images/bg-coworking.jpeg";
+import bgImage from "assets/images/bg-coworking.jpeg"
 
 function Coworking() {
   return (
@@ -160,7 +160,7 @@ function Coworking() {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Coworking;
+export default Coworking

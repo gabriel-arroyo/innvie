@@ -14,21 +14,21 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
+import MKBox from "components/MKBox"
 // import MKTypography from "components/MKTypography";
 
 // Otis Kit PRO example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
 
 // Otis Kit PRO page layout routes
-import footerRoutes from "footer.routes";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import footerRoutes from "footer.routes"
+import DefaultFooter from "examples/Footers/DefaultFooter"
 
 function CoverLayout({ coverHeight, image, children }) {
   return (
@@ -72,19 +72,19 @@ function CoverLayout({ coverHeight, image, children }) {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </MKBox>
-  );
+  )
 }
 
 // Setting default props for the CoverLayout
 CoverLayout.defaultProps = {
   coverHeight: "35vh",
-};
+}
 
 // Typechecking props for the CoverLayout
 CoverLayout.propTypes = {
   coverHeight: PropTypes.string,
   image: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-};
+}
 
-export default CoverLayout;
+export default CoverLayout

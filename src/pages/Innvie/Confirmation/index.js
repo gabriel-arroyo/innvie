@@ -14,31 +14,31 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid"
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import { useParams } from "react-router-dom";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import { useParams } from "react-router-dom"
 // Otis Kit PRO examples
-import { useAtom } from "jotai";
-import loggedUser from "states/loggedUser";
-import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate";
-import selectedPrice from "states/selectedPrice";
-import { selectedType } from "states/selectedType";
-import taxes from "constants/taxes";
-import roundTo from "tools/round";
-import CustomLayout from "../../../layouts/sections/components/CustomLayout";
-import Map from "../Home/components/Map/map";
-import PlacesGrid from "../Home/sections/PlacesGrid";
+import { useAtom } from "jotai"
+import loggedUser from "states/loggedUser"
+import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate"
+import selectedPrice from "states/selectedPrice"
+import { selectedType } from "states/selectedType"
+import taxes from "constants/taxes"
+import roundTo from "tools/round"
+import CustomLayout from "../../../layouts/sections/components/CustomLayout"
+import Map from "../Home/components/Map/map"
+import PlacesGrid from "../Home/sections/PlacesGrid"
 
 function Confirmation() {
-  const params = useParams();
-  const [user] = useAtom(loggedUser);
-  const [startDate] = useAtom(reservedStartDate);
-  const [endDate] = useAtom(reservedEndDate);
-  const [days] = useAtom(reservedDays);
-  const [type] = useAtom(selectedType);
-  const [price] = useAtom(selectedPrice);
+  const params = useParams()
+  const [user] = useAtom(loggedUser)
+  const [startDate] = useAtom(reservedStartDate)
+  const [endDate] = useAtom(reservedEndDate)
+  const [days] = useAtom(reservedDays)
+  const [type] = useAtom(selectedType)
+  const [price] = useAtom(selectedPrice)
   return (
     <CustomLayout
       title="Confirmación de reservación"
@@ -120,7 +120,7 @@ function Confirmation() {
         <PlacesGrid />
       </MKBox>
     </CustomLayout>
-  );
+  )
 }
 
-export default Confirmation;
+export default Confirmation

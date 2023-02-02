@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // Otis Kit PRO base styles
-import borders from "assets/theme/base/borders";
-import colors from "assets/theme/base/colors";
+import borders from "assets/theme/base/borders"
+import colors from "assets/theme/base/colors"
 
 // Otis Kit PRO helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
-import linearGradient from "assets/theme/functions/linearGradient";
+import pxToRem from "assets/theme/functions/pxToRem"
+import linearGradient from "assets/theme/functions/linearGradient"
 
-const { borderWidth, borderColor } = borders;
-const { transparent, info } = colors;
+const { borderWidth, borderColor } = borders
+const { transparent, info } = colors
 
 export default {
   styleOverrides: {
@@ -92,4 +92,4 @@ export default {
       },
     },
   },
-};
+}

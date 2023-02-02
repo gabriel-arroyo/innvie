@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "layouts/sections/components/BaseLayout"
+import View from "layouts/sections/components/View"
 
 // Applications page components
-import ApplicationOne from "layouts/sections/page-sections/applications/components/ApplicationOne";
-import ApplicationTwo from "layouts/sections/page-sections/applications/components/ApplicationTwo";
+import ApplicationOne from "layouts/sections/page-sections/applications/components/ApplicationOne"
+import ApplicationTwo from "layouts/sections/page-sections/applications/components/ApplicationTwo"
 
 // Applications page components code
-import applicationOneCode from "layouts/sections/page-sections/applications/components/ApplicationOne/code";
-import applicationTwoCode from "layouts/sections/page-sections/applications/components/ApplicationTwo/code";
+import applicationOneCode from "layouts/sections/page-sections/applications/components/ApplicationOne/code"
+import applicationTwoCode from "layouts/sections/page-sections/applications/components/ApplicationTwo/code"
 
 function Applications() {
   return (
@@ -41,7 +41,7 @@ function Applications() {
         <ApplicationTwo />
       </View>
     </BaseLayout>
-  );
+  )
 }
 
-export default Applications;
+export default Applications

@@ -13,12 +13,12 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import Map from "./components/Map/map";
-import Contact from "./sections/Contact";
-import Description from "./sections/Description";
-import Header from "./sections/Header";
-import OffersSwipe from "./sections/OffersSwipe";
-import PlacesSwipe from "./sections/PlacesSwipe";
+import Map from "./components/Map/map"
+import Contact from "./sections/Contact"
+import Description from "./sections/Description"
+import Header from "./sections/Header"
+import OffersSwipe from "./sections/OffersSwipe"
+import PlacesSwipe from "./sections/PlacesSwipe"
 
 function InnvieHome() {
   return (
@@ -51,7 +51,7 @@ function InnvieHome() {
       <PlacesSwipe />
       <Contact />
     </>
-  );
+  )
 }
 
-export default InnvieHome;
+export default InnvieHome

@@ -14,42 +14,42 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // @mui material components
-import Card from "@mui/material/Card";
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-import { useEffect, useState } from "react";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKInput from "components/MKInput"
+import MKButton from "components/MKButton"
+import { useEffect, useState } from "react"
 
 function Checkin() {
-  const [checked, setChecked] = useState(false);
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(null);
+  const [checked, setChecked] = useState(false)
+  const [password, setPassword] = useState("")
+  const [message, setMessage] = useState("")
+  const [error, setError] = useState(null)
   function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
+    return /\S+@\S+\.\S+/.test(email)
   }
   const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
-      setError("Email inválido");
+      setError("Email inválido")
     } else {
-      setError(null);
+      setError(null)
     }
 
-    setMessage(event.target.value);
-  };
-  const handleCheckin = () => setChecked(!checked);
+    setMessage(event.target.value)
+  }
+  const handleCheckin = () => setChecked(!checked)
   useEffect(() => {
     if (checked) {
       // const val = Math.floor(1000 + Math.random() * 9000);
-      setPassword("Se ha enviado el código de ingreso a su correo");
+      setPassword("Se ha enviado el código de ingreso a su correo")
     }
-  }, [checked]);
+  }, [checked])
   return (
     <Card>
       <MKBox
@@ -147,7 +147,7 @@ function Checkin() {
         </MKBox>
       </MKBox>
     </Card>
-  );
+  )
 }
 
-export default Checkin;
+export default Checkin

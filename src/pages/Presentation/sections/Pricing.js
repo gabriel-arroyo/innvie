@@ -14,20 +14,20 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKBadge from "components/MKBadge";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKBadge from "components/MKBadge"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import SimplePricingCard from "examples/Cards/PricingCards/SimplePricingCard";
+import SimplePricingCard from "examples/Cards/PricingCards/SimplePricingCard"
 
 // Images
-import bgPattern from "assets/images/shapes/pattern-lines.svg";
+import bgPattern from "assets/images/shapes/pattern-lines.svg"
 
 function Pricing() {
   return (
@@ -155,7 +155,7 @@ function Pricing() {
         </Container>
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Pricing;
+export default Pricing

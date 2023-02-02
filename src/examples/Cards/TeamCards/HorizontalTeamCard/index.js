@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card"
+import Grid from "@mui/material/Grid"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function HorizontalTeamCard({ image, name, position, description }) {
   return (
@@ -53,7 +53,7 @@ function HorizontalTeamCard({ image, name, position, description }) {
         </Grid>
       </Grid>
     </Card>
-  );
+  )
 }
 
 // Typechecking props for the HorizontalTeamCard
@@ -74,6 +74,6 @@ HorizontalTeamCard.propTypes = {
     label: PropTypes.string.isRequired,
   }).isRequired,
   description: PropTypes.string.isRequired,
-};
+}
 
-export default HorizontalTeamCard;
+export default HorizontalTeamCard

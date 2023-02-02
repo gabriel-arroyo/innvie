@@ -13,53 +13,53 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react"
 
 // rellax
-import Rellax from "rellax";
+import Rellax from "rellax"
 
 // typed-js
-import * as Typed from "typed.js";
+import * as Typed from "typed.js"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
+import MKButton from "components/MKButton"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import DefaultFooter from "examples/Footers/DefaultFooter"
 
 // About Us page sections
-import Information from "pages/Company/AboutUs/sections/Information";
-import Team from "pages/Company/AboutUs/sections/Team";
-import Featuring from "pages/Company/AboutUs/sections/Featuring";
-import Newsletter from "pages/Company/AboutUs/sections/Newsletter";
+import Information from "pages/Company/AboutUs/sections/Information"
+import Team from "pages/Company/AboutUs/sections/Team"
+import Featuring from "pages/Company/AboutUs/sections/Featuring"
+import Newsletter from "pages/Company/AboutUs/sections/Newsletter"
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "routes"
+import footerRoutes from "footer.routes"
 
 // Images
-import bgImage from "assets/images/bg-about-us.jpg";
+import bgImage from "assets/images/bg-about-us.jpg"
 
 function AboutUs() {
-  const headerRef = useRef(null);
-  const typedJSRef = useRef(null);
+  const headerRef = useRef(null)
+  const typedJSRef = useRef(null)
 
   // Setting up rellax
   useEffect(() => {
     const parallax = new Rellax(headerRef.current, {
       speed: -6,
-    });
+    })
 
-    return () => parallax.destroy();
-  }, []);
+    return () => parallax.destroy()
+  }, [])
 
   // Setting up typedJS
   useEffect(() => {
@@ -70,10 +70,10 @@ function AboutUs() {
       backDelay: 200,
       startDelay: 500,
       loop: true,
-    });
+    })
 
-    return () => typedJS.destroy();
-  }, []);
+    return () => typedJS.destroy()
+  }, [])
 
   return (
     <>
@@ -171,7 +171,7 @@ function AboutUs() {
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default AboutUs;
+export default AboutUs

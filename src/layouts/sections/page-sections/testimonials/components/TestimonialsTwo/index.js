@@ -14,38 +14,38 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useRef } from "react";
+import { useRef } from "react"
 
 // SwiperJS
-import SwiperCore, { Autoplay, Navigation } from "swiper";
+import SwiperCore, { Autoplay, Navigation } from "swiper"
 
 // SwiperJS react components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react"
 
 // SwiperJS styles
-import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css"
+import "swiper/css/navigation"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Icon from "@mui/material/Icon";
+import Container from "@mui/material/Container"
+import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import ComplexReviewCard from "examples/Cards/ReviewCards/ComplexReviewCard";
+import ComplexReviewCard from "examples/Cards/ReviewCards/ComplexReviewCard"
 
 // Images
-import review1 from "assets/images/examples/clem-onojegaw.jpg";
-import review2 from "assets/images/examples/studio-3.jpg";
-import logoSpotify from "assets/images/logos/small-logos/logo-spotify.svg";
-import logoSlack from "assets/images/logos/small-logos/logo-slack.svg";
+import review1 from "assets/images/examples/clem-onojegaw.jpg"
+import review2 from "assets/images/examples/studio-3.jpg"
+import logoSpotify from "assets/images/logos/small-logos/logo-spotify.svg"
+import logoSlack from "assets/images/logos/small-logos/logo-slack.svg"
 
 function TestimonialsTwo() {
   // install SwiperJS modules
-  SwiperCore.use([Autoplay, Navigation]);
+  SwiperCore.use([Autoplay, Navigation])
 
   // Swiper navigation buttons styles
   const navigationStyles = {
@@ -65,22 +65,22 @@ function TestimonialsTwo() {
     "&:hover, &:focus": {
       opacity: 1,
     },
-  };
+  }
 
   // SwiperJS navigation buttons ref
-  const navigationPrevRef = useRef(null);
-  const navigationNextRef = useRef(null);
+  const navigationPrevRef = useRef(null)
+  const navigationNextRef = useRef(null)
 
   return (
     <MKBox py={8} position="relative">
       <Swiper
         onInit={({ params, navigation }) => {
-          const { navigation: nav } = params;
+          const { navigation: nav } = params
 
-          nav.prevEl = navigationPrevRef.current;
-          nav.nextEl = navigationNextRef.current;
-          navigation.init();
-          navigation.update();
+          nav.prevEl = navigationPrevRef.current
+          nav.nextEl = navigationNextRef.current
+          navigation.init()
+          navigation.update()
         }}
         autoplay={{ delay: 5000 }}
         speed={800}
@@ -140,7 +140,7 @@ function TestimonialsTwo() {
         </MKTypography>
       </Swiper>
     </MKBox>
-  );
+  )
 }
 
-export default TestimonialsTwo;
+export default TestimonialsTwo

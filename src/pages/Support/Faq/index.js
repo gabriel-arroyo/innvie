@@ -13,30 +13,30 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from "react"
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import SimpleFooter from "examples/Footers/SimpleFooter";
-import SimpleInfoCard from "examples/Cards/InfoCards/SimpleInfoCard";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar"
+import SimpleFooter from "examples/Footers/SimpleFooter"
+import SimpleInfoCard from "examples/Cards/InfoCards/SimpleInfoCard"
 
 // HelpCenter page components
-import FaqCollapse from "pages/Support/Faq/components/FaqCollapse";
+import FaqCollapse from "pages/Support/Faq/components/FaqCollapse"
 
 // Routes
-import routes from "routes";
+import routes from "routes"
 
 function Faq() {
-  const [collapse, setCollapse] = useState(false);
+  const [collapse, setCollapse] = useState(false)
 
   return (
     <>
@@ -276,7 +276,7 @@ function Faq() {
         <SimpleFooter />
       </MKBox>
     </>
-  );
+  )
 }
 
-export default Faq;
+export default Faq

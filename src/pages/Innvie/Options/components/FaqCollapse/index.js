@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 // @mui material components
-import Icon from "@mui/material/Icon";
-import Collapse from "@mui/material/Collapse";
+import Icon from "@mui/material/Icon"
+import Collapse from "@mui/material/Collapse"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 function FaqCollapse({ title, open, children, ...rest }) {
   return (
@@ -56,7 +56,7 @@ function FaqCollapse({ title, open, children, ...rest }) {
         </MKBox>
       </Collapse>
     </MKBox>
-  );
+  )
 }
 
 // Typechecking props for the FaqCollapse
@@ -64,6 +64,6 @@ FaqCollapse.propTypes = {
   title: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
-};
+}
 
-export default FaqCollapse;
+export default FaqCollapse

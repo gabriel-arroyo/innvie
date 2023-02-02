@@ -14,23 +14,23 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Divider from "@mui/material/Divider"
 
 // Otis Kit PRO components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography"
 
 // Otis Kit PRO examples
-import DefaultReviewCard from "examples/Cards/ReviewCards/DefaultReviewCard";
+import DefaultReviewCard from "examples/Cards/ReviewCards/DefaultReviewCard"
 
 // Images
-import appleLogo from "assets/images/logos/gray-logos/logo-apple.svg";
-import facebookLogo from "assets/images/logos/gray-logos/logo-facebook.svg";
-import nasaLogo from "assets/images/logos/gray-logos/logo-nasa.svg";
-import vodafoneLogo from "assets/images/logos/gray-logos/logo-vodafone.svg";
-import digitalOceanLogo from "assets/images/logos/gray-logos/logo-digitalocean.svg";
+import appleLogo from "assets/images/logos/gray-logos/logo-apple.svg"
+import facebookLogo from "assets/images/logos/gray-logos/logo-facebook.svg"
+import nasaLogo from "assets/images/logos/gray-logos/logo-nasa.svg"
+import vodafoneLogo from "assets/images/logos/gray-logos/logo-vodafone.svg"
+import digitalOceanLogo from "assets/images/logos/gray-logos/logo-digitalocean.svg"
 
 function Information() {
   return (
@@ -106,7 +106,7 @@ function Information() {
         </Grid>
       </Container>
     </MKBox>
-  );
+  )
 }
 
-export default Information;
+export default Information
