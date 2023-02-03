@@ -29,7 +29,7 @@ import CloseIcon from "@mui/icons-material/Close"
 import MKBox from "components/MKBox"
 import MKButton from "components/MKButton"
 import MKTypography from "components/MKTypography"
-import { parseDate, getDaysDifference } from "tools/getDate"
+import { parseDate, getDaysDifference, dateIsPast } from "tools/getDate"
 import { useState, useReducer, useEffect } from "react"
 import taxes from "constants/taxes"
 import calculateCost from "tools/calculateCost"
@@ -76,12 +76,11 @@ function newReservationReducer(state, action) {
     }
     case "update_endDate": {
       if (action.payload === state.newReservation.endDate) return state
-      const daysDifferente = getDaysDifference(state.newReservation.startDate, action.payload)
-      const areEqual = compareReservations(
-        state.newReservation.startDate,
-        action.payload,
-        state.newReservation.type
-      )
+      const start = state.startIsPast
+        ? state.prevReservation.startDate
+        : state.newReservation.startDate
+      const daysDifferente = getDaysDifference(start, action.payload)
+      const areEqual = compareReservations(start, action.payload, state.newReservation.type)
       return {
         ...state,
         equal: areEqual,
@@ -126,10 +125,14 @@ function newReservationReducer(state, action) {
 function ReserveModal({ event }) {
   const [show, setShow] = useState(false)
   const toggleModal = () => setShow(!show)
+  const startIsPast = dateIsPast(event.startDate)
+  const endIsPast = dateIsPast(event.endDate)
 
   const days = getDaysDifference(event.startDate, event.endDate)
   const initialState = {
     equal: true,
+    startIsPast,
+    endIsPast,
     prevReservation: {
       type: event.type,
       startDate: event.startDate,
@@ -158,10 +161,15 @@ function ReserveModal({ event }) {
 
   const onChangeDate = (e) => {
     const [estart, eend] = e
-    const start = parseDate(estart)
-    const end = parseDate(eend)
-    dispatch({ type: "update_startDate", payload: start })
-    dispatch({ type: "update_endDate", payload: end })
+    if (eend) {
+      const start = parseDate(estart)
+      dispatch({ type: "update_startDate", payload: start })
+      const end = parseDate(eend)
+      dispatch({ type: "update_endDate", payload: end })
+    } else {
+      const end = parseDate(estart)
+      dispatch({ type: "update_endDate", payload: end })
+    }
   }
   const handleChangeName = (e) => {
     const selectedType = e.target.innerText
@@ -210,6 +218,8 @@ function ReserveModal({ event }) {
                         <Comparator
                           title="Mi reservación"
                           disabled
+                          startIsPast={startIsPast}
+                          endIsPast={endIsPast}
                           handleChangeName={handleChangeName}
                           onChangeDate={onChangeDate}
                           reservation={state.prevReservation}
@@ -220,6 +230,8 @@ function ReserveModal({ event }) {
                       {state?.newReservation && (
                         <Comparator
                           title="Nueva reservación"
+                          startIsPast={startIsPast}
+                          endIsPast={endIsPast}
                           handleChangeName={handleChangeName}
                           onChangeDate={onChangeDate}
                           reservation={state.newReservation}
@@ -235,7 +247,7 @@ function ReserveModal({ event }) {
                   ${roundTo(state.newReservation.cost - state.prevReservation.cost, 2)}
                 </MKTypography>
                 <MKTypography display="flex" justifyContent="center" variant="body2" color="error">
-                  {roundTo(state.newReservation.cost - state.prevReservation.cost, 2) > 0
+                  {roundTo(state.newReservation.cost - state.prevReservation.cost, 2) >= 0
                     ? ""
                     : "Favor de pasar a recepción por su devolución"}
                 </MKTypography>

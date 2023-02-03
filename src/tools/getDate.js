@@ -19,6 +19,15 @@ export const getDaysDifference = (startDate, endDate) => {
   if (Number.isNaN(days)) return 0
   return days
 }
+export const getReservationsDaysDifference = (startDate, endDate) => {
+  try {
+    const startMoment = moment(startDate)
+    const endMoment = moment(endDate)
+    return endMoment.diff(startMoment, "days")
+  } catch {
+    return 0
+  }
+}
 
 export function getStatus(startDate, endDate) {
   const today = new Date()
@@ -29,6 +38,16 @@ export function getStatus(startDate, endDate) {
     return "Open"
   }
   return "Done"
+}
+
+export function dateIsPast(date) {
+  try {
+    const today = moment()
+    const m = moment(date)
+    return m.isBefore(today)
+  } catch {
+    return false
+  }
 }
 
 export function parseDate(date) {
