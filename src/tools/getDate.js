@@ -10,6 +10,16 @@ export const getTomorrowDate = (date = new Date()) => {
   return currentDate
 }
 
+export const getShortDate = (_date) => {
+  const date = new Date(_date)
+  const usDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+  return usDate
+}
+
 export const getDaysDifference = (startDate, endDate) => {
   if (!startDate || !endDate) return 0
   const start = new Date(startDate)

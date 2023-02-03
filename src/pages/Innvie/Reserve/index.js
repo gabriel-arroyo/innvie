@@ -35,6 +35,8 @@ import selectedPrice from "states/selectedPrice"
 import { selectedType, maxOccupantsInType } from "states/selectedType"
 import taxes from "constants/taxes"
 import roundTo from "tools/round"
+import { sendEmailConfirmation } from "api/mail"
+import { getShortDate } from "tools/getDate"
 import BlancLayout from "../Layouts/BlancLayout"
 import LoginModal from "../Authentication/Login/LoginModal"
 import PayButton from "./PayButton"
@@ -125,6 +127,7 @@ function Reserve() {
     }
     await getAndUpdateUser(newUser)
     const code = await addReservation(formEmail, room, startDate, endDate, price)
+    await sendEmailConfirmation(formName, formEmail, getShortDate(startDate), getShortDate(endDate))
     setTimeout(() => {
       navigate(`/confirmation/${code}`)
     }, 1000)
