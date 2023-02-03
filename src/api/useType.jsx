@@ -171,11 +171,11 @@ function useType(room) {
   }
 
   async function getAll() {
+    const items = []
     setLoading(true)
     try {
       const q = query(collectionRef)
       const querySnapshot = await getDocs(q)
-      const items = []
       querySnapshot.forEach((d) => {
         items.push({ ...d.data(), id: d.id })
       })
@@ -185,6 +185,7 @@ function useType(room) {
     } catch (e) {
       setError(e)
     }
+    return items
   }
 
   async function getByName(name) {
@@ -212,6 +213,8 @@ function useType(room) {
     const type = await getByName(name)
     if (type?.price) {
       setPrice(type.price)
+      console.log("🚀 ~ file: useType.jsx:218 ~ getPriceByName ~ type.price", type.price)
+
       return type.price
     }
     return 0

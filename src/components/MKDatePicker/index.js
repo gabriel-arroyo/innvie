@@ -30,7 +30,13 @@ function MKDatePicker({ input, ...rest }) {
     <Flatpickr
       {...rest}
       render={({ defaultValue }, ref) => (
-        <MKInput {...input} defaultValue={defaultValue} inputRef={ref} style={{ width: "200px" }} />
+        <MKInput
+          {...input}
+          defaultValue={defaultValue}
+          inputRef={ref}
+          style={{ width: "200px" }}
+          disabled={rest?.disabled ?? false}
+        />
       )}
     />
   )

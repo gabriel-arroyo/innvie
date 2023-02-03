@@ -14,7 +14,6 @@ Coded by www.creative-tim.com
 */
 
 /* eslint-disable react/prop-types */
-import { useState } from "react"
 
 // @mui material components
 import Container from "@mui/material/Container"
@@ -22,7 +21,6 @@ import Grid from "@mui/material/Grid"
 import Modal from "@mui/material/Modal"
 import Divider from "@mui/material/Divider"
 import Slide from "@mui/material/Slide"
-import { parseDate } from "tools/getDate"
 
 // @mui icons
 import CloseIcon from "@mui/icons-material/Close"
@@ -31,14 +29,145 @@ import CloseIcon from "@mui/icons-material/Close"
 import MKBox from "components/MKBox"
 import MKButton from "components/MKButton"
 import MKTypography from "components/MKTypography"
-import MKDatePicker from "components/MKDatePicker"
+import { parseDate, getDaysDifference } from "tools/getDate"
+import { useState, useReducer, useEffect } from "react"
+import taxes from "constants/taxes"
+import calculateCost from "tools/calculateCost"
+import roundTo from "tools/round"
+import useType from "api/useType"
+import Comparator from "./comparator"
+
+function newReservationReducer(state, action) {
+  const compareReservations = (start, end, type) => {
+    const prevStartDate = parseDate(state.prevReservation.startDate)
+    const prevEndDate = parseDate(state.prevReservation.endDate)
+    const newStartDate = parseDate(start)
+    const newEndDate = parseDate(end)
+    const sameStartDate = prevStartDate === newStartDate
+    const sameEndDate = prevEndDate === newEndDate
+    const sameType = state.prevReservation.type === type
+    const allEqual = sameStartDate && sameEndDate && sameType
+    return allEqual
+  }
+
+  switch (action.type) {
+    case "update_startDate": {
+      if (action.payload === state.newReservation.startDate) return state
+      const areEqual = compareReservations(
+        action.payload,
+        state.newReservation.endDate,
+        state.newReservation.type
+      )
+      const daysDifferente = getDaysDifference(action.payload, state.newReservation.endDate)
+      console.log(
+        "🚀 ~ file: useNewReservation.jsx:10 ~ newReservationReducer ~ daysDifferente",
+        daysDifferente
+      )
+      return {
+        ...state,
+        equal: areEqual,
+        newReservation: {
+          ...state.newReservation,
+          startDate: action.payload,
+          days: daysDifferente,
+          cost: calculateCost(state.newReservation.price, daysDifferente, taxes),
+        },
+      }
+    }
+    case "update_endDate": {
+      if (action.payload === state.newReservation.endDate) return state
+      const daysDifferente = getDaysDifference(state.newReservation.startDate, action.payload)
+      const areEqual = compareReservations(
+        state.newReservation.startDate,
+        action.payload,
+        state.newReservation.type
+      )
+      return {
+        ...state,
+        equal: areEqual,
+        newReservation: {
+          ...state.newReservation,
+          endDate: action.payload,
+          days: daysDifferente,
+          cost: calculateCost(state.newReservation.price, daysDifferente, taxes),
+        },
+      }
+    }
+    case "update_type": {
+      const areEqual = compareReservations(
+        state.newReservation.startDate,
+        state.newReservation.endDate,
+        action.payload
+      )
+      const price = state.types.find((t) => t.type === action.payload)?.price ?? "99999"
+      const cost = calculateCost(price, state.newReservation.days, taxes)
+      return {
+        ...state,
+        equal: areEqual,
+        newReservation: {
+          ...state.newReservation,
+          price,
+          cost,
+          type: action.payload,
+        },
+      }
+    }
+    case "get_types":
+      return {
+        ...state,
+        types: action.payload,
+      }
+    default: {
+      return state
+    }
+  }
+}
 
 function ReserveModal({ event }) {
   const [show, setShow] = useState(false)
   const toggleModal = () => setShow(!show)
 
-  const onChangeDate = () => {
-    console.log("changed")
+  const days = getDaysDifference(event.startDate, event.endDate)
+  const initialState = {
+    equal: true,
+    prevReservation: {
+      type: event.type,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      days,
+      price: event.price,
+      cost: calculateCost(event.price, days, taxes),
+    },
+    newReservation: {
+      type: event.type,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      days,
+      price: event.price,
+      cost: calculateCost(event.price, days, taxes),
+    },
+    types: [],
+  }
+  const [state, dispatch] = useReducer(newReservationReducer, initialState)
+  const { getAll } = useType()
+  useEffect(() => {
+    getAll().then((alltypes) => {
+      dispatch({ type: "get_types", payload: alltypes })
+    })
+  }, [])
+
+  const onChangeDate = (e) => {
+    const [estart, eend] = e
+    const start = parseDate(estart)
+    const end = parseDate(eend)
+    dispatch({ type: "update_startDate", payload: start })
+    dispatch({ type: "update_endDate", payload: end })
+  }
+  const handleChangeName = (e) => {
+    const selectedType = e.target.innerText
+    if (!selectedType) return
+    console.log(selectedType)
+    dispatch({ type: "update_type", payload: selectedType })
   }
 
   return (
@@ -48,12 +177,12 @@ function ReserveModal({ event }) {
           <MKButton variant="gradient" color="info" onClick={toggleModal}>
             Cambiar reservación
           </MKButton>
+          {JSON.stringify()}
         </Grid>
         <Modal open={show} onClose={toggleModal} sx={{ display: "grid", placeItems: "center" }}>
           <Slide direction="down" in={show} timeout={500}>
             <MKBox
               position="relative"
-              width="500px"
               display="flex"
               flexDirection="column"
               borderRadius="xl"
@@ -72,43 +201,51 @@ function ReserveModal({ event }) {
                     item
                     xs={12}
                     lg={12}
-                    flexDirection="row"
+                    flexDirection={{ xs: "column", lg: "row" }}
                     alignItems="center"
                     sx={{ textAlign: "center", my: 0, mx: "auto" }}
                   >
-                    <Grid item xs={6} lg={6} flexDirection="column" alignItems="center">
-                      <MKTypography variant="body2" color="secondary" fontWeight="bold">
-                        Mi reservación
-                      </MKTypography>
-                      <MKDatePicker
-                        options={{ mode: "range", defaultDate: [event.startDate, event.endDate] }}
-                        variant="standard"
-                        placeholder="Please select date"
-                        fullWidth
-                        sx={{ width: "20vw", p: "20px" }}
-                        onChange={onChangeDate}
-                      />
-                      <Data text={event.type} />
-                      <Data text={parseDate(event.startDate)} />
-                      <Data text={parseDate(event.endDate)} />
+                    <Grid item xs={12} lg={6} flexDirection="column" alignItems="center">
+                      {state?.prevReservation && (
+                        <Comparator
+                          title="Mi reservación"
+                          disabled
+                          handleChangeName={handleChangeName}
+                          onChangeDate={onChangeDate}
+                          reservation={state.prevReservation}
+                        />
+                      )}
                     </Grid>
-                    <Grid item xs={6} lg={6} flexDirection="column" alignItems="center">
-                      <MKTypography variant="body2" color="secondary" fontWeight="bold">
-                        Nueva reservación
-                      </MKTypography>
-                      <Data text={event.type} />
-                      <Data text={parseDate(event.startDate)} />
-                      <Data text={parseDate(event.endDate)} />
+                    <Grid item xs={12} lg={6} flexDirection="column" alignItems="center">
+                      {state?.newReservation && (
+                        <Comparator
+                          title="Nueva reservación"
+                          handleChangeName={handleChangeName}
+                          onChangeDate={onChangeDate}
+                          reservation={state.newReservation}
+                        />
+                      )}
                     </Grid>
                   </Grid>
                 </Container>
+                <MKTypography display="flex" justifyContent="center">
+                  Diferencia a pagar:
+                </MKTypography>
+                <MKTypography display="flex" justifyContent="center" variant="h2">
+                  ${roundTo(state.newReservation.cost - state.prevReservation.cost, 2)}
+                </MKTypography>
+                <MKTypography display="flex" justifyContent="center" variant="body2" color="error">
+                  {roundTo(state.newReservation.cost - state.prevReservation.cost, 2) > 0
+                    ? ""
+                    : "Favor de pasar a recepción por su devolución"}
+                </MKTypography>
               </MKBox>
               <Divider sx={{ my: 0 }} />
               <MKBox display="flex" justifyContent="space-between" p={1.5}>
                 <MKButton variant="gradient" color="dark" onClick={toggleModal}>
-                  close
+                  Cerrar
                 </MKButton>
-                <MKButton variant="gradient" color="error">
+                <MKButton variant="gradient" color="error" disabled={state.equal}>
                   Aceptar cambios
                 </MKButton>
               </MKBox>
@@ -121,11 +258,3 @@ function ReserveModal({ event }) {
 }
 
 export default ReserveModal
-
-function Data({ text }) {
-  return (
-    <MKTypography variant="body2" color="text" fontWeight="regular">
-      {text}
-    </MKTypography>
-  )
-}

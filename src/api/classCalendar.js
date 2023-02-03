@@ -1,13 +1,14 @@
 const { serverTimestamp } = require("firebase/firestore")
 
 class Calendar {
-  constructor(email, startDate, endDate, lastUpdate, number, type) {
+  constructor(email, startDate, endDate, lastUpdate, number, type, price) {
     this.email = email
     this.startDate = startDate
     this.endDate = endDate
     this.lastUpdate = lastUpdate
     this.number = number
     this.type = type
+    this.price = price
   }
 
   toString() {
@@ -23,6 +24,7 @@ const calendarConverter = {
     lastUpdate: serverTimestamp(),
     number: calendar.number,
     type: calendar.type,
+    price: calendar.price,
   }),
   fromFirestore: (snapShot, options) => {
     const data = snapShot.data(options)
@@ -32,7 +34,8 @@ const calendarConverter = {
       data.endDate.toDate(),
       data.lastUpdate.toDate(),
       data.number,
-      data.type
+      data.type,
+      data.price
     )
   },
 }

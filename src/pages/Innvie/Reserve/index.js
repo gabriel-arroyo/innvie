@@ -124,7 +124,7 @@ function Reserve() {
       license: formLicense ?? "",
     }
     await getAndUpdateUser(newUser)
-    const code = await addReservation(formEmail, room, startDate, endDate)
+    const code = await addReservation(formEmail, room, startDate, endDate, price)
     setTimeout(() => {
       navigate(`/confirmation/${code}`)
     }, 1000)

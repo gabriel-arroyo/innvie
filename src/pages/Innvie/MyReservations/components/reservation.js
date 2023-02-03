@@ -11,7 +11,7 @@ import ImageSwipe from "pages/Innvie/Admin/NewRoom/imageswipe"
 import ReserveModal from "./reserveModal"
 
 function Reservation({ user, event }) {
-  const { getPhotos, photos } = useType()
+  const { getPhotos, photos, types } = useType()
   if (!user) {
     return <h1>Loading...</h1>
   }
@@ -37,7 +37,7 @@ function Reservation({ user, event }) {
         </Grid>
         <Grid item xs={4}>
           <Dates startDate={parseDate(event.startDate)} endDate={parseDate(event.endDate)} />
-          <ReserveModal event={event} />
+          <ReserveModal event={event} types={types} />
         </Grid>
         <Grid item xs={4}>
           <Times />

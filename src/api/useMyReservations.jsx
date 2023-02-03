@@ -140,7 +140,7 @@ function useMyReservations({ email }) {
     return id
   }
 
-  async function addReservation(_email, _room, _startDate, _endDate) {
+  async function addReservation(_email, _room, _startDate, _endDate, _price) {
     // eslint-disable-next-line no-console
     console.log("reserving", _email, _room, _startDate, _endDate)
     let start = new Date()
@@ -184,6 +184,7 @@ function useMyReservations({ email }) {
       endDate: end,
       room: _room.number,
       email: _email,
+      price: _price,
       lastUpdate: serverTimestamp(),
     }
     const id = await saveReservation(newReservationWithTimestamp)

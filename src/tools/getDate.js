@@ -35,7 +35,8 @@ export function parseDate(date) {
   if (!date) return ""
   let str = ""
   try {
-    str = date.toISOString().substring(0, 10)
+    const m = moment(date)
+    str = m.toISOString().substring(0, 10)
   } catch (error) {
     console.log("fecha ilegible", date)
   }

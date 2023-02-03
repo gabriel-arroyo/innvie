@@ -175,7 +175,7 @@ function useCalendar({ type, startDate, endDate }) {
     return id
   }
 
-  async function addReservation(_email, _room, _startDate, _endDate) {
+  async function addReservation(_email, _room, _startDate, _endDate, _price) {
     // eslint-disable-next-line no-console
     console.log("reserving", _email, _room, _startDate, _endDate)
     let start = new Date()
@@ -217,8 +217,9 @@ function useCalendar({ type, startDate, endDate }) {
       type: _room.type,
       startDate: start,
       endDate: end,
-      room: _room.number,
+      number: _room.number,
       email: _email,
+      price: _price,
       lastUpdate: serverTimestamp(),
     }
     const id = await saveReservation(newReservationWithTimestamp)
