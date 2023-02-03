@@ -1,4 +1,5 @@
 export default [
+  { name: "History", align: "center" },
   { name: "ID", align: "left" },
   { name: "Tipo", align: "left" },
   { name: "Habitaciones", align: "center" },
@@ -12,5 +13,4 @@ export default [
   { name: "Check_out", align: "center" },
   { name: "Ocupante", align: "center" },
   { name: "Comentarios", align: "center" },
-  { name: "History", align: "center" },
 ]

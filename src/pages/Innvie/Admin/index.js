@@ -45,7 +45,6 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [tab, setTab] = React.useState(0)
-  const [historyFilter, setHistoryFilter] = React.useState("all")
 
   const handleChange = (event, newValue) => {
     setTab(newValue)
@@ -61,13 +60,13 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
-        <Rooms setTab={setTab} setHistoryFilter={setHistoryFilter} />
+        <Rooms setTab={setTab} />
       </TabPanel>
       <TabPanel value={tab} index={1}>
         <NewRoomType />
       </TabPanel>
       <TabPanel value={tab} index={2}>
-        <History historyFilter={historyFilter} setHistoryFilter={setHistoryFilter} />
+        <History />
       </TabPanel>
     </Box>
   )

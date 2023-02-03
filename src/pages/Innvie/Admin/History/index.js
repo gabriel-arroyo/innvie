@@ -1,6 +1,7 @@
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types"
 
+import SelectPicker from "components/Innvie/SelectPicker"
 // @mui material components
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
@@ -10,10 +11,15 @@ import MKBox from "components/MKBox"
 // import MKAvatar from "components/MKAvatar";
 import MKTypography from "components/MKTypography"
 
+import { useAtom } from "jotai"
+import historyFilterAtom from "states/historyFilter"
 // Material Kit 2 PRO React examples
 import useHistory from "api/useHistory"
 import Table from "examples/Tables/Table"
 import { useEffect, useState } from "react"
+import { Card } from "@mui/material"
+import useRoom from "api/useRoom"
+import useUser from "../../../../api/useUser"
 
 // Images
 
@@ -54,12 +60,28 @@ RoomTypeItem.propTypes = {
   subCategory: PropTypes.string.isRequired,
 }
 
-function History({ historyFilter }) {
+function History() {
   const { loading, getCompleteHistory } = useHistory()
   const [rows, setRows] = useState()
+  const [historyFilter, setHistoryFilter] = useAtom(historyFilterAtom)
+  const { getRooms } = useRoom()
+  const { getAllUsers } = useUser()
+  const [options, setOptions] = useState()
 
   useEffect(() => {
-    const allRows = []
+    const allOptions = []
+    let allRows = []
+    getRooms().then((r) => {
+      r.forEach((room) => {
+        allOptions.push(room.number)
+      })
+    })
+    getAllUsers().then((u) => {
+      u.forEach((user) => {
+        allOptions.push(user.email)
+      })
+    })
+    setOptions(allOptions)
     getCompleteHistory().then((h) => {
       h.forEach((element) => {
         const row = {
@@ -67,23 +89,63 @@ function History({ historyFilter }) {
           action: element.action,
           id: element.actionId,
           email: element.email,
+          name:
+            element.first_name && element.last_name && `${element.first_name} ${element.last_name}`,
         }
         allRows.push(row)
       })
+      if (historyFilter !== "all") {
+        allRows = allRows.filter(
+          (r) =>
+            r.id === historyFilter || r.id.toString() === historyFilter || r.email === historyFilter
+        )
+      }
       setRows(allRows)
       console.log("allrows", allRows)
     })
-  }, [loading])
+  }, [loading, historyFilter])
 
   const columns = [
     { name: "date", align: "center" },
+    { name: "name", align: "center" },
     { name: "email", align: "center" },
     { name: "action", align: "center" },
     { name: "id", align: "center" },
   ]
 
+  const handleFilterChange = (e) => {
+    console.log("🚀 ~ file: index.js:97 ~ handleFilterChange ~ e", e)
+    if (e.target.localName === "li") {
+      setHistoryFilter(e.target.innerText)
+    } else {
+      setHistoryFilter("all")
+    }
+  }
+
   return (
-    <MKBox component="section">
+    <MKBox
+      component="section"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Card
+        sx={{
+          width: "300px",
+          p: "10px",
+          mb: "20px",
+          backgroundColor: "rgba(255,255,255,0.9)",
+        }}
+      >
+        <SelectPicker
+          options={options}
+          name="type"
+          label="Nombre"
+          onChange={handleFilterChange}
+          value={historyFilter}
+        />
+      </Card>
       {historyFilter !== "all" ? (
         <MKBox pb={2}>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
@@ -100,10 +162,6 @@ function History({ historyFilter }) {
       </Container>
     </MKBox>
   )
-}
-
-History.propTypes = {
-  historyFilter: PropTypes.string.isRequired,
 }
 
 export default History

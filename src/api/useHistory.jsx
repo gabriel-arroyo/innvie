@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   collection,
   deleteDoc,
@@ -42,7 +43,7 @@ function useHistory() {
     return commentsOptions[action]
   }
 
-  async function addAction(action, room, email = "") {
+  async function addAction(action, room, email = "", fisrt_name = "", last_name = "") {
     setError(false)
     const actionId = action.includes("Type") ? room.type : room.number
     const acitonWithTimestamp = {
@@ -53,6 +54,8 @@ function useHistory() {
       type: room.type ?? "",
       category: room.category ?? "",
       email,
+      fisrt_name,
+      last_name,
     }
     try {
       const docRef = doc(collectionRef)

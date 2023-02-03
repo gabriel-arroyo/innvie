@@ -23,7 +23,7 @@ import columns from "./tableColumns"
 import db from "../firebase"
 import calendarConverter from "./classCalendar"
 
-function useTable({ rooms, types, setTab, setHistoryFilter, updateRoom }) {
+function useTable({ rooms, types, setTab, updateRoom }) {
   const calendarRef = collection(db, "calendar")
   const [cols, setCols] = useState(columns)
   const [rows, setRows] = useState()
@@ -74,15 +74,9 @@ function useTable({ rooms, types, setTab, setHistoryFilter, updateRoom }) {
           Salida: parseDate(r.endDate),
           Check_in: parseDate(r.checkin),
           Check_out: parseDate(r.checkout),
-          Ocupante: r.email ?? "",
+          Ocupante: r.first_name && r.last_name && `${r.first_name} ${r.last_name}`,
           Comentarios: r.comment,
-          History: (
-            <RoomHistoryButton
-              number={r.number}
-              setTab={setTab}
-              setHistoryFilter={setHistoryFilter}
-            />
-          ),
+          History: <RoomHistoryButton number={r.number} setTab={setTab} />,
         }))
         setRows(calculatedRows)
       })

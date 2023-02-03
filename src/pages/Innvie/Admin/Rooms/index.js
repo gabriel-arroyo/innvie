@@ -7,7 +7,7 @@ import useType from "api/useType"
 import { useEffect, useState } from "react"
 import CreateTable from "./CreateTable"
 
-function Rooms({ setTab, setHistoryFilter }) {
+function Rooms({ setTab }) {
   const { getRooms, loading, updateRoom } = useRoom()
   const { types, loading: loadingtypes } = useType()
   const [rooms, setRooms] = useState()
@@ -29,7 +29,6 @@ function Rooms({ setTab, setHistoryFilter }) {
         loading={loading && loadingtypes}
         updateRoom={updateRoom}
         setTab={setTab}
-        setHistoryFilter={setHistoryFilter}
       />
     </MKBox>
   )
@@ -37,7 +36,6 @@ function Rooms({ setTab, setHistoryFilter }) {
 
 Rooms.propTypes = {
   setTab: PropTypes.func.isRequired,
-  setHistoryFilter: PropTypes.func.isRequired,
 }
 
 export default Rooms
