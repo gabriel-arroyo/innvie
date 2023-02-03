@@ -152,7 +152,7 @@ function useType(room) {
     try {
       const docRef = doc(collectionRef, updatedType.id)
       updateDoc(docRef, updatedTypeWithTimestamp)
-      addAction("updateType", updatedType)
+      addAction({ action: "updateType", room: updatedType })
     } catch (e) {
       // eslint-disable-next-line
       console.log(e)

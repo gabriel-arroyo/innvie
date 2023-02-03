@@ -43,7 +43,7 @@ function useHistory() {
     return commentsOptions[action]
   }
 
-  async function addAction(action, room, email = "", fisrt_name = "", last_name = "") {
+  async function addAction({ action, room, admin, email = "", fisrt_name = "", last_name = "" }) {
     setError(false)
     const actionId = action.includes("Type") ? room.type : room.number
     const acitonWithTimestamp = {
@@ -56,6 +56,7 @@ function useHistory() {
       email,
       fisrt_name,
       last_name,
+      admin: admin ?? false,
     }
     try {
       const docRef = doc(collectionRef)

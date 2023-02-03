@@ -91,6 +91,7 @@ function History() {
           email: element.email,
           name:
             element.first_name && element.last_name && `${element.first_name} ${element.last_name}`,
+          admin: element.admin,
         }
         allRows.push(row)
       })
@@ -110,6 +111,7 @@ function History() {
     { name: "name", align: "center" },
     { name: "email", align: "center" },
     { name: "action", align: "center" },
+    { name: "admin", align: "center" },
     { name: "id", align: "center" },
   ]
 
@@ -146,15 +148,6 @@ function History() {
           value={historyFilter}
         />
       </Card>
-      {historyFilter !== "all" ? (
-        <MKBox pb={2}>
-          <Container sx={{ display: "flex", justifyContent: "center" }}>
-            <MKTypography color="white" variant="h5" fontWeight="medium">
-              {historyFilter}
-            </MKTypography>
-          </Container>
-        </MKBox>
-      ) : null}
       <Container>
         <Grid container item xs={12} lg={10} md={8} mx="auto">
           <Table columns={columns} rows={rows} />

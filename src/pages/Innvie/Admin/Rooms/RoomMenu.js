@@ -36,16 +36,16 @@ function RoomMenu({ room, updateRoom }) {
     maintenance: "info",
   }
   const handleAvailable = () => {
-    updateRoom({ ...room, status: "available" })
+    updateRoom({ ...room, status: "available" }, true)
   }
   const handleOcupied = () => {
-    updateRoom({ ...room, status: "occupied" })
+    updateRoom({ ...room, status: "occupied" }, true)
   }
   const handleDirty = () => {
-    updateRoom({ ...room, status: "dirty" })
+    updateRoom({ ...room, status: "dirty" }, true)
   }
   const handleMaintenance = () => {
-    updateRoom({ ...room, status: "maintenance" })
+    updateRoom({ ...room, status: "maintenance" }, true)
   }
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">

@@ -140,7 +140,7 @@ function useRoom() {
       setError(e)
       return false
     }
-    addAction("newRoom", newRoom)
+    addAction({ action: "newRoom", room: newRoom })
     return true
   }
 
@@ -154,7 +154,7 @@ function useRoom() {
       console.error(e)
       setError(e)
     }
-    addAction("deleteRoom", { number: id })
+    addAction({ action: "deleteRoom", room: { number: id } })
   }
 
   async function deleteAllRooms() {
@@ -171,7 +171,7 @@ function useRoom() {
       console.error(e)
       setError(e)
     }
-    addAction("deleteRoom", { number: "all" })
+    addAction({ action: "deleteRoom", room: { number: "all" } })
   }
 
   async function getRoomByNumber(roomNumber) {
@@ -190,7 +190,7 @@ function useRoom() {
     return roomData
   }
 
-  async function updateRoom(updatedRoom) {
+  async function updateRoom(updatedRoom, admin = false) {
     setError(false)
     setLoading(true)
     const roomToUpdate = await getRoomByNumber(updatedRoom.number)
@@ -212,7 +212,7 @@ function useRoom() {
       console.error("error:", e)
       setError(e)
     }
-    addAction("updateRoom", updatedRoom)
+    addAction({ action: "updateRoom", room: updatedRoom, admin })
     setLoading(false)
   }
 
@@ -238,7 +238,7 @@ function useRoom() {
       console.error("error:", e)
       setError(e)
     }
-    addAction("updateRoom", updatedRoomWithTimestamp)
+    addAction({ action: "updateRoom", room: updatedRoomWithTimestamp })
     setLoading(false)
   }
 
@@ -256,7 +256,7 @@ function useRoom() {
       console.error("error:", e)
       setError(e)
     }
-    addAction("deleteRoom", { number: roomNumber })
+    addAction({ action: "deleteRoom", room: { number: roomNumber } })
   }
 
   async function deleteRoomByType(roomType) {
@@ -273,7 +273,7 @@ function useRoom() {
       console.error("error:", e)
       setError(e)
     }
-    addAction("deleteRoom", { type: roomType })
+    addAction({ action: "deleteRoom", room: { type: roomType } })
   }
 
   async function getRooms() {
