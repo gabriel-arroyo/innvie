@@ -105,7 +105,7 @@ function useCalendar({ type, startDate, endDate }) {
     const today = new Date()
     const q = query(
       collectionRef,
-      where("type", "==", _type ?? type),
+      where("type", "==", _type.type ?? type.type),
       where("endDate", ">=", today)
     )
     const querySnapshot = await getDocs(q)
@@ -124,7 +124,7 @@ function useCalendar({ type, startDate, endDate }) {
       }
     })
     const roomsfound = await getRoomsNotInArray(
-      _type ?? type,
+      _type.type ?? type.type,
       results.map((r) => r.room)
     )
     setAvailable(roomsfound.length > 0)

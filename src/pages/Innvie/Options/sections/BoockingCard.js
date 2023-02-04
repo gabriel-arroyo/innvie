@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
 =========================================================
 * Otis Kit PRO - v2.0.1
@@ -26,20 +27,20 @@ import Card from "@mui/material/Card"
 
 // Otis Kit PRO components
 import { v4 as uuid } from "uuid"
-// import useCalendar from "api/useCalendar";
+import useCalendar from "api/useCalendar"
 import MKBox from "components/MKBox"
 import MKButton from "components/MKButton"
 import MKTypography from "components/MKTypography"
 import { useAtom } from "jotai"
-// import { reservedEndDate, reservedStartDate } from "states/reservedDate";
+import { reservedEndDate, reservedStartDate } from "states/reservedDate"
 import selectedPrice from "states/selectedPrice"
 import { selectedType, maxOccupantsInType } from "states/selectedType"
 import SwipeImages from "./SwipeImages"
 
 function BookingCard({ type, action }) {
-  // const [startDate] = useAtom(reservedStartDate);
-  // const [endDate] = useAtom(reservedEndDate);
-  // const { available } = useCalendar({ type, startDate, endDate });
+  const [startDate] = useAtom(reservedStartDate)
+  const [endDate] = useAtom(reservedEndDate)
+  const { available, getAvailability } = useCalendar({ type, startDate, endDate })
   const [, setType] = useAtom(selectedType)
   const [, setMax] = useAtom(maxOccupantsInType)
   const [, setPrice] = useAtom(selectedPrice)
@@ -56,6 +57,8 @@ function BookingCard({ type, action }) {
   }
 
   useEffect(() => {
+    getAvailability(type, startDate, endDate)
+    console.log(available)
     let tempData = []
     const copyOfBeds = Object.entries(type.beds)
     const bedsDifferentToZero = copyOfBeds.filter((t) => Number(t[1]) !== 0)
@@ -127,7 +130,7 @@ function BookingCard({ type, action }) {
           <MKButton
             variant="gradient"
             color="error"
-            disabled={Math.random() >= 0.5}
+            disabled={!available}
             sx={{ height: "100%" }}
             onClick={handleReserve}
           >
