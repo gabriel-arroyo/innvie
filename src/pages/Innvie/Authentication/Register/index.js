@@ -51,7 +51,7 @@ function Register() {
     })
   }
   return (
-    <Card sx={{ width: "700px" }}>
+    <Card sx={{ width: { sm: "300px", lg: "700px", xs: "250px" } }}>
       <MKBox
         variant="gradient"
         bgColor="primary"
@@ -140,7 +140,12 @@ function Register() {
               )}
             </Grid>
           </Grid>
-          <MKBox display="flex" alignItems="center" ml={-1}>
+          <MKBox
+            display="flex"
+            alignItems="center"
+            ml={-1}
+            flexDirection={{ lg: "row", xs: "column" }}
+          >
             <Checkbox checked={checked} onChange={handleChange} />
             <MKTypography
               variant="button"
