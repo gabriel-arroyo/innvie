@@ -24,6 +24,7 @@ import MKBox from "components/MKBox"
 // import MKPagination from "components/MKPagination";
 
 // Images
+import { v4 } from "uuid"
 import RoomType from "./RoomType"
 
 function Places() {
@@ -33,7 +34,7 @@ function Places() {
       <Container>
         <Grid container spacing={3} sx={{ mt: 3 }}>
           {types.map((typeObject) => (
-            <RoomType typeObject={typeObject} />
+            <RoomType key={v4()} typeObject={typeObject} />
           ))}
         </Grid>
       </Container>

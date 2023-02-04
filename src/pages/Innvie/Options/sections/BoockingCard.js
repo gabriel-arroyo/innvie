@@ -85,7 +85,14 @@ function BookingCard({ type, action }) {
       <MKBox position="relative" borderRadius="lg" mx={2} mt={-3} mb={5} height="100%">
         <SwipeImages type={type} photos={photos} />
       </MKBox>
-      <MKBox p={3} mt={-8} height="100%">
+      <MKBox
+        p={3}
+        mt="-200px"
+        height="400px"
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+      >
         {type.accessories.length > 0 && (
           <MKTypography
             display="block"

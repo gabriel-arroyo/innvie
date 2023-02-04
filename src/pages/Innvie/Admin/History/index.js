@@ -91,7 +91,7 @@ function History() {
           email: element.email,
           name:
             element.first_name && element.last_name && `${element.first_name} ${element.last_name}`,
-          admin: element.admin,
+          admin: element.admin ? "admin" : "",
         }
         allRows.push(row)
       })

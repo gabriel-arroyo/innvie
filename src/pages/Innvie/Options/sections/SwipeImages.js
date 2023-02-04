@@ -33,7 +33,7 @@ function TypeImage({ type, photo }) {
       position="relative"
       zIndex={1}
       height="220px"
-      sx={{ aspectRatio: "1 / 1" }}
+      style={{ aspectRatio: "1/1" }}
     />
   )
 }
