@@ -53,8 +53,8 @@ function Confirmation() {
           textAlign="center"
           fullwidth
         >
-          Se le proporcionarán instrucciones detalladas para acceder a su habitación a través de su
-          correo electrónico.
+          Recibirá en breve un correo electrónico con la instrucción detallada de acceso a la
+          habitación a su llegada.
         </MKTypography>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>
