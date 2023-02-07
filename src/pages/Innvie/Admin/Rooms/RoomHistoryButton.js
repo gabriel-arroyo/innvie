@@ -6,7 +6,7 @@ import historyFilterAtom from "states/historyFilter"
 export default function RoomHistoryButton({ number, setTab }) {
   const [, setHistoryFilter] = useAtom(historyFilterAtom)
   const filter = () => {
-    setTab(2)
+    setTab(3)
     setHistoryFilter(number)
   }
   return <Button onClick={filter}>History</Button>

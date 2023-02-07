@@ -1,0 +1,18 @@
+.react-calendar-timeline .rct-header-root {
+  background: rgb(13, 40, 60);
+}
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.custom-item {
+  color: white;
+  border: 1px solid rgb(13, 40, 60);
+  border-radius: 5px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

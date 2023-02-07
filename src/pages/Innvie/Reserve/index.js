@@ -37,6 +37,7 @@ import taxes from "constants/taxes"
 import roundTo from "tools/round"
 import { sendEmailConfirmation } from "api/mail"
 import { getShortDate } from "tools/getDate"
+import MKButton from "components/MKButton"
 import BlancLayout from "../Layouts/BlancLayout"
 import LoginModal from "../Authentication/Login/LoginModal"
 import PayButton from "./PayButton"
@@ -49,7 +50,7 @@ function Reserve() {
   const [max] = useAtom(maxOccupantsInType)
   const [price] = useAtom(selectedPrice)
   const navigate = useNavigate()
-  const { room, addReservation } = useCalendar({ type, startDate, endDate })
+  const { room, addReservation, getAvailableRoom } = useCalendar({ type, startDate, endDate })
   const [terms, setTerms] = useState(false)
   const { currentUser: user, logged, getAndUpdateUser, checkEmail, mailExists } = useUser()
   const [formName, setFormName] = useState("")
@@ -111,8 +112,12 @@ function Reserve() {
   }
 
   const onApprove = async (data, actions) => {
-    const details = await actions.order.capture()
-    console.log(`Transaction ${details.status} by ${details.payer.name.given_name}`)
+    if (actions) {
+      const details = await actions.order.capture()
+      console.log(`Transaction ${details.status} by ${details.payer.name.given_name}`)
+    }
+
+    const selectedRoom = await getAvailableRoom(type, startDate, endDate)
     console.log("selected room", room?.number ?? "ND")
     const newUser = {
       first_name: formName ?? "",
@@ -126,7 +131,8 @@ function Reserve() {
       license: formLicense ?? "",
     }
     await getAndUpdateUser(newUser)
-    const code = await addReservation(formEmail, room, startDate, endDate, price)
+    const code = await addReservation(formEmail, selectedRoom, startDate, endDate, price)
+    if (!code) return
     await sendEmailConfirmation(formName, formEmail, getShortDate(startDate), getShortDate(endDate))
     setTimeout(() => {
       navigate(`/confirmation/${code}`)
@@ -418,6 +424,7 @@ function Reserve() {
               ) : (
                 <MKBox mt={3}>
                   <PayButton price={price * days * taxes + price * days} onApprove={onApprove} />
+                  <MKButton onClick={onApprove}>on aprobe</MKButton>
                 </MKBox>
               )}
             </MKBox>

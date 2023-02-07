@@ -4,7 +4,8 @@ const { serverTimestamp } = require("firebase/firestore")
 class RoomNumber {
   constructor(id, title) {
     this.id = id
-    this.title = `${id}-${title}`
+    this.rightTitle = title
+    this.title = id
   }
 
   toString() {
@@ -15,7 +16,7 @@ class RoomNumber {
 const roomNumberConverter = {
   toFirestore: (calendar) => ({
     number: calendar.id,
-    type: calendar.title,
+    type: calendar.type,
     lastUpdate: serverTimestamp(),
   }),
   fromFirestore: (snapShot, options) => {

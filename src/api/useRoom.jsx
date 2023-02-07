@@ -94,7 +94,8 @@ function useRoom() {
     return roomsData
   }
 
-  async function getRoomsNotInArray(type, array) {
+  async function getRoomsNotInArray(_type, array) {
+    const type = _type?.type || _type
     setError(false)
     setLoading(true)
     const roomsData = []

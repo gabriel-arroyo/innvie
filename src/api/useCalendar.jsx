@@ -12,12 +12,14 @@ import {
 } from "firebase/firestore"
 import db from "../firebase"
 import useRoom from "./useRoom"
+import useUser from "./useUser"
 
 function useCalendar({ type, startDate, endDate }) {
   const [calendar, setCalendar] = useState([])
   const [calendarError, setError] = useState(false)
   const collectionRef = collection(db, "calendar")
   const { roomsAvailable, getRoomsNotInArray, updateRoomStatus } = useRoom()
+  const { getUserByEmail } = useUser()
   const [available, setAvailable] = useState(false)
   const [room, setRoom] = useState({})
 
@@ -97,17 +99,14 @@ function useCalendar({ type, startDate, endDate }) {
   }
 
   async function getAvailability(_type, _startDate, _endDate) {
+    const typeString = _type?.type || _type
     const range = {
       startDate: new Date(_startDate ?? startDate),
       endDate: new Date(_endDate ?? endDate),
     }
     const results = []
     const today = new Date()
-    const q = query(
-      collectionRef,
-      where("type", "==", _type.type ?? type.type),
-      where("endDate", ">=", today)
-    )
+    const q = query(collectionRef, where("type", "==", typeString), where("endDate", ">=", today))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((d) => {
       const dateRange = {
@@ -124,7 +123,7 @@ function useCalendar({ type, startDate, endDate }) {
       }
     })
     const roomsfound = await getRoomsNotInArray(
-      _type.type ?? type.type,
+      typeString,
       results.map((r) => r.room)
     )
     setAvailable(roomsfound.length > 0)
@@ -181,7 +180,7 @@ function useCalendar({ type, startDate, endDate }) {
     let start = new Date()
     let end = new Date()
     try {
-      start = new Date(`${_startDate}, 14:45:00`)
+      start = new Date(`${_startDate}, 15:00:00`)
       end = new Date(`${_endDate}, 11:30:00`)
       if (start > end) {
         setError("Start date must be before end date")
@@ -192,7 +191,7 @@ function useCalendar({ type, startDate, endDate }) {
       return null
     }
 
-    if (!_room) {
+    if (!_room || Object.keys(_room).length === 0 || Array.isArray(_room)) {
       // eslint-disable-next-line no-console
       console.log("no room")
       setError("No room")
@@ -212,6 +211,8 @@ function useCalendar({ type, startDate, endDate }) {
       return null
     }
 
+    const foundUser = await getUserByEmail(_email)
+
     setError(false)
     const newReservationWithTimestamp = {
       type: _room.type,
@@ -220,6 +221,8 @@ function useCalendar({ type, startDate, endDate }) {
       number: _room.number,
       email: _email,
       price: _price,
+      first_name: foundUser.first_name,
+      last_name: foundUser.last_name,
       lastUpdate: serverTimestamp(),
     }
     const id = await saveReservation(newReservationWithTimestamp)

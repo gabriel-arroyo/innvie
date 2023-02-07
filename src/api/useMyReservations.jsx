@@ -146,7 +146,7 @@ function useMyReservations({ email }) {
     let start = new Date()
     let end = new Date()
     try {
-      start = new Date(`${_startDate}, 14:45:00`)
+      start = new Date(`${_startDate}, 15:00:00`)
       end = new Date(`${_endDate}, 11:30:00`)
       if (start > end) {
         setError("Start date must be before end date")

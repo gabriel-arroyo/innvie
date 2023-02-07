@@ -2,6 +2,7 @@ import Box from "@mui/material/Box"
 import Tab from "@mui/material/Tab"
 import Tabs from "@mui/material/Tabs"
 import Typography from "@mui/material/Typography"
+import Calendar from "components/Innvie/Calendar"
 import PropTypes from "prop-types"
 import * as React from "react"
 import History from "./History"
@@ -54,18 +55,22 @@ export default function BasicTabs() {
     <Box sx={{ width: "90%", paddingTop: "230px", margin: "auto" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Habitaciones" {...a11yProps(0)} />
-          <Tab label="Tipos de habitación" {...a11yProps(1)} />
-          <Tab label="Historial" {...a11yProps(2)} />
+          <Tab label="Habitaciones" {...a11yProps(1)} />
+          <Tab label="Calendario" {...a11yProps(2)} />
+          <Tab label="Tipos de habitación" {...a11yProps(3)} />
+          <Tab label="Historial" {...a11yProps(4)} />
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
         <Rooms setTab={setTab} />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <NewRoomType />
+        <Calendar />
       </TabPanel>
       <TabPanel value={tab} index={2}>
+        <NewRoomType />
+      </TabPanel>
+      <TabPanel value={tab} index={3}>
         <History />
       </TabPanel>
     </Box>
