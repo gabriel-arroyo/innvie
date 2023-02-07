@@ -50,7 +50,7 @@ function useRoom() {
       numbers.push(room.data().number)
     })
     console.log("🚀 ~ file: useRoom.jsx:49 ~ querySnapshot.forEach ~ numbers", numbers)
-    minNumber = getMinNotUsed(numbers)
+    minNumber = getMinNotUsed(numbers) > 0 ? getMinNotUsed(numbers) : 1
     setNextRoomNumber(minNumber)
     return minNumber
   }

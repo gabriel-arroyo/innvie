@@ -2,7 +2,6 @@
 import {
   Alert,
   Card,
-  Checkbox,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -12,6 +11,7 @@ import {
   OutlinedInput,
   Switch,
 } from "@mui/material"
+import useAccesories from "api/useAccesories"
 import useRoom from "api/useRoom"
 import useType from "api/useType"
 import SelectPicker from "components/Innvie/SelectPicker"
@@ -23,6 +23,7 @@ import RoomList from "components/RoomList"
 import SectionTitle from "components/SectionTitle"
 import PropTypes from "prop-types"
 import { useEffect, useState } from "react"
+import Accesory from "./accesory"
 import ImageSwipe from "./imageswipe"
 
 function NewEditSwitch({ editSwitch, handleChangeNew }) {
@@ -58,6 +59,7 @@ function NewRoomType({ room }) {
     getRoomsByType,
     deleteRoomByType,
     nextRoomNumber,
+    getNewRoomNumber,
   } = useRoom()
   const {
     error,
@@ -80,6 +82,8 @@ function NewRoomType({ room }) {
   const [editSwitch, setEditSwitch] = useState(true)
   const [roomNumber, setRoomNumber] = useState(nextRoomNumber)
   const [roomComment, setRoomComment] = useState("")
+  const [accesoryTitle, setAccesoryTitle] = useState("")
+  const { addAccesory, accesories, deleteAccesoryByName } = useAccesories()
 
   useEffect(() => {
     setRoomNumber(nextRoomNumber)
@@ -131,8 +135,20 @@ function NewRoomType({ room }) {
   }
 
   const handleDeleteRoom = async (rn) => {
-    await deleteRoomByNumber(rn.toString())
+    console.log("🚀 ~ file: index.js:134 ~ handleDeleteRoom ~ rn", rn)
+    await deleteRoomByNumber(rn)
     await getRoomsByType(cacheRoom.type)
+    setRoomNumber((r) => r - 1)
+    getNewRoomNumber()
+  }
+
+  const handleChangeAccesoryName = (e) => {
+    const { value } = e.target
+    if (!value) {
+      setAccesoryTitle("")
+      return
+    }
+    setAccesoryTitle(value)
   }
 
   const setAccesory = async (e, accesory) => {
@@ -187,7 +203,19 @@ function NewRoomType({ room }) {
         e.target.reset()
       }
     })
+    getNewRoomNumber()
     setRoomNumber((r) => r + 1)
+  }
+
+  const handleAddAccesory = () => {
+    console.log("add accesory")
+    const name = accesoryTitle.replace(" ", "_").toLowerCase()
+    const accesory = {
+      name,
+      title: accesoryTitle,
+    }
+    addAccesory(accesory)
+    setAccesoryTitle("")
   }
 
   return (
@@ -340,116 +368,26 @@ function NewRoomType({ room }) {
           </Grid>
           <Grid item xs={12} md={6} xl={6}>
             <MKBox mb={2}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("microwave")}
-                    onChange={(e) => setAccesory(e, "microwave")}
-                  />
-                }
-                name="microwave"
-                label="Microwave"
+              {accesories.map((item) => (
+                <Accesory
+                  item={item}
+                  cacheRoom={cacheRoom}
+                  setAccesory={setAccesory}
+                  deleteAccesoryByName={deleteAccesoryByName}
+                />
+              ))}
+            </MKBox>
+            <MKBox mb={2}>
+              <MKInput
+                onChange={handleChangeAccesoryName}
+                type="text"
+                name="accesory"
+                label="Accesorio"
+                value={accesoryTitle}
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("desk")}
-                    onChange={(e) => setAccesory(e, "desk")}
-                  />
-                }
-                name="desk"
-                label="Desk"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("tv")}
-                    onChange={(e) => setAccesory(e, "tv")}
-                  />
-                }
-                name="tv"
-                label="TV"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("dish")}
-                    onChange={(e) => setAccesory(e, "dish")}
-                  />
-                }
-                name="dish"
-                label="Dish"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("wifi")}
-                    onChange={(e) => setAccesory(e, "wifi")}
-                  />
-                }
-                name="wifi"
-                label="WiFi"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("minifridge")}
-                    onChange={(e) => setAccesory(e, "minifridge")}
-                  />
-                }
-                name="minifridge"
-                label="You can ask for a mini fridge"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("fullbath")}
-                    onChange={(e) => setAccesory(e, "fullbath")}
-                  />
-                }
-                name="fullbath"
-                label="Full bath"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("stovetop")}
-                    onChange={(e) => setAccesory(e, "stovetop")}
-                  />
-                }
-                name="stovetop"
-                label="Stovetop"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("diningtable")}
-                    onChange={(e) => setAccesory(e, "diningtable")}
-                  />
-                }
-                name="diningtable"
-                label="Dining Table"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("fridge")}
-                    onChange={(e) => setAccesory(e, "fridge")}
-                  />
-                }
-                name="fridge"
-                label="Fridge"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={cacheRoom?.accessories?.includes("sink")}
-                    onChange={(e) => setAccesory(e, "sink")}
-                  />
-                }
-                name="sink"
-                label="Sink"
-              />
+              <MKButton variant="contained" color="primary" onClick={handleAddAccesory}>
+                Añadir
+              </MKButton>
             </MKBox>
           </Grid>
           <Grid item xs={12}>

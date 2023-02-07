@@ -45,7 +45,8 @@ function useHistory() {
 
   async function addAction({ action, room, admin, email = "", fisrt_name = "", last_name = "" }) {
     setError(false)
-    const actionId = action.includes("Type") ? room.type : room.number
+    const actionId =
+      action.includes("Type") || action.includes("Accesory") ? room.type : room.number
     const acitonWithTimestamp = {
       action: createActionName(action, room),
       lastUpdate: serverTimestamp(),

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types"
 
@@ -82,6 +83,15 @@ function History() {
       })
     })
     setOptions(allOptions)
+    const getName = ({ first_name, last_name, admin }) => {
+      if (first_name && last_name) {
+        return `${first_name} ${last_name}`
+      }
+      if (admin) {
+        return "admin"
+      }
+      return ""
+    }
     getCompleteHistory().then((h) => {
       h.forEach((element) => {
         const row = {
@@ -89,9 +99,7 @@ function History() {
           action: element.action,
           id: element.actionId,
           email: element.email,
-          name:
-            element.first_name && element.last_name && `${element.first_name} ${element.last_name}`,
-          admin: element.admin ? "admin" : "",
+          name: getName(element),
         }
         allRows.push(row)
       })
@@ -111,7 +119,6 @@ function History() {
     { name: "name", align: "center" },
     { name: "email", align: "center" },
     { name: "action", align: "center" },
-    { name: "admin", align: "center" },
     { name: "id", align: "center" },
   ]
 
