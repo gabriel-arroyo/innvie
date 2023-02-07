@@ -29,12 +29,16 @@ import CloseIcon from "@mui/icons-material/Close"
 import MKBox from "components/MKBox"
 import MKButton from "components/MKButton"
 import MKTypography from "components/MKTypography"
-import { parseDate, getDaysDifference, dateIsPast } from "tools/getDate"
+import { parseDate, getDaysDifference, dateIsPast, getShortDate } from "tools/getDate"
 import { useState, useReducer, useEffect } from "react"
 import taxes from "constants/taxes"
 import calculateCost from "tools/calculateCost"
 import roundTo from "tools/round"
 import useType from "api/useType"
+import PayButton from "pages/Innvie/Reserve/PayButton"
+import useCalendar from "api/useCalendar"
+import { Navigate } from "react-router-dom"
+import { sendEmailConfirmation } from "api/mail"
 import Comparator from "./comparator"
 
 function newReservationReducer(state, action) {
@@ -127,6 +131,12 @@ function ReserveModal({ event }) {
   const toggleModal = () => setShow(!show)
   const startIsPast = dateIsPast(event.startDate)
   const endIsPast = dateIsPast(event.endDate)
+  const [accept, setAccept] = useState(false)
+  const { room, addReservation, getAvailableRoom } = useCalendar({
+    type: event.type,
+    startDate: event.startDate,
+    endDate: event.endDate,
+  })
 
   const days = getDaysDifference(event.startDate, event.endDate)
   const initialState = {
@@ -176,6 +186,41 @@ function ReserveModal({ event }) {
     if (!selectedType) return
     console.log(selectedType)
     dispatch({ type: "update_type", payload: selectedType })
+  }
+
+  const handleAccept = () => {
+    setAccept(true)
+  }
+
+  const onApprove = async (data, actions) => {
+    if (actions) {
+      const details = await actions.order.capture()
+      console.log(`Transaction ${details.status} by ${details.payer.name.given_name}`)
+    }
+
+    const selectedRoom = await getAvailableRoom(
+      state.newReservation.type,
+      state.newReservation.startDate,
+      state.newReservation.endDate
+    )
+    console.log("selected room", room?.number ?? "ND")
+    const code = await addReservation(
+      event.email,
+      selectedRoom,
+      event.startDate,
+      event.endDate,
+      event.price
+    )
+    if (!code) return
+    await sendEmailConfirmation(
+      event.first_name,
+      event.email,
+      getShortDate(event.startDate),
+      getShortDate(event.endDate)
+    )
+    setTimeout(() => {
+      Navigate(`/confirmation/${code}`)
+    }, 1000)
   }
 
   return (
@@ -253,13 +298,29 @@ function ReserveModal({ event }) {
                 </MKTypography>
               </MKBox>
               <Divider sx={{ my: 0 }} />
-              <MKBox display="flex" justifyContent="space-between" p={1.5}>
-                <MKButton variant="gradient" color="dark" onClick={toggleModal}>
-                  Cerrar
-                </MKButton>
-                <MKButton variant="gradient" color="error" disabled={state.equal}>
-                  Aceptar cambios
-                </MKButton>
+              <MKBox display="flex" flexDirection="column" justifyContent="center" p={1.5}>
+                <MKBox display="flex" justifyContent="space-between" p={1.5}>
+                  <MKButton variant="gradient" color="dark" onClick={toggleModal}>
+                    Cerrar
+                  </MKButton>
+                  <MKButton
+                    onClick={handleAccept}
+                    variant="gradient"
+                    color="error"
+                    disabled={state.equal}
+                  >
+                    Aceptar cambios
+                  </MKButton>
+                </MKBox>
+                {accept && (
+                  <MKBox p={2} mx="auto" alginItems="center">
+                    <PayButton
+                      price={(state.newReservation.cost - state.prevReservation.cost, 2)}
+                      onApprove={onApprove}
+                    />
+                    <MKButton onClick={onApprove}>Approve</MKButton>
+                  </MKBox>
+                )}
               </MKBox>
             </MKBox>
           </Slide>
