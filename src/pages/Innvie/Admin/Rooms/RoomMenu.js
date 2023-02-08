@@ -40,7 +40,7 @@ function RoomMenu({ room, updateRoom }) {
     setOption("available")
     toggleModal()
   }
-  const handleOcupied = () => {
+  const handleOccupied = () => {
     setOption("occupied")
     toggleModal()
   }
@@ -79,11 +79,11 @@ function RoomMenu({ room, updateRoom }) {
               <MenuItem
                 onClick={(e) => {
                   e.preventDefault()
-                  handleOcupied()
+                  handleOccupied()
                   popupState.close()
                 }}
               >
-                Ocupied
+                Occupied
               </MenuItem>
               <MenuItem
                 onClick={(e) => {

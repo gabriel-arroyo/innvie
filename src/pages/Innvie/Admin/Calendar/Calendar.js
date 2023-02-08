@@ -23,6 +23,10 @@ function Calendar() {
   const { loading, items, groups, getCalendar, updateCalendarEntry, filterItems } =
     useFormatedCalendar()
   const [tooltip, setTooltip] = useState("")
+  const lowLimit = moment().startOf("week")
+  const highLimit = moment().endOf("week")
+  const [startDate, setStartDate] = useState(lowLimit)
+  const [endDate, setEndDate] = useState(highLimit)
 
   const itemIntersects = (item, start, end) => {
     const itemStart = moment(item.start_time)
@@ -173,15 +177,23 @@ function Calendar() {
   return (
     <MKBox mx={{ lg: 4, sm: 0 }}>
       <Card>
-        <CalendarFilters filterItems={filterItems} groups={groups} items={items} />
+        <CalendarFilters
+          filterItems={filterItems}
+          groups={groups}
+          items={items}
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+        />
         {!loading && items && groups ? (
           <Timeline
             groups={groups}
             items={items}
             canMove
             canResize="both"
-            defaultTimeStart={moment().add(-2, "day")}
-            defaultTimeEnd={moment().add(2, "day")}
+            // defaultTimeStart={moment().add(-2, "day")}
+            // defaultTimeEnd={moment().add(2, "day")}
             onItemClick={onItemClick}
             onItemSelect={onItemClick}
             sidebarWidth={50}
@@ -193,6 +205,10 @@ function Calendar() {
             onItemMove={handleItemMove}
             onItemDrag={handleItemDrag}
             onItemResize={handleItemResize}
+            defaultTimeStart={lowLimit}
+            defaultTimeEnd={highLimit}
+            visibleTimeStart={startDate}
+            visibleTimeEnd={endDate}
           >
             <InfoLabel tooltip={tooltip} />
             <TodayMarker />

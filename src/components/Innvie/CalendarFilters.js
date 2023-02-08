@@ -5,8 +5,18 @@ import { Card, Checkbox, FormControlLabel, FormGroup } from "@mui/material"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 import React, { useState } from "react"
+import MKDatePicker from "components/MKDatePicker"
+import moment from "moment/moment"
 
-function CalendarFilters({ filterItems, groups, items }) {
+function CalendarFilters({
+  filterItems,
+  groups,
+  items,
+  startDate,
+  endDate,
+  setStartDate,
+  setEndDate,
+}) {
   console.log("🚀 ~ file: CalendarFilters.js:8 ~ CalendarFilters ~ items", items)
   const gropusIds = groups.map(({ id }) => {
     const label = `Room: ${id}`
@@ -133,7 +143,12 @@ function CalendarFilters({ filterItems, groups, items }) {
     if (newValue.id) setFilterText(newValue.id)
     addText(newValue.id)
   }
-
+  const onChangeDate = (e) => {
+    const [start, end] = e
+    if (!start || !end) return
+    setStartDate(moment(start))
+    setEndDate(moment(end))
+  }
   return (
     <Card
       sx={{
@@ -144,13 +159,36 @@ function CalendarFilters({ filterItems, groups, items }) {
         alignItems: "center",
       }}
     >
+      <MKDatePicker
+        type="date"
+        options={{
+          mode: "range",
+          defaultDate: [
+            moment(startDate).format("YYYY-MM-DD"),
+            moment(endDate).format("YYYY-MM-DD"),
+          ],
+          minDate: "2022-02-03",
+          maxDate: "2024-03-03",
+        }}
+        variant="standard"
+        placeholder="Please select date"
+        fullWidth
+        onChange={onChangeDate}
+      />
       <Autocomplete
         onChange={(e, newValue) => handleFilterChange(newValue)}
         disablePortal
         inputValue={filterText}
         id="combo-box-demo"
         options={Array.from(options)}
-        sx={{ width: { lg: 300, md: 200, sm: 100 }, zIndex: 3000, marginRight: "50px" }}
+        sx={{
+          width: { lg: 300, md: 200, sm: 200, xs: 200 },
+          zIndex: 3000,
+          marginRight: "30px",
+          marginLeft: "30px",
+          marginTop: "20px",
+          marginBottom: "20px",
+        }}
         renderInput={(params) => <TextField {...params} label="Filter" />}
       />
       <FormGroup sx={{ display: "flex", flexDirection: "row" }}>

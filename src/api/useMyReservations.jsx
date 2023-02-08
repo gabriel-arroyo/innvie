@@ -188,7 +188,7 @@ function useMyReservations({ email }) {
       lastUpdate: serverTimestamp(),
     }
     const id = await saveReservation(newReservationWithTimestamp)
-    await updateRoomStatus(_room.number, "ocuppied")
+    await updateRoomStatus(_room.number, "occupied")
     return id
   }
 
