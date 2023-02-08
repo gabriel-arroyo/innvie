@@ -18,28 +18,6 @@ export const routes = [
     route: "/authentication/checkin",
     component: <Checkin />,
   },
-  // {
-  //   name: "Blog",
-  //   icon: <Icon>book</Icon>,
-  //   route: "/authentication/sign-in/basic",
-  //   component: <MyReservations />,
-  // },
-  // {
-  //   name: "Login",
-  //   icon: <Icon>person</Icon>,
-  //   collapse: [
-  //     {
-  //       name: "Login",
-  //       route: "/authentication/sign-in/basic",
-  //       component: <MyReservations />,
-  //     },
-  //     {
-  //       name: "Register",
-  //       route: "/authentication/sign-up/cover",
-  //       component: <MyReservations />,
-  //     },
-  //   ],
-  // },
   {
     name: "Ingresar",
     icon: <Icon>person</Icon>,
@@ -53,6 +31,22 @@ export const routes = [
         name: "Registrarse",
         route: "/authentication/register",
         component: <Register />,
+      },
+    ],
+  },
+  {
+    name: "Language",
+    icon: <Icon>language</Icon>,
+    collapse: [
+      {
+        name: "English",
+        route: "/",
+        language: "english",
+      },
+      {
+        name: "Español",
+        route: "/es",
+        language: "spanish",
       },
     ],
   },
@@ -93,6 +87,22 @@ export const adminRoutes = [
       },
     ],
   },
+  {
+    name: "Language",
+    icon: <Icon>language</Icon>,
+    collapse: [
+      {
+        name: "English",
+        route: "/",
+        language: "english",
+      },
+      {
+        name: "Español",
+        route: "/es",
+        language: "spanish",
+      },
+    ],
+  },
 ]
 
 export const mobileLoggedRoutes = [
@@ -118,5 +128,21 @@ export const mobileLoggedRoutes = [
     name: "Salir",
     route: "/authentication",
     component: <Login />,
+  },
+  {
+    name: "Language",
+    icon: <Icon>language</Icon>,
+    collapse: [
+      {
+        name: "English",
+        route: "/",
+        language: "english",
+      },
+      {
+        name: "Español",
+        route: "/es",
+        language: "spanish",
+      },
+    ],
   },
 ]
