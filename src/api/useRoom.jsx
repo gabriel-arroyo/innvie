@@ -109,8 +109,9 @@ function useRoom() {
       return null
     }
     querySnapshot.forEach((room) => {
-      if (room.data().type === type && !array.includes(room.data().number)) {
-        roomsData.push({ ...room.data(), id: room.id })
+      const thisRoom = room.data()
+      if (thisRoom.type === type && !array.includes(thisRoom.number)) {
+        roomsData.push({ ...thisRoom, id: room.id })
       }
     })
     setRoomsAvailable(roomsData)

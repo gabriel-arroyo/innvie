@@ -14,38 +14,24 @@ import { useState } from "react"
 import MKTypography from "components/MKTypography"
 import MKButton from "components/MKButton"
 
-function RoomState({ state }) {
-  const states = {
-    available: "success",
-    occupied: "warning",
-    dirty: "error",
-    maintenance: "info",
-  }
-  return (
-    <MKBadge
-      component={Button}
-      variant="contained"
-      badgeContent={state}
-      color={states[state]}
-      size="xs"
-      container
-    />
-  )
-}
-
-RoomState.propTypes = {
-  state: PropTypes.string.isRequired,
-}
-
 function RoomMenu({ room, updateRoom }) {
   const [show, setShow] = useState(false)
   const toggleModal = () => setShow(!show)
   const [option, setOption] = useState(room.status)
-  const states = {
-    available: "success",
-    occupied: "error",
-    dirty: "warning",
-    maintenance: "info",
+
+  const getColor = (status) => {
+    switch (status) {
+      case "available":
+        return "success"
+      case "occupied":
+        return "error"
+      case "dirty":
+        return "warning"
+      case "maintenance":
+        return "info"
+      default:
+        return "success"
+    }
   }
   const closeAndSave = () => {
     updateRoom({ ...room, status: option }, true)
@@ -74,7 +60,7 @@ function RoomMenu({ room, updateRoom }) {
             <MKBadge
               component={Button}
               badgeContent={room.status}
-              color={states[room.status]}
+              color={getColor(room.status)}
               size="xs"
               container
               variant="contained"

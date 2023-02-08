@@ -10,6 +10,7 @@ import {
   setDoc,
   where,
 } from "firebase/firestore"
+import roundTo from "tools/round"
 import db from "../firebase"
 import useRoom from "./useRoom"
 import useUser from "./useUser"
@@ -22,6 +23,8 @@ function useCalendar({ type, startDate, endDate }) {
   const { getUserByEmail } = useUser()
   const [available, setAvailable] = useState(false)
   const [room, setRoom] = useState({})
+  const { getRooms } = useRoom()
+  const [ocupancy, setOcupancy] = useState(0)
 
   async function getSingle(field, operator, value) {
     setError(false)
@@ -60,6 +63,27 @@ function useCalendar({ type, startDate, endDate }) {
 
   function checkIntersection(range1, range2) {
     return range1.startDate < range2.endDate && range2.startDate < range1.endDate
+  }
+
+  async function getOcupancy() {
+    const rooms = await getRooms()
+    const today = new Date()
+    const q = query(collectionRef, where("endDate", ">=", today))
+    const querySnapshot = await getDocs(q)
+    const ocup = []
+    querySnapshot.forEach((d) => {
+      const dateRange = {
+        ...d.data(),
+        startDate: d.data().startDate.toDate(),
+        endDate: d.data().endDate.toDate(),
+      }
+      ocup.push(dateRange)
+    })
+    if (ocup.length === 0) return 0
+    const started = ocup.filter((o) => o.startDate <= today)
+    const percentage = roundTo((started.length / rooms.length) * 100)
+    setOcupancy(percentage)
+    return percentage
   }
 
   async function getRoomAvailability(_room, _startDate, _endDate, _id = null) {
@@ -124,7 +148,7 @@ function useCalendar({ type, startDate, endDate }) {
     })
     const roomsfound = await getRoomsNotInArray(
       typeString,
-      results.map((r) => r.room)
+      results.map((r) => r.number)
     )
     setAvailable(roomsfound.length > 0)
     return roomsfound
@@ -249,6 +273,8 @@ function useCalendar({ type, startDate, endDate }) {
     getCalendar,
     getMany,
     getSingle,
+    getOcupancy,
+    ocupancy,
     calendarError,
   }
 }

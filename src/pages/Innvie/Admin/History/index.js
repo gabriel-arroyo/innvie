@@ -116,10 +116,10 @@ function History() {
 
   const columns = [
     { name: "date", align: "center" },
+    { name: "id", align: "center" },
     { name: "name", align: "center" },
     { name: "email", align: "center" },
     { name: "action", align: "center" },
-    { name: "id", align: "center" },
   ]
 
   const handleFilterChange = (e) => {

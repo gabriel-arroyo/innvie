@@ -25,12 +25,17 @@ import MKTypography from "components/MKTypography"
 import MKInput from "components/MKInput"
 import MKButton from "components/MKButton"
 import { useEffect, useState } from "react"
+import useCheckin from "api/useCheckin"
+import CheckinModal from "./modal"
 
 function Checkin() {
   const [checked, setChecked] = useState(false)
   const [password, setPassword] = useState("")
   const [message, setMessage] = useState("")
   const [error, setError] = useState(null)
+  const [show, setShow] = useState(false)
+  const { currentEvent, updateEventWithCheckin, updateEventWithCheckout } = useCheckin()
+  const toggleModal = () => setShow(!show)
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email)
   }
@@ -43,7 +48,15 @@ function Checkin() {
 
     setMessage(event.target.value)
   }
-  const handleCheckin = () => setChecked(!checked)
+  const handleCheckin = () => {
+    if (checked) {
+      toggleModal()
+      updateEventWithCheckout()
+    } else {
+      updateEventWithCheckin()
+    }
+    setChecked(!checked)
+  }
   useEffect(() => {
     if (checked) {
       // const val = Math.floor(1000 + Math.random() * 9000);
@@ -71,81 +84,90 @@ function Checkin() {
         </MKTypography>
       </MKBox>
       <MKBox pt={4} pb={3} px={3}>
-        <MKBox component="form" role="form">
-          {!checked && (
-            <>
-              {" "}
-              <MKBox mb={2}>
-                <MKInput
-                  type="email"
-                  label="Email"
-                  variant="standard"
-                  value={message}
-                  onChange={handleChange}
-                  fullWidth
-                  placeholder="john@example.com"
-                  InputLabelProps={{ shrink: true }}
-                />
-              </MKBox>
-              {error && (
-                <p
-                  style={{
-                    color: "red",
-                    fontSize: "0.8rem",
-                    marginTop: "-5px",
-                    marginBottom: "5px",
-                  }}
-                >
-                  {error}
-                </p>
-              )}
-              <MKBox mb={2}>
-                <MKInput
-                  type="password"
-                  label="Contraseña"
-                  variant="standard"
-                  fullWidth
-                  placeholder="************"
-                  InputLabelProps={{ shrink: true }}
-                />
-              </MKBox>
-            </>
-          )}
-          <MKBox mt={4} mb={1}>
-            <MKButton variant="gradient" color="error" onClick={handleCheckin} fullWidth>
-              {!checked ? "Checkin" : "Checkout"}
-            </MKButton>
-          </MKBox>
-          <MKBox mt={3} mb={1} textAlign="center">
-            {checked && (
+        {currentEvent ? (
+          <MKBox component="form" role="form">
+            {!checked && (
               <>
-                <MKTypography variant="h1" fontWeight="medium" color="primary" mt={1}>
-                  {password}
-                </MKTypography>
-                <MKTypography variant="body1" fontWeight="medium" color="primary" mt={1}>
-                  Las instrucciones y el código de ingreso será enviado a su correo electrónico. Al
-                  llegar digítelo en la cerradura.
-                </MKTypography>
+                {" "}
+                <MKBox mb={2}>
+                  <MKInput
+                    type="email"
+                    label="Email"
+                    variant="standard"
+                    value={message}
+                    onChange={handleChange}
+                    fullWidth
+                    placeholder="john@example.com"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </MKBox>
+                {error && (
+                  <p
+                    style={{
+                      color: "red",
+                      fontSize: "0.8rem",
+                      marginTop: "-5px",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    {error}
+                  </p>
+                )}
+                <MKBox mb={2}>
+                  <MKInput
+                    type="password"
+                    label="Contraseña"
+                    variant="standard"
+                    fullWidth
+                    placeholder="************"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </MKBox>
               </>
             )}
-            {!checked && (
-              <MKTypography variant="button" color="text">
-                ¿No tienes una cuenta?{" "}
-                <MKTypography
-                  component={Link}
-                  to="/authentication/sign-up/cover"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Regístrate
+            <MKBox mt={4} mb={1}>
+              <MKButton variant="gradient" color="error" onClick={handleCheckin} fullWidth>
+                {!checked ? "Checkin" : "Checkout"}
+              </MKButton>
+            </MKBox>
+            <MKBox mt={3} mb={1} textAlign="center">
+              {checked && (
+                <>
+                  <MKTypography variant="h1" fontWeight="medium" color="primary" mt={1}>
+                    {password}
+                  </MKTypography>
+                  <MKTypography variant="body1" fontWeight="medium" color="primary" mt={1}>
+                    Las instrucciones y el código de ingreso será enviado a su correo electrónico.
+                    Al llegar digítelo en la cerradura.
+                  </MKTypography>
+                </>
+              )}
+              {!checked && (
+                <MKTypography variant="button" color="text">
+                  ¿No tienes una cuenta?{" "}
+                  <MKTypography
+                    component={Link}
+                    to="/authentication/sign-up/cover"
+                    variant="button"
+                    color="info"
+                    fontWeight="medium"
+                    textGradient
+                  >
+                    Regístrate
+                  </MKTypography>
                 </MKTypography>
-              </MKTypography>
-            )}
+              )}
+            </MKBox>
           </MKBox>
-        </MKBox>
+        ) : (
+          <MKBox textAlign="center">
+            <MKTypography variant="h1" fontWeight="medium" color="primary" mt={1}>
+              No hay reservaciones activas
+            </MKTypography>
+          </MKBox>
+        )}
       </MKBox>
+      <CheckinModal show={show} toggleModal={toggleModal} />
     </Card>
   )
 }

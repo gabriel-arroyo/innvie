@@ -5,6 +5,7 @@ import MKBox from "components/MKBox"
 import useRoom from "api/useRoom"
 import useType from "api/useType"
 import { useEffect, useState } from "react"
+import Ocupancy from "components/Innvie/Ocupancy"
 import CreateTable from "./CreateTable"
 
 function Rooms({ setTab }) {
@@ -23,6 +24,7 @@ function Rooms({ setTab }) {
 
   return (
     <MKBox component="section" pt={0}>
+      <Ocupancy />
       <CreateTable
         types={types}
         rooms={rooms}

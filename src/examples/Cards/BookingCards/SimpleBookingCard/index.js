@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { Fragment, useEffect } from "react"
+import { Fragment, useEffect, useState } from "react"
 
 // react-router components
 import { Link } from "react-router-dom"
@@ -31,11 +31,13 @@ import MKButton from "components/MKButton"
 import MKTypography from "components/MKTypography"
 
 function SimpleBookingCard({ image, title, description, categories, action, startDate, endDate }) {
-  const { available, getAvailableRoom } = useCalendar()
+  const { getAvailableRoom } = useCalendar()
+  const [available, setAvailable] = useState(false)
 
   useEffect(() => {
     getAvailableRoom(title, startDate, endDate).then((room) => {
       console.log("room", room)
+      setAvailable(true)
     })
   }, [])
   return (

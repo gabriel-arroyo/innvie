@@ -15,9 +15,9 @@ import { Card } from "@mui/material"
 import MKBox from "components/MKBox"
 import colors from "assets/theme/base/colors"
 import { getDaysDifference } from "tools/getDate"
-import useFormatedCalendar from "../../api/useFormatedCalendar"
-import InfoLabel from "./InfoLabel"
-import CalendarFilters from "./CalendarFilters"
+import useFormatedCalendar from "../../../../api/useFormatedCalendar"
+import InfoLabel from "../../../../components/Innvie/InfoLabel"
+import CalendarFilters from "../../../../components/Innvie/CalendarFilters"
 
 function Calendar() {
   const { loading, items, groups, getCalendar, updateCalendarEntry, filterItems } =

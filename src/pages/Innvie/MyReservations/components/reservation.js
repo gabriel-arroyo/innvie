@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 // import React, { useEffect, useState } from "react";
 import { getDaysDifference, parseDate } from "tools/getDate"
@@ -40,7 +41,7 @@ function Reservation({ user, event }) {
           <ReserveModal event={event} types={types} />
         </Grid>
         <Grid item xs={4}>
-          <Times />
+          <Times event={event} />
         </Grid>
         <Grid item xs={4}>
           <Codigo code={event.id.substring(0, 6)} />
@@ -88,11 +89,32 @@ function Dates({ startDate, endDate }) {
   )
 }
 
-function Times() {
+function getTime(date, checkuot = false) {
+  let checkin = checkuot ? "12:00" : "15:00"
+  if (date) {
+    // get hours from checkin
+    try {
+      checkin = `${new Date(date).getHours()}:${new Date(date).getMinutes()}`
+    } catch {
+      try {
+        checkin = `${new Date(date).split("T")[1].split(":")[0]}:${
+          date.split("T")[1].split(":")[1]
+        }`
+      } catch {
+        checkin = "15:00"
+      }
+    }
+  }
+  return checkin
+}
+
+function Times({ event }) {
+  const checkin = getTime(event.checkin)
+  const checkout = getTime(event.checkout, true)
   return (
     <Container>
-      <MKTypography variant="body2">Ingreso: 13:00</MKTypography>
-      <MKTypography variant="body2">Salida: 12:00</MKTypography>
+      <MKTypography variant="body2">Ingreso: {checkin}</MKTypography>
+      <MKTypography variant="body2">Salida: {checkout}</MKTypography>
     </Container>
   )
 }
