@@ -223,7 +223,7 @@ function Reserve() {
                 // { label: "Descuento", singlePrice: "50.00", discount: true },
                 {
                   label: "Impuestos",
-                  singlePrice: `$${taxes * price * days}`,
+                  singlePrice: `$${roundTo(taxes * price * days, 2)}`,
                 },
               ]}
               action={{

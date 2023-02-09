@@ -11,6 +11,7 @@ import {
   where,
 } from "firebase/firestore"
 import roundTo from "tools/round"
+import moment from "moment/moment"
 import db from "../firebase"
 import useRoom from "./useRoom"
 import useUser from "./useUser"
@@ -181,9 +182,17 @@ function useCalendar({ type, startDate, endDate }) {
 
   async function saveReservation(reservation) {
     let id = null
-    const newReservationWithTimestamp = {
+    let newReservationWithTimestamp = {
       ...reservation,
       lastUpdate: serverTimestamp(),
+    }
+    const hasPassed = moment(reservation.startDate).isBefore(moment())
+    const hours = Math.abs(moment().diff(moment(reservation.startDate), "hours"))
+    if (hasPassed || hours < 24) {
+      newReservationWithTimestamp = {
+        ...newReservationWithTimestamp,
+        checkin: moment().toDate(),
+      }
     }
     try {
       const docRef = doc(collectionRef)
