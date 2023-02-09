@@ -228,7 +228,7 @@ function ReserveModal({ event }) {
       <Container>
         <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
           <MKButton variant="gradient" color="info" onClick={toggleModal}>
-            Cambiar reservación
+            Change reservation
           </MKButton>
           {JSON.stringify()}
         </Grid>
@@ -243,7 +243,7 @@ function ReserveModal({ event }) {
               shadow="xl"
             >
               <MKBox display="flex" alginItems="center" justifyContent="space-between" p={2}>
-                <MKTypography variant="h5">Cambiar reservación</MKTypography>
+                <MKTypography variant="h5">Change reservation</MKTypography>
                 <CloseIcon fontSize="medium" sx={{ cursor: "pointer" }} onClick={toggleModal} />
               </MKBox>
               <Divider sx={{ my: 0 }} />
@@ -261,7 +261,7 @@ function ReserveModal({ event }) {
                     <Grid item xs={12} lg={6} flexDirection="column" alignItems="center">
                       {state?.prevReservation && (
                         <Comparator
-                          title="Mi reservación"
+                          title="My reservation"
                           disabled
                           startIsPast={startIsPast}
                           endIsPast={endIsPast}
@@ -274,7 +274,7 @@ function ReserveModal({ event }) {
                     <Grid item xs={12} lg={6} flexDirection="column" alignItems="center">
                       {state?.newReservation && (
                         <Comparator
-                          title="Nueva reservación"
+                          title="New reservation"
                           startIsPast={startIsPast}
                           endIsPast={endIsPast}
                           handleChangeName={handleChangeName}
@@ -286,7 +286,7 @@ function ReserveModal({ event }) {
                   </Grid>
                 </Container>
                 <MKTypography display="flex" justifyContent="center">
-                  Diferencia a pagar:
+                  Difference payable:
                 </MKTypography>
                 <MKTypography display="flex" justifyContent="center" variant="h2">
                   ${roundTo(state.newReservation.cost - state.prevReservation.cost, 2)}
@@ -294,14 +294,14 @@ function ReserveModal({ event }) {
                 <MKTypography display="flex" justifyContent="center" variant="body2" color="error">
                   {roundTo(state.newReservation.cost - state.prevReservation.cost, 2) >= 0
                     ? ""
-                    : "Favor de pasar a recepción por su devolución"}
+                    : "Please go to the reception to get a refund"}
                 </MKTypography>
               </MKBox>
               <Divider sx={{ my: 0 }} />
               <MKBox display="flex" flexDirection="column" justifyContent="center" p={1.5}>
                 <MKBox display="flex" justifyContent="space-between" p={1.5}>
                   <MKButton variant="gradient" color="dark" onClick={toggleModal}>
-                    Cerrar
+                    Close
                   </MKButton>
                   <MKButton
                     onClick={handleAccept}
@@ -309,7 +309,7 @@ function ReserveModal({ event }) {
                     color="error"
                     disabled={state.equal}
                   >
-                    Aceptar cambios
+                    Accept changes
                   </MKButton>
                 </MKBox>
                 {accept && (

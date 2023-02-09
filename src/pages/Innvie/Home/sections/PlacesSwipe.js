@@ -52,7 +52,7 @@ function PlacesSwipe() {
         sx={{ textAlign: "center", my: 0, mx: "auto" }}
       >
         <MKTypography variant="h2" fontWeight="bold" pb={2} color="white">
-          Lugares cercanos
+          Near places
         </MKTypography>
       </Grid>
       <Swiper

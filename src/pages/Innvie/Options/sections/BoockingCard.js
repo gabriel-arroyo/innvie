@@ -134,7 +134,7 @@ function BookingCard({ type, action }) {
             sx={{ height: "100%" }}
             onClick={handleReserve}
           >
-            Reservar
+            Reserve
           </MKButton>
         </div>
       </MKBox>

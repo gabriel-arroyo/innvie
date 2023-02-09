@@ -41,7 +41,7 @@ function Checkin() {
   }
   const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
-      setError("Email inválido")
+      setError("Invalid email")
     } else {
       setError(null)
     }
@@ -60,7 +60,7 @@ function Checkin() {
   useEffect(() => {
     if (checked) {
       // const val = Math.floor(1000 + Math.random() * 9000);
-      setPassword("Se ha enviado el código de ingreso a su correo")
+      setPassword("A login code has been sent to your email")
     }
   }, [checked])
   return (
@@ -80,7 +80,7 @@ function Checkin() {
           Checkin
         </MKTypography>
         <MKTypography display="block" variant="button" color="white" my={1}>
-          Ingrese su correo y contraseña para hacer checkin
+          Enter your email and password to checkin
         </MKTypography>
       </MKBox>
       <MKBox pt={4} pb={3} px={3}>
@@ -116,7 +116,7 @@ function Checkin() {
                 <MKBox mb={2}>
                   <MKInput
                     type="password"
-                    label="Contraseña"
+                    label="Password"
                     variant="standard"
                     fullWidth
                     placeholder="************"
@@ -137,14 +137,14 @@ function Checkin() {
                     {password}
                   </MKTypography>
                   <MKTypography variant="body1" fontWeight="medium" color="primary" mt={1}>
-                    Las instrucciones y el código de ingreso será enviado a su correo electrónico.
-                    Al llegar digítelo en la cerradura.
+                    Instructions and the login code will be sent to your email. When you arrive,
+                    enter it in the lock.
                   </MKTypography>
                 </>
               )}
               {!checked && (
                 <MKTypography variant="button" color="text">
-                  ¿No tienes una cuenta?{" "}
+                  Don`&apos;t have an account?{" "}
                   <MKTypography
                     component={Link}
                     to="/authentication/sign-up/cover"
@@ -153,7 +153,7 @@ function Checkin() {
                     fontWeight="medium"
                     textGradient
                   >
-                    Regístrate
+                    Register
                   </MKTypography>
                 </MKTypography>
               )}
@@ -162,7 +162,7 @@ function Checkin() {
         ) : (
           <MKBox textAlign="center">
             <MKTypography variant="h1" fontWeight="medium" color="primary" mt={1}>
-              No hay reservaciones activas
+              No active reservations
             </MKTypography>
           </MKBox>
         )}

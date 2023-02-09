@@ -20,7 +20,7 @@ function PlacesCards2() {
           image={post1}
           category={{ color: "primary", label: "house" }}
           title="Willow Metropark"
-          description="Es un parque localizado en las orillas del río Huron. El parque consta de una amplia variedad de senderos y áreas recreativas, que incluyen un campo de golf de 18 hoyos, el estanque Washago, senderos para bicicletas, juegos para niños, una alberca y más."
+          description="It is a park located on the banks of the Huron River. The park consists of a wide variety of trails and recreational areas, including an 18-hole golf course, Washago Pond, bike trails, playgrounds, a pool and more."
           author={{
             image: author1,
             name: "Mathew Glock",
@@ -34,7 +34,7 @@ function PlacesCards2() {
           image={post2}
           category={{ color: "info", label: "house" }}
           title="Greektown Casino-Hotel"
-          description="Ofrece 100,000 pies cuadrados de opciones emocionantes y llenas de acción, desde máquinas tragamonedas y juegos de mesa hasta póquer en vivo."
+          description="It offers 100,000 square feet of exciting, action-packed choices, from slots and table games to live poker."
           author={{
             image: author2,
             name: "Mathew Glock",
@@ -47,8 +47,8 @@ function PlacesCards2() {
         <RaisedBlogCard
           image={post3}
           category={{ color: "warning", label: "house" }}
-          title="Puente Ambassador"
-          description="Nos encontramos a menos de 20 minutos de el puente Ambassador que es un puente colgante internacional que une Detroit, en el Estado estadounidense de Míchigan, con Windsor en la provincia canadiense de Ontario.​"
+          title="Ambassador Bridge"
+          description="We are less than 20 minutes from the Ambassador Bridge, which is an international suspension bridge that connects Detroit, in the U.S. state of Michigan, with Windsor in the Canadian province of Ontario."
           author={{
             image: author3,
             name: "Mathew Glock",

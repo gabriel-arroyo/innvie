@@ -29,37 +29,37 @@ function PlacesCards({ number }) {
     {
       title: "Motor City Casino",
       description:
-        "Prueba tu suerte con las opciones de azar, como 77 mesas de juegos de casino, sala de casino VIP y 2660 tragamonedas. Consiéntete con masajes suecos en el spa de las instalaciones, D.Tour Spa. Prueba los deliciosos platillos que ofrecen los 3 restaurantes de la propiedad.",
+        "Try your luck with gambling options, such as 77 casino gaming tables, VIP casino room and 2660 slot machines. Indulge in Swedish massages at the property's D.Tour Spa. Try the delicious dishes offered by the 3 restaurants on site.",
       image: post1,
     },
     {
       title: "Detroit Downtown",
       description:
-        "Visita los centros culturales; por ejemplo, el Festival Detroit de las Artes en el centro de la ciudad, la Universidad Commons-Palmer Park en el distrito Noroeste de Detroit está cerca de la Universidad Detroit Mercy y el Colegio Marygrove y tiene barrios históricos, incluyendo Palmer Woods, Sherwood Forest, y Green Acres.",
+        "Visit cultural centers; for example, the Detroit Arts Festival in the city center, the University Commons-Palmer Park in the Northwest district of Detroit is near the University of Detroit Mercy and Marygrove College and has historic neighborhoods, including Palmer Woods, Sherwood Forest, and Green Acres.",
       image: post2,
     },
     {
       title: "Lake Erie",
       description:
-        "Por su tamaño (ocupa unos 25.700 kilómetros cuadrados), está considerado como el decimotercer lago natural del mundo. Completamente navegable, cuenta con una elevación sobre el nivel del mar de 173 metros y una profundidad media de 19 metros; en este sentido, es el menos profundo del conjunto de los Grandes Lagos.",
+        "For its size (it covers about 25,700 square kilometers), it is considered the thirteenth natural lake in the world. Completely navigable, it has an elevation above sea level of 173 meters and an average depth of 19 meters; in this sense, it is the least deep of the group of the Great Lakes.",
       image: post3,
     },
     {
-      title: "Instituto de Arte de Detroit",
+      title: "Detroit Institute of Arts",
       description:
-        "El Instituto de Arte de Detroit abrió sus puertas en el año 1885 y es uno de los museos más grandes de Estados Unidos. Para que te hagas una idea, exhibe una colección de más de 65.000 piezas con un valor de, aproximadamente, 1000 millones de dólares.",
+        "The Detroit Institute of Arts opened its doors in 1885 and is one of the largest museums in the United States. To give you an idea, it exhibits a collection of more than 65,000 pieces with a value of approximately $ 1 billion.",
       image: post4,
     },
     {
       title: "Greektown Casino-Hotel",
       description:
-        "Ofrece 100,000 pies cuadrados de opciones emocionantes y llenas de acción, desde máquinas tragamonedas y juegos de mesa hasta póquer en vivo.",
+        "The Greektown Casino-Hotel offers 100,000 square feet of exciting and action-packed options, from slot machines and table games to live poker.",
       image: post5,
     },
     {
-      title: "Puente Ambassador",
+      title: "Ambassador Bridge",
       description:
-        "Nos encontramos a menos de 20 minutos del puente Ambassador que es un puente colgante internacional que une Detroit, en el Estado estadounidense de Míchigan, con Windsor en la provincia canadiense de Ontario.",
+        "We are less than 20 minutes from the Ambassador Bridge, which is an international suspension bridge that connects Detroit, in the U.S. state of Michigan, with Windsor in the Canadian province of Ontario.",
       image: post6,
     },
   ]

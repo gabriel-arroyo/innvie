@@ -47,7 +47,7 @@ function DateInput({ startDate, endDate }) {
         }}
       >
         <MKTypography variant="h6" color="primary">
-          Fecha inicial / final
+          Start / End date
         </MKTypography>
         <MKDatePicker
           type="date"
@@ -76,7 +76,7 @@ function DateInput({ startDate, endDate }) {
         }}
       >
         <MKTypography variant="h6" color="primary">
-          Días
+          Days
         </MKTypography>
         <MKInput type="text" value={days} sx={{ width: "50px", pointerEvents: "none" }} />
       </Grid>
@@ -97,7 +97,7 @@ function DateInput({ startDate, endDate }) {
           color="error"
           sx={{ width: "500px", padding: "14px" }}
         >
-          Ver Opciones
+          See options
         </MKButton>
       </Grid>
     </Grid>

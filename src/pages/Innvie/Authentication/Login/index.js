@@ -57,7 +57,7 @@ function Login({ modal }) {
       // eslint-disable-next-line
       console.log("login failed")
       setLogged(false)
-      setError("Usuario o contraseña incorrectos")
+      setError("Wrong email or password")
     }
   }
 
@@ -72,7 +72,7 @@ function Login({ modal }) {
   }
   const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
-      setError("Email inválido")
+      setError("Invalid email")
     } else {
       setError(null)
     }
@@ -93,10 +93,10 @@ function Login({ modal }) {
         textAlign="center"
       >
         <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-          Ingresar
+          Login
         </MKTypography>
         <MKTypography display="block" variant="button" color="white" my={1}>
-          Ingresa con tu correo y contraseña.
+          Login with your email and password
         </MKTypography>
       </MKBox>
       <MKBox pt={4} pb={3} px={3} component="form" role="form" onSubmit={handleLogin}>
@@ -104,7 +104,7 @@ function Login({ modal }) {
           {logged && (
             <>
               <MKTypography type="h2" sx={{ m: 5, textAlign: "center" }}>
-                ¡Bienvenido! {user?.first_name}
+                ¡Welcome {user?.first_name}!
               </MKTypography>
               <MKButton
                 variant="contained"
@@ -113,7 +113,7 @@ function Login({ modal }) {
                 onClick={handleLogout}
                 fullWidth
               >
-                Cerrar sesión
+                Close session
               </MKButton>
             </>
           )}
@@ -148,7 +148,7 @@ function Login({ modal }) {
                 <MKInput
                   type="password"
                   name="password"
-                  label="Contraseña"
+                  label="Passrword"
                   variant="standard"
                   fullWidth
                   placeholder="************"
@@ -160,19 +160,19 @@ function Login({ modal }) {
           <MKBox mt={4} mb={1}>
             {!logged && (
               <MKButton type="submit" variant="gradient" color="error" fullWidth>
-                ingresar
+                login
               </MKButton>
             )}
             {logged && !modal && (
               <MKButton component={Link} to="/" variant="gradient" color="error" fullWidth>
-                regresar
+                return
               </MKButton>
             )}
           </MKBox>
           {!modal && (
             <MKBox mt={3} mb={1} textAlign="center">
               <MKTypography variant="button" color="text">
-                ¿No tienes una cuenta?{" "}
+                Don`&apos`t have an account?{" "}
                 <MKTypography
                   component={Link}
                   to="/authentication/register"
@@ -181,7 +181,7 @@ function Login({ modal }) {
                   fontWeight="medium"
                   textGradient
                 >
-                  Regístrate
+                  Register
                 </MKTypography>
               </MKTypography>
             </MKBox>

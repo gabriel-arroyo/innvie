@@ -41,7 +41,7 @@ function Search() {
         <Grid container spacing={{ xs: 0, lg: 3 }} sx={{ pt: 2, pb: 3, px: 2, mx: "auto" }}>
           <Grid item xs={12} lg={3} sx={{ mt: 2 }}>
             <MKTypography display="block" variant="button" fontWeight="regular" color="text" mb={1}>
-              Fecha
+              Date
             </MKTypography>
             <MKInput type="date" variant="standard" placeholder="Please select date" fullWidth />
             {/* <MKDatePicker
@@ -54,7 +54,7 @@ function Search() {
           </Grid>
           <Grid item xs={12} lg={3} sx={{ mt: 2 }}>
             <MKTypography display="block" variant="button" fontWeight="regular" color="text" mb={1}>
-              Días
+              Days
             </MKTypography>
             2
             {/* <Autocomplete

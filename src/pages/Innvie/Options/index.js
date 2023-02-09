@@ -77,10 +77,10 @@ function Options() {
                 },
               })}
             >
-              Nuestras Opciones
+              Our options
             </MKTypography>
             <MKTypography variant="body1" color="white" mt={1}>
-              Habitaciones disponibles para la fecha seleccionada:
+              Available rooms for the selected dates:
             </MKTypography>
           </Grid>
         </Container>
@@ -106,8 +106,8 @@ function Options() {
         {!startDate && (
           <Container sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <MKAlert color="error" dismissible sx={{ width: "540px" }}>
-              <Icon fontSize="small">warning</Icon>&nbsp; Favor de seleccionar una fecha para
-              validar la disponibilidad
+              <Icon fontSize="small">warning</Icon>&nbsp; please select a date to see the available
+              rooms:
             </MKAlert>
           </Container>
         )}
@@ -123,18 +123,18 @@ function Options() {
               color: "primary",
               icon: "local_offer",
               title: "7x6",
-              description: "Paga 6 noches y la séptima es gratis. ",
-              description2: "Válido solamente al pagar 6 noches por adelantado.",
-              description3: "Ahorra 90 USD o más.",
+              description: "Pay 6 nights and get 1 night free.",
+              description2: "Only valid when paying 6 nights in advance.",
+              description3: "Save 90 USD or more",
             },
             {
               variant: "gradient",
               color: "primary",
               icon: "local_offer",
-              title: "3 Noches gratis",
-              description: "Paga 2 semanas y obtén 3 noches gratis.",
-              description2: "Válido solamente al pagar 2 semanas por adelantado.",
-              description3: "Ahorra 195 USD",
+              title: "3 free nights",
+              description: "Pay 2 weeks and get 3 nights free.",
+              description2: "Only valid when paying 2 weeks in advance.",
+              description3: "Save up to 195 USD",
             },
           ]}
         />

@@ -33,7 +33,7 @@ function LoginModal() {
       <Container>
         <MKBox mt={0} mb={0} textAlign="center">
           <MKTypography variant="button" color="text">
-            ¿Ya tienes una cuenta?{" "}
+            Already have an account?{" "}
             <MKButton variant="text" color="info" onClick={toggleModal}>
               Login
             </MKButton>

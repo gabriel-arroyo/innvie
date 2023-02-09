@@ -19,7 +19,7 @@ import PropTypes from "prop-types"
 // @mui material components
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
-import Icon from "@mui/material/Icon"
+// import Icon from "@mui/material/Icon"
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox"
@@ -40,18 +40,18 @@ function CustomLayout({ title, subtitle, children }) {
           action={{
             type: "external",
             route: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-            label: (
-              <MKTypography
-                color="white"
-                fontWeight="regular"
-                textTransform="capitalize"
-                fontSize="small"
-              >
-                <Icon>print</Icon>
-                &nbsp;&nbsp;Imprimir
-              </MKTypography>
-            ),
-            color: "info",
+            // label: (
+            //   // <MKTypography
+            //   //   color="white"
+            //   //   fontWeight="regular"
+            //   //   textTransform="capitalize"
+            //   //   fontSize="small"
+            //   // >
+            //   //   <Icon>print</Icon>
+            //   //   &nbsp;&nbsp;Imprimir
+            //   // </MKTypography>
+            // ),
+            // color: "info",
           }}
           transparent
           relative

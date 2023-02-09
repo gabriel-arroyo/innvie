@@ -1,0 +1,6 @@
+/* media query 650px */
+@media (max-width: 650px) {
+  .logo {
+    height: 100px;
+  }
+}

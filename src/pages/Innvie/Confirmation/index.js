@@ -41,8 +41,8 @@ function Confirmation() {
   const [price] = useAtom(selectedPrice)
   return (
     <CustomLayout
-      title="Confirmación de reservación"
-      subtitle="Gracias por su pago. Su pago se ha completado y le hemos enviado un recibo de su compra por correo electrónico. Para ver los detalles de la transacción, inicie sesión en su cuenta PayPal."
+      title="Booking Confirmed"
+      subtitle="Thank you for your payment. Your payment has been successfully completed, and a receipt for your purchase has been emailed to you. You may log into your account at www.paypal.com/us to view details of this transaction."
     >
       <MKBox position="relative" zIndex={10} px={{ xs: 1, sm: 0 }} mt={8}>
         <MKTypography
@@ -53,8 +53,8 @@ function Confirmation() {
           textAlign="center"
           fullwidth
         >
-          Recibirá en breve un correo electrónico con la instrucción detallada de acceso a la
-          habitación a su llegada.
+          You will receive an email shortly with detailed instructions on how to access the room
+          upon
         </MKTypography>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>
@@ -71,7 +71,7 @@ function Confirmation() {
               <MKTypography>{`${days} noches`}</MKTypography>
               <MKBox pt={3} pb={2} px={2} textAlign="center">
                 <MKBox my={1}>
-                  <MKTypography>Costo de habitación: ${price * days}.00</MKTypography>
+                  <MKTypography>Room rate: ${price * days}.00</MKTypography>
                   <MKTypography>Tax: ${roundTo(taxes * days * price, 2)}</MKTypography>
                   <MKTypography variant="h1" color="text">
                     Total:{" "}
@@ -94,7 +94,7 @@ function Confirmation() {
             <MKTypography variant="h6" fontWeight="bold" mb={2}>
               {user?.email ? user.email : ""}
             </MKTypography>
-            <MKTypography>Código de reservación</MKTypography>
+            <MKTypography>Reservation code</MKTypography>
             <MKTypography variant="h3">{params.code.substring(0, 6)}</MKTypography>
           </Grid>
         </Grid>

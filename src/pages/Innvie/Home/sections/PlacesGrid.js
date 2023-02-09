@@ -26,42 +26,42 @@ function PlacesGrid() {
     {
       title: "Motor City Casino",
       description:
-        "Prueba tu suerte con las opciones de azar, como 77 mesas de juegos de casino, sala de casino VIP y 2660 tragamonedas. Consiéntete con masajes suecos en el spa de las instalaciones, D.Tour Spa. Prueba los deliciosos platillos que ofrecen los 3 restaurantes de la propiedad.",
+        "Test your luck with gambling options, such as 77 casino gaming tables, VIP casino room and 2660 slot machines. Indulge in Swedish massages at the on-site spa, D.Tour Spa. Try the delicious dishes offered by the 3 restaurants on the property.",
       image: post1,
       url: "https://goo.gl/maps/VpPMcZExLNsT9wvr6",
     },
     {
       title: "Detroit Downtown",
       description:
-        "Visita los centros culturales; por ejemplo, el Festival Detroit de las Artes en el centro de la ciudad, la Universidad Commons-Palmer Park en el distrito Noroeste de Detroit está cerca de la Universidad Detroit Mercy y el Colegio Marygrove y tiene barrios históricos, incluyendo Palmer Woods, Sherwood Forest, y Green Acres.",
+        "Visit cultural centers; for example, the Detroit Arts Festival in downtown Detroit, the University Commons-Palmer Park in Detroit's Northwest District is near Detroit Mercy University and Marygrove College and has historic neighborhoods, including Palmer Woods, Sherwood Forest, and Green Acres.",
       image: post2,
       url: "https://goo.gl/maps/TJbDkw21F8L696R96",
     },
     {
       title: "Lake Erie",
       description:
-        "Por su tamaño (ocupa unos 25.700 kilómetros cuadrados), está considerado como el decimotercer lago natural del mundo. Completamente navegable, cuenta con una elevación sobre el nivel del mar de 173 metros y una profundidad media de 19 metros; en este sentido, es el menos profundo del conjunto de los Grandes Lagos.",
+        "For its size (it occupies about 25,700 square kilometers), it is considered the thirteenth natural lake in the world. Completely navigable, it has an elevation above sea level of 173 meters and an average depth of 19 meters; in this sense, it is the least deep of the Great Lakes.",
       image: post3,
       url: "https://goo.gl/maps/5j9c2KZPqapcK6Ys8",
     },
     {
-      title: "Instituto de Arte de Detroit",
+      title: "Detroit Institute of Arts",
       description:
-        "El Instituto de Arte de Detroit abrió sus puertas en el año 1885 y es uno de los museos más grandes de Estados Unidos. Para que te hagas una idea, exhibe una colección de más de 65.000 piezas con un valor de, aproximadamente, 1000 millones de dólares.",
+        "The Detroit Institute of Arts opened its doors in 1885 and is one of the largest museums in the United States. To give you an idea, it exhibits a collection of more than 65,000 pieces with a value of approximately $ 1 billion.",
       image: post4,
       url: "https://goo.gl/maps/5j9c2KZPqapcK6Ys8",
     },
     {
       title: "Greektown Casino-Hotel",
       description:
-        "Ofrece 100,000 pies cuadrados de opciones emocionantes y llenas de acción, desde máquinas tragamonedas y juegos de mesa hasta póquer en vivo.",
+        "It offers 100,000 square feet of exciting and action-packed options, from slot machines and table games to live poker.",
       image: post5,
       url: "https://goo.gl/maps/fgkGnThmjg4LuMET8",
     },
     {
-      title: "Puente Ambassador",
+      title: "Ambassador Bridge",
       description:
-        "Nos encontramos a menos de 20 minutos del puente Ambassador que es un puente colgante internacional que une Detroit, en el Estado estadounidense de Míchigan, con Windsor en la provincia canadiense de Ontario.",
+        "We are less than 20 minutes from the Ambassador Bridge, which is an international suspension bridge that connects Detroit, in the U.S. state of Michigan, with Windsor in the Canadian province of Ontario.",
       image: post6,
       url: "https://goo.gl/maps/wCeJwGJqmEYQqChy8",
     },
@@ -79,7 +79,7 @@ function PlacesGrid() {
           sx={{ textAlign: "center", my: 0, mx: "auto" }}
         >
           <MKTypography variant="h2" fontWeight="bold" pb={7}>
-            Lugares cercanos
+            Near places
           </MKTypography>
           <Grid container spacing={3}>
             {cards.map(({ title, description, image, url }) => (

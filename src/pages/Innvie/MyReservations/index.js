@@ -78,10 +78,10 @@ function MyReservations() {
                 },
               })}
             >
-              Mis Reservaciones
+              My reservations
             </MKTypography>
             <MKTypography variant="body1" color="white" mt={1}>
-              Datos de mis visitas pasadas y pendientes
+              Info from my last and pending reservations
             </MKTypography>
           </Grid>
         </Container>

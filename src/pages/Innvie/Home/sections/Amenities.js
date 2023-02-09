@@ -32,7 +32,7 @@ function Places() {
           sx={{ textAlign: "center", my: 0, mx: "auto" }}
         >
           <MKTypography variant="h2" fontWeight="bold" pb={7} color="white">
-            Amenidades
+            Amenities
           </MKTypography>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4} mb={{ xs: 3, lg: 0 }} sx={{ display: "flex" }}>

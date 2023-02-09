@@ -93,7 +93,8 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
     return () => window.removeEventListener("resize", displayMobileNavbar)
   }, [])
 
-  const useUserName = (name = "") => (name === "Ingresar" ? user?.first_name ?? "No user" : name)
+  const useUserName = (name = "") =>
+    name === "Ingresar" || name === "Login" ? user?.first_name ?? "No user" : name
   const renderNavbarItems = (!user ? routes : adminRoutes).map(
     ({ name, icon, href, route, collapse }) => (
       <DefaultNavbarDropdown
@@ -295,13 +296,15 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
 
   const renderLoggedRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
     let template
-    collapse = [
-      {
-        name: "Salir",
-        route: "/authentication",
-        component: <Login />,
-      },
-    ]
+    if (name === "Ingresar" || name === "Login") {
+      collapse = [
+        {
+          name: "Logout",
+          route: "/authentication",
+          component: <Login />,
+        },
+      ]
+    }
     // Render the dropdown menu that should be display as columns
     if (collapse && columns && name === dropdownName) {
       const calculateColumns = collapse.reduce((resultArray, item, index) => {

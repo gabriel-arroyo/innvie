@@ -71,19 +71,19 @@ function Dates({ startDate, endDate }) {
   return (
     <Container>
       <MKTypography variant="body2">
-        Desde:{" "}
+        From:{" "}
         <span>
           <b>{startDate}</b>
         </span>
       </MKTypography>
       <MKTypography variant="body2">
-        Hasta:{" "}
+        To:{" "}
         <span>
           <b>{endDate}</b>
         </span>
       </MKTypography>
       <MKTypography variant="body2">
-        {days} Noche{days > 1 ? "s" : ""}
+        {days} Night{days > 1 ? "s" : ""}
       </MKTypography>
     </Container>
   )
@@ -113,8 +113,8 @@ function Times({ event }) {
   const checkout = getTime(event.checkout, true)
   return (
     <Container>
-      <MKTypography variant="body2">Ingreso: {checkin}</MKTypography>
-      <MKTypography variant="body2">Salida: {checkout}</MKTypography>
+      <MKTypography variant="body2">Check-in: {checkin}</MKTypography>
+      <MKTypography variant="body2">Check-out: {checkout}</MKTypography>
     </Container>
   )
 }
@@ -133,7 +133,7 @@ function UserData({ data, dataTitle }) {
 function Codigo({ code }) {
   return (
     <Container>
-      <MKTypography variant="body2">Código de reservación</MKTypography>
+      <MKTypography variant="body2">Reservation code</MKTypography>
       <MKTypography variant="h4" fontWeight="bold">
         {code}
       </MKTypography>
@@ -145,7 +145,7 @@ function Address() {
   return (
     <Container sx={{ textAlign: "right" }}>
       <MKTypography variant="body2">18732 Dix Toledo HWY Brownstown MI 48193</MKTypography>
-      <MKTypography variant="body2">Info para llegar</MKTypography>
+      <MKTypography variant="body2">Directions</MKTypography>
       <a href="https://goo.gl/maps/HPMADd47LReDdC3p6" target="_blank" rel="noreferrer">
         https://goo.gl/maps/HPMADd47LReDdC3p6
       </a>

@@ -3,12 +3,13 @@ import PropTypes from "prop-types"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from "react-responsive-carousel"
 import MKBox from "components/MKBox"
+import { v4 } from "uuid"
 
 function SwipeImages({ type, photos }) {
   return (
     <Carousel showThumbs={false}>
       {photos.map((photo) => (
-        <TypeImage type={type.type} photo={photo} />
+        <TypeImage key={v4()} type={type.type} photo={photo} />
       ))}
     </Carousel>
   )

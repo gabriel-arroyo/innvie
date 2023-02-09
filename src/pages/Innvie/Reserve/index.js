@@ -210,19 +210,19 @@ function Reserve() {
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={4}>
             <CustomPricingCard
-              badge={{ color: "light", label: "cotización" }}
+              badge={{ color: "light", label: "Quotation" }}
               price={{
                 currency: "$",
                 value: roundTo(days * price + days * price * taxes, 2),
               }}
               specifications={[
-                { label: `Habitación ${type}`, singlePrice: `$${price}` },
+                { label: `Room: ${type}`, singlePrice: `$${price}` },
                 { label: `${days} día${days > 1 ? "s" : ""}` },
-                { label: `Entrada:`, singlePrice: startDate },
-                { label: `Salida:`, singlePrice: endDate },
+                { label: `Check-in:`, singlePrice: startDate },
+                { label: `Check-out:`, singlePrice: endDate },
                 // { label: "Descuento", singlePrice: "50.00", discount: true },
                 {
-                  label: "Impuestos",
+                  label: "Tax",
                   singlePrice: `$${taxes * price * days}`,
                 },
               ]}
@@ -230,7 +230,7 @@ function Reserve() {
                 type: "internal",
                 route: "/innvie/confirmation",
                 color: "error",
-                label: "Pagar",
+                label: "Pay now",
               }}
             />
           </Grid>
@@ -244,14 +244,14 @@ function Reserve() {
                       onChange={onNameChange}
                       value={formName}
                       type="text"
-                      label="Nombre"
+                      label="Name"
                       fullWidth
                     />
                   </MKBox>
                   <MKBox mb={2}>
                     <MKInput
                       type="text"
-                      label="Apellido"
+                      label="Lastname"
                       value={formLastName}
                       onChange={onLastNameChange}
                       fullWidth
@@ -260,7 +260,7 @@ function Reserve() {
                   <MKBox mb={2}>
                     <MKInput
                       type="text"
-                      label="Teléfono"
+                      label="Phone"
                       value={formPhone}
                       onChange={onPhoneChange}
                       fullWidth
@@ -269,7 +269,7 @@ function Reserve() {
                   <MKBox mb={2}>
                     <MKInput
                       type="text"
-                      label="Dirección"
+                      label="Address"
                       value={formAddress}
                       onChange={onAddressChange}
                       fullWidth
@@ -278,7 +278,7 @@ function Reserve() {
                   <MKBox mb={2}>
                     <MKInput
                       type="text"
-                      label="Ciudad"
+                      label="City"
                       value={formCity}
                       onChange={onCityChange}
                       fullWidth
@@ -287,7 +287,7 @@ function Reserve() {
                   <MKBox mb={2}>
                     <MKInput
                       type="text"
-                      label="País"
+                      label="Country"
                       value={formCountry}
                       onChange={onCountryChange}
                       fullWidth
@@ -296,7 +296,7 @@ function Reserve() {
                   <MKBox mb={2}>
                     <MKInput
                       type="text"
-                      label="Código Postal"
+                      label="Zip Code"
                       value={formZipCode}
                       onChange={onZipCodeChange}
                       fullWidth
@@ -318,7 +318,7 @@ function Reserve() {
                       color="error"
                       textAlign="center"
                     >
-                      Este correo ya está registrado. Ingrese con su cuenta
+                      This email is already registered. Please login.
                     </MKTypography>
                   )}
                   <MKBox mb={2}>
@@ -338,7 +338,7 @@ function Reserve() {
                       <MKInput
                         type="number"
                         name="party"
-                        label="Número de ocupantes"
+                        label="Party number"
                         value={party}
                         onChange={handlePartyChange}
                       />
@@ -347,7 +347,7 @@ function Reserve() {
                       <MKInput
                         type="number"
                         name="adults"
-                        label="Adultos"
+                        label="Adults"
                         value={adults}
                         onChange={handleAdultsChange}
                       />
@@ -356,7 +356,7 @@ function Reserve() {
                       <MKInput
                         type="number"
                         name="children"
-                        label="Niños"
+                        label="Kids"
                         value={kids}
                         onChange={handleKidsChange}
                       />
@@ -368,7 +368,7 @@ function Reserve() {
                     <MKBox mb={2}>
                       <MKInput
                         type="password"
-                        label="Contraseña"
+                        label="Password"
                         value={formPassword}
                         onChange={onPasswordChange}
                         fullWidth
@@ -377,7 +377,7 @@ function Reserve() {
                     <MKBox mb={2}>
                       <MKInput
                         type="password"
-                        label="Repite Contraseña"
+                        label="Repeat password"
                         value={formConfirPassword}
                         onChange={onConfirmPasswordChange}
                         fullWidth
@@ -390,7 +390,7 @@ function Reserve() {
                         color="error"
                         textAlign="center"
                       >
-                        Las contraseñas no coinciden
+                        Passwords do not match
                       </MKTypography>
                     )}
                   </Grid>
@@ -403,7 +403,7 @@ function Reserve() {
                     color="text"
                     sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
                   >
-                    &nbsp;&nbsp;Acepto los&nbsp;
+                    &nbsp;&nbsp;I Accept the&nbsp;
                   </MKTypography>
                   <MKTypography
                     component="a"
@@ -413,13 +413,13 @@ function Reserve() {
                     color="info"
                     textGradient
                   >
-                    Términos y condiciones
+                    Terms & Conditions
                   </MKTypography>
                 </MKBox>
               </MKBox>
               {!terms || mailExists || !coincidentPassword || !formEmail || party < 1 ? (
                 <MKTypography fontWeight="regular" color="error" sx={{ textAlign: "center" }}>
-                  Por favor llene todos los campos correctamente
+                  Please fill all the fields
                 </MKTypography>
               ) : (
                 <MKBox mt={3}>

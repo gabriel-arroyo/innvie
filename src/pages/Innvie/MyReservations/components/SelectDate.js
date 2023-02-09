@@ -56,7 +56,7 @@ function SelectDate({ startDate, endDate, type }) {
     >
       <MKTypography variant="body2">{days} Noches</MKTypography>
       <MKTypography variant="h6" color="primary" sx={{ width: "200px", textAlign: "center" }}>
-        Fecha inicial / final
+        Start / End date
       </MKTypography>
       <MKDatePicker
         type="date"
@@ -70,23 +70,23 @@ function SelectDate({ startDate, endDate, type }) {
       {dateDifference && !before && (
         <>
           <MKTypography variant="body3" width={180} textAlign="center" color="error">
-            Las siguientes fechas están disponibles:
+            Following dates are availabel
           </MKTypography>
           <MKTypography variant="body3" width={180} textAlign="center" color="error">
             {unpaidStart} to {unpaidEnd}
           </MKTypography>
           <MKTypography variant="body" color="error" fontWeight="bold" my={2}>
-            Cambiar reservación
+            Change booking
           </MKTypography>
           <MKTypography>
-            Precio total: ${roundTo(price * days + price * days * 4.08, 2)}
+            Total price: ${roundTo(price * days + price * days * 4.08, 2)}
           </MKTypography>
           <PayButton price={price * days + price * days * 4.08} onApprove={onApprove} />
         </>
       )}
       {dateDifference && before && (
         <MKTypography variant="body3" textAlign="center" color="error">
-          Para solicitar su devolución favor de pasar al mostrador principal
+          To request your refund please go to the main counter
         </MKTypography>
       )}
     </Grid>

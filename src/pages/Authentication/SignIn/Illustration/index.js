@@ -70,7 +70,7 @@ function Illustration() {
         </MKBox>
         <MKBox mt={3} textAlign="center">
           <MKTypography variant="button" color="text">
-            Don&apos;t have an account?{" "}
+            Don`&apos;`?{" "}
             <MKTypography
               component={Link}
               to="/authentication/sign-up/cover"

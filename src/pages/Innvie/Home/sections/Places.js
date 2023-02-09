@@ -21,7 +21,7 @@ function Places() {
           sx={{ textAlign: "center", my: 0, mx: "auto" }}
         >
           <MKTypography variant="h2" fontWeight="bold" pb={7} color="white">
-            Lugares cercanos
+            Near Places
           </MKTypography>
           <PlacesCards />
         </Grid>

@@ -42,15 +42,14 @@ function Description() {
               <Grid container justifyContent="center" py={6}>
                 <Grid item xs={12} md={7} mx={{ xs: "auto", sm: 6, md: 1 }}>
                   <MKBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-                    <MKTypography variant="h3">Bienvenido</MKTypography>
+                    <MKTypography variant="h3">Welcome</MKTypography>
                   </MKBox>
                   <MKTypography variant="body1" fontWeight="light" color="text">
-                    En INNVIE nos interesa tu descanso y tranquilidad. Si viajas solo, acompañado o
-                    en grupo, tenemos espacios para que así sea.
-                    <br />
-                    INNVIE te ofrece un ambiente espacioso y tranquilo fuera de la ciudad, pero muy
-                    cerca y totalmente conectado, para que disfrutes la cercanía con la ciudad.{" "}
-                    <br />
+                    At INNVIE we are interested in your rest and peace of mind. Whether you are
+                    traveling alone, accompanied or in a group, we have spaces to make it happen.
+                    INNVIE offers you a spacious and spacious and quiet environment outside the
+                    city, but very close and fully connected, so you can enjoy the proximity to the
+                    city.
                   </MKTypography>
                 </Grid>
               </Grid>

@@ -23,17 +23,17 @@ function Comparator({
       <SelectPicker
         options={types ? types.map((o) => o.type) : []}
         name="type"
-        label="Tipo de habitación"
+        label="Room type"
         onChange={handleChangeName}
         value={reservation.type}
         disabled={disabled || endIsPast}
         sx={{ my: "25px", width: "180px" }}
       />
       <MKTypography variant="body2">
-        {startIsPast && !endIsPast ? "La fecha de incio ya ha pasado" : ""}
+        {startIsPast && !endIsPast ? "This date has already passed" : ""}
       </MKTypography>
       <MKTypography variant="body2">
-        {endIsPast && endIsPast ? "Esta reservación ya venció, no puede modificarse" : ""}
+        {endIsPast && endIsPast ? "This reservation has expired, it cannot be modified" : ""}
       </MKTypography>
       <MKDatePicker
         options={{
@@ -50,9 +50,9 @@ function Comparator({
         disabled={disabled || endIsPast}
       />
       <Data text={`${reservation.days} Noche${reservation.days !== 1 ? "s" : ""}`} />
-      <MKTypography variant="caption">Precio por noche:</MKTypography>
+      <MKTypography variant="caption">Price per night:</MKTypography>
       <MKTypography>${reservation.price}.00</MKTypography>
-      <MKTypography variant="caption">Precio total</MKTypography>
+      <MKTypography variant="caption">Total price</MKTypography>
       <MKTypography>${reservation.cost}</MKTypography>
     </MKBox>
   )

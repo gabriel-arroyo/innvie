@@ -37,7 +37,7 @@ function TermsModal() {
     <MKBox component="section" py={6}>
       <Container>
         <MKButton variant="text" color="info" onClick={toggleModal}>
-          Términos y condiciones
+          Terms & Conditions
         </MKButton>
         <Modal
           open={show}

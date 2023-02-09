@@ -78,7 +78,7 @@ function Selected() {
                 },
               })}
             >
-              Mi Habitación
+              My Room
             </MKTypography>
           </Grid>
         </Container>

@@ -27,7 +27,7 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (event.target.password.value !== event.target.password_confirmation.value) {
-      setError("Las contraseñas no coinciden")
+      setError("Passwords don't match")
       return
     }
     const newUser = {
@@ -67,7 +67,7 @@ function Register() {
           Registro
         </MKTypography>
         <MKTypography display="block" variant="button" color="white" my={1}>
-          Ingresa tus datos para registrarte
+          Enter your details to create your account
         </MKTypography>
       </MKBox>
       <MKBox p={3}>
@@ -75,25 +75,25 @@ function Register() {
           <Grid container spacing={2}>
             <Grid item xs={12} md={6} xl={6}>
               <MKBox mb={2}>
-                <MKInput type="text" name="first_name" label="Nombre" fullWidth />
+                <MKInput type="text" name="first_name" label="Name" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" name="last_name" label="Apellido" fullWidth />
+                <MKInput type="text" name="last_name" label="Lastname" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" name="phone" label="Teléfono" fullWidth />
+                <MKInput type="text" name="phone" label="Phone" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" name="address" label="Dirección" fullWidth />
+                <MKInput type="text" name="address" label="Address" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" name="city" label="Ciudad" fullWidth />
+                <MKInput type="text" name="city" label="City" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" name="country" label="País" fullWidth />
+                <MKInput type="text" name="country" label="Country" fullWidth />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" name="zipcode" label="Código Postal" fullWidth />
+                <MKInput type="text" name="zipcode" label="Zip code" fullWidth />
               </MKBox>
             </Grid>
             <Grid item xs={12} md={6} xl={6}>
@@ -112,17 +112,17 @@ function Register() {
                     marginBottom: "5px",
                   }}
                 >
-                  El usuario ya existe
+                  User already exists
                 </p>
               )}
               <MKBox mb={2}>
-                <MKInput type="password" name="password" label="Contraseña" fullWidth />
+                <MKInput type="password" name="password" label="Password" fullWidth />
               </MKBox>
               <MKBox mb={2}>
                 <MKInput
                   type="password"
                   name="password_confirmation"
-                  label="Repite Contraseña"
+                  label="Repit password"
                   fullWidth
                 />
               </MKBox>
@@ -153,18 +153,18 @@ function Register() {
               color="text"
               sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
             >
-              &nbsp;&nbsp;Acepto los&nbsp;
+              &nbsp;&nbsp;I accept the&nbsp;
             </MKTypography>
             <TermsModal />
           </MKBox>
           <MKBox mt={3} mb={1}>
             <MKButton type="submit" variant="gradient" color="error" fullWidth disabled={!checked}>
-              Registrarse
+              Register
             </MKButton>
           </MKBox>
           <MKBox mt={3} mb={1} textAlign="center">
             <MKTypography variant="button" color="text">
-              ¿Ya tienes una cuenta?{" "}
+              Already have an account?{" "}
               <MKTypography
                 component={Link}
                 to="/authentication"
@@ -173,7 +173,7 @@ function Register() {
                 fontWeight="medium"
                 textGradient
               >
-                Ingresa
+                Login
               </MKTypography>
             </MKTypography>
           </MKBox>

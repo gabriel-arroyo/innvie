@@ -19,16 +19,16 @@ export const routes = [
     component: <Checkin />,
   },
   {
-    name: "Ingresar",
+    name: "Login",
     icon: <Icon>person</Icon>,
     collapse: [
       {
-        name: "Ingresar",
+        name: "Login",
         route: "/authentication",
         component: <Login />,
       },
       {
-        name: "Registrarse",
+        name: "Register",
         route: "/authentication/register",
         component: <Register />,
       },
@@ -66,22 +66,22 @@ export const adminRoutes = [
     component: <Checkin />,
   },
   {
-    name: "Mis Reservaciones",
+    name: "My Reservations",
     icon: <Icon>check</Icon>,
     route: "/myreservations",
     component: <MyReservations />,
   },
   {
-    name: "Ingresar",
+    name: "Login",
     icon: <Icon>person</Icon>,
     collapse: [
       {
-        name: "Ingresar",
+        name: "Login",
         route: "/authentication",
         component: <Login />,
       },
       {
-        name: "Registrarse",
+        name: "Register",
         route: "/authentication/register",
         component: <Register />,
       },
@@ -119,13 +119,13 @@ export const mobileLoggedRoutes = [
     component: <Checkin />,
   },
   {
-    name: "Mis Reservaciones",
+    name: "My Reservations",
     icon: <Icon>check</Icon>,
     route: "/myreservations",
     component: <MyReservations />,
   },
   {
-    name: "Salir",
+    name: "Logout",
     route: "/authentication",
     component: <Login />,
   },
