@@ -10,11 +10,15 @@ import Timeline, {
 } from "react-calendar-timeline"
 import "react-calendar-timeline/lib/Timeline.css"
 import "./Calendar.css"
+import Icon from "@mui/material/Icon"
+import CloseIcon from "@mui/icons-material/Close"
+import MKTypography from "components/MKTypography"
 import moment from "moment"
-import { Card } from "@mui/material"
+import { Card, Divider, Modal, Slide } from "@mui/material"
 import MKBox from "components/MKBox"
 import colors from "assets/theme/base/colors"
 import { getDaysDifference } from "tools/getDate"
+import MKButton from "components/MKButton"
 import useFormatedCalendar from "../../../../api/useFormatedCalendar"
 import InfoLabel from "../../../../components/Innvie/InfoLabel"
 import CalendarFilters from "../../../../components/Innvie/CalendarFilters"
@@ -27,6 +31,10 @@ function Calendar() {
   const highLimit = moment().endOf("week")
   const [startDate, setStartDate] = useState(lowLimit)
   const [endDate, setEndDate] = useState(highLimit)
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  const [show, setShow] = useState(false)
+  const toggleModal = () => setShow(!show)
 
   const itemIntersects = (item, start, end) => {
     const itemStart = moment(item.start_time)
@@ -46,30 +54,44 @@ function Calendar() {
     return itemsOnNewGroup.filter((i) => itemIntersects(i, start, end)).length > 0
   }
 
-  const handleItemMove = (itemId, dragTime, newGroupOrder) => {
-    const item = items.find((i) => i.id === itemId)
-    if (!item) return
-    const group = groups.find((g) => g.id === newGroupOrder + 1)
+  const closeAndSave = () => {
+    console.log("closeAndSave")
+    const group = groups.find((g) => g.id === selectedItem.newGroupOrder + 1)
     if (group) {
       setTooltip(`${group.title} ${group.tip}`)
     }
-    const days = getDaysDifference(moment(item.start_time).format(), moment(item.end_time).format())
+    const days = getDaysDifference(
+      moment(selectedItem.item.start_time).format(),
+      moment(selectedItem.item.end_time).format()
+    )
     if (
       groupIntersection(
-        itemId,
-        newGroupOrder + 1,
-        moment(dragTime),
-        moment(dragTime).add(days, "days")
+        selectedItem.itemId,
+        selectedItem.newGroupOrder + 1,
+        moment(selectedItem.dragTime),
+        moment(selectedItem.dragTime).add(days, "days")
       )
     ) {
       return
     }
 
-    const start = moment(dragTime).format()
-    const end = moment(dragTime).add(days, "days").format()
-    const newGroup = newGroupOrder + 1
+    const start = moment(selectedItem.dragTime).format()
+    const end = moment(selectedItem.dragTime).add(days, "days").format()
+    const newGroup = selectedItem.newGroupOrder + 1
 
-    updateCalendarEntry(itemId, start, end, newGroup).then(() => {})
+    updateCalendarEntry(selectedItem.itemId, start, end, newGroup).then(() => {})
+    setShow(false)
+  }
+
+  const handleItemMove = (itemId, dragTime, newGroupOrder) => {
+    const item = items.find((i) => i.id === itemId)
+    if (!item) return
+    const itemDate = moment(item.start_time)
+    if (itemDate.isBefore(moment())) {
+      return
+    }
+    setSelectedItem({ itemId, dragTime, newGroupOrder, item })
+    setShow(true)
   }
   function handleTooltip(group) {
     setTooltip(`${group.title} ${group.tip}`)
@@ -157,6 +179,10 @@ function Calendar() {
     if (group) {
       setTooltip(`${group.title} ${group.tip}`)
     }
+    if (item.start_time.isBefore(moment()) && edge === "left") {
+      return
+    }
+
     if (
       groupIntersection(
         itemId,
@@ -174,6 +200,7 @@ function Calendar() {
 
     updateCalendarEntry(itemId, start, end).then(() => {})
   }
+  
   return (
     <MKBox mx={{ lg: 4, sm: 0 }}>
       <Card>
@@ -251,6 +278,53 @@ function Calendar() {
           </Card>
         )}
       </Card>
+      <Modal open={show} onClose={toggleModal} sx={{ display: "grid", placeItems: "center" }}>
+        <Slide direction="down" in={show} timeout={500}>
+          <MKBox
+            position="relative"
+            width="500px"
+            display="flex"
+            flexDirection="column"
+            borderRadius="xl"
+            variant="gradient"
+            bgColor="error"
+            shadow="sm"
+          >
+            <MKBox display="flex" alginItems="center" justifyContent="space-between" py={3} px={2}>
+              <MKTypography variant="h6" color="white">
+                Atención por favor
+              </MKTypography>
+              <CloseIcon
+                color="white"
+                fontSize="medium"
+                sx={{ cursor: "pointer" }}
+                onClick={toggleModal}
+              />
+            </MKBox>
+            <Divider light sx={{ my: 0 }} />
+            <MKBox p={6} textAlign="center" color="white">
+              <Icon fontSize="large" color="inherit">
+                notifications_active
+              </Icon>
+              <MKTypography variant="h4" color="white" mt={3} mb={1}>
+                Está modificando el estado de una habitación
+              </MKTypography>
+              <MKTypography variant="body2" color="white" opacity={0.8} mb={2}>
+                Esto podría afectar la reservación de algún huesped
+              </MKTypography>
+            </MKBox>
+            <Divider light sx={{ my: 0 }} />
+            <MKBox display="flex" justifyContent="space-between" py={2} px={1.5}>
+              <MKButton color="white" onClick={closeAndSave}>
+                OK
+              </MKButton>
+              <MKButton variant="text" color="white" onClick={toggleModal}>
+                close
+              </MKButton>
+            </MKBox>
+          </MKBox>
+        </Slide>
+      </Modal>
     </MKBox>
   )
 }
