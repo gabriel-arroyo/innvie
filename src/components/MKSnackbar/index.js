@@ -122,6 +122,7 @@ function MKSnackbar({ color, icon, title, dateTime, content, close, bgWhite, ...
             fontSize: ({ typography: { size } }) => size.sm,
             color: ({ palette: { white, text } }) =>
               bgWhite || color === "light" ? text.main : white.main,
+            textAlign: "justify",
           }}
         >
           {content}

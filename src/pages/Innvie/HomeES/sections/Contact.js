@@ -16,17 +16,39 @@ Coded by www.creative-tim.com
 // @mui material components
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
+import { sendContact } from "api/mail"
+import ToastAlert from "components/Innvie/ToastAlert"
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox"
 import MKButton from "components/MKButton"
 import MKInput from "components/MKInput"
 import MKTypography from "components/MKTypography"
+import { useState } from "react"
 
 // Images
 // import bgImage from "../../../../assets/images/patron1.png";
 
 function Contact() {
+  const [showSnackbar, setShow] = useState(false)
+  const toggleSnackbar = () => {
+    setShow(!showSnackbar)
+    setTimeout(() => {
+      setShow(false)
+    }, 3000)
+  }
+  const hanldeSubmit = async (e) => {
+    e.preventDefault()
+    console.log("submit")
+    const fullname = e.target.fullname.value
+    const email = e.target.email.value
+    const phone = e.target.phone.value
+    const message = e.target.message.value
+    await sendContact(fullname, phone, email, message)
+    e.target.reset()
+    toggleSnackbar()
+  }
+
   return (
     <MKBox component="section" py={{ xs: 0, lg: 6 }}>
       <Container>
@@ -127,7 +149,7 @@ function Contact() {
                 </MKBox>
               </Grid>
               <Grid item xs={12} lg={7}>
-                <MKBox component="form" p={2} method="post">
+                <MKBox component="form" p={2} method="post" role="form" onSubmit={hanldeSubmit}>
                   <MKBox px={3} py={{ xs: 2, sm: 6 }}>
                     <MKTypography variant="h2" mb={1}>
                       ¡Comunícate con nosotros!
@@ -141,6 +163,7 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
+                          name="fullname"
                           label="Mi nombre es"
                           placeholder="Nombre completo"
                           InputLabelProps={{ shrink: true }}
@@ -150,6 +173,7 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
+                          name="phone"
                           label="Mi teléfono es"
                           placeholder="Teléfono"
                           InputLabelProps={{ shrink: true }}
@@ -159,6 +183,7 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
+                          name="email"
                           label="Mi correo es"
                           placeholder="Correo electrónico"
                           InputLabelProps={{ shrink: true }}
@@ -168,6 +193,7 @@ function Contact() {
                       <Grid item xs={12} pr={1} mb={6}>
                         <MKInput
                           variant="standard"
+                          name="message"
                           label="Tu mensaje"
                           placeholder="Quiero decir ..."
                           InputLabelProps={{ shrink: true }}
@@ -186,10 +212,17 @@ function Contact() {
                       textAlign="right"
                       ml="auto"
                     >
+                      <ToastAlert
+                        show={showSnackbar}
+                        toggle={toggleSnackbar}
+                        title="Contacto"
+                        content="Se ha enviado su mensaje. Nos comunicaremos con usted lo antes posible."
+                      />
                       <MKButton
                         variant="gradient"
+                        type="submit"
                         color="error"
-                        sx={{ width: "120px", padding: "0px !important" }}
+                        sx={{ width: "120px", padding: "0px !important", height: "30px" }}
                       >
                         Enviar Mensaje
                       </MKButton>

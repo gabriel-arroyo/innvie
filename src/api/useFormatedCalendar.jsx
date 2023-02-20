@@ -1,19 +1,20 @@
-/* eslint-disable camelcase */
-import { useState } from "react"
 import {
   collection,
-  getDocs,
-  query,
-  orderBy,
   doc,
+  getDocs,
+  orderBy,
+  query,
   serverTimestamp,
   updateDoc,
   where,
 } from "firebase/firestore"
 import moment from "moment"
+import { useState } from "react"
 import db from "../firebase"
 import formatedCalendarConverter from "./classFormatedCalendar"
 import roomNumberConverter from "./classRoomNumbers"
+import { sendReservationChange } from "./mail"
+/* eslint-disable camelcase */
 
 function useFormatedCalendar() {
   const calendarRef = collection(db, "calendar")
@@ -40,17 +41,26 @@ function useFormatedCalendar() {
       group: group ?? item.group,
       status: calculatedStatus,
     }
+    console.log(updatedItem.email)
     const updatedItemList = items.map((i) => (i.id === _id ? updatedItem : i))
     setItems(updatedItemList)
     const docRef = doc(db, "calendar", _id)
     const data = {
       startDate: start_time.toDate(),
       endDate: end_time.toDate(),
-      number: group,
+      number: group ?? item.group,
       lastUpdate: serverTimestamp(),
       status: calculatedStatus,
     }
     await updateDoc(docRef, data)
+    await sendReservationChange({
+      name: updatedItem.title,
+      email: updatedItem.email,
+      check_in: updatedItem.start_time,
+      check_out: updatedItem.end_time,
+      room: updatedItem.group,
+      access_key: updatedItem.id.substr(0, 6),
+    })
   }
 
   async function getEvents() {
@@ -103,7 +113,7 @@ function useFormatedCalendar() {
 
   const filterItems = async (status, room, email) => {
     // if filter is empty, return
-    if (!status && !room && !email) return
+    if (!(status || room || email)) return
     const { events, rooms } = await getCalendar()
     let filteredItems = events
     if (room) {

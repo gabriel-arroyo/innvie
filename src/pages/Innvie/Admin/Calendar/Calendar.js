@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from "react"
@@ -55,31 +57,35 @@ function Calendar() {
   }
 
   const closeAndSave = () => {
-    console.log("closeAndSave")
-    const group = groups.find((g) => g.id === selectedItem.newGroupOrder + 1)
-    if (group) {
-      setTooltip(`${group.title} ${group.tip}`)
-    }
-    const days = getDaysDifference(
-      moment(selectedItem.item.start_time).format(),
-      moment(selectedItem.item.end_time).format()
-    )
-    if (
-      groupIntersection(
-        selectedItem.itemId,
-        selectedItem.newGroupOrder + 1,
-        moment(selectedItem.dragTime),
-        moment(selectedItem.dragTime).add(days, "days")
+    if (selectedItem.type === "move") {
+      const group = groups.find((g) => g.id === selectedItem.newGroupOrder + 1)
+      if (group) {
+        setTooltip(`${group.title} ${group.tip}`)
+      }
+      const days = getDaysDifference(
+        moment(selectedItem.item.start_time).format(),
+        moment(selectedItem.item.end_time).format()
       )
-    ) {
-      return
+      if (
+        groupIntersection(
+          selectedItem.itemId,
+          selectedItem.newGroupOrder + 1,
+          moment(selectedItem.dragTime),
+          moment(selectedItem.dragTime).add(days, "days")
+        )
+      ) {
+        return
+      }
+
+      const start = moment(selectedItem.dragTime).format()
+      const end = moment(selectedItem.dragTime).add(days, "days").format()
+      const newGroup = selectedItem.newGroupOrder + 1
+
+      updateCalendarEntry(selectedItem.itemId, start, end, newGroup).then(() => {})
     }
-
-    const start = moment(selectedItem.dragTime).format()
-    const end = moment(selectedItem.dragTime).add(days, "days").format()
-    const newGroup = selectedItem.newGroupOrder + 1
-
-    updateCalendarEntry(selectedItem.itemId, start, end, newGroup).then(() => {})
+    if (selectedItem.type === "resize") {
+      updateCalendarEntry(selectedItem.itemId, selectedItem.start, selectedItem.end).then(() => {})
+    }
     setShow(false)
   }
 
@@ -87,10 +93,12 @@ function Calendar() {
     const item = items.find((i) => i.id === itemId)
     if (!item) return
     const itemDate = moment(item.start_time)
-    if (itemDate.isBefore(moment())) {
+    const today = moment().format("YYYY-MM-DD")
+    const todayTime = moment(`${today} 12:00:00`)
+    if (moment(dragTime).isBefore(todayTime) || itemDate.isBefore(todayTime)) {
       return
     }
-    setSelectedItem({ itemId, dragTime, newGroupOrder, item })
+    setSelectedItem({ itemId, dragTime, newGroupOrder, item, type: "move" })
     setShow(true)
   }
   function handleTooltip(group) {
@@ -152,6 +160,7 @@ function Calendar() {
       className="custom-group"
       onMouseEnter={() => handleTooltip(group)}
       onClick={() => handleTooltip(group)}
+      onKeyUp={() => handleTooltip(group)}
     >
       {group.title}
     </div>
@@ -173,8 +182,19 @@ function Calendar() {
     }
   }
   const handleItemResize = (itemId, endTimeOrStartTime, edge) => {
+    const today = moment().format("YYYY-MM-DD")
+    const todayTime = moment(`${today} 12:00:00`)
+    if (moment(endTimeOrStartTime).isBefore(todayTime)) {
+      return
+    }
     const date = moment(endTimeOrStartTime)
+    if (date.isBefore(moment())) {
+      return
+    }
     const item = items.find((i) => i.id === itemId)
+    if (moment(item.end_time).isBefore(todayTime)) {
+      return
+    }
     const group = groups.find((g) => g.id === item.group)
     if (group) {
       setTooltip(`${group.title} ${group.tip}`)
@@ -197,10 +217,10 @@ function Calendar() {
 
     const start = edge === "left" ? date : item.start_time
     const end = edge === "left" ? item.end_time : date
-
-    updateCalendarEntry(itemId, start, end).then(() => {})
+    setSelectedItem({ itemId, start, end, type: "resize" })
+    setShow(true)
   }
-  
+
   return (
     <MKBox mx={{ lg: 4, sm: 0 }}>
       <Card>
@@ -248,7 +268,13 @@ function Calendar() {
                   width: "4px",
                 }
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-                return <div style={customStyles} onClick={someCustomHandler} />
+                return (
+                  <div
+                    style={customStyles}
+                    onClick={someCustomHandler}
+                    onKeyUp={someCustomHandler}
+                  />
+                )
               }}
             </TodayMarker>
             <CursorMarker />
