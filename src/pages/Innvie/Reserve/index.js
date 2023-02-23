@@ -218,8 +218,8 @@ function Reserve() {
               specifications={[
                 { label: `Room: ${type}`, singlePrice: `$${price}` },
                 { label: `${days} día${days > 1 ? "s" : ""}` },
-                { label: `Check-in:`, singlePrice: startDate },
-                { label: `Check-out:`, singlePrice: endDate },
+                { label: "Check-in:", singlePrice: startDate },
+                { label: "Check-out:", singlePrice: endDate },
                 // { label: "Descuento", singlePrice: "50.00", discount: true },
                 {
                   label: "Tax",

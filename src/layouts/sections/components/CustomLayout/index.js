@@ -71,7 +71,7 @@ function CustomLayout({ title, subtitle, children }) {
             <img
               src="https://firebasestorage.googleapis.com/v0/b/innvie-6e09a.appspot.com/o/logo-azul.png?alt=media&token=609c519b-5244-4f6e-b05a-4a6781442f84"
               alt="confirmation"
-              width="15%"
+              style={{ maxWidth: "150px", aspectRatio: "418/281" }}
             />
           </Box>
           <MKTypography variant="h3" mb={1} sx={{ textAlign: "center", width: "auto" }}>
