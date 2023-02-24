@@ -28,7 +28,7 @@ import { selectedType } from "states/selectedType"
 import taxes from "constants/taxes"
 import roundTo from "tools/round"
 import CustomLayout from "../../../layouts/sections/components/CustomLayout"
-import Map from "../HomeES/components/Map/map"
+import GoogleMap from "../HomeES/components/Map/map"
 import PlacesGrid from "../HomeES/sections/PlacesGrid"
 
 function Confirmation() {
@@ -99,7 +99,7 @@ function Confirmation() {
           </Grid>
         </Grid>
         <Grid container spacing={3} mt={5} justifyContent="center">
-          <Map />
+          <GoogleMap />
           <Grid item xs={12} lg={4} display="flex" flexDirection="column" justifyContent="center">
             <MKTypography sx={{ lineHeight: "2.5" }}>
               18732 Dix Toledo HWY Brownstown MI 48193

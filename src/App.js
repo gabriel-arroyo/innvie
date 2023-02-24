@@ -107,11 +107,6 @@ export default function App() {
               <Route path="/es/reserve/" element={<ReserveES />} />
               <Route path="/es/confirmation/:code" element={<ConfirmationES />} />
               <Route path="/es/myreservations" element={<MyReservationsES />} />
-              <Route path="/es/authentication" element={<CoverLayoutES image={bgImage} />}>
-                <Route index element={<LoginES />} />
-                <Route path="/es/authentication/register" element={<RegisterES />} />
-                <Route path="/es/authentication/checkin" element={<CheckinES />} />
-              </Route>
             </Route>
             <Route path="/admin" element={<NavbarLayout />}>
               <Route index element={<Admin />} />
@@ -125,6 +120,11 @@ export default function App() {
               <Route index element={<Login />} />
               <Route path="/authentication/register" element={<Register />} />
               <Route path="/authentication/checkin" element={<Checkin />} />
+            </Route>
+            <Route path="/es/authentication" element={<CoverLayoutES image={bgImage} />}>
+              <Route index element={<LoginES />} />
+              <Route path="/es/authentication/register" element={<RegisterES />} />
+              <Route path="/es/authentication/checkin" element={<CheckinES />} />
             </Route>
             <Route path="/confirmation/:code" element={<Confirmation />} />
             <Route path="/test/api" element={<ApiTest />} />

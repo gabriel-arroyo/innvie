@@ -5,7 +5,7 @@ import MKBox from "components/MKBox"
 import Container from "@mui/material/Container"
 import "./map.css"
 
-function Map() {
+function GoogleMap() {
   return (
     <MKBox component="section" py={{ xs: 0, lg: 6 }} borderRadius="lg">
       <Container sx={{ borderRadius: "50px" }}>
@@ -39,4 +39,4 @@ function Map() {
   )
 }
 
-export default Map
+export default GoogleMap

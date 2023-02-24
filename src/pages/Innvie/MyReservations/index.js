@@ -64,14 +64,15 @@ function MyReservations() {
           <Grid
             container
             item
-            xs={12}
-            lg={6}
+            xs={10}
+            lg={4}
             justifyContent="center"
             sx={{ mx: "auto", textAlign: "center" }}
           >
             <MKTypography
               variant="h2"
               color="white"
+              fullwidth
               sx={({ breakpoints, typography: { size } }) => ({
                 [breakpoints.down("md")]: {
                   fontSize: size["3xl"],
@@ -80,7 +81,7 @@ function MyReservations() {
             >
               My reservations
             </MKTypography>
-            <MKTypography variant="body1" color="white" mt={1}>
+            <MKTypography variant="body1" color="white" mt={1} fullwidth>
               Info from my last and pending reservations
             </MKTypography>
           </Grid>

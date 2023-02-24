@@ -5,7 +5,7 @@ import { getDaysDifference, parseDate } from "tools/getDate"
 import MKTypography from "components/MKTypography"
 import { Container } from "@mui/material"
 import Grid from "@mui/material/Grid"
-import Map from "components/Map"
+import GoogleMap from "components/Map"
 import { useEffect, useState } from "react"
 import useType from "api/useType"
 import ImageSwipe from "pages/Innvie/Admin/NewRoom/imageswipe"
@@ -53,7 +53,7 @@ function Reservation({ user, event }) {
           <Address />
         </Grid>
         <Grid item xs={4}>
-          <Map />
+          <GoogleMap />
         </Grid>
       </Grid>
     </Container>

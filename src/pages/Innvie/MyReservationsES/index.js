@@ -64,8 +64,8 @@ function MyReservations() {
           <Grid
             container
             item
-            xs={12}
-            lg={6}
+            xs={10}
+            lg={4}
             justifyContent="center"
             sx={{ mx: "auto", textAlign: "center" }}
           >

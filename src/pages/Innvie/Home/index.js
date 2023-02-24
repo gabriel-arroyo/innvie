@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import Map from "./components/Map/map"
+import GoogleMap from "./components/Map/map"
 import Contact from "./sections/Contact"
 import Description from "./sections/Description"
 import Header from "./sections/Header"
@@ -47,7 +47,7 @@ function InnvieHome() {
           },
         ]}
       />
-      <Map />
+      <GoogleMap />
       <PlacesSwipe />
       <Contact />
     </>
