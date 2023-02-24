@@ -24,6 +24,7 @@ function useUser() {
   const [currentUser, setCurrentUser] = useAtom(loggedUser)
   const [logged, setLogged] = useState(false)
   const [mailExists, setMailExists] = useState(false)
+  const [checkedIn, setCheckedIn] = useState(false)
 
   async function getAllUsers() {
     const q = query(collectionRef)
@@ -125,7 +126,19 @@ function useUser() {
     const updatedUserWithTimestamp = { ...updatedUser, lastUpdate: serverTimestamp() }
     try {
       const docRef = doc(collectionRef, updatedUser.id)
-      updateDoc(docRef, updatedUserWithTimestamp)
+      await updateDoc(docRef, updatedUserWithTimestamp)
+    } catch (error) {
+      // eslint-disable-next-line
+      console.log(error)
+    }
+  }
+
+  async function updateLoggedUser(updatedUser) {
+    const updatedUserWithTimestamp = { ...updatedUser, lastUpdate: serverTimestamp() }
+    try {
+      const docRef = doc(collectionRef, updatedUser.id)
+      await updateDoc(docRef, updatedUserWithTimestamp)
+      setCurrentUser(updatedUserWithTimestamp)
     } catch (error) {
       // eslint-disable-next-line
       console.log(error)
@@ -250,6 +263,7 @@ function useUser() {
   function getCurrentUser() {
     if (currentUser) {
       setLogged(true)
+      setCheckedIn(Boolean(currentUser.checkin))
       return currentUser
     }
 
@@ -257,10 +271,30 @@ function useUser() {
     if (item) {
       setLogged(true)
       setCurrentUser(item)
+      setCheckedIn(Boolean(item.checkin) && !item.checkout)
       return item
     }
+    setCheckedIn(false)
     setLogged(false)
     return null
+  }
+
+  async function checkinUser() {
+    const user = getCurrentUser()
+    if (!user) return
+    const updatedUser = { ...user, lastCheckin: serverTimestamp(), checkin: true }
+    await updateLoggedUser(updatedUser)
+    setCheckedIn(true)
+    localStorage.setItem("user", JSON.stringify(updatedUser))
+  }
+
+  async function checkoutUser() {
+    const user = getCurrentUser()
+    if (!user) return
+    const updatedUser = { ...user, lastCheckin: serverTimestamp(), checkin: false, checkout: true }
+    await updateLoggedUser(updatedUser)
+    setCheckedIn(false)
+    localStorage.setItem("user", JSON.stringify(updatedUser))
   }
 
   useEffect(() => {
@@ -275,6 +309,7 @@ function useUser() {
     addUser,
     addOrUpdateUser,
     deleteUser,
+    updateLoggedUser,
     updateUser,
     getAndUpdateUser,
     deleteAllUsers,
@@ -287,6 +322,9 @@ function useUser() {
     getUserByEmail,
     saveLocalUser,
     getUserById,
+    checkoutUser,
+    checkinUser,
+    checkedIn,
   }
 }
 
