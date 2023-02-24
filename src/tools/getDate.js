@@ -21,7 +21,7 @@ export const getShortDate = (_date) => {
 }
 
 export const getDaysDifference = (startDate, endDate) => {
-  if (!startDate || !endDate) return 0
+  if (!(startDate && endDate)) return 0
   const start = new Date(startDate)
   const end = new Date(endDate)
   const difference = Math.abs(end - start)
@@ -67,13 +67,27 @@ export function parseDate(date) {
     const m = moment(date)
     str = m.toISOString().substring(0, 10)
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log("fecha ilegible", date)
+  }
+  return str
+}
+
+export function parseInformalDate(date) {
+  if (!date) return ""
+  let str = ""
+  try {
+    const m = moment(date).format("MMMM Do YYYY")
+    str = m
+  } catch (error) {
+    // eslint-disable-next-line no-console
     console.log("fecha ilegible", date)
   }
   return str
 }
 
 export function removeDateRange(sdBig, edBig, sdSmall, edSmall) {
-  if (!sdBig || !edBig || !sdSmall || !edSmall) return []
+  if (!(sdBig && edBig && sdSmall && edSmall)) return []
   const startDateA = moment(sdBig)
   const endDateA = moment(edBig)
   const startDateB = moment(sdSmall)

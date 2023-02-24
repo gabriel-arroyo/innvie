@@ -18,7 +18,6 @@ function Reservation({ user, event }) {
   }
   useEffect(() => {
     getPhotos(event.type)
-    console.log("🚀 ~ file: reservation.js:21 ~ useEffect ~ event", event)
   }, [])
 
   return (
@@ -27,32 +26,32 @@ function Reservation({ user, event }) {
         {event.type}
       </MKTypography>
       <Grid container spacing={2} display="flex" alignItems="center">
-        <Grid item xs={4}>
-          <UserData data={`${user?.first_name}, ${user?.last_name}`} dataTitle="Nombre:" />
+        <Grid item xs={12} lg={4} textAlign="center">
+          <UserData data={`${user?.first_name}, ${user?.last_name}`} dataTitle="Name:" />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4} textAlign="center">
           <UserData data={user?.email} dataTitle="Email:" />
         </Grid>
-        <Grid item xs={4}>
-          <UserData data={user?.phone} dataTitle="Teléfono:" />
+        <Grid item xs={12} lg={4} textAlign="center">
+          <UserData data={user?.phone} dataTitle="Phone:" />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4} textAlign="center">
           <Dates startDate={parseDate(event.startDate)} endDate={parseDate(event.endDate)} />
           <ReserveModal event={event} types={types} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4} textAlign="center">
           <Times event={event} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4} textAlign="center">
           <Codigo code={event.id.substring(0, 6)} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4} textAlign="center">
           <ImageSwipe images={photos} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4} textAlign="center">
           <Address />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} lg={4} textAlign="center">
           <GoogleMap />
         </Grid>
       </Grid>
@@ -123,7 +122,7 @@ function UserData({ data, dataTitle }) {
   return (
     <Container>
       <MKTypography variant="body2">{dataTitle}</MKTypography>
-      <MKTypography textAlign="center" variant="body2" fontWeight="normal" sx={{ width: "200px" }}>
+      <MKTypography textAlign="center" variant="body2" fontWeight="normal">
         {data}
       </MKTypography>
     </Container>

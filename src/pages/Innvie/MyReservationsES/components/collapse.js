@@ -59,7 +59,7 @@ function FaqCollapse({ title, user, event, open, ...rest }) {
           justifyContent="space-between"
           sx={{ mx: "auto", textAlign: "left", display: "flex" }}
         >
-          <Grid item xs={12} lg={7}>
+          <Grid item xs={12} lg={6}>
             <MKTypography variant="h5" color={open ? "dark" : "text"} sx={{ userSelect: "none" }}>
               {title}
             </MKTypography>
@@ -69,7 +69,7 @@ function FaqCollapse({ title, user, event, open, ...rest }) {
               {status}
             </MKTypography>
           </Grid>
-          <Grid item xs={12} lg={3}>
+          <Grid item xs={12} lg={4}>
             <MKTypography variant="h5" color={open ? "dark" : "text"} sx={{ userSelect: "none" }}>
               {parseDate(event.startDate)} - {parseDate(event.endDate)}
             </MKTypography>
