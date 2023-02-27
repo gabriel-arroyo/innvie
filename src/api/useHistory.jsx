@@ -28,17 +28,17 @@ function useHistory() {
       status += ` to ${statusName}`
     }
     const commentsOptions = {
-      checkIn: `Check in`,
-      checkOut: `Check out`,
-      clean: `Clean room`,
-      dirty: `Dirty room`,
-      maintenance: `Maintenance room`,
-      newRoom: `New room created`,
-      newType: `New type created`,
-      deleteRoom: `Room deleted`,
-      deleteType: `Type deleted`,
+      checkIn: "Check in",
+      checkOut: "Check out",
+      clean: "Clean room",
+      dirty: "Dirty room",
+      maintenance: "Maintenance room",
+      newRoom: "New room created",
+      newType: "New type created",
+      deleteRoom: "Room deleted",
+      deleteType: "Type deleted",
       updateRoom: `Room updated${status}`,
-      updateType: `Type updated`,
+      updateType: "Type updated",
     }
     return commentsOptions[action]
   }

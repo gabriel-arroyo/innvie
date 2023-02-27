@@ -695,6 +695,20 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
           >
             {renderNavbarItems}
           </MKBox>
+          <DefaultNavbarDropdown
+            key="notifications"
+            name=""
+            icon={<Icon>notifications</Icon>}
+            route="/notifications"
+            collapse
+            light={light}
+            onMouseEnter={({ currentTarget }) => {
+              setDropdown(currentTarget)
+              setDropdownEl(currentTarget)
+              setDropdownName("notifications")
+            }}
+            onMouseLeave={() => setDropdown(null)}
+          />
           {user?.admin && (
             <DefaultNavbarDropdown
               key="admin"
@@ -705,6 +719,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
               light={light}
             />
           )}
+
           <MKBox ml={{ xs: "auto", lg: 0 }}>
             {action &&
               (action.type === "internal" ? (

@@ -1,9 +1,9 @@
 import Icon from "@mui/material/Icon"
-import Login from "pages/Innvie/Authentication/Login"
-import Register from "pages/Innvie/Authentication/Register"
-import Checkin from "pages/Innvie/Checkin"
-import InnvieHome from "pages/Innvie/Home"
-import MyReservations from "pages/Innvie/MyReservations"
+import Login from "pages/Innvie/AuthenticationES/Login"
+import Register from "pages/Innvie/AuthenticationES/Register"
+import Checkin from "pages/Innvie/CheckinES"
+import InnvieHome from "pages/Innvie/HomeES"
+import MyReservations from "pages/Innvie/MyReservationsES"
 
 export const routes = [
   {

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
 =========================================================
 * Otis Kit PRO - v2.0.1
@@ -26,6 +27,9 @@ import MKInput from "components/MKInput"
 import MKButton from "components/MKButton"
 import { useEffect, useState } from "react"
 import useCheckin from "api/useCheckin"
+import useUser from "api/useUser"
+import { sendEmailPass } from "api/mail"
+import moment from "moment/moment"
 import CheckinModal from "./modal"
 
 function Checkin() {
@@ -34,35 +38,66 @@ function Checkin() {
   const [message, setMessage] = useState("")
   const [error, setError] = useState(null)
   const [show, setShow] = useState(false)
-  const { currentEvent, updateEventWithCheckin, updateEventWithCheckout } = useCheckin()
+  const { checkinUser, checkoutUser, login, logged, checkedIn } = useUser()
+  const { currentEvent, updateEventWithCheckin, updateEventWithCheckout, getCurrentEvent } =
+    useCheckin()
   const toggleModal = () => setShow(!show)
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email)
   }
   const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
-      setError("Email inválido")
+      setError("Email no válido")
     } else {
       setError(null)
     }
 
     setMessage(event.target.value)
   }
-  const handleCheckin = () => {
+
+  const sendEmail = async () => {
+    if (Object.keys(currentEvent).length === 0) return
+    const access_key = currentEvent.id.substring(0, 6)
+    const check_in = moment(currentEvent.startDate).format("MMMM Do YYYY")
+    const check_out = moment(currentEvent.endDate).format("MMMM Do YYYY")
+    const to_email = currentEvent.email
+    sendEmailPass(access_key, to_email, check_in, check_out)
+  }
+  const handleCheckin = async (e) => {
+    e.preventDefault()
     if (checked) {
       toggleModal()
       updateEventWithCheckout()
+      checkoutUser()
     } else {
+      const formEmail = e.target.email.value
+      const formPassword = e.target.password.value
+      const confirmed = await login(formEmail, formPassword)
+      if (!confirmed) {
+        setError("Email o contraseña incorrectos")
+        return
+      }
       updateEventWithCheckin()
+      checkinUser()
+      sendEmail()
     }
     setChecked(!checked)
   }
   useEffect(() => {
     if (checked) {
       // const val = Math.floor(1000 + Math.random() * 9000);
-      setPassword("Se ha enviado el código de ingreso a su correo")
+      setPassword("Se ha enviado la clave de ingreso a su correo")
     }
   }, [checked])
+  useEffect(() => {
+    if (checkedIn && logged) {
+      setChecked(true)
+    }
+  }, [checkedIn, logged])
+  useEffect(() => {
+    getCurrentEvent()
+  }, [])
+
   return (
     <Card>
       <MKBox
@@ -80,12 +115,12 @@ function Checkin() {
           Checkin
         </MKTypography>
         <MKTypography display="block" variant="button" color="white" my={1}>
-          Ingrese su correo y contraseña para hacer checkin
+          Ingresa tu correo y contraseña para hacer checkin
         </MKTypography>
       </MKBox>
       <MKBox pt={4} pb={3} px={3}>
-        {currentEvent ? (
-          <MKBox component="form" role="form">
+        {Object.keys(currentEvent).length > 0 || checked ? (
+          <MKBox component="form" role="form" onSubmit={handleCheckin}>
             {!checked && (
               <>
                 {" "}
@@ -94,6 +129,7 @@ function Checkin() {
                     type="email"
                     label="Email"
                     variant="standard"
+                    name="email"
                     value={message}
                     onChange={handleChange}
                     fullWidth
@@ -118,6 +154,7 @@ function Checkin() {
                     type="password"
                     label="Contraseña"
                     variant="standard"
+                    name="password"
                     fullWidth
                     placeholder="************"
                     InputLabelProps={{ shrink: true }}
@@ -126,7 +163,7 @@ function Checkin() {
               </>
             )}
             <MKBox mt={4} mb={1}>
-              <MKButton variant="gradient" color="error" onClick={handleCheckin} fullWidth>
+              <MKButton type="submit" variant="gradient" color="error" fullWidth>
                 {!checked ? "Checkin" : "Checkout"}
               </MKButton>
             </MKBox>
@@ -137,8 +174,8 @@ function Checkin() {
                     {password}
                   </MKTypography>
                   <MKTypography variant="body1" fontWeight="medium" color="primary" mt={1}>
-                    Las instrucciones y el código de ingreso será enviado a su correo electrónico.
-                    Al llegar digítelo en la cerradura.
+                    Las intrucciones para ingresar y el código de acceso se enviarán a su correo.
+                    Cuando llegue a la habitación, ingrese el código en la cerradura.
                   </MKTypography>
                 </>
               )}
