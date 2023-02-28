@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser"
 
 const service_id = "service_lytpmd3"
 const publick_key = "3asCHkKqOW8LMZnGa"
-// const template_id_confirmation = "template_kz9i168"
+const template_id_confirmation = "template_kz9i168"
 const template_id_2 = "template_04kuvre"
 const innvie_mail = "innvie.hotel@gmail.com"
 
@@ -28,28 +28,24 @@ export function sendTemplateEmail(reply_to, to_email, subject, body) {
 }
 
 export async function sendEmailConfirmation(to_name, to_email, check_in, check_out) {
-  console.log("🚀 ~ file: mail.js:31 ~ sendEmailConfirmation ~ check_out", check_out)
-  console.log("🚀 ~ file: mail.js:31 ~ sendEmailConfirmation ~ check_in", check_in)
-  console.log("🚀 ~ file: mail.js:31 ~ sendEmailConfirmation ~ to_email", to_email)
-  console.log("🚀 ~ file: mail.js:31 ~ sendEmailConfirmation ~ to_name", to_name)
-  // try {
-  //   const result = await emailjs.send(
-  //     service_id,
-  //     template_id_confirmation,
-  //     {
-  //       from_name: "Innvie Motel",
-  //       to_name,
-  //       check_in,
-  //       check_out,
-  //       to_email,
-  //       reply_to: innvie_mail,
-  //     },
-  //     "3asCHkKqOW8LMZnGa"
-  //   )
-  //   console.log("🚀 ~ file: mail.js:13 ~ sendEmailConfirmation ~ result", result)
-  // } catch (error) {
-  //   console.log("🚀 ~ file: mail.js:14 ~ sendEmailConfirmation ~ error", error)
-  // }
+  try {
+    const result = await emailjs.send(
+      service_id,
+      template_id_confirmation,
+      {
+        from_name: "Innvie Motel",
+        to_name,
+        check_in,
+        check_out,
+        to_email,
+        reply_to: innvie_mail,
+      },
+      "3asCHkKqOW8LMZnGa"
+    )
+    console.log("🚀 ~ file: mail.js:13 ~ sendEmailConfirmation ~ result", result)
+  } catch (error) {
+    console.log("🚀 ~ file: mail.js:14 ~ sendEmailConfirmation ~ error", error)
+  }
 }
 
 export async function sendEmailPass(access_key, to_email, check_in, check_out) {

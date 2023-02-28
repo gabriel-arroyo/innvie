@@ -1,54 +1,28 @@
 /* eslint-disable no-param-reassign */
-/**
-=========================================================
-* Otis Kit PRO - v2.0.1
-=========================================================
+import "./Navbar.css"
 
-* Product Page: https://material-ui.com/store/items/otis-kit-pro-material-kit-react/
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useEffect, useState } from "react"
-
-// react-router components
-import { Link } from "react-router-dom"
-
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types"
-
-// @mui material components
 import Container from "@mui/material/Container"
 import Grow from "@mui/material/Grow"
 import Icon from "@mui/material/Icon"
 import MuiLink from "@mui/material/Link"
 import Popper from "@mui/material/Popper"
-// import Badge from "@mui/material/Badge"
-// import NotificationIcon from "@mui/icons-material/Notifications"
-
-// Otis Kit PRO components
+import useNotifications from "api/useNotifications"
+import useUser from "api/useUser"
+import breakpoints from "assets/theme/base/breakpoints"
 import MKBox from "components/MKBox"
 import MKButton from "components/MKButton"
 import MKTypography from "components/MKTypography"
-
-// Otis Kit PRO examples
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown"
 import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile"
-
-// Otis Kit PRO base styles
-import breakpoints from "assets/theme/base/breakpoints"
-
-import useUser from "api/useUser"
+import { adminRoutes, routes } from "innvie.routes"
 import { useAtom } from "jotai"
 import Login from "pages/Innvie/Authentication/Login"
+import PropTypes from "prop-types"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import loggedUser from "states/loggedUser"
-import "./Navbar.css"
-import { routes, adminRoutes } from "innvie.routes"
+
+import { Grid } from "@mui/material"
 import StandardRoute from "./StandardRout"
 
 function DefaultNavbar({ transparent, light, action, sticky, relative, center, logoUrl }) {
@@ -61,6 +35,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
   const [arrowRef, setArrowRef] = useState(null)
   const [mobileNavbar, setMobileNavbar] = useState(false)
   const [mobileView, setMobileView] = useState(false)
+  const { notifications, getAllNotifications } = useNotifications()
 
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar)
 
@@ -69,6 +44,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
   useEffect(() => {
     if (getCurrentUser()) {
       setUser(getCurrentUser())
+      getAllNotifications()
     }
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
@@ -148,12 +124,18 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
     }
     // eslint-disable-next-line no-console
     if (name === "Notifications") {
-      collapse = [
-        {
-          name: "test1",
-        },
-        { name: "test2" },
-      ]
+      collapse = notifications.map((item) => ({
+        name: (
+          <Grid container spacing={1} flexDirection="column">
+            {user?.admin && (
+              <Grid item>
+                <b>{item.email}</b>
+              </Grid>
+            )}
+            <Grid item>{item.text}</Grid>
+          </Grid>
+        ),
+      }))
     }
     if (collapse && name === dropdownName) {
       template = collapse.map((item) => {
@@ -177,7 +159,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
             justifyContent="space-between"
             alignItems="center"
             variant="button"
-            textTransform="capitalize"
+            // textTransform="capitalize"
             minWidth={item.description ? "14rem" : "12rem"}
             color={item.description ? "dark" : "text"}
             fontWeight={item.description ? "bold" : "regular"}
@@ -319,7 +301,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
                   justifyContent="space-between"
                   alignItems="center"
                   variant="button"
-                  textTransform="capitalize"
+                  // textTransform="capitalize"
                   minWidth={item.description ? "14rem" : "12rem"}
                   color={item.description ? "dark" : "text"}
                   fontWeight={item.description ? "bold" : "regular"}
