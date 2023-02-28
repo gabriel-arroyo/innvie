@@ -71,7 +71,6 @@ export const adminRoutes = [
     route: "/myreservations",
     component: <MyReservations />,
   },
-
   {
     name: "",
     icon: <Icon>language</Icon>,

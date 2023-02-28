@@ -19,6 +19,22 @@ export const routes = [
     component: <Checkin />,
   },
   {
+    name: "",
+    icon: <Icon>language</Icon>,
+    collapse: [
+      {
+        name: "English",
+        route: "/",
+        language: "english",
+      },
+      {
+        name: "Español",
+        route: "/es",
+        language: "spanish",
+      },
+    ],
+  },
+  {
     name: "Ingresar",
     icon: <Icon>person</Icon>,
     collapse: [
@@ -31,22 +47,6 @@ export const routes = [
         name: "Registrarse",
         route: "/es/authentication/register",
         component: <Register />,
-      },
-    ],
-  },
-  {
-    name: "Idioma",
-    icon: <Icon>language</Icon>,
-    collapse: [
-      {
-        name: "English",
-        route: "/",
-        language: "english",
-      },
-      {
-        name: "Español",
-        route: "/es",
-        language: "spanish",
       },
     ],
   },
@@ -72,6 +72,22 @@ export const adminRoutes = [
     component: <MyReservations />,
   },
   {
+    name: "",
+    icon: <Icon>language</Icon>,
+    collapse: [
+      {
+        name: "English",
+        route: "/",
+        language: "english",
+      },
+      {
+        name: "Español",
+        route: "/es",
+        language: "spanish",
+      },
+    ],
+  },
+  {
     name: "Ingresar",
     icon: <Icon>person</Icon>,
     collapse: [
@@ -84,22 +100,6 @@ export const adminRoutes = [
         name: "Registrarse",
         route: "/es/authentication/register",
         component: <Register />,
-      },
-    ],
-  },
-  {
-    name: "Idioma",
-    icon: <Icon>language</Icon>,
-    collapse: [
-      {
-        name: "English",
-        route: "/",
-        language: "english",
-      },
-      {
-        name: "Español",
-        route: "/es",
-        language: "spanish",
       },
     ],
   },
@@ -125,12 +125,7 @@ export const mobileLoggedRoutes = [
     component: <MyReservations />,
   },
   {
-    name: "Salir",
-    route: "/authentication",
-    component: <Login />,
-  },
-  {
-    name: "Idioma",
+    name: "",
     icon: <Icon>language</Icon>,
     collapse: [
       {
@@ -144,5 +139,10 @@ export const mobileLoggedRoutes = [
         language: "spanish",
       },
     ],
+  },
+  {
+    name: "Salir",
+    route: "/authentication",
+    component: <Login />,
   },
 ]
