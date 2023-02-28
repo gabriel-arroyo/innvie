@@ -50,6 +50,11 @@ export const routes = [
       },
     ],
   },
+  {
+    name: "Notifications",
+    icon: <Icon>notifications</Icon>,
+    collapse: [],
+  },
 ]
 
 export const adminRoutes = [
@@ -102,6 +107,11 @@ export const adminRoutes = [
         component: <Register />,
       },
     ],
+  },
+  {
+    name: "Notifications",
+    icon: <Icon>notifications</Icon>,
+    collapse: [],
   },
 ]
 

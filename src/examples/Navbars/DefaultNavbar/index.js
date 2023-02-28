@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { Fragment, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 // react-router components
 import { Link } from "react-router-dom"
@@ -24,8 +24,6 @@ import PropTypes from "prop-types"
 
 // @mui material components
 import Container from "@mui/material/Container"
-import Divider from "@mui/material/Divider"
-import Grid from "@mui/material/Grid"
 import Grow from "@mui/material/Grow"
 import Icon from "@mui/material/Icon"
 import MuiLink from "@mui/material/Link"
@@ -51,7 +49,7 @@ import Login from "pages/Innvie/Authentication/Login"
 import loggedUser from "states/loggedUser"
 import "./Navbar.css"
 import { routes, adminRoutes } from "innvie.routes"
-import StandardRoute from "./LinkComponent"
+import StandardRoute from "./StandardRout"
 
 function DefaultNavbar({ transparent, light, action, sticky, relative, center, logoUrl }) {
   const [dropdown, setDropdown] = useState("")
@@ -121,96 +119,9 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
   )
 
   // Render the routes on the dropdown menu
-  const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
+  const renderRoutes = routes.map(({ name, collapse }) => {
     let template
-    // Render the dropdown menu that should be display as columns
-    if (collapse && columns && name === dropdownName) {
-      const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn)
-
-        if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = []
-        }
-
-        resultArray[chunkIndex].push(item)
-
-        return resultArray
-      }, [])
-
-      template = (
-        <Grid key={name} container spacing={3} py={1} px={1.5}>
-          {calculateColumns.map((cols, key) => {
-            const gridKey = `grid-${key}`
-            const dividerKey = `divider-${key}`
-
-            return (
-              <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
-                {cols.map((col, index) => (
-                  <Fragment key={col.name}>
-                    <MKTypography
-                      display="block"
-                      variant="button"
-                      fontWeight="bold"
-                      textTransform="capitalize"
-                      py={1}
-                      px={0.5}
-                      mt={index !== 0 ? 2 : 0}
-                    >
-                      {col.name}
-                    </MKTypography>
-                    {col.collapse.map((item) => (
-                      <MKTypography
-                        key={item.name}
-                        component={item.route ? Link : MuiLink}
-                        to={item.route ? item.route : ""}
-                        href={item.href ? item.href : (e) => e.preventDefault()}
-                        target={item.href ? "_blank" : ""}
-                        rel={item.href ? "noreferrer" : "noreferrer"}
-                        minWidth="11.25rem"
-                        display="block"
-                        variant="button"
-                        color="text"
-                        textTransform="capitalize"
-                        fontWeight="regular"
-                        py={0.625}
-                        px={2}
-                        sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-                          borderRadius: borderRadius.md,
-                          cursor: "pointer",
-                          transition: "all 300ms linear",
-
-                          "&:hover": {
-                            backgroundColor: grey[200],
-                            color: dark.main,
-                          },
-                        })}
-                      >
-                        {item.name}
-                      </MKTypography>
-                    ))}
-                  </Fragment>
-                ))}
-                {key !== 0 && (
-                  <Divider
-                    key={dividerKey}
-                    orientation="vertical"
-                    sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "-4px",
-                      transform: "translateY(-45%)",
-                      height: "90%",
-                    }}
-                  />
-                )}
-              </Grid>
-            )
-          })}
-        </Grid>
-      )
-
-      // Render the dropdown menu that should be display as list items
-    } else if (collapse && name === dropdownName) {
+    if (collapse && name === dropdownName) {
       template = collapse.map((item) => (
         <StandardRoute
           collapse={item}
@@ -224,7 +135,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
     return template
   })
 
-  const renderLoggedRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
+  const renderLoggedRoutes = routes.map(({ name, collapse }) => {
     let template
     if (name === "Ingresar" || name === "Login") {
       collapse = [
@@ -235,94 +146,16 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
         },
       ]
     }
-    // Render the dropdown menu that should be display as columns
-    if (collapse && columns && name === dropdownName) {
-      const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn)
-
-        if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = []
-        }
-
-        resultArray[chunkIndex].push(item)
-
-        return resultArray
-      }, [])
-
-      template = (
-        <Grid key={name} container spacing={3} py={1} px={1.5}>
-          {calculateColumns.map((cols, key) => {
-            const gridKey = `grid-${key}`
-            const dividerKey = `divider-${key}`
-
-            return (
-              <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
-                {cols.map((col, index) => (
-                  <Fragment key={col.name}>
-                    <MKTypography
-                      display="block"
-                      variant="button"
-                      fontWeight="bold"
-                      textTransform="capitalize"
-                      py={1}
-                      px={0.5}
-                      mt={index !== 0 ? 2 : 0}
-                    >
-                      {col.name}
-                    </MKTypography>
-                    {col.collapse.map((item) => (
-                      <MKTypography
-                        key={item.name}
-                        component={item.route ? Link : MuiLink}
-                        to={item.route ? item.route : ""}
-                        href={item.href ? item.href : (e) => e.preventDefault()}
-                        target={item.href ? "_blank" : ""}
-                        rel={item.href ? "noreferrer" : "noreferrer"}
-                        minWidth="11.25rem"
-                        display="block"
-                        variant="button"
-                        color="text"
-                        textTransform="capitalize"
-                        fontWeight="regular"
-                        py={0.625}
-                        px={2}
-                        sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-                          borderRadius: borderRadius.md,
-                          cursor: "pointer",
-                          transition: "all 300ms linear",
-
-                          "&:hover": {
-                            backgroundColor: grey[200],
-                            color: dark.main,
-                          },
-                        })}
-                      >
-                        {item.name}
-                      </MKTypography>
-                    ))}
-                  </Fragment>
-                ))}
-                {key !== 0 && (
-                  <Divider
-                    key={dividerKey}
-                    orientation="vertical"
-                    sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "-4px",
-                      transform: "translateY(-45%)",
-                      height: "90%",
-                    }}
-                  />
-                )}
-              </Grid>
-            )
-          })}
-        </Grid>
-      )
-
-      // Render the dropdown menu that should be display as list items
-    } else if (collapse && name === dropdownName) {
+    // eslint-disable-next-line no-console
+    if (name === "Notifications") {
+      collapse = [
+        {
+          name: "test1",
+        },
+        { name: "test2" },
+      ]
+    }
+    if (collapse && name === dropdownName) {
       template = collapse.map((item) => {
         const linkComponent = {
           component: MuiLink,
@@ -459,8 +292,8 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
   )
 
   // Render routes that are nested inside the dropdown menu routes
-  const renderNestedRoutes = routes.map(({ collapse, columns }) =>
-    collapse && !columns
+  const renderNestedRoutes = routes.map(({ collapse }) =>
+    collapse
       ? collapse.map(({ name: parentName, collapse: nestedCollapse }) => {
           let template
 

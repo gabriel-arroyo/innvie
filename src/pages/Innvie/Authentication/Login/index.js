@@ -172,7 +172,7 @@ function Login({ modal }) {
           {!modal && (
             <MKBox mt={3} mb={1} textAlign="center">
               <MKTypography variant="button" color="text">
-                Don`&apos`t have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <MKTypography
                   component={Link}
                   to="/authentication/register"
