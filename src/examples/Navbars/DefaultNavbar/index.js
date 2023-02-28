@@ -30,6 +30,8 @@ import Grow from "@mui/material/Grow"
 import Icon from "@mui/material/Icon"
 import MuiLink from "@mui/material/Link"
 import Popper from "@mui/material/Popper"
+// import Badge from "@mui/material/Badge"
+// import NotificationIcon from "@mui/icons-material/Notifications"
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox"
@@ -49,6 +51,7 @@ import Login from "pages/Innvie/Authentication/Login"
 import loggedUser from "states/loggedUser"
 import "./Navbar.css"
 import { routes, adminRoutes } from "innvie.routes"
+import StandardRoute from "./LinkComponent"
 
 function DefaultNavbar({ transparent, light, action, sticky, relative, center, logoUrl }) {
   const [dropdown, setDropdown] = useState("")
@@ -208,87 +211,14 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
 
       // Render the dropdown menu that should be display as list items
     } else if (collapse && name === dropdownName) {
-      template = collapse.map((item) => {
-        const linkComponent = {
-          component: MuiLink,
-          href: item.href,
-          target: "_blank",
-          rel: "noreferrer",
-        }
-
-        const routeComponent = {
-          component: Link,
-          to: item.route,
-        }
-
-        return (
-          <MKTypography
-            key={item.name}
-            {...(item.route ? routeComponent : linkComponent)}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            variant="button"
-            textTransform="capitalize"
-            minWidth={item.description ? "14rem" : "12rem"}
-            color={item.description ? "dark" : "text"}
-            fontWeight={item.description ? "bold" : "regular"}
-            py={item.description ? 1 : 0.625}
-            px={2}
-            sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-              borderRadius: borderRadius.md,
-              cursor: "pointer",
-              transition: "all 300ms linear",
-
-              "&:hover": {
-                backgroundColor: grey[200],
-                color: dark.main,
-
-                "& *": {
-                  color: dark.main,
-                },
-              },
-            })}
-            onMouseEnter={({ currentTarget }) => {
-              if (item.dropdown) {
-                setNestedDropdown(currentTarget)
-                setNestedDropdownEl(currentTarget)
-                setNestedDropdownName(item.name)
-              }
-            }}
-            onMouseLeave={() => {
-              if (item.dropdown) {
-                setNestedDropdown(null)
-              }
-            }}
-          >
-            {item.description ? (
-              <MKBox>
-                {item.name}
-                <MKTypography
-                  display="block"
-                  variant="button"
-                  color="text"
-                  fontWeight="regular"
-                  sx={{ transition: "all 300ms linear" }}
-                >
-                  {item.description}
-                </MKTypography>
-              </MKBox>
-            ) : (
-              item.name
-            )}
-            {item.collapse && (
-              <Icon
-                fontSize="small"
-                sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
-              >
-                keyboard_arrow_right
-              </Icon>
-            )}
-          </MKTypography>
-        )
-      })
+      template = collapse.map((item) => (
+        <StandardRoute
+          collapse={item}
+          setNestedDropdown={setNestedDropdown}
+          setNestedDropdownEl={setNestedDropdownEl}
+          setNestedDropdownName={setNestedDropdownName}
+        />
+      ))
     }
 
     return template
@@ -695,10 +625,14 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
           >
             {renderNavbarItems}
           </MKBox>
-          <DefaultNavbarDropdown
+          {/* <DefaultNavbarDropdown
             key="notifications"
             name=""
-            icon={<Icon>notifications</Icon>}
+            icon={
+              <Badge badgeContent={4} color="secondary">
+                <NotificationIcon color="dark" />
+              </Badge>
+            }
             route="/notifications"
             collapse
             light={light}
@@ -708,7 +642,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
               setDropdownName("notifications")
             }}
             onMouseLeave={() => setDropdown(null)}
-          />
+          /> */}
           {user?.admin && (
             <DefaultNavbarDropdown
               key="admin"

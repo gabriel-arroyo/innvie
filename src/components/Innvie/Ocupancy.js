@@ -17,7 +17,7 @@ function Ocupancy() {
           fontSize: "1.5rem",
         }}
       >
-        <p>Ocupación hoy: </p>
+        <p>Ocuppancy Today: </p>
         <p style={{ fontWeight: "bold", color: "red" }}>{ocupancy}%</p>
       </Card>
     </Container>

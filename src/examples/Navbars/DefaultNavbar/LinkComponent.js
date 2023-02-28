@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react"
 import MuiLink from "@mui/material/Link"
 import { Link } from "react-router-dom"
@@ -5,7 +6,12 @@ import Icon from "@mui/material/Icon"
 import MKTypography from "components/MKTypography"
 import MKBox from "components/MKBox"
 
-function LinkComponent(collapse, setNestedDropdown, setNestedDropdownEl, setNestedDropdownName) {
+function StandardRoute({
+  collapse,
+  setNestedDropdown,
+  setNestedDropdownEl,
+  setNestedDropdownName,
+}) {
   const { href, name, route, description, dropdown } = collapse
   const linkComponent = {
     component: MuiLink,
@@ -75,7 +81,7 @@ function LinkComponent(collapse, setNestedDropdown, setNestedDropdownEl, setNest
       ) : (
         name
       )}
-      {collapse && (
+      {collapse.collapse && (
         <Icon fontSize="small" sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}>
           keyboard_arrow_right
         </Icon>
@@ -84,4 +90,4 @@ function LinkComponent(collapse, setNestedDropdown, setNestedDropdownEl, setNest
   )
 }
 
-export default LinkComponent
+export default StandardRoute

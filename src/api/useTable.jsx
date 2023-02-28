@@ -64,18 +64,18 @@ function useTable({ rooms, types, setTab, updateRoom }) {
         const roomsWithEvents = allRoomsWitTypes.map((room, i) => ({ ...room, ...results[i] }))
         const calculatedRows = roomsWithEvents.map((r) => ({
           ID: <RoomId name={r.number} />,
-          Tipo: <RoomTypeItem category={r.type} subCategory={r.category} />,
-          Habitaciones: r.rooms ?? "",
+          Type: <RoomTypeItem category={r.type} subCategory={r.category} />,
+          Rooms: r.rooms ?? "",
           Queen: r.beds.queen ?? "",
           Full: r.beds.fill ?? "",
           Single: r.beds.single ?? "",
-          Estado: <RoomMenu room={r} updateRoom={updateRoom} />,
-          Entrada: parseDate(r.startDate),
-          Salida: parseDate(r.endDate),
+          Status: <RoomMenu room={r} updateRoom={updateRoom} />,
+          Date_in: parseDate(r.startDate),
+          Date_out: parseDate(r.endDate),
           Check_in: parseDate(r.checkin),
           Check_out: parseDate(r.checkout),
-          Ocupante: r.first_name && r.last_name && `${r.first_name} ${r.last_name}`,
-          Comentarios: r.comment,
+          User: r.first_name && r.last_name && `${r.first_name} ${r.last_name}`,
+          Comments: r.comment,
           History: <RoomHistoryButton number={r.number} setTab={setTab} />,
         }))
         setRows(calculatedRows)

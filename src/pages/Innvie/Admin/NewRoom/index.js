@@ -33,11 +33,11 @@ function NewEditSwitch({ editSwitch, handleChangeNew }) {
         <FormGroup>
           <FormControlLabel
             control={<Switch checked={editSwitch} onChange={handleChangeNew} />}
-            label="Nuevo"
+            label="New"
           />
           <FormControlLabel
             control={<Switch checked={!editSwitch} onChange={handleChangeNew} />}
-            label="Editar"
+            label="Edit"
           />
         </FormGroup>
       </Grid>
@@ -231,7 +231,7 @@ function NewRoomType({ room }) {
                 <SelectPicker
                   options={types ? types.map((o) => o.type) : []}
                   name="type"
-                  label="Nombre"
+                  label="Name"
                   onChange={handleChangeName}
                   value={cacheRoom.type}
                 />
@@ -242,7 +242,7 @@ function NewRoomType({ room }) {
                 <MKInput
                   type="text"
                   name="type"
-                  label="Nombre"
+                  label="Name"
                   fullWidth
                   onChange={handleChangeName}
                 />
@@ -252,7 +252,7 @@ function NewRoomType({ room }) {
               <SelectPicker
                 options={options}
                 name="category"
-                label="Categoría"
+                label="Category"
                 onChange={(e) => {
                   setCacheRoom({ ...cacheRoom, category: e.target.innerText })
                 }}
@@ -264,7 +264,7 @@ function NewRoomType({ room }) {
                 <MKInput
                   type="number"
                   name="rooms"
-                  label="Habitaciones"
+                  label="Rooms"
                   defaultValue={0}
                   fullWidth
                   value={cacheRoom?.rooms ?? 0}
@@ -280,7 +280,7 @@ function NewRoomType({ room }) {
               <MKInput
                 type="number"
                 name="queen"
-                label="Camas Queen"
+                label="Queen beds"
                 defaultValue={0}
                 fullWidth
                 value={cacheRoom.beds?.queen ?? 0}
@@ -295,7 +295,7 @@ function NewRoomType({ room }) {
               <MKInput
                 type="number"
                 name="full"
-                label="Camas Full"
+                label="Full beds"
                 defaultValue={0}
                 fullWidth
                 value={cacheRoom.beds?.full ?? 0}
@@ -310,7 +310,7 @@ function NewRoomType({ room }) {
               <MKInput
                 type="number"
                 name="single"
-                label="Camas Single"
+                label="Single beds"
                 defaultValue={0}
                 fullWidth
                 value={cacheRoom.beds?.single ?? 0}
@@ -340,7 +340,7 @@ function NewRoomType({ room }) {
               <MKInput
                 type="number"
                 name="maxOccupants"
-                label="Máximo número de ocupantes"
+                label="Max occupants"
                 defaultValue={0}
                 fullWidth
                 value={cacheRoom.maxOccupants ?? 0}
@@ -353,7 +353,7 @@ function NewRoomType({ room }) {
             </MKBox>
             <MKBox mb={2}>
               <FormControl fullWidth>
-                <InputLabel htmlFor="outlined-adornment-amount">Precio</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
                 <OutlinedInput
                   name="price"
                   id="price"
@@ -382,11 +382,11 @@ function NewRoomType({ room }) {
                 onChange={handleChangeAccesoryName}
                 type="text"
                 name="accesory"
-                label="Accesorio"
+                label="Accesory"
                 value={accesoryTitle}
               />
               <MKButton variant="contained" color="primary" onClick={handleAddAccesory}>
-                Añadir
+                Add
               </MKButton>
             </MKBox>
           </Grid>
@@ -417,7 +417,7 @@ function NewRoomType({ room }) {
             fullWidth
             disabled={!cacheRoom?.type}
           >
-            Guardar
+            Save
           </MKButton>
           {!editSwitch && (
             <MKButton
@@ -428,7 +428,7 @@ function NewRoomType({ room }) {
               disabled={!cacheRoom?.type}
               onClick={handleDeleteType}
             >
-              Eliminar
+              Delete
             </MKButton>
           )}
         </MKBox>
@@ -442,7 +442,7 @@ function NewRoomType({ room }) {
             mb={2}
             sx={{ justifyContent: "center" }}
           >
-            Agregar o quitar Habitaciones
+            Add or remove rooms
           </MKTypography>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6} xl={6} s>
@@ -450,7 +450,7 @@ function NewRoomType({ room }) {
                 <MKInput
                   type="number"
                   name="number"
-                  label="Número de habitacion"
+                  label="Room number"
                   defaultValue={0}
                   fullWidth
                   value={roomNumber ?? 0}
@@ -463,7 +463,7 @@ function NewRoomType({ room }) {
                 <MKInput
                   type="text"
                   name="comment"
-                  label="Comentario"
+                  label="Comment"
                   fullWidth
                   onChange={(e) => {
                     setRoomComment(e.target.value)
@@ -482,7 +482,7 @@ function NewRoomType({ room }) {
                 fullWidth
                 disabled={!cacheRoom?.type}
               >
-                Agregar
+                Add
               </MKButton>
             </Grid>
             <Grid item xs={12} md={6} xl={6}>

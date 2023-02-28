@@ -55,10 +55,10 @@ export default function BasicTabs() {
     <Box sx={{ width: "90%", paddingTop: "230px", margin: "auto" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Habitaciones" {...a11yProps(1)} />
-          <Tab label="Calendario" {...a11yProps(2)} />
-          <Tab label="Tipos de habitación" {...a11yProps(3)} />
-          <Tab label="Historial" {...a11yProps(4)} />
+          <Tab label="Rooms" {...a11yProps(1)} />
+          <Tab label="Calendar" {...a11yProps(2)} />
+          <Tab label="Room Types" {...a11yProps(3)} />
+          <Tab label="History" {...a11yProps(4)} />
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
