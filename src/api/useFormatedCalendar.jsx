@@ -14,6 +14,7 @@ import db from "../firebase"
 import formatedCalendarConverter from "./classFormatedCalendar"
 import roomNumberConverter from "./classRoomNumbers"
 import { sendReservationChange } from "./mail"
+import useNotifications from "./useNotifications"
 /* eslint-disable camelcase */
 
 function useFormatedCalendar() {
@@ -22,6 +23,7 @@ function useFormatedCalendar() {
   const [loading, setLoading] = useState(true)
   const [groups, setGroups] = useState([])
   const [items, setItems] = useState([])
+  const { addNotification } = useNotifications()
 
   const getStatusByDate = (start_time, end_time) => {
     const now = moment()
@@ -60,6 +62,14 @@ function useFormatedCalendar() {
       check_out: updatedItem.end_time,
       room: updatedItem.group,
       access_key: updatedItem.id.substr(0, 6),
+    })
+    await addNotification({
+      email: updatedItem.email,
+      text: `Your reservation has been updated to room ${
+        updatedItem.group
+      } from ${updatedItem.start_time.format("DD.MM.YYYY")} to ${updatedItem.end_time.format(
+        "DD.MM.YYYY"
+      )}`,
     })
   }
 

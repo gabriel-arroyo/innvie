@@ -50,6 +50,11 @@ export const routes = [
       },
     ],
   },
+  {
+    name: "Notificaciones",
+    icon: <Icon>notifications</Icon>,
+    collapse: [],
+  },
 ]
 
 export const adminRoutes = [
@@ -103,6 +108,11 @@ export const adminRoutes = [
       },
     ],
   },
+  {
+    name: "Notificaciones",
+    icon: <Icon>notifications</Icon>,
+    collapse: [],
+  },
 ]
 
 export const mobileLoggedRoutes = [
@@ -144,5 +154,10 @@ export const mobileLoggedRoutes = [
     name: "Salir",
     route: "/authentication",
     component: <Login />,
+  },
+  {
+    name: "Notificaciones",
+    icon: <Icon>notifications</Icon>,
+    collapse: [],
   },
 ]

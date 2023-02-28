@@ -155,4 +155,9 @@ export const mobileLoggedRoutes = [
     route: "/authentication",
     component: <Login />,
   },
+  {
+    name: "Notifications",
+    icon: <Icon>notifications</Icon>,
+    collapse: [],
+  },
 ]

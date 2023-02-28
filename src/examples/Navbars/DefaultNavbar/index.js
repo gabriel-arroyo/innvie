@@ -35,17 +35,23 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
   const [arrowRef, setArrowRef] = useState(null)
   const [mobileNavbar, setMobileNavbar] = useState(false)
   const [mobileView, setMobileView] = useState(false)
-  const { notifications, getAllNotifications } = useNotifications()
+  const { notifications, getAllNotifications, getNotificationsByEmail } = useNotifications()
 
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar)
 
   const { getCurrentUser } = useUser()
   const [user, setUser] = useAtom(loggedUser)
   useEffect(() => {
-    if (getCurrentUser()) {
+    const u = getCurrentUser()
+    if (u) {
       setUser(getCurrentUser())
-      getAllNotifications()
     }
+    if (u?.admin === true) {
+      getAllNotifications()
+    } else if (u) {
+      getNotificationsByEmail(u.email)
+    }
+
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
@@ -531,7 +537,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
     </Container>
   )
 }
-// DefaultNavbar default props
+
 DefaultNavbar.defaultProps = {
   action: null,
   transparent: false,
@@ -542,7 +548,7 @@ DefaultNavbar.defaultProps = {
   logoUrl: null,
   brand: null,
 }
-// Typechecking props for the DefaultNavbar
+// DefaultNavbar default props
 DefaultNavbar.propTypes = {
   brand: PropTypes.string,
   logoUrl: PropTypes.string,

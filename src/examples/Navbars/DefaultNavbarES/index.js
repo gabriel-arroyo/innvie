@@ -1,54 +1,29 @@
 /* eslint-disable no-param-reassign */
-/**
-=========================================================
-* Otis Kit PRO - v2.0.1
-=========================================================
+import "./Navbar.css"
 
-* Product Page: https://material-ui.com/store/items/otis-kit-pro-material-kit-react/
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { Fragment, useEffect, useState } from "react"
-
-// react-router components
-import { Link } from "react-router-dom"
-
-// prop-types is a library for typechecking of props.
-import PropTypes from "prop-types"
-
-// @mui material components
 import Container from "@mui/material/Container"
-import Divider from "@mui/material/Divider"
-import Grid from "@mui/material/Grid"
 import Grow from "@mui/material/Grow"
 import Icon from "@mui/material/Icon"
 import MuiLink from "@mui/material/Link"
 import Popper from "@mui/material/Popper"
-
-// Otis Kit PRO components
+import useNotifications from "api/useNotifications"
+import useUser from "api/useUser"
+import breakpoints from "assets/theme/base/breakpoints"
 import MKBox from "components/MKBox"
 import MKButton from "components/MKButton"
 import MKTypography from "components/MKTypography"
-
-import { routes, adminRoutes } from "innvie.routesES"
-// Otis Kit PRO examples
-
-// Otis Kit PRO base styles
-import breakpoints from "assets/theme/base/breakpoints"
-
-import useUser from "api/useUser"
+import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbarES/DefaultNavbarDropdown"
+import DefaultNavbarMobile from "examples/Navbars/DefaultNavbarES/DefaultNavbarMobile"
+import { adminRoutes, routes } from "innvie.routesES"
 import { useAtom } from "jotai"
 import Login from "pages/Innvie/Authentication/Login"
+import PropTypes from "prop-types"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import loggedUser from "states/loggedUser"
-import DefaultNavbarMobile from "./DefaultNavbarMobile"
-import DefaultNavbarDropdown from "./DefaultNavbarDropdown"
-import "./Navbar.css"
+
+import { Grid } from "@mui/material"
+import StandardRoute from "./StandardRout"
 
 function DefaultNavbar({ transparent, light, action, sticky, relative, center, logoUrl }) {
   const [dropdown, setDropdown] = useState("")
@@ -60,15 +35,23 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
   const [arrowRef, setArrowRef] = useState(null)
   const [mobileNavbar, setMobileNavbar] = useState(false)
   const [mobileView, setMobileView] = useState(false)
+  const { notifications, getAllNotifications, getNotificationsByEmail } = useNotifications()
 
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar)
 
   const { getCurrentUser } = useUser()
   const [user, setUser] = useAtom(loggedUser)
   useEffect(() => {
-    if (getCurrentUser()) {
+    const u = getCurrentUser()
+    if (u) {
       setUser(getCurrentUser())
     }
+    if (u?.admin === true) {
+      getAllNotifications()
+    } else if (u) {
+      getNotificationsByEmail(u.email)
+    }
+
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
@@ -118,281 +101,49 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
   )
 
   // Render the routes on the dropdown menu
-  const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
+  const renderRoutes = routes.map(({ name, collapse }) => {
     let template
-    // Render the dropdown menu that should be display as columns
-    if (collapse && columns && name === dropdownName) {
-      const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn)
-
-        if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = []
-        }
-
-        resultArray[chunkIndex].push(item)
-
-        return resultArray
-      }, [])
-
-      template = (
-        <Grid key={name} container spacing={3} py={1} px={1.5}>
-          {calculateColumns.map((cols, key) => {
-            const gridKey = `grid-${key}`
-            const dividerKey = `divider-${key}`
-
-            return (
-              <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
-                {cols.map((col, index) => (
-                  <Fragment key={col.name}>
-                    <MKTypography
-                      display="block"
-                      variant="button"
-                      fontWeight="bold"
-                      textTransform="capitalize"
-                      py={1}
-                      px={0.5}
-                      mt={index !== 0 ? 2 : 0}
-                    >
-                      {col.name}
-                    </MKTypography>
-                    {col.collapse.map((item) => (
-                      <MKTypography
-                        key={item.name}
-                        component={item.route ? Link : MuiLink}
-                        to={item.route ? item.route : ""}
-                        href={item.href ? item.href : (e) => e.preventDefault()}
-                        target={item.href ? "_blank" : ""}
-                        rel={item.href ? "noreferrer" : "noreferrer"}
-                        minWidth="11.25rem"
-                        display="block"
-                        variant="button"
-                        color="text"
-                        textTransform="capitalize"
-                        fontWeight="regular"
-                        py={0.625}
-                        px={2}
-                        sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-                          borderRadius: borderRadius.md,
-                          cursor: "pointer",
-                          transition: "all 300ms linear",
-
-                          "&:hover": {
-                            backgroundColor: grey[200],
-                            color: dark.main,
-                          },
-                        })}
-                      >
-                        {item.name}
-                      </MKTypography>
-                    ))}
-                  </Fragment>
-                ))}
-                {key !== 0 && (
-                  <Divider
-                    key={dividerKey}
-                    orientation="vertical"
-                    sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "-4px",
-                      transform: "translateY(-45%)",
-                      height: "90%",
-                    }}
-                  />
-                )}
-              </Grid>
-            )
-          })}
-        </Grid>
-      )
-
-      // Render the dropdown menu that should be display as list items
-    } else if (collapse && name === dropdownName) {
-      template = collapse.map((item) => {
-        const linkComponent = {
-          component: MuiLink,
-          href: item.href,
-          target: "_blank",
-          rel: "noreferrer",
-        }
-
-        const routeComponent = {
-          component: Link,
-          to: item.route,
-        }
-
-        return (
-          <MKTypography
-            key={item.name}
-            {...(item.route ? routeComponent : linkComponent)}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            variant="button"
-            textTransform="capitalize"
-            minWidth={item.description ? "14rem" : "12rem"}
-            color={item.description ? "dark" : "text"}
-            fontWeight={item.description ? "bold" : "regular"}
-            py={item.description ? 1 : 0.625}
-            px={2}
-            sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-              borderRadius: borderRadius.md,
-              cursor: "pointer",
-              transition: "all 300ms linear",
-
-              "&:hover": {
-                backgroundColor: grey[200],
-                color: dark.main,
-
-                "& *": {
-                  color: dark.main,
-                },
-              },
-            })}
-            onMouseEnter={({ currentTarget }) => {
-              if (item.dropdown) {
-                setNestedDropdown(currentTarget)
-                setNestedDropdownEl(currentTarget)
-                setNestedDropdownName(item.name)
-              }
-            }}
-            onMouseLeave={() => {
-              if (item.dropdown) {
-                setNestedDropdown(null)
-              }
-            }}
-          >
-            {item.description ? (
-              <MKBox>
-                {item.name}
-                <MKTypography
-                  display="block"
-                  variant="button"
-                  color="text"
-                  fontWeight="regular"
-                  sx={{ transition: "all 300ms linear" }}
-                >
-                  {item.description}
-                </MKTypography>
-              </MKBox>
-            ) : (
-              item.name
-            )}
-            {item.collapse && (
-              <Icon
-                fontSize="small"
-                sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
-              >
-                keyboard_arrow_right
-              </Icon>
-            )}
-          </MKTypography>
-        )
-      })
+    if (collapse && name === dropdownName) {
+      template = collapse.map((item) => (
+        <StandardRoute
+          collapse={item}
+          setNestedDropdown={setNestedDropdown}
+          setNestedDropdownEl={setNestedDropdownEl}
+          setNestedDropdownName={setNestedDropdownName}
+        />
+      ))
     }
 
     return template
   })
 
-  const renderLoggedRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
+  const renderLoggedRoutes = routes.map(({ name, collapse }) => {
     let template
     if (name === "Ingresar" || name === "Login") {
       collapse = [
         {
-          name: "Salir",
-          route: "/es/authentication",
+          name: "Logout",
+          route: "/authentication",
           component: <Login />,
         },
       ]
     }
-    // Render the dropdown menu that should be display as columns
-    if (collapse && columns && name === dropdownName) {
-      const calculateColumns = collapse.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / rowsPerColumn)
-
-        if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = []
-        }
-
-        resultArray[chunkIndex].push(item)
-
-        return resultArray
-      }, [])
-
-      template = (
-        <Grid key={name} container spacing={3} py={1} px={1.5}>
-          {calculateColumns.map((cols, key) => {
-            const gridKey = `grid-${key}`
-            const dividerKey = `divider-${key}`
-
-            return (
-              <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
-                {cols.map((col, index) => (
-                  <Fragment key={col.name}>
-                    <MKTypography
-                      display="block"
-                      variant="button"
-                      fontWeight="bold"
-                      textTransform="capitalize"
-                      py={1}
-                      px={0.5}
-                      mt={index !== 0 ? 2 : 0}
-                    >
-                      {col.name}
-                    </MKTypography>
-                    {col.collapse.map((item) => (
-                      <MKTypography
-                        key={item.name}
-                        component={item.route ? Link : MuiLink}
-                        to={item.route ? item.route : ""}
-                        href={item.href ? item.href : (e) => e.preventDefault()}
-                        target={item.href ? "_blank" : ""}
-                        rel={item.href ? "noreferrer" : "noreferrer"}
-                        minWidth="11.25rem"
-                        display="block"
-                        variant="button"
-                        color="text"
-                        textTransform="capitalize"
-                        fontWeight="regular"
-                        py={0.625}
-                        px={2}
-                        sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-                          borderRadius: borderRadius.md,
-                          cursor: "pointer",
-                          transition: "all 300ms linear",
-
-                          "&:hover": {
-                            backgroundColor: grey[200],
-                            color: dark.main,
-                          },
-                        })}
-                      >
-                        {item.name}
-                      </MKTypography>
-                    ))}
-                  </Fragment>
-                ))}
-                {key !== 0 && (
-                  <Divider
-                    key={dividerKey}
-                    orientation="vertical"
-                    sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "-4px",
-                      transform: "translateY(-45%)",
-                      height: "90%",
-                    }}
-                  />
-                )}
+    // eslint-disable-next-line no-console
+    if (name === "Notificaciones") {
+      collapse = notifications.map((item) => ({
+        name: (
+          <Grid container spacing={1} flexDirection="column">
+            {user?.admin && (
+              <Grid item>
+                <b>{item.email}</b>
               </Grid>
-            )
-          })}
-        </Grid>
-      )
-
-      // Render the dropdown menu that should be display as list items
-    } else if (collapse && name === dropdownName) {
+            )}
+            <Grid item>{item.text}</Grid>
+          </Grid>
+        ),
+      }))
+    }
+    if (collapse && name === dropdownName) {
       template = collapse.map((item) => {
         const linkComponent = {
           component: MuiLink,
@@ -414,7 +165,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
             justifyContent="space-between"
             alignItems="center"
             variant="button"
-            textTransform="capitalize"
+            // textTransform="capitalize"
             minWidth={item.description ? "14rem" : "12rem"}
             color={item.description ? "dark" : "text"}
             fontWeight={item.description ? "bold" : "regular"}
@@ -529,8 +280,8 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
   )
 
   // Render routes that are nested inside the dropdown menu routes
-  const renderNestedRoutes = routes.map(({ collapse, columns }) =>
-    collapse && !columns
+  const renderNestedRoutes = routes.map(({ collapse }) =>
+    collapse
       ? collapse.map(({ name: parentName, collapse: nestedCollapse }) => {
           let template
 
@@ -556,7 +307,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
                   justifyContent="space-between"
                   alignItems="center"
                   variant="button"
-                  textTransform="capitalize"
+                  // textTransform="capitalize"
                   minWidth={item.description ? "14rem" : "12rem"}
                   color={item.description ? "dark" : "text"}
                   fontWeight={item.description ? "bold" : "regular"}
@@ -695,6 +446,24 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
           >
             {renderNavbarItems}
           </MKBox>
+          {/* <DefaultNavbarDropdown
+            key="notifications"
+            name=""
+            icon={
+              <Badge badgeContent={4} color="secondary">
+                <NotificationIcon color="dark" />
+              </Badge>
+            }
+            route="/notifications"
+            collapse
+            light={light}
+            onMouseEnter={({ currentTarget }) => {
+              setDropdown(currentTarget)
+              setDropdownEl(currentTarget)
+              setDropdownName("notifications")
+            }}
+            onMouseLeave={() => setDropdown(null)}
+          /> */}
           {user?.admin && (
             <DefaultNavbarDropdown
               key="admin"
@@ -705,6 +474,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
               light={light}
             />
           )}
+
           <MKBox ml={{ xs: "auto", lg: 0 }}>
             {action &&
               (action.type === "internal" ? (
@@ -767,7 +537,7 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
     </Container>
   )
 }
-// DefaultNavbar default props
+
 DefaultNavbar.defaultProps = {
   action: null,
   transparent: false,
@@ -778,7 +548,7 @@ DefaultNavbar.defaultProps = {
   logoUrl: null,
   brand: null,
 }
-// Typechecking props for the DefaultNavbar
+// DefaultNavbar default props
 DefaultNavbar.propTypes = {
   brand: PropTypes.string,
   logoUrl: PropTypes.string,
