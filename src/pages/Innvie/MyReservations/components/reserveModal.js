@@ -233,7 +233,12 @@ function ReserveModal({ event }) {
           {JSON.stringify()}
         </Grid>
         <Modal open={show} onClose={toggleModal} sx={{ display: "grid", placeItems: "center" }}>
-          <Slide direction="down" in={show} timeout={500}>
+          <Slide
+            direction="down"
+            in={show}
+            timeout={500}
+            sx={{ overflowX: "hidden", overflowY: "scroll", maxHeight: "80vh" }}
+          >
             <MKBox
               position="relative"
               display="flex"
