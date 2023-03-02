@@ -36,7 +36,7 @@ function CoverLayout() {
         }}
       />
       <main>
-        <MKBox mt={{ xs: -20, lg: -18 }} px={1}>
+        <MKBox mt={{ xs: -20, lg: -18 }} minHeight="42vh" px={1}>
           <Grid container spacing={1} justifyContent="center">
             <Grid item>
               <Outlet />

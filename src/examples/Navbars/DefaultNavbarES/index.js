@@ -430,10 +430,10 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
                 component="img"
                 src={logoUrl}
                 alt="logo"
-                width={{ xs: "150px", lg: "190px" }}
+                width={{ xs: "120px", lg: "190px" }}
                 position="absolute"
                 zIndex={1}
-                sx={{ top: "100px" }}
+                sx={{ top: { xs: "80px", lg: "100px" } }}
                 className="logo"
               />
             )}
