@@ -65,7 +65,7 @@ function useFormatedCalendar() {
     })
     await addNotification({
       email: updatedItem.email,
-      text: `Your reservation has been updated to room ${
+      text: `Your reservation ${_id.substring(0, 6)} has been updated to room ${
         updatedItem.group
       } from ${updatedItem.start_time.format("DD.MM.YYYY")} to ${updatedItem.end_time.format(
         "DD.MM.YYYY"

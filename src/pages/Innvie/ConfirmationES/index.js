@@ -64,10 +64,10 @@ function Confirmation() {
                   user?.last_name ? user.last_name : ""
                 }`}
               </MKTypography>
-              <MKTypography variant="h4">{`Habitación ${type}`}</MKTypography>
+              <MKTypography variant="h4">{`Habitación: ${type}`}</MKTypography>
               <br />
-              <MKTypography>{`Fecha de ingreso: ${startDate}`}</MKTypography>
-              <MKTypography>{`Fecha de salida: ${endDate}`}</MKTypography>
+              <MKTypography>{`Fecha de ingreso: ${startDate} a las 3:00 pm`}</MKTypography>
+              <MKTypography>{`Fecha de salida: ${endDate} a las 12:00 pm`}</MKTypography>
               <MKTypography>{`${days} noches`}</MKTypography>
               <MKBox pt={3} pb={2} px={2} textAlign="center">
                 <MKBox my={1}>
