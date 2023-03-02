@@ -77,38 +77,24 @@ function Reserve() {
   useEffect(() => {
     count.current += 1
   })
-  const handlePartyChange = (e) => {
-    const intParty = parseInt(e.target.value, 10)
-    if (intParty < 1 || intParty > max) return
-    const intKids = parseInt(kids, 10)
-    const intAdults = parseInt(adults, 10)
-    const up = intParty > intKids + intAdults
-    if (up || !(intAdults === 1 && intKids > 0)) {
-      const newAdults = intParty - intKids
-      setAdults(newAdults)
-    } else {
-      const newKids = intParty - intAdults
-      setKids(newKids)
-    }
-    setParty(intParty > 0 ? intParty : 0)
-  }
+
   const handleAdultsChange = (e) => {
     const intAdults = parseInt(e.target.value, 10)
-    const intParty = parseInt(party, 10)
-    const newKids = intParty - intAdults
-    if (newKids < 0) return
+    const intKids = parseInt(kids, 10)
+    const newParty = intAdults + intKids
+    if (newParty > max) return
     if (intAdults < 1) return
-    setKids(newKids)
+    setParty(newParty)
     setAdults(intAdults)
   }
   const handleKidsChange = (e) => {
     const intKids = parseInt(e.target.value, 10)
-    const intParty = parseInt(party, 10)
-    const newAdults = intParty - intKids
-    if (newAdults < 0) return
+    const intAdults = parseInt(adults, 10)
+    const newParty = intAdults + intKids
+    if (newParty > max) return
     if (intKids < 0) return
+    setParty(newParty)
     setKids(intKids)
-    setAdults(newAdults)
   }
 
   const onApprove = async (data, actions) => {
@@ -131,7 +117,15 @@ function Reserve() {
       license: formLicense ?? "",
     }
     await getAndUpdateUser(newUser)
-    const code = await addReservation(formEmail, selectedRoom, startDate, endDate, price)
+    const code = await addReservation(
+      formEmail,
+      selectedRoom,
+      startDate,
+      endDate,
+      price,
+      adults,
+      kids
+    )
     if (!code) return
     await sendEmailConfirmation(formName, formEmail, getShortDate(startDate), getShortDate(endDate))
     setTimeout(() => {
@@ -334,15 +328,6 @@ function Reserve() {
                 </Grid>
                 <Grid item xs={12} py={4}>
                   <Grid item>
-                    <MKBox mb={2}>
-                      <MKInput
-                        type="number"
-                        name="party"
-                        label="Party number"
-                        value={party}
-                        onChange={handlePartyChange}
-                      />
-                    </MKBox>
                     <MKBox mb={2}>
                       <MKInput
                         type="number"

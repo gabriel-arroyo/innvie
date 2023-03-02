@@ -207,7 +207,7 @@ function useCalendar({ type, startDate, endDate }) {
     return id
   }
 
-  async function addReservation(_email, _room, _startDate, _endDate, _price) {
+  async function addReservation(_email, _room, _startDate, _endDate, _price, _adults, _kids) {
     // eslint-disable-next-line no-console
     console.log("reserving", _email, _room, _startDate, _endDate)
     let start = new Date()
@@ -257,6 +257,12 @@ function useCalendar({ type, startDate, endDate }) {
       first_name: foundUser.first_name,
       last_name: foundUser.last_name,
       lastUpdate: serverTimestamp(),
+    }
+    if (_adults) {
+      newReservationWithTimestamp.adults = _adults
+    }
+    if (_kids) {
+      newReservationWithTimestamp.kids = _kids
     }
     const id = await saveReservation(newReservationWithTimestamp)
     await updateRoomStatus(_room.number, "occupied")
