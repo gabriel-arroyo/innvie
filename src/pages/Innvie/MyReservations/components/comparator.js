@@ -3,7 +3,8 @@ import SelectPicker from "components/Innvie/SelectPicker"
 import MKBox from "components/MKBox"
 import MKDatePicker from "components/MKDatePicker"
 import MKTypography from "components/MKTypography"
-import useType from "api/useType"
+import { useEffect } from "react"
+import useCalendar from "api/useCalendar"
 
 function Comparator({
   title,
@@ -14,14 +15,22 @@ function Comparator({
   startIsPast,
   endIsPast,
 }) {
-  const { types } = useType()
+  const { getAvailableTypes, typesNames } = useCalendar({
+    type: reservation.type,
+    startDate: reservation.startDate,
+    endDate: reservation.endDate,
+  })
+  useEffect(() => {
+    getAvailableTypes(reservation.startDate, reservation.endDate, reservation.type)
+  }, [])
+
   return (
     <MKBox width={230}>
       <MKTypography variant="body2" color="secondary" fontWeight="bold">
         {title}
       </MKTypography>
       <SelectPicker
-        options={types ? types.map((o) => o.type) : []}
+        options={typesNames}
         name="type"
         label="Room type"
         onChange={handleChangeName}
@@ -30,7 +39,7 @@ function Comparator({
         sx={{ my: "25px", width: "180px" }}
       />
       <MKTypography variant="body2">
-        {startIsPast && !endIsPast ? "This date has already passed" : ""}
+        {startIsPast && !endIsPast ? "Start date has already passed" : ""}
       </MKTypography>
       <MKTypography variant="body2">
         {endIsPast && endIsPast ? "This reservation has expired, it cannot be modified" : ""}

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import PropTypes from "prop-types"
 import { useEffect, useState } from "react"
 import {
@@ -8,6 +9,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore"
 import roundTo from "tools/round"
@@ -15,6 +17,9 @@ import moment from "moment/moment"
 import db from "../firebase"
 import useRoom from "./useRoom"
 import useUser from "./useUser"
+import { sendReservationChange } from "./mail"
+import useNotifications from "./useNotifications"
+import useType from "./useType"
 
 function useCalendar({ type, startDate, endDate }) {
   const [calendar, setCalendar] = useState([])
@@ -24,8 +29,19 @@ function useCalendar({ type, startDate, endDate }) {
   const { getUserByEmail } = useUser()
   const [available, setAvailable] = useState(false)
   const [room, setRoom] = useState({})
+  const [typesNames, setTypesNames] = useState([])
   const { getRooms } = useRoom()
   const [ocupancy, setOcupancy] = useState(0)
+  const { addNotification } = useNotifications()
+  const defaultRoom = {
+    type: "",
+    accessories: ["microwave", "desk", "tv", "dish", "wifi", "minifridge", "fullbath"],
+    beds: { full: 0, queen: 0 },
+    photos: [],
+    price: 0,
+    category: "Habitación",
+  }
+  const { getAll } = useType(defaultRoom)
 
   async function getSingle(field, operator, value) {
     setError(false)
@@ -123,6 +139,39 @@ function useCalendar({ type, startDate, endDate }) {
     return !found
   }
 
+  async function getAvailableTypes(_startDate, _endDate, _default) {
+    const range = {
+      startDate: new Date(_startDate ?? startDate),
+      endDate: new Date(_endDate ?? endDate),
+    }
+    const results = []
+    const today = new Date()
+    const q = query(collectionRef, where("endDate", ">=", today))
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((d) => {
+      const dateRange = {
+        ...d.data(),
+        startDate: d.data().startDate.toDate(),
+        endDate: d.data().endDate.toDate(),
+      }
+      if (checkIntersection(range, dateRange)) {
+        results.push({
+          ...d.data(),
+          startDate: d.data().startDate.toDate(),
+          endDate: d.data().endDate.toDate(),
+        })
+      }
+    })
+    const types = results.map((r) => r.type)
+    const unique = [...new Set(types)]
+    const typesList = await getAll()
+    const availableTypes = typesList.filter((t) => !unique.includes(t.type))
+    const typeNames = availableTypes.map((t) => t.type)
+    typeNames.push(_default)
+    setTypesNames(typeNames)
+    return typeNames
+  }
+
   async function getAvailability(_type, _startDate, _endDate) {
     const typeString = _type?.type || _type
     const range = {
@@ -210,11 +259,11 @@ function useCalendar({ type, startDate, endDate }) {
   async function addReservation(_email, _room, _startDate, _endDate, _price, _adults, _kids) {
     // eslint-disable-next-line no-console
     console.log("reserving", _email, _room, _startDate, _endDate)
-    let start = new Date()
-    let end = new Date()
+    let start = moment().toDate()
+    let end = moment().toDate()
     try {
-      start = new Date(`${_startDate}, 15:00:00`)
-      end = new Date(`${_endDate}, 11:30:00`)
+      start = moment(_startDate).set({ hour: 15 }).toDate()
+      end = moment(_endDate).set({ hour: 11, minute: 30 }).toDate()
       if (start > end) {
         setError("Start date must be before end date")
         return null
@@ -269,6 +318,47 @@ function useCalendar({ type, startDate, endDate }) {
     return id
   }
 
+  async function updateCalendarEntry(_id, _startDate, _endDate, number, status) {
+    const start_time = moment(_startDate).set("hour", 15).set("minute", 0)
+    const end_time = moment(_endDate).set("hour", 11).set("minute", 30)
+    const item = calendar.find((i) => i.id === _id)
+    const updatedItem = {
+      ...item,
+      start_time,
+      end_time,
+      number: number ?? item.number,
+      status,
+    }
+    console.log(updatedItem.email)
+    const updatedItemList = calendar.map((i) => (i.id === _id ? updatedItem : i))
+    setCalendar(updatedItemList)
+    const docRef = doc(db, "calendar", _id)
+    const data = {
+      startDate: start_time.toDate(),
+      endDate: end_time.toDate(),
+      number: number ?? item.number,
+      lastUpdate: serverTimestamp(),
+      status,
+    }
+    await updateDoc(docRef, data)
+    await sendReservationChange({
+      name: updatedItem.title,
+      email: updatedItem.email,
+      check_in: updatedItem.start_time,
+      check_out: updatedItem.end_time,
+      room: updatedItem.group,
+      access_key: updatedItem.id.substr(0, 6),
+    })
+    await addNotification({
+      email: updatedItem.email,
+      text: `Your reservation ${_id.substring(0, 6)} has been updated to room ${
+        updatedItem.group
+      } from ${updatedItem.start_time.format("DD.MM.YYYY")} to ${updatedItem.end_time.format(
+        "DD.MM.YYYY"
+      )}`,
+    })
+  }
+
   useEffect(() => {
     if (type && startDate && endDate) {
       getAvailableRoom(type, startDate, endDate)
@@ -280,8 +370,11 @@ function useCalendar({ type, startDate, endDate }) {
     calendar,
     roomsAvailable,
     available,
+    typesNames,
     addReservation,
+    updateCalendarEntry,
     getReservationsByEmail,
+    getAvailableTypes,
     getAvailability,
     getRoomAvailability,
     getAvailableRoom,

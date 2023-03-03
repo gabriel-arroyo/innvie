@@ -8,6 +8,8 @@ const template_id_confirmation = "template_kz9i168"
 const template_id_2 = "template_04kuvre"
 const innvie_mail = "innvie.hotel@gmail.com"
 
+const debugging = true
+
 export function sendTemplateEmail(reply_to, to_email, subject, body) {
   try {
     const result = emailjs.send(
@@ -28,6 +30,10 @@ export function sendTemplateEmail(reply_to, to_email, subject, body) {
 }
 
 export async function sendEmailConfirmation(to_name, to_email, check_in, check_out) {
+  if (debugging) {
+    console.log("email test: not send when debugging")
+    return
+  }
   try {
     const result = await emailjs.send(
       service_id,
@@ -49,6 +55,10 @@ export async function sendEmailConfirmation(to_name, to_email, check_in, check_o
 }
 
 export async function sendEmailPass(access_key, to_email, check_in, check_out) {
+  if (debugging) {
+    console.log("email test: not send when debugging")
+    return
+  }
   const subject = "Innvie Motel - Access Key"
   const body = `
   We are ready to receive you at Innvie Motel!
@@ -75,6 +85,10 @@ Thank you for your trust.
 }
 
 export async function sendContact(name, phone, email, message) {
+  if (debugging) {
+    console.log("email test: not send when debugging")
+    return
+  }
   const date = new Date().toLocaleString()
   const subject = `New contact from ${email}`
   const body = `Hello,
@@ -102,6 +116,10 @@ export async function sendReservationChange({
   access_key,
   message,
 }) {
+  if (debugging) {
+    console.log("email test: not send when debugging")
+    return
+  }
   const date = new Date().toLocaleString()
   const subject = `Reservation change for ${email}`
   const body = `Hello,

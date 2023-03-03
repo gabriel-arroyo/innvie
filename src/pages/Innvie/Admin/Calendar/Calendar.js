@@ -21,6 +21,7 @@ import MKBox from "components/MKBox"
 import colors from "assets/theme/base/colors"
 import { getDaysDifference } from "tools/getDate"
 import MKButton from "components/MKButton"
+import { sendEmailPass } from "api/mail"
 import useFormatedCalendar from "../../../../api/useFormatedCalendar"
 import InfoLabel from "../../../../components/Innvie/InfoLabel"
 import CalendarFilters from "../../../../components/Innvie/CalendarFilters"
@@ -30,7 +31,7 @@ function Calendar() {
     useFormatedCalendar()
   const [tooltip, setTooltip] = useState("")
   const lowLimit = moment().startOf("week")
-  const highLimit = moment().endOf("week")
+  const highLimit = moment().endOf("week").add(1, "week")
   const [startDate, setStartDate] = useState(lowLimit)
   const [endDate, setEndDate] = useState(highLimit)
   const [selectedItem, setSelectedItem] = useState(null)
@@ -56,11 +57,17 @@ function Calendar() {
     return itemsOnNewGroup.filter((i) => itemIntersects(i, start, end)).length > 0
   }
 
-  const closeAndSave = () => {
+  const closeAndSave = async () => {
+    let newStartDate
+    let newId
+    let newEndDate
+    let newEmail
+    let newType
     if (selectedItem.type === "move") {
       const group = groups.find((g) => g.id === selectedItem.newGroupOrder + 1)
       if (group) {
         setTooltip(`${group.title} ${group.tip}`)
+        newType = group.tip
       }
       const days = getDaysDifference(
         moment(selectedItem.item.start_time).format(),
@@ -77,14 +84,32 @@ function Calendar() {
         return
       }
 
-      const start = moment(selectedItem.dragTime).format()
-      const end = moment(selectedItem.dragTime).add(days, "days").format()
+      newStartDate = moment(selectedItem.dragTime).format()
+      newEndDate = moment(selectedItem.dragTime).add(days, "days").format()
       const newGroup = selectedItem.newGroupOrder + 1
-
-      updateCalendarEntry(selectedItem.itemId, start, end, newGroup).then(() => {})
+      newId = selectedItem.itemId
+      newEmail = selectedItem.item.email
+      await updateCalendarEntry(newId, newStartDate, newEndDate, newGroup, newType).then(() => {})
     }
     if (selectedItem.type === "resize") {
-      updateCalendarEntry(selectedItem.itemId, selectedItem.start, selectedItem.end).then(() => {})
+      newStartDate = moment(selectedItem.start).format()
+      newEndDate = moment(selectedItem.end).format()
+      newId = selectedItem.itemId
+      newEmail = selectedItem.item.email
+      await updateCalendarEntry(newId, newStartDate, newEndDate).then(() => {
+        console.log("updated")
+      })
+    }
+    const checkinTimeHasPassed = moment(newStartDate)
+      .set({ hour: 14, minute: 30, second: 0, millisecond: 0 })
+      .isBefore(moment())
+    if (checkinTimeHasPassed) {
+      await sendEmailPass(
+        newId.substring(0, 6),
+        newEmail,
+        moment(newStartDate).format("YYYY-MM-DD"),
+        moment(newEndDate).format("YYYY-MM-DD")
+      )
     }
     setShow(false)
   }
@@ -182,6 +207,7 @@ function Calendar() {
     }
   }
   const handleItemResize = (itemId, endTimeOrStartTime, edge) => {
+    console.log(items)
     const today = moment().format("YYYY-MM-DD")
     const todayTime = moment(`${today} 12:00:00`)
     if (moment(endTimeOrStartTime).isBefore(todayTime)) {

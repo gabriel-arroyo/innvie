@@ -31,10 +31,10 @@ function useFormatedCalendar() {
     if (now.isAfter(moment(end_time))) return "done"
     return "occupied"
   }
-  async function updateCalendarEntry(_id, _startDate, _endDate, group, status) {
+  async function updateCalendarEntry(_id, _startDate, _endDate, group, newType) {
     const start_time = moment(_startDate).set("hour", 15).set("minute", 0)
     const end_time = moment(_endDate).set("hour", 11).set("minute", 30)
-    const calculatedStatus = status ?? getStatusByDate(start_time, end_time)
+    const calculatedStatus = getStatusByDate(start_time, end_time)
     const item = items.find((i) => i.id === _id)
     const updatedItem = {
       ...item,
@@ -42,6 +42,7 @@ function useFormatedCalendar() {
       end_time,
       group: group ?? item.group,
       status: calculatedStatus,
+      type: newType ?? item.type,
     }
     console.log(updatedItem.email)
     const updatedItemList = items.map((i) => (i.id === _id ? updatedItem : i))
@@ -53,6 +54,7 @@ function useFormatedCalendar() {
       number: group ?? item.group,
       lastUpdate: serverTimestamp(),
       status: calculatedStatus,
+      type: newType ?? item.type,
     }
     await updateDoc(docRef, data)
     await sendReservationChange({

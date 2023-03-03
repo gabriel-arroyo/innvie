@@ -39,6 +39,7 @@ import PayButton from "pages/Innvie/Reserve/PayButton"
 import useCalendar from "api/useCalendar"
 import { Navigate } from "react-router-dom"
 import { sendEmailConfirmation } from "api/mail"
+import moment from "moment"
 import Comparator from "./comparator"
 
 function newReservationReducer(state, action) {
@@ -132,7 +133,7 @@ function ReserveModal({ event }) {
   const startIsPast = dateIsPast(event.startDate)
   const endIsPast = dateIsPast(event.endDate)
   const [accept, setAccept] = useState(false)
-  const { room, addReservation, getAvailableRoom } = useCalendar({
+  const { room, getAvailableRoom, updateCalendarEntry } = useCalendar({
     type: event.type,
     startDate: event.startDate,
     endDate: event.endDate,
@@ -188,13 +189,26 @@ function ReserveModal({ event }) {
     dispatch({ type: "update_type", payload: selectedType })
   }
 
-  const handleAccept = () => {
+  const handleAccept = async () => {
+    const selectedRoom = await getAvailableRoom(
+      state.newReservation.type,
+      state.newReservation.startDate,
+      state.newReservation.endDate
+    )
+    console.log(selectedRoom)
+    // check if selectedRoom is an empty array or empty object
+
+    if (Object.keys(selectedRoom).length === 0 || selectedRoom.length === 0) {
+      alert("There are no rooms of that type available for the selected dates")
+      return
+    }
     setAccept(true)
   }
 
   const onApprove = async (data, actions) => {
     if (actions) {
       const details = await actions.order.capture()
+      // eslint-disable-next-line no-console
       console.log(`Transaction ${details.status} by ${details.payer.name.given_name}`)
     }
 
@@ -204,12 +218,12 @@ function ReserveModal({ event }) {
       state.newReservation.endDate
     )
     console.log("selected room", room?.number ?? "ND")
-    const code = await addReservation(
-      event.email,
-      selectedRoom,
-      event.startDate,
-      event.endDate,
-      event.price
+    const code = await updateCalendarEntry(
+      event.id,
+      state.newReservation.startDate,
+      state.newReservation.endDate,
+      selectedRoom?.number ?? "ND",
+      moment(state.newReservation.startDate).isBefore(moment()) ? "occupied" : "pending"
     )
     if (!code) return
     await sendEmailConfirmation(
