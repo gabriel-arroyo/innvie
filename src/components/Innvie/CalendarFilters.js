@@ -17,7 +17,6 @@ function CalendarFilters({
   setStartDate,
   setEndDate,
 }) {
-  console.log("🚀 ~ file: CalendarFilters.js:8 ~ CalendarFilters ~ items", items)
   const gropusIds = groups.map(({ id }) => {
     const label = `Room: ${id}`
     const group = {
@@ -28,7 +27,6 @@ function CalendarFilters({
     return group
   })
   const itesmNames = items.map(({ title, email }) => {
-    console.log("🚀 ~ file: CalendarFilters.js:29 ~ itesmNames ~ title", title)
     let first_name = ""
     let last_name = ""
     if (title) {
@@ -50,7 +48,6 @@ function CalendarFilters({
     JSON.parse(item)
   )
 
-  console.log("🚀 ~ file: CalendarFilters.js:39 ~ CalendarFilters ~ options", options)
   const [all, setAll] = useState(true)
   const [available, setAvailable] = useState(false)
   const [occupied, setOccupied] = useState(false)
@@ -133,7 +130,6 @@ function CalendarFilters({
   }
 
   const handleFilterChange = (newValue) => {
-    console.log("🚀 ~ file: CalendarFilters.js:70 ~ handleFilterChange ~ newValue", newValue)
     if (!newValue) {
       setFilterText("")
       setAll(true)

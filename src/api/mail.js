@@ -115,6 +115,7 @@ export async function sendReservationChange({
   room,
   access_key,
   message,
+  type,
 }) {
   if (debugging) {
     console.log("email test: not send when debugging")
@@ -130,6 +131,7 @@ export async function sendReservationChange({
     Email: ${email}
     Check in: ${check_in}
     Check out: ${check_out}
+    Room Type: ${type}
     Room: ${room}
     Access key: ${access_key}
     Message: ${message}

@@ -92,13 +92,16 @@ function Calendar() {
       await updateCalendarEntry(newId, newStartDate, newEndDate, newGroup, newType).then(() => {})
     }
     if (selectedItem.type === "resize") {
+      const group = groups.find((g) => g.id === selectedItem.item.group)
       newStartDate = moment(selectedItem.start).format()
       newEndDate = moment(selectedItem.end).format()
       newId = selectedItem.itemId
       newEmail = selectedItem.item.email
-      await updateCalendarEntry(newId, newStartDate, newEndDate).then(() => {
-        console.log("updated")
-      })
+      await updateCalendarEntry(newId, newStartDate, newEndDate, group.title, group.tip).then(
+        () => {
+          console.log("updated")
+        }
+      )
     }
     const checkinTimeHasPassed = moment(newStartDate)
       .set({ hour: 14, minute: 30, second: 0, millisecond: 0 })
@@ -191,7 +194,6 @@ function Calendar() {
     </div>
   )
   const onItemClick = (e) => {
-    console.log("🚀 ~ file: Calendar.js:32 ~ onItemClick ~ e", e)
     // find item by item id
     const item = items.find((i) => i.id === e)
     if (!item) return
@@ -243,7 +245,7 @@ function Calendar() {
 
     const start = edge === "left" ? date : item.start_time
     const end = edge === "left" ? item.end_time : date
-    setSelectedItem({ itemId, start, end, type: "resize" })
+    setSelectedItem({ itemId, dragTime: start, start, end, item, type: "resize" })
     setShow(true)
   }
 

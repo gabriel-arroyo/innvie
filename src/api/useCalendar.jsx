@@ -167,12 +167,14 @@ function useCalendar({ type, startDate, endDate }) {
     const typesList = await getAll()
     const availableTypes = typesList.filter((t) => !unique.includes(t.type))
     const typeNames = availableTypes.map((t) => t.type)
-    typeNames.push(_default)
+    if (!typeNames.includes(_default)) {
+      typeNames.push(_default)
+    }
     setTypesNames(typeNames)
     return typeNames
   }
 
-  async function getAvailability(_type, _startDate, _endDate) {
+  async function getAvailability(_type, _startDate, _endDate, currentId = null) {
     const typeString = _type?.type || _type
     const range = {
       startDate: new Date(_startDate ?? startDate),
@@ -191,11 +193,16 @@ function useCalendar({ type, startDate, endDate }) {
       if (checkIntersection(range, dateRange)) {
         results.push({
           ...d.data(),
+          id: d.id,
           startDate: d.data().startDate.toDate(),
           endDate: d.data().endDate.toDate(),
         })
       }
     })
+    if (currentId) {
+      results.pop((r) => r.id === currentId)
+    }
+
     const roomsfound = await getRoomsNotInArray(
       typeString,
       results.map((r) => r.number)
@@ -204,8 +211,8 @@ function useCalendar({ type, startDate, endDate }) {
     return roomsfound
   }
 
-  async function getAvailableRoom(_type, _startDate, _endDate) {
-    const avail = await getAvailability(_type, _startDate, _endDate)
+  async function getAvailableRoom(_type, _startDate, _endDate, currentId = null) {
+    const avail = await getAvailability(_type, _startDate, _endDate, currentId)
 
     if (avail.length > 0) {
       const r = avail.sort((a, b) => a.number - b.number)[0]
@@ -220,6 +227,7 @@ function useCalendar({ type, startDate, endDate }) {
     if (cal) {
       setCalendar(cal)
     }
+    return cal
   }
 
   async function getReservationsByEmail(email) {
@@ -319,9 +327,13 @@ function useCalendar({ type, startDate, endDate }) {
   }
 
   async function updateCalendarEntry(_id, _startDate, _endDate, number, status) {
+    let foundCalendar = calendar
+    if (calendar.length === 0) {
+      foundCalendar = await getCalendar()
+    }
     const start_time = moment(_startDate).set("hour", 15).set("minute", 0)
     const end_time = moment(_endDate).set("hour", 11).set("minute", 30)
-    const item = calendar.find((i) => i.id === _id)
+    const item = foundCalendar.find((i) => i.id === _id)
     const updatedItem = {
       ...item,
       start_time,
@@ -329,8 +341,9 @@ function useCalendar({ type, startDate, endDate }) {
       number: number ?? item.number,
       status,
     }
+
     console.log(updatedItem.email)
-    const updatedItemList = calendar.map((i) => (i.id === _id ? updatedItem : i))
+    const updatedItemList = foundCalendar.map((i) => (i.id === _id ? updatedItem : i))
     setCalendar(updatedItemList)
     const docRef = doc(db, "calendar", _id)
     const data = {
@@ -339,6 +352,7 @@ function useCalendar({ type, startDate, endDate }) {
       number: number ?? item.number,
       lastUpdate: serverTimestamp(),
       status,
+      type: item.type,
     }
     await updateDoc(docRef, data)
     await sendReservationChange({
@@ -348,6 +362,7 @@ function useCalendar({ type, startDate, endDate }) {
       check_out: updatedItem.end_time,
       room: updatedItem.group,
       access_key: updatedItem.id.substr(0, 6),
+      type: updatedItem.type,
     })
     await addNotification({
       email: updatedItem.email,

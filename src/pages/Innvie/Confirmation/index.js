@@ -25,6 +25,7 @@ import loggedUser from "states/loggedUser"
 import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate"
 import selectedPrice from "states/selectedPrice"
 import { selectedType } from "states/selectedType"
+import modifiedPrice from "states/modifiedPrice"
 import taxes from "constants/taxes"
 import roundTo from "tools/round"
 import CustomLayout from "../../../layouts/sections/components/CustomLayout"
@@ -39,6 +40,7 @@ function Confirmation() {
   const [days] = useAtom(reservedDays)
   const [type] = useAtom(selectedType)
   const [price] = useAtom(selectedPrice)
+  const [newPrice] = useAtom(modifiedPrice)
   return (
     <CustomLayout
       title="Booking Confirmed"
@@ -86,6 +88,21 @@ function Confirmation() {
                     </MKTypography>
                     {roundTo(price * days + price * days * taxes, 2)}
                   </MKTypography>
+                  {newPrice && (
+                    <MKTypography variant="h1" color="error">
+                      Difference Payable:{" "}
+                      <MKTypography
+                        display="inline"
+                        component="small"
+                        variant="h5"
+                        color="inherit"
+                        verticalAlign="top"
+                      >
+                        $
+                      </MKTypography>
+                      {newPrice}
+                    </MKTypography>
+                  )}
                 </MKBox>
               </MKBox>
             </MKBox>

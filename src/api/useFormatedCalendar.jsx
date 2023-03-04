@@ -34,14 +34,12 @@ function useFormatedCalendar() {
   async function updateCalendarEntry(_id, _startDate, _endDate, group, newType) {
     const start_time = moment(_startDate).set("hour", 15).set("minute", 0)
     const end_time = moment(_endDate).set("hour", 11).set("minute", 30)
-    const calculatedStatus = getStatusByDate(start_time, end_time)
     const item = items.find((i) => i.id === _id)
     const updatedItem = {
       ...item,
       start_time,
       end_time,
       group: group ?? item.group,
-      status: calculatedStatus,
       type: newType ?? item.type,
     }
     console.log(updatedItem.email)
@@ -53,18 +51,23 @@ function useFormatedCalendar() {
       endDate: end_time.toDate(),
       number: group ?? item.group,
       lastUpdate: serverTimestamp(),
-      status: calculatedStatus,
-      type: newType ?? item.type,
+    }
+    if (newType || item.type) {
+      data.type = newType ?? item.type
     }
     await updateDoc(docRef, data)
-    await sendReservationChange({
+    const reservationData = {
       name: updatedItem.title,
       email: updatedItem.email,
       check_in: updatedItem.start_time,
       check_out: updatedItem.end_time,
       room: updatedItem.group,
       access_key: updatedItem.id.substr(0, 6),
-    })
+    }
+    if (newType || item.type) {
+      reservationData.type = newType ?? item.type
+    }
+    await sendReservationChange(reservationData)
     await addNotification({
       email: updatedItem.email,
       text: `Your reservation ${_id.substring(0, 6)} has been updated to room ${
@@ -154,6 +157,7 @@ function useFormatedCalendar() {
     groups,
     items,
     getCalendar,
+    getStatusByDate,
     updateCalendarEntry,
     filterItems,
   }

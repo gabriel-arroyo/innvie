@@ -37,9 +37,14 @@ import roundTo from "tools/round"
 import useType from "api/useType"
 import PayButton from "pages/Innvie/Reserve/PayButton"
 import useCalendar from "api/useCalendar"
-import { Navigate } from "react-router-dom"
 import { sendEmailConfirmation } from "api/mail"
 import moment from "moment"
+import { useNavigate } from "react-router-dom"
+import { useAtom } from "jotai"
+import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate"
+import { selectedType } from "states/selectedType"
+import modifiedPrice from "states/modifiedPrice"
+import selectedPrice from "states/selectedPrice"
 import Comparator from "./comparator"
 
 function newReservationReducer(state, action) {
@@ -128,11 +133,18 @@ function newReservationReducer(state, action) {
 }
 
 function ReserveModal({ event }) {
+  const [, setStartDate] = useAtom(reservedStartDate)
+  const [, setEndDate] = useAtom(reservedEndDate)
+  const [, setDays] = useAtom(reservedDays)
+  const [, setType] = useAtom(selectedType)
+  const [, setPrice] = useAtom(selectedPrice)
+  const [, setModifiedPrice] = useAtom(modifiedPrice)
   const [show, setShow] = useState(false)
   const toggleModal = () => setShow(!show)
   const startIsPast = dateIsPast(event.startDate)
   const endIsPast = dateIsPast(event.endDate)
   const [accept, setAccept] = useState(false)
+  const navigate = useNavigate()
   const { room, getAvailableRoom, updateCalendarEntry } = useCalendar({
     type: event.type,
     startDate: event.startDate,
@@ -165,6 +177,7 @@ function ReserveModal({ event }) {
   const [state, dispatch] = useReducer(newReservationReducer, initialState)
   const { getAll } = useType()
   useEffect(() => {
+    setModifiedPrice(0)
     getAll().then((alltypes) => {
       dispatch({ type: "get_types", payload: alltypes })
     })
@@ -181,19 +194,22 @@ function ReserveModal({ event }) {
       const end = parseDate(estart)
       dispatch({ type: "update_endDate", payload: end })
     }
+    setAccept(false)
   }
   const handleChangeName = (e) => {
-    const selectedType = e.target.innerText
-    if (!selectedType) return
-    console.log(selectedType)
-    dispatch({ type: "update_type", payload: selectedType })
+    const selectedTypeChange = e.target.innerText
+    if (!selectedTypeChange) return
+    console.log(selectedTypeChange)
+    dispatch({ type: "update_type", payload: selectedTypeChange })
+    setAccept(false)
   }
 
   const handleAccept = async () => {
     const selectedRoom = await getAvailableRoom(
       state.newReservation.type,
       state.newReservation.startDate,
-      state.newReservation.endDate
+      state.newReservation.endDate,
+      event.id
     )
     console.log(selectedRoom)
     // check if selectedRoom is an empty array or empty object
@@ -215,26 +231,37 @@ function ReserveModal({ event }) {
     const selectedRoom = await getAvailableRoom(
       state.newReservation.type,
       state.newReservation.startDate,
-      state.newReservation.endDate
+      state.newReservation.endDate,
+      event.id
     )
     console.log("selected room", room?.number ?? "ND")
-    const code = await updateCalendarEntry(
+    await updateCalendarEntry(
       event.id,
       state.newReservation.startDate,
       state.newReservation.endDate,
       selectedRoom?.number ?? "ND",
       moment(state.newReservation.startDate).isBefore(moment()) ? "occupied" : "pending"
     )
-    if (!code) return
     await sendEmailConfirmation(
       event.first_name,
       event.email,
-      getShortDate(event.startDate),
-      getShortDate(event.endDate)
+      getShortDate(state.newReservation.startDate),
+      getShortDate(state.newReservation.endDate)
     )
+    const daysDiff = getDaysDifference(state.newReservation.startDate, state.newReservation.endDate)
+    setStartDate(state.newReservation.startDate)
+    setEndDate(state.newReservation.endDate)
+    setDays(daysDiff)
+    setType(state.newReservation.type)
+    const differencePayable = roundTo(state.newReservation.cost - state.prevReservation.cost, 2)
+    setModifiedPrice(differencePayable)
+    setPrice(state.newReservation.price)
+
+    // wait 2 seconds
     setTimeout(() => {
-      Navigate(`/confirmation/${code}`)
-    }, 1000)
+      console.log("navigating")
+      navigate(`/confirmation/${event.id}`)
+    }, 2000)
   }
 
   return (
