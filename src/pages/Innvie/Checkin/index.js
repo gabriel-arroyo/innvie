@@ -29,6 +29,7 @@ import { useEffect, useState } from "react"
 import useCheckin from "api/useCheckin"
 import useUser from "api/useUser"
 import { sendEmailPass } from "api/mail"
+import useNotifications from "api/useNotifications"
 import moment from "moment/moment"
 import CheckinModal from "./modal"
 
@@ -38,6 +39,7 @@ function Checkin() {
   const [message, setMessage] = useState("")
   const [error, setError] = useState(null)
   const [show, setShow] = useState(false)
+  const { addNotification } = useNotifications()
   const { checkinUser, checkoutUser, login, logged, checkedIn } = useUser()
   const { currentEvent, updateEventWithCheckin, updateEventWithCheckout, getCurrentEvent } =
     useCheckin()
@@ -61,7 +63,11 @@ function Checkin() {
     const check_in = moment(currentEvent.startDate).format("MMMM Do YYYY")
     const check_out = moment(currentEvent.endDate).format("MMMM Do YYYY")
     const to_email = currentEvent.email
-    sendEmailPass(access_key, to_email, check_in, check_out)
+    await sendEmailPass(access_key, to_email, check_in, check_out)
+    await addNotification({
+      email: to_email,
+      text: `You have checked in your reservation ${currentEvent.id.substring(0, 6)}`,
+    })
   }
   const handleCheckin = async (e) => {
     e.preventDefault()
@@ -69,6 +75,10 @@ function Checkin() {
       toggleModal()
       updateEventWithCheckout()
       checkoutUser()
+      await addNotification({
+        email: currentEvent.email,
+        text: `You have checked out your reservation ${currentEvent.id.substring(0, 6)}`,
+      })
     } else {
       const formEmail = e.target.email.value
       const formPassword = e.target.password.value

@@ -37,6 +37,7 @@ import { useAtom } from "jotai"
 import loggedUser from "states/loggedUser"
 import useNotifications from "api/useNotifications"
 import { Grid } from "@mui/material"
+import moment from "moment"
 
 function DefaultNavbarMobile({ open }) {
   const [collapse, setCollapse] = useState("")
@@ -158,6 +159,8 @@ function DefaultNavbarMobile({ open }) {
               {user?.admin && (
                 <Grid item>
                   <b>{item.email}</b>
+                  {" | "}
+                  {moment(item.timestamp.toDate()).format("YYYY-MM-DD HH:mm:ss")}
                 </Grid>
               )}
               <Grid item>{item.text}</Grid>

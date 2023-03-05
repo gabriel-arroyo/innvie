@@ -217,7 +217,7 @@ function useRoom() {
     setLoading(false)
   }
 
-  async function updateRoomStatus(number, status) {
+  async function updateRoomStatus({ number, status }) {
     setError(false)
     setLoading(true)
     const roomToUpdate = await getRoomByNumber(number)

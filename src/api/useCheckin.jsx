@@ -57,7 +57,7 @@ function useCheckin() {
       checkin: serverTimestamp(),
     }
     await setDoc(doc(db, "calendar", id), newData)
-    await updateRoomStatus(currentEvent.number, "occupied")
+    await updateRoomStatus({ room: currentEvent.number, status: "occupied" })
   }
   async function updateEventWithCheckout() {
     if (!currentEvent.id) return
@@ -68,7 +68,7 @@ function useCheckin() {
       checkout: serverTimestamp(),
     }
     await setDoc(doc(db, "calendar", id), newData)
-    await updateRoomStatus(currentEvent.number, "available")
+    await updateRoomStatus({ room: currentEvent.number, status: "dirty" })
   }
 
   async function getCurrentEvent() {

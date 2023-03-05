@@ -23,6 +23,7 @@ import { Link } from "react-router-dom"
 import loggedUser from "states/loggedUser"
 
 import { Grid } from "@mui/material"
+import moment from "moment"
 import StandardRoute from "./StandardRout"
 
 function DefaultNavbar({ transparent, light, action, sticky, relative, center, logoUrl }) {
@@ -136,6 +137,8 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
             {user?.admin && (
               <Grid item>
                 <b>{item.email}</b>
+                {" | "}
+                {moment(item.timestamp.toDate()).format("YYYY-MM-DD HH:mm:ss")}
               </Grid>
             )}
             <Grid item>{item.text}</Grid>
