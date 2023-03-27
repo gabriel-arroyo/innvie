@@ -51,12 +51,9 @@ function DateInput({ startDate, endDate }) {
         </MKTypography>
         <MKDatePicker
           type="date"
-          options={{
-            mode: "range",
-            defaultDate: [startDate, endDate],
-            minDate: "2022-02-03",
-            maxDate: "2024-03-03",
-          }}
+          startDate={startDate}
+          endDate={endDate}
+          minDate="today"
           variant="standard"
           placeholder="Please select date"
           fullWidth

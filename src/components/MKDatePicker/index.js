@@ -24,11 +24,18 @@ import "flatpickr/dist/flatpickr.css"
 
 // Otis Kit PRO components
 import MKInput from "components/MKInput"
+import { getCurrentDate, getTomorrowDate } from "tools/getDate"
 
-function MKDatePicker({ input, ...rest }) {
+function MKDatePicker({ input, minDate, maxDate, mode, startDate, endDate, ...rest }) {
   return (
     <Flatpickr
       {...rest}
+      options={{
+        defaultDate: [startDate, endDate],
+        mode,
+        minDate,
+        maxDate,
+      }}
       render={({ defaultValue }, ref) => (
         <MKInput
           {...input}
@@ -45,11 +52,21 @@ function MKDatePicker({ input, ...rest }) {
 // Setting default values for the props of MKDatePicker
 MKDatePicker.defaultProps = {
   input: {},
+  minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+  maxDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+  startDate: getCurrentDate(),
+  endDate: getTomorrowDate(),
+  mode: "range",
 }
 
 // Typechecking props for the MKDatePicker
 MKDatePicker.propTypes = {
   input: PropTypes.instanceOf(Object),
+  minDate: PropTypes.string,
+  maxDate: PropTypes.string,
+  mode: PropTypes.string,
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
 }
 
 export default MKDatePicker
