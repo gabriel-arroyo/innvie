@@ -322,7 +322,7 @@ function useCalendar({ type, startDate, endDate }) {
       newReservationWithTimestamp.kids = _kids
     }
     const id = await saveReservation(newReservationWithTimestamp)
-    await updateRoomStatus({ room: _room.number, status: "occupied" })
+    await updateRoomStatus({ number: _room.number, status: "occupied" })
     return id
   }
 

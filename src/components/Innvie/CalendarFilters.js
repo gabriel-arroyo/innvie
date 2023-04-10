@@ -54,7 +54,7 @@ function CalendarFilters({
   const [dirty, setDirty] = useState(false)
   const [maintenance, setMaintenance] = useState(false)
   const [done, setDone] = useState(false)
-  const [filterText, setFilterText] = useState("")
+  // const [filterText, setFilterText] = useState("")
   const [status, setStatus] = useState([])
   const [room, setRoom] = useState(null)
   const [email, setEmail] = useState(null)
@@ -67,7 +67,7 @@ function CalendarFilters({
     setDirty(false)
     setMaintenance(false)
     setDone(false)
-    setFilterText("")
+    // setFilterText("")
     setStatus([])
     if (event.target.checked) filterItems([], room, email)
   }
@@ -129,14 +129,15 @@ function CalendarFilters({
     changeSelection(event, "maintenance")
   }
 
+  // eslint-disable-next-line no-unused-vars
   const handleFilterChange = (newValue) => {
     if (!newValue) {
-      setFilterText("")
+      // setFilterText("")
       setAll(true)
       addText(null)
       return
     }
-    if (newValue.id) setFilterText(newValue.id)
+    // if (newValue.id) setFilterText(newValue.id)
     addText(newValue.id)
   }
   const onChangeDate = (e) => {
@@ -157,24 +158,17 @@ function CalendarFilters({
     >
       <MKDatePicker
         type="date"
-        options={{
-          mode: "range",
-          defaultDate: [
-            moment(startDate).format("YYYY-MM-DD"),
-            moment(endDate).format("YYYY-MM-DD"),
-          ],
-          minDate: "2022-02-03",
-          maxDate: "2024-03-03",
-        }}
         variant="standard"
         placeholder="Please select date"
+        startDate={startDate}
+        endDate={endDate}
         fullWidth
         onChange={onChangeDate}
       />
       <Autocomplete
         onChange={(e, newValue) => handleFilterChange(newValue)}
         disablePortal
-        inputValue={filterText}
+        // inputValue={filterText}
         id="combo-box-demo"
         options={Array.from(options)}
         sx={{

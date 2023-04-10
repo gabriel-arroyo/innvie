@@ -79,6 +79,7 @@ function Reserve() {
   useEffect(() => {
     count.current += 1
   })
+
   const handleAdultsChange = (e) => {
     const intAdults = parseInt(e.target.value, 10)
     const intKids = parseInt(kids, 10)
@@ -216,14 +217,18 @@ function Reserve() {
               }}
               specifications={[
                 { label: `Habitación ${type}`, singlePrice: `$${price}` },
-                { label: `${days} día${days > 1 ? "s" : ""}` },
-                { label: `Entrada:`, singlePrice: startDate },
-                { label: `Salida:`, singlePrice: endDate },
-                // { label: "Descuento", singlePrice: "50.00", discount: true },
                 {
-                  label: "Impuestos",
+                  label: `${days} día${days > 1 ? "s" : ""}`,
+                  singlePrice: `Subtotal: $${price * days}`,
+                },
+                // { label: "Descuento", singlePrice: "50.00", discount: true },
+                { label: "Impuestos por día", singlePrice: `${roundTo(taxes * 100, 2)}%` },
+                {
+                  label: "Total Impuestos",
                   singlePrice: `$${roundTo(taxes * price * days, 2)}`,
                 },
+                { label: `Entrada:`, singlePrice: startDate },
+                { label: `Salida:`, singlePrice: endDate },
               ]}
               action={{
                 type: "internal",
@@ -308,6 +313,7 @@ function Reserve() {
                       value={formEmail}
                       onChange={onEmailChange}
                       fullWidth
+                      disabled
                     />
                   </MKBox>
                   {mailExists && (

@@ -79,7 +79,7 @@ function Options() {
             >
               Our options
             </MKTypography>
-            <MKTypography variant="body1" color="white" mt={1}>
+            <MKTypography variant="body1" color="white" mt={1} sx={{ width: "100vw" }}>
               Available rooms for the selected dates:
             </MKTypography>
           </Grid>

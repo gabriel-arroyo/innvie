@@ -217,14 +217,18 @@ function Reserve() {
               }}
               specifications={[
                 { label: `Room: ${type}`, singlePrice: `$${price}` },
-                { label: `${days} day${days > 1 ? "s" : ""}` },
-                { label: "Check-in:", singlePrice: startDate },
-                { label: "Check-out:", singlePrice: endDate },
-                // { label: "Descuento", singlePrice: "50.00", discount: true },
                 {
-                  label: "Tax",
+                  label: `${days} day${days > 1 ? "s" : ""}`,
+                  singlePrice: `Subtotal: $${price * days}`,
+                },
+                // { label: "Descuento", singlePrice: "50.00", discount: true },
+                { label: "Tax by day", singlePrice: `${roundTo(taxes * 100, 2)}%` },
+                {
+                  label: "Total tax",
                   singlePrice: `$${roundTo(taxes * price * days, 2)}`,
                 },
+                { label: "Check-in:", singlePrice: startDate },
+                { label: "Check-out:", singlePrice: endDate },
               ]}
               action={{
                 type: "internal",
@@ -309,6 +313,7 @@ function Reserve() {
                       value={formEmail}
                       onChange={onEmailChange}
                       fullWidth
+                      disabled
                     />
                   </MKBox>
                   {mailExists && (

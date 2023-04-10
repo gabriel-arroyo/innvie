@@ -8,7 +8,7 @@ const template_id_confirmation = "template_kz9i168"
 const template_id_2 = "template_04kuvre"
 const innvie_mail = "innvie.hotel@gmail.com"
 
-const debugging = true
+const debugging = false
 
 export function sendTemplateEmail(reply_to, to_email, subject, body) {
   try {

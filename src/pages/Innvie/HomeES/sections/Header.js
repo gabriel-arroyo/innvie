@@ -80,7 +80,7 @@ function Header() {
               backgroundColor: "rgba(255,255,255,0.9)",
             }}
           >
-            <DateInput className="dateHome" />
+            <DateInput className="dateHome" optionsUrl="/es/options/" />
           </Card>
         </Container>
       </div>

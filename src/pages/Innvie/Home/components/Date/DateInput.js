@@ -12,7 +12,7 @@ import { useAtom } from "jotai"
 import { reservedDays, reservedEndDate, reservedStartDate } from "states/reservedDate"
 import { getCurrentDate, getDaysDifference, getTomorrowDate } from "tools/getDate"
 
-function DateInput({ startDate, endDate }) {
+function DateInput({ startDate, endDate, optionsUrl }) {
   const matches = useMediaQuery("(min-width:1000px)")
   const [, setStartDate] = useAtom(reservedStartDate)
   const [, setEndDate] = useAtom(reservedEndDate)
@@ -89,7 +89,7 @@ function DateInput({ startDate, endDate }) {
       >
         <MKButton
           component={Link}
-          to="/options"
+          to={optionsUrl}
           variant="gradient"
           color="error"
           sx={{ width: "500px", padding: "14px" }}
@@ -106,9 +106,11 @@ export default DateInput
 DateInput.propTypes = {
   startDate: PropTypes.string,
   endDate: PropTypes.string,
+  optionsUrl: PropTypes.string,
 }
 
 DateInput.defaultProps = {
   startDate: getCurrentDate(),
   endDate: getTomorrowDate(),
+  optionsUrl: "/options",
 }

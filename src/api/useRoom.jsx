@@ -218,6 +218,10 @@ function useRoom() {
   }
 
   async function updateRoomStatus({ number, status }) {
+    if (!number || !status) {
+      setError("No room found")
+      return
+    }
     setError(false)
     setLoading(true)
     const roomToUpdate = await getRoomByNumber(number)
