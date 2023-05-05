@@ -51,6 +51,8 @@ function Comparator({
           allowInvalidPreload: true,
           minDate: "today",
         }}
+        startDate={reservation.startDate}
+        endDate={reservation.endDate}
         variant="standard"
         placeholder="Please select date"
         fullWidth

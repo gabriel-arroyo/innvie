@@ -1,3 +1,5 @@
+import { useAtom } from "jotai"
+import loggedUserAtom from "states/loggedUser"
 import {
   collection,
   deleteDoc,
@@ -26,6 +28,7 @@ function useType(room) {
   const [price, setPrice] = useState(0)
   const { addAction } = useHistory()
   const collectionRef = collection(db, "types")
+  const [loggedUser] = useAtom(loggedUserAtom)
   const defaultRoom = {
     type: "",
     accessories: ["microwave", "desk", "tv", "dish", "wifi", "minifridge", "fullbath"],
@@ -152,7 +155,14 @@ function useType(room) {
     try {
       const docRef = doc(collectionRef, updatedType.id)
       updateDoc(docRef, updatedTypeWithTimestamp)
-      addAction({ action: "updateType", room: updatedType })
+      addAction({
+        action: "updateType",
+        room: updatedType,
+        admin: !!loggedUser.admin,
+        email: loggedUser.email,
+        fisrt_name: loggedUser.first_name,
+        last_name: loggedUser.last_name,
+      })
     } catch (e) {
       // eslint-disable-next-line
       console.log(e)

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 // @mui material components
@@ -17,7 +17,10 @@ import TermsModal from "pages/Innvie/TermsAndConditions/modal"
 import { v4 as uuidv4 } from "uuid"
 import ToastAlert from "components/Innvie/ToastAlert"
 import SelectPicker from "components/Innvie/SelectPicker"
-import options from "./countries.json"
+import { sendPageNewUser } from "api/mail"
+import useCountries from "api/useCountries"
+import useStates from "api/useStates"
+import useCities from "api/useCities"
 
 function Register() {
   const navigate = useNavigate()
@@ -26,32 +29,80 @@ function Register() {
   const [selectedCountry, setSelectedCountry] = useState("United States")
   const [selectedState, setSelectedState] = useState("Alabama")
   const [selectedCity, setSelectedCity] = useState("Birmingham")
-  const [states, setStates] = useState([])
-  const [cities, setCities] = useState([])
   const { addUser, insertError } = useUser()
   const [checked, setChecked] = React.useState(false)
+  const [inputName, setInputName] = useState("")
+  const [inputLastName, setInputLastName] = useState("")
+  const [inputPhone, setInputPhone] = useState("")
+  const [inputAddress, setInputAddress] = useState("")
+  const [inputZipcode, setInputZipcode] = useState("")
+  const [inputEmail, setInputEmail] = useState("")
+  const [inputLicense, setInputLicense] = useState("")
+  const [inputPassword, setInputPassword] = useState("")
+  const [inputPasswordConfirmation, setInputPasswordConfirmation] = useState("")
+  const { getCountries } = useCountries()
+  const { getStates } = useStates()
+  const { getCities } = useCities()
+  const [countries, setCountries] = useState([])
+  const [states, setStates] = useState([])
+  const [cities, setCities] = useState([])
+
+  const handleInputName = (event) => {
+    const regex = /^[a-zA-Z]*(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+    if (!regex.test(event.target.value)) return
+    setInputName(event.target.value)
+  }
+
+  const handleInputLastName = (event) => {
+    const regex = /^[a-zA-Z]*(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+    if (!regex.test(event.target.value)) return
+    setInputLastName(event.target.value)
+  }
+
+  const handleInputPhone = (event) => {
+    if (event.target.value.length > 10) return
+    const regex = /^(\+?\d{0,10})?$/
+    if (!regex.test(event.target.value)) return
+    setInputPhone(event.target.value)
+  }
+
+  const handleInputAddress = (event) => {
+    const regex = /^[a-zA-Z0-9\s,'#-]*$/
+    if (!regex.test(event.target.value)) return
+    setInputAddress(event.target.value)
+  }
+
+  const handleInputZipcode = (event) => {
+    if (event.target.value.length > 5) return
+    const regex = /^(\d{0,5}(?:[-\s]\d{0,4})?)?$/
+    if (!regex.test(event.target.value)) return
+    setInputZipcode(event.target.value)
+  }
+
+  const handleInputEmail = (event) => {
+    // const regex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
+    // if (!regex.test(event.target.value)) return
+    setInputEmail(event.target.value)
+  }
+
+  const handleInputLicense = (event) => {
+    const regex = /^(\d{0,13}(?:[-\s]\d{0,4})?)?$/
+    if (!regex.test(event.target.value)) return
+    setInputLicense(event.target.value)
+  }
+
+  const handleInputPassword = (event) => {
+    // const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+    // if (!regex.test(event.target.value)) return
+    setInputPassword(event.target.value)
+  }
+
+  const handleInputPasswordConfirmation = (event) => {
+    setInputPasswordConfirmation(event.target.value)
+  }
+
   const handleChange = (event) => {
     setChecked(event.target.checked)
-  }
-
-  const countries = options.Countries.map((countrry) => countrry.CountryName)
-
-  const getCountry = (country) => options.Countries.find((c) => c.CountryName === country)
-  const getStates = (country) => {
-    const countryInfo = getCountry(country)
-    const foundStates = countryInfo?.States
-      ? countryInfo.States.map((state) => state.StateName)
-      : []
-    setStates(foundStates)
-    setCities([])
-    return foundStates
-  }
-  const getCities = (country, state) => {
-    console.log("getCities", country, state)
-    const countryInfo = getCountry(country)
-    const foundCities = countryInfo?.States.find((s) => s.StateName === state)?.Cities ?? []
-    setCities(foundCities)
-    return foundCities
   }
 
   const [showSnackbar, setShow] = useState(false)
@@ -59,7 +110,7 @@ function Register() {
     setShow(!showSnackbar)
     setTimeout(() => {
       setShow(false)
-    }, 3000)
+    }, 15000)
   }
 
   const [showError, setShowError] = useState(false)
@@ -114,6 +165,7 @@ function Register() {
         login(event.target.email.value, event.target.password.value).then((logged) => {
           if (logged) {
             event.target.reset()
+            sendPageNewUser(inputName + inputLastName, inputEmail, inputPassword)
             toggleSnackbar()
             setChecked(false)
             navigateDelay()
@@ -124,6 +176,9 @@ function Register() {
       }
     })
   }
+  useEffect(() => {
+    getCountries().then((res) => setCountries(res?.map((country) => country["country-name"]) ?? []))
+  }, [])
   return (
     <Card sx={{ width: { sm: "300px", lg: "700px", xs: "250px" } }}>
       <MKBox
@@ -149,38 +204,77 @@ function Register() {
           <Grid container spacing={2}>
             <Grid item xs={12} md={6} xl={6}>
               <MKBox mb={2}>
-                <MKInput type="text" name="first_name" label="Name" fullWidth required />
-              </MKBox>
-              <MKBox mb={2}>
-                <MKInput type="text" name="last_name" label="Lastname" fullWidth required />
+                <MKInput
+                  type="text"
+                  name="first_name"
+                  label="Name"
+                  fullWidth
+                  required
+                  value={inputName}
+                  onChange={handleInputName}
+                  inputProps={{
+                    inputMode: "text",
+                    pattern: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+                  }}
+                />
               </MKBox>
               <MKBox mb={2}>
                 <MKInput
+                  type="text"
+                  name="last_name"
+                  label="Lastname"
+                  fullWidth
+                  required
+                  value={inputLastName}
+                  onChange={handleInputLastName}
+                  inputProps={{
+                    inputMode: "text",
+                    pattern: "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+                  }}
+                />
+              </MKBox>
+              <MKBox mb={2}>
+                <MKInput
+                  maxLength={10}
                   type="text"
                   name="phone"
                   label="Phone"
                   fullWidth
                   required
+                  value={inputPhone}
+                  onChange={handleInputPhone}
                   inputProps={{
                     pattern: "^\\d{3}-\\d{3}-\\d{4}$|^[(]\\d{3}[)]\\s\\d{3}-\\d{4}$|^\\d{10}$",
                   }}
                 />
               </MKBox>
               <MKBox mb={2}>
-                <MKInput type="text" name="address" label="Address" fullWidth required />
+                <MKInput
+                  type="text"
+                  name="address"
+                  label="Address"
+                  fullWidth
+                  required
+                  value={inputAddress}
+                  onChange={handleInputAddress}
+                  inputProps={{
+                    inputMode: "text",
+                    pattern: "^[a-zA-Z0-9\\s,'#-]*$",
+                  }}
+                />
               </MKBox>
               <MKBox mb={2}>
                 <SelectPicker
                   options={countries}
                   name="country"
                   label="Country"
-                  onChange={(e) => {
+                  onChange={async (e) => {
                     const country = e.target.innerText
-                    const statesFromCountry = getStates(country)
+                    const statesFromCountry = await getStates(country)
                     setSelectedCountry(country)
                     setSelectedState("")
                     setSelectedCity("")
-                    setStates(statesFromCountry)
+                    setStates(statesFromCountry.map((state) => state["state-name"]))
                   }}
                   value={selectedCountry}
                   required
@@ -191,12 +285,12 @@ function Register() {
                   options={states}
                   name="state"
                   label="State"
-                  onChange={(e) => {
+                  onChange={async (e) => {
                     const state = e.target.innerText
-                    const citiesFromState = getCities(selectedCountry, state)
+                    const citiesFromState = await getCities(selectedCountry, state)
                     setSelectedState(state)
                     setSelectedCity("")
-                    setCities(citiesFromState)
+                    setCities(citiesFromState?.map((city) => city["city-name"]) ?? [])
                   }}
                   value={selectedState}
                   required
@@ -222,6 +316,8 @@ function Register() {
                   label="Zip code"
                   fullWidth
                   required
+                  value={inputZipcode}
+                  onChange={handleInputZipcode}
                   inputProps={{ inputMode: "numeric", pattern: "^\\d{5}(?:[-\\s]\\d{4})?$" }}
                 />
               </MKBox>
@@ -234,6 +330,8 @@ function Register() {
                   label="Email"
                   fullWidth
                   required
+                  value={inputEmail}
+                  onChange={handleInputEmail}
                   inputProps={{
                     inputMode: "numeric",
                     pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
@@ -247,6 +345,8 @@ function Register() {
                   label="License Number"
                   fullWidth
                   required
+                  value={inputLicense}
+                  onChange={handleInputLicense}
                   inputProps={{ inputMode: "numeric", pattern: "^(\\d{4,13})$" }}
                 />
               </MKBox>
@@ -281,6 +381,8 @@ function Register() {
                   label="Password"
                   fullWidth
                   required
+                  value={inputPassword}
+                  onChange={handleInputPassword}
                   inputProps={{
                     inputMode: "text",
                     pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
@@ -294,6 +396,8 @@ function Register() {
                   label="Repit password"
                   fullWidth
                   required
+                  value={inputPasswordConfirmation}
+                  onChange={handleInputPasswordConfirmation}
                 />
               </MKBox>
               {error && (
@@ -352,7 +456,8 @@ function Register() {
       <ToastAlert
         show={showSnackbar}
         toggle={toggleSnackbar}
-        title="Successfull registry"
+        color="success"
+        title="Success!"
         content="User has been regitered successfully."
       />
       <ToastAlert

@@ -150,7 +150,7 @@ function History() {
         <SelectPicker
           options={options}
           name="type"
-          label="Nombre"
+          label="Filter"
           onChange={handleFilterChange}
           value={historyFilter}
         />

@@ -38,6 +38,8 @@ import roundTo from "tools/round"
 import { sendEmailConfirmation } from "api/mail"
 import { getShortDate } from "tools/getDate"
 import MKButton from "components/MKButton"
+import reservedAdultsAtom from "states/reservedAdults"
+import reservedKidsAtom from "states/reservedKids"
 import useNotifications from "api/useNotifications"
 import BlancLayout from "../Layouts/BlancLayout"
 import LoginModal from "../Authentication/Login/LoginModal"
@@ -50,6 +52,8 @@ function Reserve() {
   const [type] = useAtom(selectedType)
   const [max] = useAtom(maxOccupantsInType)
   const [price] = useAtom(selectedPrice)
+  const [, setReservedAdults] = useAtom(reservedAdultsAtom)
+  const [, setReservedKids] = useAtom(reservedKidsAtom)
   const navigate = useNavigate()
   const { room, addReservation, getAvailableRoom } = useCalendar({ type, startDate, endDate })
   const [terms, setTerms] = useState(false)
@@ -118,6 +122,8 @@ function Reserve() {
       email: formEmail ?? "",
       license: formLicense ?? "",
     }
+    setReservedAdults(adults)
+    setReservedKids(kids)
     await getAndUpdateUser(newUser)
     const code = await addReservation(
       formEmail,

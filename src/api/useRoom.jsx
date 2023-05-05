@@ -10,6 +10,8 @@ import {
   where,
 } from "firebase/firestore"
 import { useEffect, useState } from "react"
+import { useAtom } from "jotai"
+import loggedUserAtom from "states/loggedUser"
 import db from "../firebase"
 import useHistory from "./useHistory"
 
@@ -22,6 +24,7 @@ function useRoom() {
   const [roomsAvailable, setRoomsAvailable] = useState([])
   const collectionRef = collection(db, "rooms")
   const [nextRoomNumber, setNextRoomNumber] = useState(1)
+  const [loggedUser] = useAtom(loggedUserAtom)
 
   function getMinNotUsed(array) {
     const sortedArray = array.sort((a, b) => a - b)
@@ -141,7 +144,14 @@ function useRoom() {
       setError(e)
       return false
     }
-    addAction({ action: "newRoom", room: newRoom })
+    addAction({
+      action: "newRoom",
+      room: newRoom,
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
     return true
   }
 
@@ -155,7 +165,15 @@ function useRoom() {
       console.error(e)
       setError(e)
     }
-    addAction({ action: "deleteRoom", room: { number: id } })
+    console.log(`loggedUser1:${JSON.stringify(loggedUser)}`)
+    addAction({
+      action: "deleteRoom",
+      room: { number: id },
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
   }
 
   async function deleteAllRooms() {
@@ -172,7 +190,14 @@ function useRoom() {
       console.error(e)
       setError(e)
     }
-    addAction({ action: "deleteRoom", room: { number: "all" } })
+    addAction({
+      action: "deleteRoom",
+      room: { number: "all" },
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
   }
 
   async function getRoomByNumber(roomNumber) {
@@ -191,7 +216,7 @@ function useRoom() {
     return roomData
   }
 
-  async function updateRoom(updatedRoom, admin = false) {
+  async function updateRoom(updatedRoom) {
     setError(false)
     setLoading(true)
     const roomToUpdate = await getRoomByNumber(updatedRoom.number)
@@ -213,7 +238,14 @@ function useRoom() {
       console.error("error:", e)
       setError(e)
     }
-    addAction({ action: "updateRoom", room: updatedRoom, admin })
+    addAction({
+      action: "updateRoom",
+      room: updatedRoom,
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
     setLoading(false)
   }
 
@@ -243,7 +275,14 @@ function useRoom() {
       console.error("error:", e)
       setError(e)
     }
-    addAction({ action: "updateRoom", room: updatedRoomWithTimestamp })
+    addAction({
+      action: "updateRoom",
+      room: updatedRoomWithTimestamp,
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
     setLoading(false)
   }
 
@@ -261,7 +300,15 @@ function useRoom() {
       console.error("error:", e)
       setError(e)
     }
-    addAction({ action: "deleteRoom", room: { number: roomNumber } })
+    console.log(`loggedUser: ${JSON.stringify(loggedUser)}`)
+    addAction({
+      action: "deleteRoom",
+      room: { number: roomNumber },
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
   }
 
   async function deleteRoomByType(roomType) {
@@ -278,7 +325,14 @@ function useRoom() {
       console.error("error:", e)
       setError(e)
     }
-    addAction({ action: "deleteRoom", room: { type: roomType } })
+    addAction({
+      action: "deleteRoom",
+      room: { type: roomType },
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
   }
 
   async function getRooms() {

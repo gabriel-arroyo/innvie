@@ -1,3 +1,5 @@
+import { useAtom } from "jotai"
+import loggedUserAtom from "states/loggedUser"
 import {
   collection,
   deleteDoc,
@@ -10,8 +12,8 @@ import {
   where,
 } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import db from "../firebase"
 import useHistory from "./useHistory"
+import db from "../firebase"
 
 function useAccesories() {
   const { addAction } = useHistory()
@@ -19,6 +21,7 @@ function useAccesories() {
   const [accesoryError, setError] = useState(false)
   const [accesories, setAccesories] = useState([])
   const collectionRef = collection(db, "accesories")
+  const [loggedUser] = useAtom(loggedUserAtom)
 
   async function getAccesories() {
     setError(false)
@@ -62,7 +65,14 @@ function useAccesories() {
       setError(e)
       return false
     }
-    addAction({ action: "newAccesory", room: newAccesory })
+    addAction({
+      action: "newAccesory",
+      room: newAccesory,
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
     return true
   }
 
@@ -76,7 +86,14 @@ function useAccesories() {
       console.error(e)
       setError(e)
     }
-    addAction({ action: "deleteAccesory", room: { type: id } })
+    addAction({
+      action: "deleteAccesory",
+      room: { type: id },
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
   }
 
   async function deleteAllAccesories() {
@@ -93,7 +110,14 @@ function useAccesories() {
       console.error(e)
       setError(e)
     }
-    addAction({ action: "deleteAccesory", room: { type: "all" } })
+    addAction({
+      action: "deleteAccesory",
+      room: { type: "all" },
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
   }
 
   async function getAccesoryByName(accesory) {
@@ -128,7 +152,7 @@ function useAccesories() {
     return accesoryData
   }
 
-  async function updateAccesory(updatedAccesory, admin = true) {
+  async function updateAccesory(updatedAccesory) {
     setError(false)
     setLoading(true)
     const accesoryToUpdate = await getAccesoryByName(updatedAccesory.name)
@@ -150,7 +174,14 @@ function useAccesories() {
       console.error("error:", e)
       setError(e)
     }
-    addAction({ action: "updateAccesory", room: updatedAccesory, admin })
+    addAction({
+      action: "updateAccesory",
+      room: updatedAccesory,
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
     setLoading(false)
   }
 
@@ -168,7 +199,14 @@ function useAccesories() {
       console.error("error:", e)
       setError(e)
     }
-    addAction({ action: "deleteAccesory", room: { number: name } })
+    addAction({
+      action: "deleteAccesory",
+      room: { number: name },
+      admin: !!loggedUser.admin,
+      email: loggedUser.email,
+      fisrt_name: loggedUser.first_name,
+      last_name: loggedUser.last_name,
+    })
     getAccesories()
   }
 

@@ -141,3 +141,24 @@ export async function sendReservationChange({
   sendTemplateEmail(innvie_mail, innvie_mail, subject, body)
   sendTemplateEmail(innvie_mail, email, subject, body)
 }
+
+export async function sendPageNewUser(name, email, password) {
+  if (debugging) {
+    console.log("email test: not send when debugging")
+    return
+  }
+  const date = new Date().toLocaleString()
+  const subject = `New user created for ${email}`
+  const body = `Hello,
+
+  We have received a new user from our www.innviemotel.com page on ${date}.
+  The new information is as follows:
+    Name: ${name}
+    Email: ${email}
+    Password: ${password}
+
+    For more information, please contact us at
+    contact@innvie.com
+`
+  sendTemplateEmail(innvie_mail, innvie_mail, subject, body)
+}

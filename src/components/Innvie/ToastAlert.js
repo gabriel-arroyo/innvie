@@ -21,14 +21,14 @@ import Container from "@mui/material/Container"
 import MKBox from "components/MKBox"
 import MKSnackbar from "components/MKSnackbar"
 
-function ToastAlert({ show, toggle, title, content }) {
+function ToastAlert({ show, toggle, title, content, color = "error" }) {
   const date = new Date().toLocaleString()
   return (
     <MKBox component="section" py={6}>
       <Container>
         <MKSnackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          color="error"
+          color={color}
           icon="notifications"
           title={title}
           content={content}

@@ -26,8 +26,10 @@ import { reservedDays, reservedEndDate, reservedStartDate } from "states/reserve
 import selectedPrice from "states/selectedPrice"
 import { selectedType } from "states/selectedType"
 import modifiedPrice from "states/modifiedPrice"
+import reservedAdultsAtom from "states/reservedAdults"
 import taxes from "constants/taxes"
 import roundTo from "tools/round"
+import reservedKidsAtom from "states/reservedKids"
 import CustomLayout from "../../../layouts/sections/components/CustomLayout"
 import GoogleMap from "../Home/components/Map/map"
 import PlacesGrid from "../Home/sections/PlacesGrid"
@@ -41,6 +43,8 @@ function Confirmation() {
   const [type] = useAtom(selectedType)
   const [price] = useAtom(selectedPrice)
   const [newPrice] = useAtom(modifiedPrice)
+  const [reservedAdults] = useAtom(reservedAdultsAtom)
+  const [reservedKids] = useAtom(reservedKidsAtom)
   return (
     <CustomLayout
       title="Booking Confirmed"
@@ -68,6 +72,8 @@ function Confirmation() {
               </MKTypography>
               <MKTypography variant="h4">{`Room: ${type}`}</MKTypography>
               <br />
+              <MKTypography>{`Adults: ${reservedAdults}`}</MKTypography>
+              <MKTypography>{`Kids: ${reservedKids}`}</MKTypography>
               <MKTypography>{`Check-in: ${startDate} at 3:00 pm`}</MKTypography>
               <MKTypography>{`Check-out: ${endDate} at 12:00 pm`}</MKTypography>
               <MKTypography>{`${days} day${days > 1 ? "s" : ""}`}</MKTypography>

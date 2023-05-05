@@ -57,6 +57,8 @@ function DateInput({ startDate, endDate, optionsUrl }) {
             minDate: "2022-02-03",
             maxDate: "2024-03-03",
           }}
+          startDate={startDate}
+          endDate={endDate}
           variant="standard"
           placeholder="Please select date"
           fullWidth

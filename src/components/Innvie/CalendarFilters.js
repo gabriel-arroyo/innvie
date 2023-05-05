@@ -1,12 +1,13 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
-import { Card, Checkbox, FormControlLabel, FormGroup } from "@mui/material"
+import { Card, Checkbox, FormControlLabel, FormGroup, Typography } from "@mui/material"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 import React, { useState } from "react"
 import MKDatePicker from "components/MKDatePicker"
 import moment from "moment/moment"
+import { parseDate } from "tools/getDate"
 
 function CalendarFilters({
   filterItems,
@@ -17,6 +18,7 @@ function CalendarFilters({
   setStartDate,
   setEndDate,
 }) {
+  console.log(startDate)
   const gropusIds = groups.map(({ id }) => {
     const label = `Room: ${id}`
     const group = {
@@ -156,12 +158,15 @@ function CalendarFilters({
         alignItems: "center",
       }}
     >
+      <Typography variant="body2" sx={{ marginRight: "30px" }}>
+        Filters
+      </Typography>
       <MKDatePicker
         type="date"
         variant="standard"
         placeholder="Please select date"
-        startDate={startDate}
-        endDate={endDate}
+        startDate={parseDate(startDate)}
+        endDate={parseDate(endDate)}
         fullWidth
         onChange={onChangeDate}
       />
@@ -179,7 +184,7 @@ function CalendarFilters({
           marginTop: "20px",
           marginBottom: "20px",
         }}
-        renderInput={(params) => <TextField {...params} label="Filter" />}
+        renderInput={(params) => <TextField {...params} label="Rooms & Users" />}
       />
       <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
         <FormControlLabel

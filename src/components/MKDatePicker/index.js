@@ -25,8 +25,9 @@ import "flatpickr/dist/flatpickr.css"
 // Otis Kit PRO components
 import MKInput from "components/MKInput"
 import { getCurrentDate, getTomorrowDate } from "tools/getDate"
+import { FormControl, InputLabel } from "@mui/material"
 
-function MKDatePicker({ input, minDate, maxDate, mode, startDate, endDate, ...rest }) {
+function MKDatePicker({ input, minDate, maxDate, mode, startDate, endDate, label, ...rest }) {
   return (
     <Flatpickr
       {...rest}
@@ -37,13 +38,16 @@ function MKDatePicker({ input, minDate, maxDate, mode, startDate, endDate, ...re
         maxDate,
       }}
       render={({ defaultValue }, ref) => (
-        <MKInput
-          {...input}
-          defaultValue={defaultValue}
-          inputRef={ref}
-          style={{ width: "200px" }}
-          disabled={rest?.disabled ?? false}
-        />
+        <FormControl>
+          <InputLabel htmlFor="name-input">{label}</InputLabel>
+          <MKInput
+            {...input}
+            defaultValue={defaultValue}
+            inputRef={ref}
+            style={{ width: "200px" }}
+            disabled={rest?.disabled ?? false}
+          />
+        </FormControl>
       )}
     />
   )
@@ -57,6 +61,7 @@ MKDatePicker.defaultProps = {
   startDate: getCurrentDate(),
   endDate: getTomorrowDate(),
   mode: "range",
+  label: "",
 }
 
 // Typechecking props for the MKDatePicker
@@ -67,6 +72,7 @@ MKDatePicker.propTypes = {
   mode: PropTypes.string,
   startDate: PropTypes.string,
   endDate: PropTypes.string,
+  label: PropTypes.string,
 }
 
 export default MKDatePicker

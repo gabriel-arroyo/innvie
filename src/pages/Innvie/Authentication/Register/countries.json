@@ -612,6 +612,207 @@
         { "Cities": [], "StateName": "Midlands" }
       ],
       "CountryName": "Zimbabwe"
+    },
+    {
+      "States": [
+        {
+          "StateName": "Alabama",
+          "Cities": ["Birmingham", "Montgomery", "Mobile", "Huntsville", "Tuscaloosa"]
+        },
+        {
+          "StateName": "Alaska",
+          "Cities": ["Anchorage", "Fairbanks", "Juneau", "Sitka", "Ketchikan"]
+        },
+        {
+          "StateName": "Arizona",
+          "Cities": ["Phoenix", "Tucson", "Mesa", "Chandler", "Glendale"]
+        },
+        {
+          "StateName": "Arkansas",
+          "Cities": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale", "Jonesboro"]
+        },
+        {
+          "StateName": "California",
+          "Cities": ["Los Angeles", "San Diego", "San Francisco", "San Jose", "Sacramento"]
+        },
+        {
+          "StateName": "Colorado",
+          "Cities": ["Denver", "Colorado Springs", "Aurora", "Fort Collins", "Lakewood"]
+        },
+        {
+          "StateName": "Connecticut",
+          "Cities": ["Bridgeport", "New Haven", "Hartford", "Stamford", "Waterbury"]
+        },
+        {
+          "StateName": "Delaware",
+          "Cities": ["Wilmington", "Dover", "Newark", "Middletown", "Smyrna"]
+        },
+        {
+          "StateName": "Florida",
+          "Cities": ["Jacksonville", "Miami", "Tampa", "Orlando", "St. Petersburg"]
+        },
+        {
+          "StateName": "Georgia",
+          "Cities": ["Atlanta", "Augusta", "Savannah", "Columbus", "Macon"]
+        },
+        {
+          "StateName": "Hawaii",
+          "Cities": ["Honolulu", "Hilo", "Kailua", "Kapolei", "Kaneohe"]
+        },
+        {
+          "StateName": "Idaho",
+          "Cities": ["Boise", "Meridian", "Nampa", "Idaho Falls", "Pocatello"]
+        },
+        {
+          "StateName": "Illinois",
+          "Cities": ["Chicago", "Aurora", "Rockford", "Joliet", "Naperville"]
+        },
+        {
+          "StateName": "Indiana",
+          "Cities": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend", "Carmel"]
+        },
+        {
+          "StateName": "Iowa",
+          "Cities": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City", "Waterloo"]
+        },
+        {
+          "StateName": "Kansas",
+          "Cities": ["Wichita", "Overland Park", "Kansas City", "Olathe", "Topeka"]
+        },
+        {
+          "StateName": "Kentucky",
+          "Cities": ["Louisville", "Lexington", "Bowling Green", "Owensboro", "Covington"]
+        },
+        {
+          "StateName": "Louisiana",
+          "Cities": [
+            "New Orleans",
+            "Baton Rouge",
+            "Shreveport",
+            "Lafayette",
+            "Lake Charles",
+            "Kenner"
+          ]
+        },
+        {
+          "StateName": "Maine",
+          "Cities": ["Lewiston", "Portland", "Augusta", "Bangor", "South Portland", "Auburn"]
+        },
+        {
+          "StateName": "Maryland",
+          "Cities": ["Baltimore", "Columbia", "Silver Spring", "Dundalk", "Bethesda", "Frederick"]
+        },
+        {
+          "StateName": "Massachusetts",
+          "Cities": ["Boston", "Worcester", "Springfield", "Lowell", "Cambridge", "New Bedford"]
+        },
+        {
+          "StateName": "Michigan",
+          "Cities": [
+            "Lansing",
+            "Detroit",
+            "Grand Rapids",
+            "Warren",
+            "Sterling Heights",
+            "Ann Arbor"
+          ]
+        },
+        {
+          "StateName": "Minnesota",
+          "Cities": [
+            "Minneapolis",
+            "Saint Paul",
+            "Rochester",
+            "Duluth",
+            "Bloomington",
+            "Brooklyn Park"
+          ]
+        },
+        {
+          "StateName": "Mississippi",
+          "Cities": ["Jackson", "Gulfport", "Southaven", "Hattiesburg", "Biloxi", "Meridian"]
+        },
+        {
+          "StateName": "Missouri",
+          "Cities": [
+            "Kansas City",
+            "Saint Louis",
+            "Springfield",
+            "Independence",
+            "Columbia",
+            "Lee's Summit"
+          ]
+        },
+        {
+          "StateName": "Montana",
+          "Cities": ["Billings", "Missoula", "Great Falls", "Bozeman", "Butte", "Helena"]
+        },
+        {
+          "StateName": "Louisiana",
+          "Cities": [
+            "New Orleans",
+            "Baton Rouge",
+            "Shreveport",
+            "Lafayette",
+            "Lake Charles",
+            "Kenner"
+          ]
+        },
+        {
+          "StateName": "Maine",
+          "Cities": ["Lewiston", "Portland", "Augusta", "Bangor", "South Portland", "Auburn"]
+        },
+        {
+          "StateName": "Maryland",
+          "Cities": ["Baltimore", "Columbia", "Silver Spring", "Dundalk", "Bethesda", "Frederick"]
+        },
+        {
+          "StateName": "Massachusetts",
+          "Cities": ["Boston", "Worcester", "Springfield", "Lowell", "Cambridge", "New Bedford"]
+        },
+        {
+          "StateName": "Michigan",
+          "Cities": [
+            "Lansing",
+            "Detroit",
+            "Grand Rapids",
+            "Warren",
+            "Sterling Heights",
+            "Ann Arbor"
+          ]
+        },
+        {
+          "StateName": "Minnesota",
+          "Cities": [
+            "Minneapolis",
+            "Saint Paul",
+            "Rochester",
+            "Duluth",
+            "Bloomington",
+            "Brooklyn Park"
+          ]
+        },
+        {
+          "StateName": "Mississippi",
+          "Cities": ["Jackson", "Gulfport", "Southaven", "Hattiesburg", "Biloxi", "Meridian"]
+        },
+        {
+          "StateName": "Missouri",
+          "Cities": [
+            "Kansas City",
+            "Saint Louis",
+            "Springfield",
+            "Independence",
+            "Columbia",
+            "Lee's Summit"
+          ]
+        },
+        {
+          "StateName": "Montana",
+          "Cities": ["Billings", "Missoula", "Great Falls", "Bozeman", "Butte", "Helena"]
+        }
+      ],
+      "CountryName": "United States"
     }
   ]
 }

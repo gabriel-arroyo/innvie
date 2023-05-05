@@ -361,7 +361,10 @@ function NewRoomType({ room }) {
                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
                   label="Price"
                   value={cacheRoom.price}
-                  onChange={(e) => setCacheRoom({ ...cacheRoom, price: e.target.value })}
+                  onChange={(e) => {
+                    if (e.target.value < 0) return
+                    setCacheRoom({ ...cacheRoom, price: e.target.value })
+                  }}
                 />
               </FormControl>
             </MKBox>

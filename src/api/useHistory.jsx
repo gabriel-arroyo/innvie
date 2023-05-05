@@ -44,6 +44,15 @@ function useHistory() {
   }
 
   async function addAction({ action, room, admin, email = "", fisrt_name = "", last_name = "" }) {
+    console.info(
+      "useHistory",
+      `| action: ${action}`,
+      `| room: ${JSON.stringify(room)}`,
+      `| admin: ${admin}`,
+      `| email: ${email}`,
+      `| name: ${fisrt_name}`,
+      `| last-name: ${last_name}`
+    )
     setError(false)
     const actionId =
       action.includes("Type") || action.includes("Accesory") ? room.type : room.number
@@ -61,7 +70,7 @@ function useHistory() {
     }
     try {
       const docRef = doc(collectionRef)
-      console.log("useHistory", docRef, collectionRef, acitonWithTimestamp)
+      // console.log("useHistory", docRef, collectionRef, acitonWithTimestamp)
       await setDoc(docRef, acitonWithTimestamp)
     } catch (e) {
       // eslint-disable-next-line

@@ -61,6 +61,8 @@ function SelectDate({ startDate, endDate, type }) {
       <MKDatePicker
         type="date"
         options={{ mode: "range", defaultDate: [startDate, endDate] }}
+        startDate={startDate}
+        endDate={endDate}
         variant="standard"
         placeholder="Please select date"
         fullWidth

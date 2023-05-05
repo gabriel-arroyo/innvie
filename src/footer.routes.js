@@ -1,7 +1,7 @@
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook"
-import TwitterIcon from "@mui/icons-material/Twitter"
-import YouTubeIcon from "@mui/icons-material/YouTube"
+// import FacebookIcon from "@mui/icons-material/Facebook"
+// import TwitterIcon from "@mui/icons-material/Twitter"
+// import YouTubeIcon from "@mui/icons-material/YouTube"
 
 // Otis Kit PRO components
 import MKTypography from "components/MKTypography"
@@ -18,19 +18,18 @@ export default {
     route: "/",
   },
   socials: [
-    {
-      icon: <FacebookIcon />,
-      link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-    },
-    {
-      icon: <TwitterIcon />,
-      link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-    },
-
-    {
-      icon: <YouTubeIcon />,
-      link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-    },
+    // {
+    //   icon: <FacebookIcon />,
+    //   link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+    // },
+    // {
+    //   icon: <TwitterIcon />,
+    //   link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+    // },
+    // {
+    //   icon: <YouTubeIcon />,
+    //   link: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+    // },
   ],
   // menus: [
   //   {
