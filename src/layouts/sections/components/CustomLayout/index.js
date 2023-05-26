@@ -37,22 +37,22 @@ function CustomLayout({ title, subtitle, children }) {
     <MKBox display="flex" flexDirection="column" bgColor="white" minHeight="100vh">
       <MKBox bgColor="white" shadow="sm" py={0.25}>
         <DefaultNavbar
-          action={{
-            type: "external",
-            route: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
-            // label: (
-            //   // <MKTypography
-            //   //   color="white"
-            //   //   fontWeight="regular"
-            //   //   textTransform="capitalize"
-            //   //   fontSize="small"
-            //   // >
-            //   //   <Icon>print</Icon>
-            //   //   &nbsp;&nbsp;Imprimir
-            //   // </MKTypography>
-            // ),
-            // color: "info",
-          }}
+          // action={{
+          //   type: "external",
+          //   // route: "https://material-ui.com/store/items/otis-kit-pro-material-kit-react/",
+          //   // label: (
+          //   //   // <MKTypography
+          //   //   //   color="white"
+          //   //   //   fontWeight="regular"
+          //   //   //   textTransform="capitalize"
+          //   //   //   fontSize="small"
+          //   //   // >
+          //   //   //   <Icon>print</Icon>
+          //   //   //   &nbsp;&nbsp;Imprimir
+          //   //   // </MKTypography>
+          //   // ),
+          //   // color: "info",
+          // }}
           transparent
           relative
         />

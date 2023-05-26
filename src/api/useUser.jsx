@@ -152,6 +152,10 @@ function useUser() {
     if (updatedUser.id) {
       foundUser = await getUserById(updatedUser.id)
       console.log("found user with id:", foundUser)
+      if (!foundUser) {
+        foundUser = await getUserByEmail(updatedUser.email)
+        console.log("found user with email", foundUser)
+      }
     } else if (updatedUser.email) {
       foundUser = await getUserByEmail(updatedUser.email)
       console.log("found user with email", foundUser)

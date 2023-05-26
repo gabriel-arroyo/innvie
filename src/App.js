@@ -59,6 +59,7 @@ import MyReservations from "pages/Innvie/MyReservations"
 import MyReservationsES from "pages/Innvie/MyReservationsES"
 import Terms from "pages/Innvie/TermsAndConditions"
 import ApiTest from "pages/Tests/apitest"
+import Update from "pages/Innvie/Authentication/Update"
 import img from "./assets/images/shapes/bg-tile1.svg"
 // Images
 
@@ -119,6 +120,7 @@ export default function App() {
             <Route path="/authentication" element={<CoverLayout image={bgImage} />}>
               <Route index element={<Login />} />
               <Route path="/authentication/register" element={<Register />} />
+              <Route path="/authentication/update" element={<Update />} />
               <Route path="/authentication/checkin" element={<Checkin />} />
             </Route>
             <Route path="/es/authentication" element={<CoverLayoutES image={bgImage} />}>

@@ -24,6 +24,7 @@ import loggedUser from "states/loggedUser"
 
 import { Grid } from "@mui/material"
 import moment from "moment"
+import LogoutModal from "pages/Innvie/Authentication/Login/logoutModal"
 import StandardRoute from "./StandardRout"
 
 function DefaultNavbar({ transparent, light, action, sticky, relative, center, logoUrl }) {
@@ -123,10 +124,15 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
     if (name === "Ingresar" || name === "Login") {
       collapse = [
         {
-          name: "Logout",
-          route: "/authentication",
+          name: "My Profile",
+          route: "/authentication/update",
           component: <Login />,
         },
+        // {
+        //   name: "Logout",
+        //   route: "/authentication",
+        //   component: <Login />,
+        // },
       ]
     }
     // eslint-disable-next-line no-console
@@ -161,71 +167,74 @@ function DefaultNavbar({ transparent, light, action, sticky, relative, center, l
         }
 
         return (
-          <MKTypography
-            key={item.name}
-            {...(item.route ? routeComponent : linkComponent)}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            variant="button"
-            // textTransform="capitalize"
-            minWidth={item.description ? "14rem" : "12rem"}
-            color={item.description ? "dark" : "text"}
-            fontWeight={item.description ? "bold" : "regular"}
-            py={item.description ? 1 : 0.625}
-            px={2}
-            sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
-              borderRadius: borderRadius.md,
-              cursor: "pointer",
-              transition: "all 300ms linear",
+          <>
+            {(name === "Ingresar" || name === "Login") && <LogoutModal />}
+            <MKTypography
+              key={item.name}
+              {...(item.route ? routeComponent : linkComponent)}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              variant="button"
+              // textTransform="capitalize"
+              minWidth={item.description ? "14rem" : "12rem"}
+              color={item.description ? "dark" : "text"}
+              fontWeight={item.description ? "bold" : "regular"}
+              py={item.description ? 1 : 0.625}
+              px={2}
+              sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
+                borderRadius: borderRadius.md,
+                cursor: "pointer",
+                transition: "all 300ms linear",
 
-              "&:hover": {
-                backgroundColor: grey[200],
-                color: dark.main,
-
-                "& *": {
+                "&:hover": {
+                  backgroundColor: grey[200],
                   color: dark.main,
+
+                  "& *": {
+                    color: dark.main,
+                  },
                 },
-              },
-            })}
-            onMouseEnter={({ currentTarget }) => {
-              if (item.dropdown) {
-                setNestedDropdown(currentTarget)
-                setNestedDropdownEl(currentTarget)
-                setNestedDropdownName(item.name)
-              }
-            }}
-            onMouseLeave={() => {
-              if (item.dropdown) {
-                setNestedDropdown(null)
-              }
-            }}
-          >
-            {item.description ? (
-              <MKBox>
-                {item.name}
-                <MKTypography
-                  display="block"
-                  variant="button"
-                  color="text"
-                  fontWeight="regular"
-                  sx={{ transition: "all 300ms linear" }}
+              })}
+              onMouseEnter={({ currentTarget }) => {
+                if (item.dropdown) {
+                  setNestedDropdown(currentTarget)
+                  setNestedDropdownEl(currentTarget)
+                  setNestedDropdownName(item.name)
+                }
+              }}
+              onMouseLeave={() => {
+                if (item.dropdown) {
+                  setNestedDropdown(null)
+                }
+              }}
+            >
+              {item.description ? (
+                <MKBox>
+                  {item.name}
+                  <MKTypography
+                    display="block"
+                    variant="button"
+                    color="text"
+                    fontWeight="regular"
+                    sx={{ transition: "all 300ms linear" }}
+                  >
+                    {item.description}
+                  </MKTypography>
+                </MKBox>
+              ) : (
+                item.name
+              )}
+              {item.collapse && (
+                <Icon
+                  fontSize="small"
+                  sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
                 >
-                  {item.description}
-                </MKTypography>
-              </MKBox>
-            ) : (
-              item.name
-            )}
-            {item.collapse && (
-              <Icon
-                fontSize="small"
-                sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
-              >
-                keyboard_arrow_right
-              </Icon>
-            )}
-          </MKTypography>
+                  keyboard_arrow_right
+                </Icon>
+              )}
+            </MKTypography>
+          </>
         )
       })
     }

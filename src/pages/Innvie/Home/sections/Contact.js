@@ -216,7 +216,7 @@ function Contact() {
                         show={showSnackbar}
                         toggle={toggleSnackbar}
                         title="Contacto"
-                        content="Se ha enviado su mensaje. Nos comunicaremos con usted lo antes posible."
+                        content="The message has been sent successfully! We will contact you soon."
                       />
                       <MKButton
                         type="submit"

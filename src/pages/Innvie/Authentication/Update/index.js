@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 // @mui material components
 import Card from "@mui/material/Card"
-import Checkbox from "@mui/material/Checkbox"
 
 // Otis Kit PRO components
 import MKBox from "components/MKBox"
 import MKButton from "components/MKButton"
 import MKInput from "components/MKInput"
 import MKTypography from "components/MKTypography"
+import Checkbox from "@mui/material/Checkbox"
 
 import { Grid } from "@mui/material"
 import useUser from "api/useUser"
-import TermsModal from "pages/Innvie/TermsAndConditions/modal"
 import { v4 as uuidv4 } from "uuid"
 import ToastAlert from "components/Innvie/ToastAlert"
 // import SelectPicker from "components/Innvie/SelectPicker"
@@ -22,14 +21,14 @@ import { sendPageNewUser } from "api/mail"
 // import useStates from "api/useStates"
 // import useCities from "api/useCities"
 
-function Register() {
+function Update() {
   const navigate = useNavigate()
-  const { login } = useUser()
+  const { login, currentUser, getCurrentUser } = useUser()
   const [error, setError] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState("United States")
   const [selectedState, setSelectedState] = useState("Alabama")
   const [selectedCity, setSelectedCity] = useState("Birmingham")
-  const { addUser, insertError } = useUser()
+  const { getAndUpdateUser, insertError } = useUser()
   const [checked, setChecked] = React.useState(false)
   const [inputName, setInputName] = useState("")
   const [inputLastName, setInputLastName] = useState("")
@@ -46,6 +45,7 @@ function Register() {
   // const [countries, setCountries] = useState([])
   // const [states, setStates] = useState([])
   // const [cities, setCities] = useState([])
+  const [inputPreviousPassword, setInputPreviousPassword] = useState("")
 
   const handleInputName = (event) => {
     const regex = /^[a-zA-Z]*(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
@@ -91,6 +91,10 @@ function Register() {
     setInputLicense(event.target.value)
   }
 
+  const handleInputPreviousPassword = (event) => {
+    setInputPreviousPassword(event.target.value)
+  }
+
   const handleInputPassword = (event) => {
     // const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
     // if (!regex.test(event.target.value)) return
@@ -99,10 +103,6 @@ function Register() {
 
   const handleInputPasswordConfirmation = (event) => {
     setInputPasswordConfirmation(event.target.value)
-  }
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked)
   }
 
   const [showSnackbar, setShow] = useState(false)
@@ -127,6 +127,10 @@ function Register() {
     }, 3000)
   }
 
+  const handleChange = (event) => {
+    setChecked(event.target.checked)
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     // Check if all required fields are filled
@@ -138,11 +142,19 @@ function Register() {
         isValid = false
       }
     })
+    if (checked && inputPreviousPassword !== currentUser.password) {
+      setError("Previous password is incorrect")
+      isValid = false
+    }
+    if (!checked && inputPassword !== currentUser.password) {
+      setError("Password is incorrect")
+      isValid = false
+    }
 
     if (!isValid) {
       return
     }
-    if (event.target.password.value !== event.target.password_confirmation.value) {
+    if (checked && event.target.password.value !== event.target.password_confirmation.value) {
       setError("Passwords don't match")
       return
     }
@@ -160,7 +172,7 @@ function Register() {
       id: uuidv4(),
       license: event.target.license.value,
     }
-    Promise.resolve(addUser(newUser)).then((res) => {
+    Promise.resolve(getAndUpdateUser(newUser)).then((res) => {
       if (res) {
         login(event.target.email.value, event.target.password.value).then((logged) => {
           if (logged) {
@@ -177,8 +189,16 @@ function Register() {
     })
   }
   useEffect(() => {
-    console.log("test")
     // getCountries().then((res) => setCountries(res?.map((country) => country["country-name"]) ?? []))
+    const res = getCurrentUser()
+    setInputName(res?.first_name ?? "")
+    setInputLastName(res?.last_name ?? "")
+    setInputPhone(res?.phone ?? "")
+    setInputAddress(res?.address ?? "")
+    setInputZipcode(res?.zipcode ?? "")
+    setInputEmail(res?.email ?? "")
+    setInputLicense(res?.license ?? "")
+    console.log(res)
   }, [])
   return (
     <Card sx={{ width: { sm: "300px", lg: "700px", xs: "250px" } }}>
@@ -194,10 +214,7 @@ function Register() {
         textAlign="center"
       >
         <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-          Register
-        </MKTypography>
-        <MKTypography display="block" variant="button" color="white" my={1}>
-          Enter your details to create your account
+          My Account
         </MKTypography>
       </MKBox>
       <MKBox p={3}>
@@ -399,19 +416,61 @@ function Register() {
                   User already exists
                 </p>
               )}
-              <MKBox mb={2}>
+              <MKBox
+                display="flex"
+                alignItems="center"
+                ml={-1}
+                flexDirection={{ lg: "row", xs: "column" }}
+              >
+                <Checkbox checked={checked} onChange={handleChange} />
+                <MKTypography
+                  variant="button"
+                  fontWeight="regular"
+                  color="text"
+                  sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                >
+                  Change Password
+                </MKTypography>
+              </MKBox>
+              {!checked && (
                 <MKTypography
                   variant="body2"
                   fontWeight="bold"
                   color="primary"
-                  mt={1}
+                  my={1}
                   style={{ fontSize: "0.8rem" }}
                 >
-                  <i>
-                    At least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special
-                    character
-                  </i>
+                  <i>Enter password to save</i>
                 </MKTypography>
+              )}
+              <MKBox mb={2}>
+                {checked && (
+                  <MKBox mb={2}>
+                    <MKInput
+                      type="prevpassword"
+                      name="prev_password"
+                      label="Previous password"
+                      fullWidth
+                      required
+                      value={inputPreviousPassword}
+                      onChange={handleInputPreviousPassword}
+                    />
+                  </MKBox>
+                )}
+                {checked && (
+                  <MKTypography
+                    variant="body2"
+                    fontWeight="bold"
+                    color="primary"
+                    my={1}
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    <i>
+                      At least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special
+                      character
+                    </i>
+                  </MKTypography>
+                )}
                 <MKInput
                   type="password"
                   name="password"
@@ -426,17 +485,19 @@ function Register() {
                   }}
                 />
               </MKBox>
-              <MKBox mb={2}>
-                <MKInput
-                  type="password"
-                  name="password_confirmation"
-                  label="Repit password"
-                  fullWidth
-                  required
-                  value={inputPasswordConfirmation}
-                  onChange={handleInputPasswordConfirmation}
-                />
-              </MKBox>
+              {checked && (
+                <MKBox mb={2}>
+                  <MKInput
+                    type="password"
+                    name="password_confirmation"
+                    label="Repeat password"
+                    fullWidth
+                    required
+                    value={inputPasswordConfirmation}
+                    onChange={handleInputPasswordConfirmation}
+                  />
+                </MKBox>
+              )}
               {error && (
                 <p
                   style={{
@@ -451,42 +512,10 @@ function Register() {
               )}
             </Grid>
           </Grid>
-          <MKBox
-            display="flex"
-            alignItems="center"
-            ml={-1}
-            flexDirection={{ lg: "row", xs: "column" }}
-          >
-            <Checkbox checked={checked} onChange={handleChange} />
-            <MKTypography
-              variant="button"
-              fontWeight="regular"
-              color="text"
-              sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-            >
-              &nbsp;&nbsp;I accept the&nbsp;
-            </MKTypography>
-            <TermsModal />
-          </MKBox>
           <MKBox mt={3} mb={1}>
-            <MKButton type="submit" variant="gradient" color="error" fullWidth disabled={!checked}>
-              Register
+            <MKButton type="submit" variant="gradient" color="error" fullWidth>
+              Update
             </MKButton>
-          </MKBox>
-          <MKBox mt={3} mb={1} textAlign="center">
-            <MKTypography variant="button" color="text">
-              Already have an account?{" "}
-              <MKTypography
-                component={Link}
-                to="/authentication"
-                variant="button"
-                color="info"
-                fontWeight="medium"
-                textGradient
-              >
-                Login
-              </MKTypography>
-            </MKTypography>
           </MKBox>
         </MKBox>
       </MKBox>
@@ -495,16 +524,16 @@ function Register() {
         toggle={toggleSnackbar}
         color="success"
         title="Success!"
-        content="User has been regitered successfully."
+        content="User has been update successfully."
       />
       <ToastAlert
         show={showError}
         toggle={toggleError}
         title="Error"
-        content="User could not be registered."
+        content="User could not be updated."
       />
     </Card>
   )
 }
 
-export default Register
+export default Update
