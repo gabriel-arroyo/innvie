@@ -9,6 +9,7 @@ import useRoom from "./useRoom"
 function useCheckin() {
   const [calendarError, setError] = useState(false)
   const [currentEvent, setCurrentEvent] = useState({})
+  const [allCurrentEvents, setAllCurrentEvents] = useState([])
   const collectionRef = collection(db, "calendar")
   const { currentUser } = useUser()
   const { updateRoomStatus } = useRoom()
@@ -114,6 +115,7 @@ function useCheckin() {
     })
     const selected = ordered[0] ?? []
     setCurrentEvent(selected)
+    setAllCurrentEvents(ordered)
 
     return selected
   }
@@ -127,6 +129,7 @@ function useCheckin() {
     getSingle,
     getCurrentEvent,
     currentEvent,
+    allCurrentEvents,
     calendarError,
     updateEventWithCheckin,
     updateEventWithCheckout,

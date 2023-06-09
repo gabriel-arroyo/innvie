@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useState } from "react"
-
+import { useNavigate } from "react-router-dom"
 // @mui material components
 import Container from "@mui/material/Container"
 import Modal from "@mui/material/Modal"
@@ -34,9 +34,11 @@ function LogoutModal() {
   const [show, setShow] = useState(false)
   const toggleModal = () => setShow(!show)
   const { logout } = useUser()
+  const navigate = useNavigate()
 
   const handleLogout = async () => {
     await logout()
+    navigate("/")
   }
 
   return (

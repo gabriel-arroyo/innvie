@@ -84,6 +84,36 @@ Thank you for your trust.
   sendTemplateEmail(innvie_mail, to_email, subject, body)
 }
 
+export async function sendEmailCheckout(to_email, check_out) {
+  if (debugging) {
+    console.log("email test: not send when debugging")
+    return
+  }
+  const subject = "Innvie Motel - Checkout"
+  const body = `
+  Subject: Checkout Reminder - Innvie Motel
+
+Thank you for choosing Innvie Motel for your stay. We hope you had a wonderful time with us.
+
+Just a friendly reminder, your checkout details are as follows:
+
+- Check-out: ${check_out} at 12:00 pm
+
+Please ensure that you gather your belongings and vacate your room by the specified checkout time. Remember to return your access key to the front desk upon departure.
+
+If you have any questions or need assistance during your checkout, our front desk staff will be available to help you.
+
+For updates on our latest news and nearby attractions, please visit our website at [www.innviemotel.com/tourism](http://www.innviemotel.com/tourism) or inquire at the front desk.
+
+Thank you once again for choosing Innvie Motel. We value your patronage and hope to welcome you back in the future.
+
+Best regards,
+
+Innvie Motel Management
+  `
+  sendTemplateEmail(innvie_mail, to_email, subject, body)
+}
+
 export async function sendContact(name, phone, email, message) {
   if (debugging) {
     console.log("email test: not send when debugging")

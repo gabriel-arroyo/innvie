@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 // @mui material components
 import Card from "@mui/material/Card"
@@ -24,7 +24,6 @@ import Card from "@mui/material/Card"
 import MKBox from "components/MKBox"
 import MKTypography from "components/MKTypography"
 import MKInput from "components/MKInput"
-import MKButton from "components/MKButton"
 import { useEffect, useState } from "react"
 import useCheckin from "api/useCheckin"
 import useUser from "api/useUser"
@@ -32,18 +31,27 @@ import { sendEmailPass } from "api/mail"
 import useNotifications from "api/useNotifications"
 import moment from "moment/moment"
 import CheckinModal from "./modal"
+import CheckinTable from "./table"
 
 function Checkin() {
+  const navigate = useNavigate()
   const [checked, setChecked] = useState(false)
-  const [password, setPassword] = useState("")
   const [message, setMessage] = useState("")
   const [error, setError] = useState(null)
   const [show, setShow] = useState(false)
   const { addNotification } = useNotifications()
   const { checkinUser, checkoutUser, login, logged, checkedIn } = useUser()
-  const { currentEvent, updateEventWithCheckin, updateEventWithCheckout, getCurrentEvent } =
-    useCheckin()
-  const toggleModal = () => setShow(!show)
+  const {
+    currentEvent,
+    allCurrentEvents,
+    updateEventWithCheckin,
+    updateEventWithCheckout,
+    getCurrentEvent,
+  } = useCheckin()
+  const toggleModal = () => {
+    navigate("authentication/checkin")
+    setShow(!show)
+  }
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email)
   }
@@ -96,7 +104,6 @@ function Checkin() {
   useEffect(() => {
     if (checked) {
       // const val = Math.floor(1000 + Math.random() * 9000);
-      setPassword("A login code has been sent to your email")
     }
   }, [checked])
   useEffect(() => {
@@ -107,6 +114,18 @@ function Checkin() {
   useEffect(() => {
     getCurrentEvent()
   }, [])
+
+  function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein }
+  }
+
+  const rows = [
+    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+    createData("Eclair", 262, 16.0, 24, 6.0),
+    createData("Cupcake", 305, 3.7, 67, 4.3),
+    createData("Gingerbread", 356, 16.0, 49, 3.9),
+  ]
 
   return (
     <Card>
@@ -128,6 +147,7 @@ function Checkin() {
           Enter your email and password to checkin
         </MKTypography>
       </MKBox>
+      {rows && <CheckinTable rows={allCurrentEvents} />}
       <MKBox pt={4} pb={3} px={3}>
         {Object.keys(currentEvent).length > 0 || checked ? (
           <MKBox component="form" role="form" onSubmit={handleCheckin}>
@@ -172,39 +192,6 @@ function Checkin() {
                 </MKBox>
               </>
             )}
-            <MKBox mt={4} mb={1}>
-              <MKButton type="submit" variant="gradient" color="error" fullWidth>
-                {!checked ? "Checkin" : "Checkout"}
-              </MKButton>
-            </MKBox>
-            <MKBox mt={3} mb={1} textAlign="center">
-              {checked && (
-                <>
-                  <MKTypography variant="h1" fontWeight="medium" color="primary" mt={1}>
-                    {password}
-                  </MKTypography>
-                  <MKTypography variant="body1" fontWeight="medium" color="primary" mt={1}>
-                    Instructions and the login code will be sent to your email. When you arrive,
-                    enter it in the lock.
-                  </MKTypography>
-                </>
-              )}
-              {!checked && (
-                <MKTypography variant="button" color="text">
-                  Don&apos;t have an account?{" "}
-                  <MKTypography
-                    component={Link}
-                    to="/authentication/sign-up/cover"
-                    variant="button"
-                    color="info"
-                    fontWeight="medium"
-                    textGradient
-                  >
-                    Register
-                  </MKTypography>
-                </MKTypography>
-              )}
-            </MKBox>
           </MKBox>
         ) : (
           <MKBox textAlign="center">
