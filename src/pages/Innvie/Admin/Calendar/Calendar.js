@@ -25,6 +25,9 @@ import { sendEmailPass } from "api/mail"
 import useFormatedCalendar from "../../../../api/useFormatedCalendar"
 import InfoLabel from "../../../../components/Innvie/InfoLabel"
 import CalendarFilters from "../../../../components/Innvie/CalendarFilters"
+import Submenu from "./Submenu"
+
+const emails = ["username1@gmail.com", "user02@gmail.com"]
 
 function Calendar() {
   const { loading, items, groups, getCalendar, updateCalendarEntry, filterItems } =
@@ -35,9 +38,20 @@ function Calendar() {
   const [startDate, setStartDate] = useState(lowLimit)
   const [endDate, setEndDate] = useState(highLimit)
   const [selectedItem, setSelectedItem] = useState(null)
+  const [open, setOpen] = useState(false)
+  const [selectedValue, setSelectedValue] = useState(emails[1])
 
   const [show, setShow] = useState(false)
   const toggleModal = () => setShow(!show)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = (value) => {
+    setOpen(false)
+    setSelectedValue(value)
+  }
 
   const itemIntersects = (item, start, end) => {
     const itemStart = moment(item.start_time)
@@ -182,6 +196,7 @@ function Calendar() {
       <div>{`${itemContext.title} - ${capitalize(getItemRealTimeStatus(item))}`}</div>
     </div>
   )
+
   const groupRenderer = ({ group }) => (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
@@ -189,6 +204,8 @@ function Calendar() {
       onMouseEnter={() => handleTooltip(group)}
       onClick={() => handleTooltip(group)}
       onKeyUp={() => handleTooltip(group)}
+      // on rigth click
+      onContextMenu={(e) => handleClickOpen(e)}
     >
       {group.title}
     </div>
@@ -271,6 +288,7 @@ function Calendar() {
             // defaultTimeEnd={moment().add(2, "day")}
             onItemClick={onItemClick}
             onItemSelect={onItemClick}
+            onCanvasContextMenu={handleClickOpen}
             sidebarWidth={50}
             minZoom={60 * 60 * 1000 * 24 * 4}
             timeSteps={{ day: 1 }}
@@ -331,6 +349,7 @@ function Calendar() {
             <p style={{ width: "100%", alignSelf: "center", textAlign: "center" }}>Loading...</p>
           </Card>
         )}
+        <Submenu selectedValue={selectedValue} open={open} onClose={handleClose} />
       </Card>
       <Modal open={show} onClose={toggleModal} sx={{ display: "grid", placeItems: "center" }}>
         <Slide direction="down" in={show} timeout={500}>

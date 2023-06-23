@@ -178,7 +178,7 @@ function CalendarFilters({
         options={Array.from(options)}
         sx={{
           width: { lg: 300, md: 200, sm: 200, xs: 200 },
-          zIndex: 3000,
+          zIndex: 100,
           marginRight: "30px",
           marginLeft: "30px",
           marginTop: "20px",
