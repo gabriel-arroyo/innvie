@@ -3,13 +3,13 @@
 /* eslint-disable react/prop-types */
 import { Divider } from "@mui/material"
 import moment from "moment/moment"
-import { Link } from "react-router-dom"
 import { useState } from "react"
 import useNotifications from "api/useNotifications"
 import useUser from "api/useUser"
 import MKInput from "components/MKInput"
 import useCheckin from "api/useCheckin"
 import { sendEmailPass } from "api/mail"
+import getToken from "api/lockApi"
 import MKBox from "../../../components/MKBox/index"
 import MKTypography from "../../../components/MKTypography/index"
 import MKAlertCloseIcon from "../../../components/MKAlert/MKAlertCloseIcon"
@@ -22,8 +22,8 @@ function CheckinLoginModal({ show, toggleModal, returnHome }) {
   const [message, setMessage] = useState("")
   const [error, setError] = useState(null)
   const { addNotification } = useNotifications()
-  const { checkinUser, checkoutUser, login } = useUser()
-  const { currentEvent, updateEventWithCheckin, updateEventWithCheckout } = useCheckin()
+  const { checkinUser, login } = useUser()
+  const { currentEvent, updateEventWithCheckin } = useCheckin()
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email)
@@ -40,10 +40,10 @@ function CheckinLoginModal({ show, toggleModal, returnHome }) {
 
   const sendEmail = async () => {
     if (Object.keys(currentEvent).length === 0) return
-    const access_key = currentEvent.id.substring(0, 6)
     const check_in = moment(currentEvent.startDate).format("MMMM Do YYYY")
     const check_out = moment(currentEvent.endDate).format("MMMM Do YYYY")
     const to_email = currentEvent.email
+    const access_key = await getToken()
     await sendEmailPass(access_key, to_email, check_in, check_out)
     await addNotification({
       email: to_email,
@@ -52,26 +52,17 @@ function CheckinLoginModal({ show, toggleModal, returnHome }) {
   }
   const handleCheckin = async (e) => {
     e.preventDefault()
-    if (checked) {
-      toggleModal()
-      updateEventWithCheckout()
-      checkoutUser()
-      await addNotification({
-        email: currentEvent.email,
-        text: `You have checked out your reservation ${currentEvent.id.substring(0, 6)}`,
-      })
-    } else {
-      const formEmail = e.target.email.value
-      const formPassword = e.target.password.value
-      const confirmed = await login(formEmail, formPassword)
-      if (!confirmed) {
-        setError("Wrong email or password")
-        return
-      }
-      updateEventWithCheckin()
-      checkinUser()
-      sendEmail()
+
+    const formEmail = e.target.email.value
+    const formPassword = e.target.password.value
+    const confirmed = await login(formEmail, formPassword)
+    if (!confirmed) {
+      setError("Wrong email or password")
+      return
     }
+    updateEventWithCheckin()
+    checkinUser()
+    sendEmail()
     setChecked(!checked)
   }
 
@@ -90,8 +81,8 @@ function CheckinLoginModal({ show, toggleModal, returnHome }) {
           padding="40px"
         >
           <MKBox display="flex" alginItems="center" justifyContent="space-between" py={3} px={2}>
-            <MKTypography variant="h6" color="white">
-              Thank you for staying with us!
+            <MKTypography variant="h6" color="text">
+              Please confirm your identity.
             </MKTypography>
             <MKAlertCloseIcon
               color="white"
@@ -147,7 +138,7 @@ function CheckinLoginModal({ show, toggleModal, returnHome }) {
             {!checked && (
               <MKBox mt={4} mb={1}>
                 <MKButton type="submit" variant="gradient" color="error" fullWidth>
-                  {!checked ? "Checkin" : "Checkout"}
+                  Checkin
                 </MKButton>
               </MKBox>
             )}
@@ -157,21 +148,6 @@ function CheckinLoginModal({ show, toggleModal, returnHome }) {
                   A login code has been sent to your email.
                   <br />
                   Please enter this code in the lock.
-                </MKTypography>
-              )}
-              {!checked && (
-                <MKTypography variant="button" color="text">
-                  Don&apos;t have an account?{" "}
-                  <MKTypography
-                    component={Link}
-                    to="/authentication/register"
-                    variant="button"
-                    color="info"
-                    fontWeight="medium"
-                    textGradient
-                  >
-                    Register
-                  </MKTypography>
                 </MKTypography>
               )}
             </MKBox>

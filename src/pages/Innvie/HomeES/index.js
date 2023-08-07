@@ -25,28 +25,7 @@ function InnvieHomeES() {
     <>
       <Header />
       <Description />
-      <OffersSwipe
-        cards={[
-          {
-            variant: "gradient",
-            color: "primary",
-            icon: "local_offer",
-            title: "7x6",
-            description: "Paga 6 noches y la séptima es gratis. ",
-            description2: "Válido solamente al pagar 6 noches por adelantado.",
-            description3: "Ahorra 90 USD o más.",
-          },
-          {
-            variant: "gradient",
-            color: "primary",
-            icon: "local_offer",
-            title: "3 Noches gratis",
-            description: "Paga 2 semanas y obtén 3 noches gratis.",
-            description2: "Válido solamente al pagar 2 semanas por adelantado.",
-            description3: "Ahorra 195 USD",
-          },
-        ]}
-      />
+      <OffersSwipe />
       <GoogleMap />
       <PlacesSwipe />
       <Contact />

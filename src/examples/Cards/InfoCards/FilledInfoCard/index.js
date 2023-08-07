@@ -27,16 +27,7 @@ import MuiLink from "@mui/material/Link"
 import MKBox from "components/MKBox"
 import MKTypography from "components/MKTypography"
 
-function FilledInfoCard({
-  variant,
-  color,
-  icon,
-  title,
-  description,
-  description2,
-  description3,
-  action,
-}) {
+function FilledInfoCard({ variant, color, icon, title, text, subtitle, action }) {
   const buttonStyles = {
     width: "max-content",
     display: "flex",
@@ -87,13 +78,16 @@ function FilledInfoCard({
           {title}
         </MKTypography>
         <MKTypography display="block" variant="body2" color="white">
-          {description}
+          {text}
         </MKTypography>
-        <MKTypography display="block" variant="body2" color="white">
-          {description2}
-        </MKTypography>
-        <MKTypography display="block" variant="body2" color="white" mb={2}>
-          {description3}
+        <MKTypography
+          display="block"
+          variant="body2"
+          color="white"
+          mt={2}
+          sx={{ fontWeight: "bold" }}
+        >
+          {subtitle}
         </MKTypography>
         {action && action.type === "external" ? (
           <MKTypography
@@ -109,18 +103,6 @@ function FilledInfoCard({
             {action.label} <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
           </MKTypography>
         ) : null}
-        {/* {action && action.type === "internal" ? (
-          <MKTypography
-            component={Link}
-            to={action.route}
-            variant="body2"
-            fontWeight="regular"
-            color={variant === "contained" ? color : "white"}
-            sx={buttonStyles}
-          >
-            {action.label} <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
-          </MKTypography>
-        ) : null} */}
       </MKBox>
     </MKBox>
   )
@@ -131,8 +113,7 @@ FilledInfoCard.defaultProps = {
   variant: "contained",
   color: "info",
   action: false,
-  description2: "",
-  description3: "",
+  subtitle: "",
 }
 
 // Typechecking props for the FilledInfoCard
@@ -150,9 +131,8 @@ FilledInfoCard.propTypes = {
   ]),
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  description2: PropTypes.string,
-  description3: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
   action: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({

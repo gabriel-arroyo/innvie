@@ -18,7 +18,6 @@ function CalendarFilters({
   setStartDate,
   setEndDate,
 }) {
-  console.log(startDate)
   const gropusIds = groups.map(({ id }) => {
     const label = `Room: ${id}`
     const group = {

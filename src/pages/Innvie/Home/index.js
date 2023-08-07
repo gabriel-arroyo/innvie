@@ -25,28 +25,7 @@ function InnvieHome() {
     <>
       <Header />
       <Description />
-      <OffersSwipe
-        cards={[
-          {
-            variant: "gradient",
-            color: "primary",
-            icon: "local_offer",
-            title: "7x6",
-            description: "Pay 6 nights and get the 7th free.",
-            description2: "Only valid when paying 6 nights in advance.",
-            description3: "Save 90 USD or more.",
-          },
-          {
-            variant: "gradient",
-            color: "primary",
-            icon: "local_offer",
-            title: "3 free nights",
-            description: "Pay 2 weeks and get 3 free nights.",
-            description2: "Only valid when paying 2 weeks in advance.",
-            description3: "Save 195 USD",
-          },
-        ]}
-      />
+      <OffersSwipe />
       <GoogleMap />
       <PlacesSwipe />
       <Contact />

@@ -8,6 +8,7 @@ import Calendar from "./Calendar/Calendar"
 import History from "./History"
 import NewRoomType from "./NewRoom"
 import Rooms from "./Rooms"
+import Offers from "./Offers"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -59,6 +60,7 @@ export default function BasicTabs() {
           <Tab label="Calendar" {...a11yProps(2)} />
           <Tab label="Room Types" {...a11yProps(3)} />
           <Tab label="History" {...a11yProps(4)} />
+          <Tab label="Offers" {...a11yProps(5)} />
         </Tabs>
       </Box>
       <TabPanel value={tab} index={0}>
@@ -72,6 +74,9 @@ export default function BasicTabs() {
       </TabPanel>
       <TabPanel value={tab} index={3}>
         <History />
+      </TabPanel>
+      <TabPanel value={tab} index={4}>
+        <Offers />
       </TabPanel>
     </Box>
   )

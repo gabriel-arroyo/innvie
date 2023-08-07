@@ -14,18 +14,26 @@ import CheckinLoginModal from "./checkinLoginModal"
 import CheckoutLoginModal from "./checkoutLoginModal"
 
 export default function CheckinTable({ rows }) {
-  const [show, setShow] = React.useState(false)
+  const [showCheckin, setShowCheckin] = React.useState(false)
+  const [showCheckout, setShowCheckout] = React.useState(false)
   const navigate = useNavigate()
 
   const returnHome = () => {
     console.log("return")
-    setShow(!show)
+    setShowCheckin(!showCheckin)
+    setShowCheckout(!showCheckout)
     navigate("/")
   }
 
-  const toggleModal = () => {
+  const toggleModalCheckin = () => {
     console.log("toggle")
-    setShow(!show)
+    setShowCheckin(!showCheckin)
+    // navigate("/")
+  }
+
+  const toggleModalCheckout = () => {
+    console.log("toggle")
+    setShowCheckout(!showCheckout)
     // navigate("/")
   }
   console.log(rows)
@@ -45,23 +53,23 @@ export default function CheckinTable({ rows }) {
                 <TableCell align="center">
                   {row.checkin == null ? (
                     <>
-                      <MKButton variant="gradient" color="error" onClick={toggleModal}>
+                      <MKButton variant="gradient" color="error" onClick={toggleModalCheckin}>
                         Checkin
                       </MKButton>
                       <CheckinLoginModal
-                        show={show}
-                        toggleModal={toggleModal}
+                        show={showCheckin}
+                        toggleModal={toggleModalCheckin}
                         returnHome={returnHome}
                       />
                     </>
                   ) : (
                     <>
-                      <MKButton variant="gradient" color="primary" onClick={toggleModal}>
+                      <MKButton variant="gradient" color="primary" onClick={toggleModalCheckout}>
                         Checkout
                       </MKButton>
                       <CheckoutLoginModal
-                        show={show}
-                        toggleModal={toggleModal}
+                        show={showCheckout}
+                        toggleModal={toggleModalCheckout}
                         returnHome={returnHome}
                       />
                     </>

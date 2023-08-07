@@ -26,6 +26,7 @@ import useFormatedCalendar from "../../../../api/useFormatedCalendar"
 import InfoLabel from "../../../../components/Innvie/InfoLabel"
 import CalendarFilters from "../../../../components/Innvie/CalendarFilters"
 import Submenu from "./Submenu"
+import ItemSubmenu from "./ItemSubmenu"
 
 const emails = ["username1@gmail.com", "user02@gmail.com"]
 
@@ -38,20 +39,17 @@ function Calendar() {
   const [startDate, setStartDate] = useState(lowLimit)
   const [endDate, setEndDate] = useState(highLimit)
   const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedGroup, setSelectedGroup] = useState(null)
+  const [selectedRoomNumber, setSelectedRoomNumber] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [tempEndDate, setTempEndDate] = useState(null)
   const [open, setOpen] = useState(false)
+  const [itemSubmenuOpen, setItemSubmenuOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState(emails[1])
+  const [showRemoveButton, setShowRemoveButton] = useState(false)
 
   const [show, setShow] = useState(false)
   const toggleModal = () => setShow(!show)
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = (value) => {
-    setOpen(false)
-    setSelectedValue(value)
-  }
 
   const itemIntersects = (item, start, end) => {
     const itemStart = moment(item.start_time)
@@ -152,6 +150,7 @@ function Calendar() {
   useEffect(() => {
     getCalendar()
   }, [])
+
   const getBackgroundColor = (status, selected, end_time) => {
     // if end_time has passed, set color to grey
     if (moment(end_time).isBefore(moment())) {
@@ -183,6 +182,57 @@ function Calendar() {
     if (typeof s !== "string") return ""
     return s.charAt(0).toUpperCase() + s.slice(1)
   }
+  // eslint-disable-next-line no-unused-vars
+  const onItemClick = (e, b, time) => {
+    const selection = new Date(time)
+    console.log("🚀 ~ file: Calendar.js:186 ~ onItemClick ~ selection:", selection)
+    const stringSelection = selection.toISOString()
+    console.log("🚀 ~ file: Calendar.js:187 ~ onItemClick ~ selection:", selection)
+    setSelectedDate(stringSelection) // Convert the time to a suitable format
+
+    const item = items.find((i) => i.id === e)
+    const start = item.start_time
+    const end = item.end_time
+    if (!item) return
+    const group = groups.find((g) => g.id === item.group)
+    if (!group) return
+    setTooltip(`${group.title} ${group.tip}`)
+    if (b.button === 2) {
+      const d = new Date(time)
+      const d2 = d.setDate(d.getDate() + 1)
+      const d3 = new Date(d2)
+      setTempEndDate(d3)
+      setSelectedGroup(group.tip)
+      setSelectedRoomNumber(e)
+      setSelectedItem({ e, dragTime: start, start, end, item, type: "select", group })
+      setItemSubmenuOpen(true)
+    }
+  }
+
+  const handleClickOpen = (e, time) => {
+    console.log("e", e)
+    // Retrieve the selected date and group using the provided time and rowIndex
+    const selection = new Date(time)
+    console.log("🚀 ~ file: Calendar.js:213 ~ handleClickOpen ~ selection:", selection)
+    const stringSelection = selection.toISOString()
+    console.log("🚀 ~ file: Calendar.js:215 ~ handleClickOpen ~ selection:", selection)
+    setSelectedDate(stringSelection) // C // Convert the time to a suitable format
+    const d = new Date(time)
+    const d2 = d.setDate(d.getDate() + 1)
+    const d3 = new Date(d2)
+    setTempEndDate(d3)
+    setSelectedGroup(groups[e - 1].tip)
+    setSelectedRoomNumber(e)
+    // Print the selected date and group to the console
+    setOpen(true)
+  }
+
+  const handleClose = (value) => {
+    setItemSubmenuOpen(false)
+    setOpen(false)
+    setSelectedValue(value)
+    console.log("selected value!", value)
+  }
 
   const itemRenderer = ({ item, itemContext, getItemProps }) => (
     <div
@@ -210,15 +260,7 @@ function Calendar() {
       {group.title}
     </div>
   )
-  const onItemClick = (e) => {
-    // find item by item id
-    const item = items.find((i) => i.id === e)
-    if (!item) return
-    // find group by item id
-    const group = groups.find((g) => g.id === item.group)
-    if (!group) return
-    setTooltip(`${group.title} ${group.tip}`)
-  }
+
   const handleItemDrag = (e) => {
     const group = groups.find((g) => g.id === e.newGroupOrder + 1)
     if (group) {
@@ -266,6 +308,31 @@ function Calendar() {
     setShow(true)
   }
 
+  const onItemContextMenu = (itemId, e, time) => {
+    // Prevent the default context menu from appearing
+    e.preventDefault()
+    console.log(itemId, e)
+    const selection = new Date(time)
+    const stringSelection = selection.toISOString()
+    setSelectedDate(stringSelection) // Convert the time to a suitable format
+
+    const item = items.find((i) => i.id === itemId)
+    const start = item.start_time
+    const end = item.end_time
+    if (!item) return
+    const group = groups.find((g) => g.id === item.group)
+    const roomn = item.group
+    if (!group) return
+    setTooltip(`${group.title} ${group.tip}`)
+    setShowRemoveButton(true)
+    const emd = moment(end)
+    const ed = emd.toDate()
+    setTempEndDate(ed)
+    setSelectedGroup(group.tip)
+    setSelectedRoomNumber(roomn)
+    setSelectedItem({ itemId, dragTime: start, start, end, item, type: "select", roomn })
+  }
+
   return (
     <MKBox mx={{ lg: 4, sm: 0 }}>
       <Card>
@@ -278,6 +345,22 @@ function Calendar() {
           setStartDate={setStartDate}
           setEndDate={setEndDate}
         />
+        {showRemoveButton && (
+          <MKButton
+            variant="contained"
+            color="error"
+            size="large"
+            sx={{
+              position: "fixed",
+              bottom: "16px",
+              right: "16px",
+              zIndex: 9999,
+            }}
+            onClick={() => setItemSubmenuOpen(true)}
+          >
+            Cancel
+          </MKButton>
+        )}
         {!loading && items && groups ? (
           <Timeline
             groups={groups}
@@ -286,8 +369,9 @@ function Calendar() {
             canResize="both"
             // defaultTimeStart={moment().add(-2, "day")}
             // defaultTimeEnd={moment().add(2, "day")}
-            onItemClick={onItemClick}
-            onItemSelect={onItemClick}
+            onItemClick={onItemContextMenu}
+            onItemSelect={onItemContextMenu}
+            onItemUnselect={() => console.log("test-----------------")}
             onCanvasContextMenu={handleClickOpen}
             sidebarWidth={50}
             minZoom={60 * 60 * 1000 * 24 * 4}
@@ -349,7 +433,25 @@ function Calendar() {
             <p style={{ width: "100%", alignSelf: "center", textAlign: "center" }}>Loading...</p>
           </Card>
         )}
-        <Submenu selectedValue={selectedValue} open={open} onClose={handleClose} />
+        <ItemSubmenu
+          selectedRoomNumber={selectedRoomNumber}
+          selectedValue={selectedValue}
+          open={itemSubmenuOpen}
+          onClose={handleClose}
+          selectedDate={selectedDate}
+          tempEndDate={tempEndDate}
+          selectedGroup={selectedGroup}
+          selectedItem={JSON.stringify(selectedItem)}
+        />
+        <Submenu
+          selectedRoomNumber={selectedRoomNumber}
+          selectedValue={selectedValue}
+          open={open}
+          onClose={handleClose}
+          selectedDate={selectedDate}
+          tempEndDate={tempEndDate}
+          selectedGroup={selectedGroup}
+        />
       </Card>
       <Modal open={show} onClose={toggleModal} sx={{ display: "grid", placeItems: "center" }}>
         <Slide direction="down" in={show} timeout={500}>

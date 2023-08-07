@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { useEffect, useState } from "react"
 import {
   collection,
+  deleteDoc,
   doc,
   documentId,
   getDocs,
@@ -248,7 +249,7 @@ function useCalendar({ type, startDate, endDate }) {
     if (hasPassed || hours < 24) {
       newReservationWithTimestamp = {
         ...newReservationWithTimestamp,
-        checkin: moment().toDate(),
+        // checkin: moment().toDate(),
       }
     }
     try {
@@ -326,6 +327,17 @@ function useCalendar({ type, startDate, endDate }) {
     return id
   }
 
+  async function cancelReservation(id) {
+    console.log("reservation ", id, " canceled")
+    try {
+      const documentRef = doc(collectionRef, id)
+      await deleteDoc(documentRef)
+      console.log("Document successfully deleted!")
+    } catch (error) {
+      console.log("Error fetching document:", error)
+    }
+  }
+
   async function updateCalendarEntry(_id, _startDate, _endDate, number, status) {
     let foundCalendar = calendar
     if (calendar.length === 0) {
@@ -387,6 +399,7 @@ function useCalendar({ type, startDate, endDate }) {
     available,
     typesNames,
     addReservation,
+    cancelReservation,
     updateCalendarEntry,
     getReservationsByEmail,
     getAvailableTypes,

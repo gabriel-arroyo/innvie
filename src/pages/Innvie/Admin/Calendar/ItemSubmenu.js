@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import * as React from "react"
-import PropTypes from "prop-types"
 import Avatar from "@mui/material/Avatar"
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
@@ -12,12 +12,12 @@ import Dialog from "@mui/material/Dialog"
 import AddIcon from "@mui/icons-material/Add"
 import { Container, Modal } from "@mui/material"
 import MKBox from "components/MKBox"
-import ReserveModal from "./ReserveModal"
+import RemoveModal from "./RemoveModal"
 // import { blue } from "@mui/material/colors"
 
 // const emails = ["username3@gmail.com", "user02@gmail.com"]
 
-export default function Submenu(props) {
+export default function ItemSubmenu(props) {
   const {
     onClose,
     selectedValue,
@@ -26,7 +26,11 @@ export default function Submenu(props) {
     selectedGroup,
     selectedRoomNumber,
     tempEndDate,
+    selectedItem,
+    group,
   } = props
+  console.log("🚀 ~ file: ItemSubmenu.js:31 ~ ItemSubmenu ~ selectedItem:", selectedItem)
+
   const [show, setShow] = React.useState(false)
   const toggleModal = () => setShow(!show)
 
@@ -64,7 +68,7 @@ export default function Submenu(props) {
                   <AddIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Reserve" />
+              <ListItemText primary="Remove" />
             </ListItemButton>
             <Modal
               open={show}
@@ -86,12 +90,15 @@ export default function Submenu(props) {
                 bgColor="white"
                 shadow="xl"
               >
-                <ReserveModal
+                <RemoveModal
                   modal
                   selectedDate={selectedDate}
                   selectedGroup={selectedGroup}
                   selectedRoomNumber={selectedRoomNumber}
                   tempEndDate={tempEndDate}
+                  group={group}
+                  selectedItem={selectedItem}
+                  onClose={onClose}
                 />
               </MKBox>
             </Modal>
@@ -100,16 +107,6 @@ export default function Submenu(props) {
       </List>
     </Dialog>
   )
-}
-
-Submenu.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
-  selectedDate: PropTypes.string.isRequired,
-  selectedGroup: PropTypes.string.isRequired,
-  selectedRoomNumber: PropTypes.string.isRequired,
-  tempEndDate: PropTypes.string.isRequired,
 }
 
 // export default function Submenu() {

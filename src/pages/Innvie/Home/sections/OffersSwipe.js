@@ -22,7 +22,6 @@ import { Swiper, SwiperSlide } from "swiper/react"
 // SwiperJS styles
 import "swiper/css"
 import "swiper/css/navigation"
-import PropTypes from "prop-types"
 import useMediaQuery from "@mui/material/useMediaQuery"
 
 // Pricing page components
@@ -33,10 +32,41 @@ import { v4 as uuidv4 } from "uuid"
 import Container from "@mui/material/Container"
 import MKBox from "components/MKBox"
 import Grid from "@mui/material/Grid"
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { readOffers } from "api/offersApi"
 import Offers from "../components/Offers/offers"
 
-function OffersSwipe({ cards }) {
+function OffersSwipe() {
+  const [cards, setCards] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await readOffers()
+
+        if (!response) {
+          console.log("No data available.")
+          setCards([]) // Clear the cards
+          return
+        }
+
+        const convertedResponse = response.map((offer) => ({
+          variant: "gradient",
+          color: "primary",
+          icon: "local_offer",
+          title: offer.title || "No Title",
+          text: offer.text || "No Text",
+          subtitle: offer.subtitle || "",
+        }))
+
+        setCards(convertedResponse)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+        setCards([]) // Clear the cards
+      }
+    }
+    fetchData()
+  }, [])
+
   const matches = useMediaQuery("(min-width:1000px)")
   // eslint-disable-next-line no-console
   console.log(matches)
@@ -96,7 +126,3 @@ function OffersSwipe({ cards }) {
 }
 
 export default OffersSwipe
-
-OffersSwipe.propTypes = {
-  cards: PropTypes.instanceOf(Array).isRequired,
-}

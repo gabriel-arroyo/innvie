@@ -48,7 +48,7 @@ function CheckoutLoginModal({ show, toggleModal, returnHome }) {
       text: `You have checked out your reservation ${currentEvent.id.substring(0, 6)}`,
     })
   }
-  const handleCheckin = async (e) => {
+  const handleCheckout = async (e) => {
     e.preventDefault()
     if (checked) {
       toggleModal()
@@ -88,7 +88,7 @@ function CheckoutLoginModal({ show, toggleModal, returnHome }) {
           padding="40px"
         >
           <MKBox display="flex" alginItems="center" justifyContent="space-between" py={3} px={2}>
-            <MKTypography variant="h6" color="white">
+            <MKTypography variant="h6" color="text">
               Thank you for staying with us!
             </MKTypography>
             <MKAlertCloseIcon
@@ -100,7 +100,7 @@ function CheckoutLoginModal({ show, toggleModal, returnHome }) {
           </MKBox>
           <Divider light sx={{ my: 0 }} />
 
-          <MKBox component="form" role="form" onSubmit={handleCheckin}>
+          <MKBox component="form" role="form" onSubmit={handleCheckout}>
             {!checked && (
               <>
                 {" "}
