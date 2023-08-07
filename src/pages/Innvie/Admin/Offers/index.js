@@ -10,8 +10,21 @@ import OfferItem from "./OfferItem"
 
 export default function Offers() {
   const [list, setList] = useState([])
-  const [newOffer, setNewOffer] = useState({ title: "", text: "", subtitle: "" })
-  const isFormValid = newOffer.title && newOffer.text && newOffer.subtitle
+  const [newOffer, setNewOffer] = useState({
+    title: "",
+    text: "",
+    subtitle: "",
+    titulo: "",
+    texto: "",
+    subtitulo: "",
+  })
+  const isFormValid =
+    newOffer.title &&
+    newOffer.text &&
+    newOffer.subtitle &&
+    newOffer.titulo &&
+    newOffer.text &&
+    newOffer.subtitulo
 
   const fetchOffers = async () => {
     const offers = await readOffers()
@@ -45,7 +58,7 @@ export default function Offers() {
     // You need to implement the function to create an offer in your API
     await createOffer(newOffer) // Replace 'createOffer' with the actual API call
     fetchOffers() // Refresh the offers list
-    setNewOffer({ title: "", text: "", subtitle: "" }) // Reset the form
+    setNewOffer({ title: "", text: "", subtitle: "", titulo: "", texto: "", subtitulo: "" }) // Reset the form
   }
 
   return (
@@ -84,6 +97,36 @@ export default function Offers() {
                 label="Subtitle"
                 fullWidth
                 value={newOffer.subtitle}
+                onChange={handleNewOfferChange}
+              />
+            </MKBox>
+            <MKBox mb={2}>
+              <MKInput
+                type="text"
+                name="titulo"
+                label="Título (español)"
+                fullWidth
+                value={newOffer.titulo}
+                onChange={handleNewOfferChange}
+              />
+            </MKBox>
+            <MKBox mb={2}>
+              <MKInput
+                type="text"
+                name="texto"
+                label="Texto (español)"
+                fullWidth
+                value={newOffer.texto}
+                onChange={handleNewOfferChange}
+              />
+            </MKBox>
+            <MKBox mb={2}>
+              <MKInput
+                type="text"
+                name="subtitulo"
+                label="Subtítulo (español)"
+                fullWidth
+                value={newOffer.subtitulo}
                 onChange={handleNewOfferChange}
               />
             </MKBox>
